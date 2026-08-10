@@ -4,7 +4,8 @@ const machines = [
     name: "Hot & Cold Coffee Machine",
     type: "Coffee vending",
     art: "coffee-art",
-    copy: "A Japanese cup-vending platform for serving hot and cold coffee from one self-service machine.",
+    image: "/hot-cold-coffee-machine.jpg",
+    copy: "The actual hot-and-cold coffee vending machine available from I Vend Station.",
     featured: true,
   },
   {
@@ -12,6 +13,7 @@ const machines = [
     name: "Compact Vending Machine",
     type: "Compact series",
     art: "compact-art",
+    image: null,
     copy: "A compact floor-standing format for locations where space and a clean footprint matter.",
   },
   {
@@ -19,6 +21,7 @@ const machines = [
     name: "Classic Vending Machine",
     type: "Standard series",
     art: "classic-art",
+    image: null,
     copy: "A full-size machine platform with a larger display area and flexible product configuration.",
   },
   {
@@ -26,6 +29,7 @@ const machines = [
     name: "Touchscreen Vending Machine",
     type: "Touchscreen series",
     art: "touch-art",
+    image: null,
     copy: "A modern vending format with a visual touchscreen purchasing experience.",
   },
   {
@@ -33,6 +37,7 @@ const machines = [
     name: "Double Cabinet Machine",
     type: "High-capacity series",
     art: "double-art",
+    image: null,
     copy: "An expanded two-cabinet format for larger capacity and a broader product plan.",
   },
   {
@@ -40,6 +45,7 @@ const machines = [
     name: "Frozen Food Vending Machine",
     type: "Frozen series",
     art: "frozen-art",
+    image: null,
     copy: "A touchscreen machine format designed for frozen products and controlled cold storage.",
   },
   {
@@ -47,6 +53,7 @@ const machines = [
     name: "Hot Food Vending Machine",
     type: "Hot food series",
     art: "hot-art",
+    image: null,
     copy: "An automated machine format for storing and preparing selected packaged meals for collection.",
   },
 ];
@@ -93,7 +100,7 @@ export default function Home() {
           {machines.map((machine, index) => (
             <article className={`machine-card ${machine.featured ? "featured" : ""}`} key={machine.code}>
               <div className="card-top"><span>{machine.type}</span><small>{String(index + 1).padStart(2,"0")}</small></div>
-              <div className="card-art"><div className="card-glow"/><MachineArt kind={machine.art}/></div>
+              <div className="card-art"><div className="card-glow"/>{machine.image ? <img className="machine-photo" src={machine.image} alt="Hot and cold coffee vending machine available from I Vend Station"/> : <MachineArt kind={machine.art}/>}</div>
               <div className="card-copy"><div className="model-code">{machine.code}</div><h3>{machine.name}</h3><p>{machine.copy}</p><div className="card-bottom"><strong>Request quotation</strong><a href={`mailto:hello@example.com?subject=Enquiry: ${encodeURIComponent(machine.code)}`} aria-label={`Ask about ${machine.name}`}>↗</a></div></div>
             </article>
           ))}

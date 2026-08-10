@@ -1,0 +1,28 @@
+.machine-photo {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: 315px;
+  max-width: 82%;
+  object-fit: contain;
+  border-radius: 5px;
+  box-shadow: 0 22px 35px #29313d30;
+  transition: transform 0.5s ease;
+}
+
+.machine-card:hover .machine-photo {
+  transform: translateY(-7px);
+}
+
+@media (max-width: 650px) {
+  .machine-photo {
+    height: 290px;
+    max-width: 88%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .machine-photo {
+    transition: none;
+  }
+}
