@@ -1,0 +1,57 @@
+.page { color: #15171c; background: #fff; }
+.breadcrumb { width: min(1220px, calc(100% - 64px)); margin: 0 auto; padding-top: 112px; display: flex; gap: 9px; color: #999da5; font-size: 9px; letter-spacing: 0.4px; }
+.breadcrumb a { color: #3d424b; }
+.intro { width: min(1220px, calc(100% - 64px)); margin: 0 auto; padding: 70px 0 75px; display: grid; grid-template-columns: 1.4fr 0.6fr; align-items: end; gap: 80px; }
+.introCopy > p,
+.label { margin: 0; color: #777c85; font-size: 9px; font-weight: 760; letter-spacing: 1.8px; text-transform: uppercase; }
+.intro h1 { margin: 20px 0 14px; max-width: 880px; font-size: clamp(58px, 7.2vw, 104px); line-height: 0.92; letter-spacing: -6.5px; }
+.modelCode { color: #1d65e8; font-size: 11px; font-weight: 760; letter-spacing: 1.5px; }
+.summary { margin: 0 0 5px; color: #737780; font-size: 13px; line-height: 1.75; }
+.page > section:nth-of-type(2) { width: min(1220px, calc(100% - 64px)); margin: 0 auto; }
+.details { width: min(1120px, calc(100% - 64px)); margin: 125px auto; display: grid; grid-template-columns: 1fr 0.8fr; gap: 12vw; }
+.details h2,
+.actualPhoto h2,
+.photoNotice h2,
+.quote h2 { margin: 22px 0; font-size: clamp(43px, 5vw, 69px); line-height: 0.96; letter-spacing: -4px; }
+.details > div > p:last-child,
+.actualPhoto > div > p:last-child,
+.photoNotice > p:last-child,
+.quote > div > p:last-child { max-width: 530px; color: #7e828a; font-size: 12px; line-height: 1.75; }
+.details ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid #dfe1e5; }
+.details li { min-height: 78px; display: grid; grid-template-columns: 45px 1fr; align-items: center; border-bottom: 1px solid #dfe1e5; font-size: 13px; font-weight: 620; }
+.details li span { color: #a3a6ad; font-size: 8px; }
+.actualPhoto { padding: 120px max(32px, calc((100vw - 1120px) / 2)); display: grid; grid-template-columns: 0.75fr 1.25fr; align-items: center; gap: 8vw; background: #f4f5f7; }
+.actualPhoto figure { margin: 0; padding: 28px; border-radius: 24px; background: #fff; }
+.actualPhoto img { display: block; width: 100%; max-height: 690px; object-fit: contain; border-radius: 12px; }
+.actualPhoto figcaption { margin-top: 16px; color: #969aa2; font-size: 8px; text-align: center; }
+.photoNotice { margin-top: 125px; padding: 120px max(32px, calc((100vw - 900px) / 2)); text-align: center; background: #f4f5f7; }
+.photoNotice > p:last-child { margin-left: auto; margin-right: auto; }
+.quote { width: min(1220px, calc(100% - 64px)); margin: 120px auto; padding: clamp(42px, 6vw, 82px); display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; border-radius: 28px; color: #fff; background: radial-gradient(circle at 86% 18%, #3f7df5 0, transparent 30%), #12151b; }
+.quote .label { color: #8992a0; }
+.quote > div > p:last-child { color: #9ea4af; }
+.quote > a { flex: 0 0 auto; padding: 16px 21px; border-radius: 999px; color: #15171c; background: #fff; font-size: 11px; font-weight: 720; }
+.quote > a span { margin-left: 8px; color: #1d65e8; }
+.nextMachine { width: min(1220px, calc(100% - 64px)); margin: 0 auto 90px; padding: 30px 0; display: grid; grid-template-columns: 150px 1fr auto; align-items: center; border-top: 1px solid #dfe1e5; border-bottom: 1px solid #dfe1e5; }
+.nextMachine span { color: #92969e; font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; }
+.nextMachine strong { font-size: 20px; }
+.nextMachine i { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #17191e; font-style: normal; }
+
+@media (max-width: 800px) {
+  .breadcrumb,
+  .intro,
+  .page > section:nth-of-type(2),
+  .details,
+  .quote,
+  .nextMachine { width: calc(100% - 30px); }
+  .breadcrumb { padding-top: 98px; }
+  .intro { padding: 48px 0; grid-template-columns: 1fr; gap: 28px; }
+  .intro h1 { font-size: 58px; letter-spacing: -4px; }
+  .details { margin: 85px auto; grid-template-columns: 1fr; gap: 45px; }
+  .actualPhoto { padding: 85px 15px; grid-template-columns: 1fr; }
+  .photoNotice { margin-top: 85px; padding: 85px 20px; }
+  .quote { margin: 80px auto; align-items: flex-start; flex-direction: column; border-radius: 22px; }
+  .quote h2 { font-size: 45px; letter-spacing: -3px; }
+  .nextMachine { grid-template-columns: 1fr auto; }
+  .nextMachine span { grid-column: 1 / -1; margin-bottom: 10px; }
+  .nextMachine strong { font-size: 16px; }
+}

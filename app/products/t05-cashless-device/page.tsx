@@ -49,16 +49,6 @@ const operatorTools = [
 export default function T05CashlessPage() {
   return (
     <main className={styles.page}>
-      <nav className={styles.globalNav} aria-label="I Vend Station navigation">
-        <Link className={styles.brand} href="/" aria-label="I Vend Station home">
-          <img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" />
-        </Link>
-        <div className={styles.globalLinks}>
-          <Link href="/#machines">Machines</Link>
-          <Link href="/#contact">Contact</Link>
-        </div>
-      </nav>
-
       <div className={styles.productNav}>
         <div>
           <span>T05</span>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./corrections.css";
+import "./storefront.css";
+import SiteHeader from "./components/SiteHeader";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -26,5 +28,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={geist.variable}>{children}</body></html>;
+  return <html lang="en"><body className={geist.variable}><SiteHeader />{children}</body></html>;
 }

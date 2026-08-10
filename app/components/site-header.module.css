@@ -1,0 +1,189 @@
+.header {
+  position: fixed;
+  z-index: 1000;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  padding: 0 18px;
+  pointer-events: none;
+}
+
+.bar {
+  width: min(1360px, 100%);
+  min-height: 62px;
+  margin: 0 auto;
+  padding: 0 9px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border: 1px solid rgba(18, 22, 30, 0.1);
+  border-radius: 18px;
+  color: #20232a;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 35px rgba(20, 27, 39, 0.11);
+  backdrop-filter: blur(22px) saturate(155%);
+  pointer-events: auto;
+}
+
+.logo {
+  width: 132px;
+  flex: 0 0 auto;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 1.65vw, 26px);
+  font-size: 11px;
+  font-weight: 630;
+  white-space: nowrap;
+}
+
+.desktopNav a {
+  padding: 20px 0;
+  transition: color 180ms ease;
+}
+
+.desktopNav a:hover,
+.desktopNav a:focus-visible {
+  color: #1d65e8;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account,
+.mobileAccount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 17px;
+  border-radius: 12px;
+  color: #fff;
+  background: #15171c;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.account:hover,
+.account:focus-visible,
+.mobileAccount:hover,
+.mobileAccount:focus-visible {
+  background: #1d65e8;
+  transform: translateY(-1px);
+}
+
+.accountShort,
+.menuButton {
+  display: none;
+}
+
+.menuButton {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #eef0f4;
+  place-items: center;
+  cursor: pointer;
+}
+
+.menuButton span {
+  position: absolute;
+  width: 17px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: #17191e;
+  transition: transform 180ms ease;
+}
+
+.menuButton span:first-child { transform: translateY(-3px); }
+.menuButton span:last-child { transform: translateY(3px); }
+.menuButton[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
+.menuButton[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
+
+.mobilePanel,
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .bar { gap: 18px; }
+  .desktopNav { gap: 14px; }
+  .accountLong { display: none; }
+  .accountShort { display: inline; }
+}
+
+@media (max-width: 880px) {
+  .header { top: 10px; padding: 0 10px; }
+  .bar { min-height: 58px; padding-left: 14px; border-radius: 16px; }
+  .logo { width: 122px; }
+  .desktopNav { display: none; }
+  .menuButton { position: relative; display: grid; }
+  .mobilePanel {
+    position: relative;
+    z-index: 2;
+    width: min(520px, calc(100% - 20px));
+    margin: 8px auto 0 10px;
+    padding: 14px;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    border: 1px solid rgba(18, 22, 30, 0.1);
+    border-radius: 20px;
+    color: #17191e;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 24px 60px rgba(15, 21, 32, 0.22);
+    backdrop-filter: blur(24px) saturate(150%);
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  }
+  .mobilePanelOpen { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .mobilePanel nav { display: grid; }
+  .mobilePanel nav a {
+    min-height: 50px;
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: center;
+    border-bottom: 1px solid #e7e9ed;
+    font-size: 15px;
+    font-weight: 620;
+  }
+  .mobilePanel nav a:last-child { border-bottom: 0; }
+  .mobilePanel nav small { color: #a0a4ad; font-size: 8px; letter-spacing: 1px; }
+  .mobilePanel nav span { color: #1d65e8; }
+  .mobileAccount { width: 100%; margin-top: 12px; justify-content: space-between; }
+  .backdrop {
+    position: fixed;
+    z-index: 1;
+    inset: 0;
+    display: block;
+    border: 0;
+    background: rgba(7, 10, 15, 0.25);
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 430px) {
+  .account { padding: 0 12px; }
+  .logo { width: 112px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header * { transition: none !important; }
+}

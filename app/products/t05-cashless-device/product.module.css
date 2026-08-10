@@ -54,10 +54,10 @@
 .productNav {
   position: sticky;
   z-index: 19;
-  top: 0;
+  top: 88px;
   width: 100%;
   height: 58px;
-  margin-top: 64px;
+  margin-top: 88px;
   padding: 0 max(32px, calc((100vw - 1240px) / 2));
   display: flex;
   align-items: center;
@@ -571,8 +571,7 @@
 }
 
 @media (max-width: 680px) {
-  .globalNav { width: calc(100% - 32px); }
-  .globalLinks { display: none; }
+  .productNav { top: 78px; margin-top: 78px; }
   .productNav { padding: 0 16px; }
   .productNav small, .productLinks > a:not(.quotePill) { display: none; }
   .hero { min-height: 870px; padding: 105px 20px 70px; }

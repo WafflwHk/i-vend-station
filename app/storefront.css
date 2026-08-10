@@ -1,0 +1,85 @@
+#machines,
+#cashless,
+#guide,
+#about,
+#faq,
+#contact { scroll-margin-top: 100px; }
+
+.card-actions { gap: 9px; }
+.card-bottom .view-machine-button { width: auto; height: 38px; padding: 0 15px; flex: 1; display: flex; align-items: center; justify-content: space-between; border-radius: 9px; color: #fff; background: #16171b; font-size: 10px; font-weight: 700; }
+.card-bottom .view-machine-button:hover { background: #1d65e8; }
+.card-bottom .quote-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+
+.collection-page { min-height: 100vh; color: #16171c; background: #fff; }
+.collection-hero { min-height: 680px; padding: 170px max(32px, calc((100vw - 1220px) / 2)) 80px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: radial-gradient(circle at 75% 25%, #dce7fb 0, transparent 28%), linear-gradient(145deg, #fafafa, #eef1f6); }
+.collection-hero h1 { margin: 27px 0 70px; font-size: clamp(72px, 9vw, 128px); line-height: 0.86; letter-spacing: -8px; }
+.collection-hero h1 em { color: #9ca1aa; font-style: normal; }
+.collection-hero-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; padding-top: 25px; border-top: 1px solid #d6d9df; }
+.collection-hero-foot p { max-width: 500px; margin: 0; color: #737780; font-size: 13px; line-height: 1.7; }
+.collection-hero-foot > span { color: #8b8f97; font-size: 9px; font-weight: 750; letter-spacing: 1.5px; text-transform: uppercase; }
+.collection-hero-foot > a { padding: 14px 18px; border-radius: 999px; color: #fff; background: #16171c; font-size: 10px; font-weight: 700; }
+.collection-hero-foot > a span { margin-left: 7px; color: #6fa0ff; }
+.collection-list { padding: 125px max(32px, calc((100vw - 1220px) / 2)); }
+.collection-heading { margin-bottom: 50px; display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; }
+.collection-heading h2 { margin: 18px 0 0; font-size: clamp(50px, 5.6vw, 78px); letter-spacing: -4.8px; }
+.collection-heading > p { max-width: 400px; margin: 0; color: #80838b; font-size: 12px; line-height: 1.7; }
+.collection-link { padding-bottom: 5px; border-bottom: 1px solid #16171c; font-size: 10px; font-weight: 700; }
+.collection-link span { margin-left: 9px; color: #1d65e8; }
+
+.store-feature { min-height: 730px; display: grid; grid-template-columns: 1fr 1fr; color: #fff; background: #101319; }
+.store-feature-visual { position: relative; min-height: 580px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #426996, #112b4d); }
+.store-feature-visual img { position: relative; z-index: 2; width: min(58%, 430px); filter: drop-shadow(25px 35px 28px #06122380); }
+.store-orbit { position: absolute; width: 520px; height: 520px; border: 1px solid #ffffff30; border-radius: 50%; box-shadow: 0 0 0 90px #ffffff08, 0 0 0 180px #ffffff05; }
+.store-feature-copy { padding: 95px max(40px, calc((100vw - 1220px) / 2)) 85px 80px; display: flex; flex-direction: column; justify-content: center; }
+.store-t05 { margin: 32px 0 13px; color: #6f9cf4; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
+.store-feature h2 { margin: 0; font-size: clamp(48px, 5vw, 72px); line-height: 0.96; letter-spacing: -4.6px; }
+.store-feature-copy > p { max-width: 500px; color: #989fa9; font-size: 13px; line-height: 1.75; }
+.store-feature-copy > a { align-self: flex-start; margin-top: 19px; padding: 14px 18px; border-radius: 999px; color: #111318; background: #fff; font-size: 10px; font-weight: 700; }
+.store-feature-copy > a span { margin-left: 8px; color: #1d65e8; }
+.store-feature-copy > small { margin-top: 17px; color: #5f6671; font-size: 8px; }
+
+.about-section { padding: 135px max(32px, calc((100vw - 1220px) / 2)); background: #f2f3f5; }
+.about-main { display: grid; grid-template-columns: 0.52fr 1.48fr; gap: 70px; }
+.about-main h2 { margin: 0; max-width: 920px; font-size: clamp(54px, 6.5vw, 92px); line-height: 0.95; letter-spacing: -5.7px; }
+.about-main h2 em { color: #979ca5; font-style: normal; }
+.about-copy { margin-top: 75px; margin-left: 35%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.about-copy > p { margin: 0; color: #737780; font-size: 14px; line-height: 1.8; }
+.about-points { display: grid; border-top: 1px solid #d5d8dd; }
+.about-points div { min-height: 58px; display: grid; grid-template-columns: 38px 1fr; align-items: center; border-bottom: 1px solid #d5d8dd; font-size: 11px; font-weight: 620; }
+.about-points span { color: #a0a4ab; font-size: 8px; }
+
+.faq-section { padding: 135px max(32px, calc((100vw - 1050px) / 2)); background: #fff; }
+.faq-head { display: grid; grid-template-columns: 1fr 1.8fr; align-items: end; gap: 50px; margin-bottom: 70px; }
+.faq-head h2 { margin: 20px 0 0; font-size: clamp(56px, 6.4vw, 88px); line-height: 0.95; letter-spacing: -5.5px; }
+.faq-head > p { margin: 0; color: #7a7e86; font-size: 13px; line-height: 1.75; }
+.faq-list { border-top: 1px solid #d9dce1; }
+.faq-list details { border-bottom: 1px solid #d9dce1; }
+.faq-list summary { min-height: 82px; display: grid; grid-template-columns: 55px 1fr auto; align-items: center; list-style: none; cursor: pointer; font-size: 18px; font-weight: 640; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary small { color: #9da1a8; font-size: 8px; }
+.faq-list summary span { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #17191e; transition: transform 180ms ease; }
+.faq-list details[open] summary span { transform: rotate(45deg); background: #1d65e8; }
+.faq-list details p { max-width: 720px; margin: -5px 0 28px 55px; color: #777b84; font-size: 12px; line-height: 1.75; }
+
+.site-footer { background: #fff; }
+
+@media (max-width: 850px) {
+  .collection-hero { min-height: 600px; padding: 135px 20px 65px; }
+  .collection-hero h1 { margin-bottom: 50px; font-size: 70px; letter-spacing: -5px; }
+  .collection-hero-foot, .collection-heading { align-items: flex-start; flex-direction: column; }
+  .collection-list { padding: 90px 15px; }
+  .store-feature { grid-template-columns: 1fr; }
+  .store-feature-copy { padding: 75px 22px; }
+  .about-section, .faq-section { padding: 95px 20px; }
+  .about-main, .faq-head { grid-template-columns: 1fr; }
+  .about-copy { margin: 55px 0 0; grid-template-columns: 1fr; gap: 35px; }
+}
+
+@media (max-width: 560px) {
+  .collection-hero h1 { font-size: 58px; }
+  .collection-heading h2, .about-main h2, .faq-head h2 { font-size: 48px; letter-spacing: -3.2px; }
+  .store-feature-visual { min-height: 470px; }
+  .store-feature h2 { font-size: 46px; letter-spacing: -3px; }
+  .faq-list summary { min-height: 75px; grid-template-columns: 36px 1fr auto; font-size: 15px; }
+  .faq-list details p { margin-left: 36px; }
+}
