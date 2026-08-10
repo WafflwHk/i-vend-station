@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname = "/", requestHeaders = {}) {
@@ -70,6 +70,17 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/t05-terminal-correct.png", import.meta.url)),
     access(new URL("../public/hot-cold-coffee-machine.jpg", import.meta.url)),
   ]);
+});
+
+test("uses reliable native navigation instead of the broken Vinext Link shim", async () => {
+  const appDirectory = new URL("../app/", import.meta.url);
+  const appFiles = await readdir(appDirectory, { recursive: true });
+  const sourceFiles = appFiles.filter((file) => file.endsWith(".tsx"));
+
+  for (const file of sourceFiles) {
+    const source = await readFile(new URL(file.replaceAll("\\", "/"), appDirectory), "utf8");
+    assert.doesNotMatch(source, /from\s+["']next\/link["']/);
+  }
 });
 
 test("protects accounts and rejects unknown machine routes", async () => {

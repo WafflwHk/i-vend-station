@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Machine } from "../data/machines";
 import MachineArt from "./MachineArt";
 
@@ -20,7 +19,7 @@ export default function MachineCard({ machine, index }: Props) {
         <h3>{machine.name}</h3>
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
-          <Link className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></Link>
+          <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
           <a className="quote-icon" href={`mailto:hello@example.com?subject=Enquiry: ${encodeURIComponent(machine.code)}`} aria-label={`Request a quotation for ${machine.name}`} title="Request a quotation">&#8599;</a>
         </div>
       </div>

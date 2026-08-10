@@ -9,6 +9,8 @@
 }
 
 .bar {
+  position: relative;
+  z-index: 3;
   width: min(1360px, 100%);
   min-height: 62px;
   margin: 0 auto;

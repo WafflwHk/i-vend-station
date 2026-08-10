@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import MachineViewer from "../../components/MachineViewer";
 import SiteFooter from "../../components/SiteFooter";
@@ -34,7 +33,7 @@ export default async function MachineDetailPage({ params }: Props) {
 
   return (
     <main className={styles.page}>
-      <div className={styles.breadcrumb} data-animate="up"><Link href="/machines">Machines</Link><span>/</span><span>{machine.code}</span></div>
+      <div className={styles.breadcrumb} data-animate="up"><a href="/machines">Machines</a><span>/</span><span>{machine.code}</span></div>
 
       <section className={styles.intro}>
         <div className={styles.introCopy} data-animate="left">
@@ -72,7 +71,7 @@ export default async function MachineDetailPage({ params }: Props) {
         <a href={`mailto:hello@example.com?subject=Quotation request: ${encodeURIComponent(machine.code)}`}>Request quotation <span aria-hidden="true">&#8599;</span></a>
       </section>
 
-      <Link className={styles.nextMachine} href={`/machines/${nextMachine.slug}`} data-animate="up"><span>Next machine</span><strong>{nextMachine.name}</strong><i aria-hidden="true">&rarr;</i></Link>
+      <a className={styles.nextMachine} href={`/machines/${nextMachine.slug}`} data-animate="up"><span>Next machine</span><strong>{nextMachine.name}</strong><i aria-hidden="true">&rarr;</i></a>
       <SiteFooter />
     </main>
   );

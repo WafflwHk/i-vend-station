@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import styles from "./site-header.module.css";
@@ -53,16 +52,16 @@ export default function SiteHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.bar}>
-        <Link className={styles.logo} href="/" aria-label="I Vend Station home" onClick={() => setOpen(false)}>
+        <a className={styles.logo} href="/" aria-label="I Vend Station home" onClick={() => setOpen(false)}>
           <img src="/i-vend-station-logo.png" alt="I Vend Station" />
-        </Link>
+        </a>
 
         <nav className={styles.desktopNav} aria-label="Main navigation">
-          {links.map((link) => <Link key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</Link>)}
+          {links.map((link) => <a key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>)}
         </nav>
 
         <div className={styles.actions}>
-          <Link className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></Link>
+          <a className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></a>
           <button
             ref={menuButtonRef}
             className={styles.menuButton}
@@ -80,10 +79,10 @@ export default function SiteHeader() {
       <div className={`${styles.mobilePanel} ${open ? styles.mobilePanelOpen : ""}`} id="mobile-site-menu" aria-hidden={!open} inert={!open}>
         <nav aria-label="Mobile navigation">
           {links.map((link, index) => (
-            <Link ref={index === 0 ? firstLinkRef : undefined} key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{link.label}<span aria-hidden="true">&rarr;</span></Link>
+            <a ref={index === 0 ? firstLinkRef : undefined} key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{link.label}<span aria-hidden="true">&rarr;</span></a>
           ))}
         </nav>
-        <Link className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></Link>
+        <a className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
       </div>
       {open ? <button className={styles.backdrop} type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
     </header>

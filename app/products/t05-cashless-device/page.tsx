@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import styles from "./product.module.css";
 
 export const metadata: Metadata = {
@@ -185,7 +184,7 @@ export default function T05CashlessPage() {
       </section>
 
       <footer className={styles.footer} data-animate="up">
-        <Link className={styles.brand} href="/" aria-label="I Vend Station home"><img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" /></Link>
+        <a className={styles.brand} href="/" aria-label="I Vend Station home"><img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" /></a>
         <p>Vending machines and cashless payment equipment.</p>
         <div><span>&copy; 2026 I Vend Station</span><small>Payment availability and compatibility are subject to confirmation.</small></div>
       </footer>

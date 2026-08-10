@@ -1,4 +1,3 @@
-import Link from "next/link";
 import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
@@ -35,7 +34,7 @@ export default function Home() {
           <div className="eyebrow"><span /> VENDING MACHINE SUPPLIER</div>
           <h1>Machines built<br /><em>for opportunity.</em></h1>
           <p>Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
-          <div className="hero-actions"><Link className="button dark" href="/machines">View all machines <b>&rarr;</b></Link><Link className="text-link" href="/store">Open the store <span>&#8599;</span></Link></div>
+          <div className="hero-actions"><a className="button dark" href="/machines">View all machines <b>&rarr;</b></a><a className="text-link" href="/store">Open the store <span>&#8599;</span></a></div>
         </div>
         <div className="hero-showcase" aria-label="Vending machine range" data-scroll-vending>
           <div className="hero-ring" />

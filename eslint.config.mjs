@@ -35,9 +35,12 @@ const eslintConfig = defineConfig([
         version: "detect",
       },
     },
-    // Vinext's current Next Image client shim can hydrate with duplicate React.
-    // Keep direct local images until that runtime integration is stable.
     rules: {
+      // Vinext beta's client Link shim currently crashes on hosted navigation.
+      // Native anchors intentionally provide reliable document navigation.
+      "@next/next/no-html-link-for-pages": "off",
+      // Vinext's current Next Image client shim can hydrate with duplicate React.
+      // Keep direct local images until that runtime integration is stable.
       "@next/next/no-img-element": "off",
     },
   },
