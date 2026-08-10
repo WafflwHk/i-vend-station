@@ -1,0 +1,15 @@
+.cashless-visual {
+  background: linear-gradient(145deg, #5979a8, #15345f);
+}
+
+.cashless-visual img {
+  width: min(64%, 440px);
+  transform: none;
+  filter: drop-shadow(24px 32px 25px #07142773);
+}
+
+@media (max-width: 650px) {
+  .cashless-visual img {
+    width: min(72%, 390px);
+  }
+}

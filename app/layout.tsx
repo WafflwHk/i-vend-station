@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import "./corrections.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -10,13 +11,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "I Vend Station",
     description: "Vending machines. Coffee systems. Cashless payments.",
-    images: [{ url: "/og-machines-clean.png", width: 1536, height: 1024, alt: "I Vend Station vending machine range and cashless payment terminal" }],
+    images: [{ url: "/og-t05-correct.png", width: 1536, height: 1024, alt: "I Vend Station vending machine range with the actual grey T05 cashless device" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "I Vend Station",
     description: "Vending machines. Coffee systems. Cashless payments.",
-    images: ["/og-machines-clean.png"],
+    images: ["/og-t05-correct.png"],
   },
 };
 

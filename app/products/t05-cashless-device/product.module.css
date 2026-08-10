@@ -102,7 +102,7 @@
   grid-template-columns: 0.9fr 1.1fr;
   align-items: center;
   padding: 70px max(32px, calc((100vw - 1240px) / 2)) 80px;
-  background: radial-gradient(circle at 68% 45%, #6e251b3a 0, transparent 30%), linear-gradient(150deg, #090a0c, #030405 70%);
+  background: radial-gradient(circle at 68% 45%, #234f9a3d 0, transparent 32%), linear-gradient(150deg, #090a0c, #030405 70%);
 }
 
 .heroGlow {
@@ -113,9 +113,9 @@
   height: 65vw;
   max-width: 900px;
   max-height: 900px;
-  border: 1px solid #ff6b4121;
+  border: 1px solid #5b91ff2b;
   border-radius: 50%;
-  box-shadow: inset 0 0 130px #ff56320b;
+  box-shadow: inset 0 0 130px #2d7eff10;
   animation: breathe 7s ease-in-out infinite;
 }
 
@@ -183,10 +183,10 @@
 .deviceStage img {
   position: relative;
   z-index: 2;
-  width: min(620px, 90%);
+  width: min(540px, 82%);
   height: auto;
-  transform: rotate(-8deg) translateY(-4px);
-  filter: drop-shadow(42px 60px 38px #000a) saturate(1.04);
+  transform: translateY(-4px);
+  filter: drop-shadow(32px 42px 32px #000b) saturate(1.02);
   animation: deviceFloat 6.5s ease-in-out infinite;
 }
 
@@ -195,8 +195,8 @@
   width: 470px;
   height: 470px;
   border-radius: 50%;
-  border: 1px solid #ff7b5430;
-  box-shadow: 0 0 50px #ff5b3720;
+  border: 1px solid #66a0ff3b;
+  box-shadow: 0 0 50px #2d7eff25;
   animation: ringPulse 4s ease-out infinite;
 }
 
@@ -546,7 +546,7 @@
 
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes deviceFloat { 0%, 100% { transform: rotate(-8deg) translateY(-4px); } 50% { transform: rotate(-6deg) translateY(-18px); } }
+@keyframes deviceFloat { 0%, 100% { transform: translateY(-4px); } 50% { transform: translateY(-18px); } }
 @keyframes ringPulse { 0% { opacity: 0; transform: scale(0.72); } 45% { opacity: 0.65; } 100% { opacity: 0; transform: scale(1.22); } }
 @keyframes breathe { 50% { transform: scale(1.04); opacity: 0.8; } }
 @keyframes nfcWave { 50% { transform: scale(1.07); opacity: 0.4; } }
@@ -585,7 +585,7 @@
   .hero h1 { font-size: 60px; letter-spacing: -4px; }
   .heroIntro { font-size: 14px; }
   .deviceStage { height: 390px; }
-  .deviceStage img { width: min(430px, 112%); }
+  .deviceStage img { width: min(370px, 88%); }
   .signalRing { width: 300px; height: 300px; }
   .deviceNote { right: auto; bottom: 5%; }
   .paymentBand { padding: 80px 18px; }

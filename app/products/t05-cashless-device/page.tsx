@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     description: "A simpler way to bring cashless payments to compatible vending machines.",
     images: [
       {
-        url: "/og-t05-cashless.png",
+        url: "/og-t05-correct.png",
         width: 1536,
         height: 1024,
-        alt: "Orange cashless payment terminal on a dark background",
+        alt: "I Vend Station vending machines with the actual grey T05 cashless device",
       },
     ],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "T05 Cashless | I Vend Station",
     description: "Tap, scan, and pay at compatible vending machines.",
-    images: ["/og-t05-cashless.png"],
+    images: ["/og-t05-correct.png"],
   },
 };
 
@@ -88,8 +88,8 @@ export default function T05CashlessPage() {
         <div className={styles.deviceStage} aria-label="T05 cashless payment terminal">
           <div className={styles.signalRing} />
           <div className={`${styles.signalRing} ${styles.signalRingTwo}`} />
-          <img src="/t05-terminal.png" alt="Orange T05 cashless payment terminal" />
-          <span className={styles.deviceNote}>Terminal configuration shown for illustration.</span>
+          <img src="/t05-terminal-correct.png" alt="Actual grey T05 cashless payment device supplied by I Vend Station" />
+          <span className={styles.deviceNote}>Actual device photo supplied by I Vend Station.</span>
         </div>
         <div className={styles.scrollCue}><span>Scroll to explore</span><i /></div>
       </section>
