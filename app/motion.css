@@ -11,8 +11,11 @@
   transition:
     opacity 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay),
     translate 880ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay),
-    scale 880ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay);
-  will-change: opacity, translate, scale;
+    scale 880ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay),
+    transform 350ms ease,
+    box-shadow 350ms ease,
+    background-color 220ms ease,
+    color 220ms ease;
 }
 
 .motion-enabled [data-animate="left"] { --motion-x: -48px; --motion-y: 0px; }
@@ -26,7 +29,6 @@
   opacity: 1;
   translate: 0 0;
   scale: 1;
-  will-change: auto;
 }
 
 .hero .unit-one,
@@ -34,7 +36,7 @@
 .hero .unit-three,
 .hero .hero-ring,
 .hero .showcase-badge {
-  transition: transform 120ms linear, opacity 120ms linear;
+  transition: opacity 120ms linear;
   will-change: transform, opacity;
 }
 
@@ -135,6 +137,8 @@
 .cashless-copy > a:active,
 button:not(:disabled):active { scale: 0.97; }
 
+.motion-enabled [data-animate][data-in-view="true"]:active { scale: 0.97; }
+
 @media (max-width: 700px) {
   .motion-enabled [data-animate] { --motion-y: 24px; }
   .motion-enabled [data-animate="left"] { --motion-x: -24px; --motion-y: 0px; }
@@ -142,6 +146,10 @@ button:not(:disabled):active { scale: 0.97; }
   .hero .unit-one { transform: translate3d(calc(var(--vending-scroll) * 42px), calc(var(--vending-scroll) * 4px), 0) rotate(calc(var(--vending-scroll) * 2deg)); }
   .hero .unit-two { transform: translate3d(calc(var(--vending-scroll) * -10px), calc(var(--vending-scroll) * -5px), 0); }
   .hero .unit-three { transform: translate3d(calc(var(--vending-scroll) * -36px), calc(var(--vending-scroll) * 6px), 0) rotate(calc(var(--vending-scroll) * -2deg)); }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .button:hover { transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

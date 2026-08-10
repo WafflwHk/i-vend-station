@@ -1,12 +1,12 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export default function ScrollMotion() {
   const pathname = usePathname();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const syncMotionPreference = () => {
       document.documentElement.classList.toggle("motion-enabled", !motionPreference.matches);
@@ -20,10 +20,9 @@ export default function ScrollMotion() {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let revealObserver: IntersectionObserver | null = null;
     let scrollFrame = 0;
-    let setupFrame = 0;
     let heroSection: HTMLElement | null = null;
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -44,36 +43,38 @@ export default function ScrollMotion() {
       if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateHeroMotion);
     };
 
-    setupFrame = window.requestAnimationFrame(() => {
-      const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-animate]"));
-      if (motionPreference.matches || !("IntersectionObserver" in window)) {
-        revealItems.forEach((item) => { item.dataset.inView = "true"; });
-      } else {
-        revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              (entry.target as HTMLElement).dataset.inView = "true";
-              revealObserver?.unobserve(entry.target);
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
-        );
-        revealItems.forEach((item) => revealObserver?.observe(item));
-      }
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-animate]"));
+    if (motionPreference.matches || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => { item.dataset.inView = "true"; });
+    } else {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            (entry.target as HTMLElement).dataset.inView = "true";
+            revealObserver?.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
+      );
+      const firstViewLimit = window.innerHeight * 0.93;
+      revealItems.forEach((item) => {
+        const bounds = item.getBoundingClientRect();
+        if (bounds.top < firstViewLimit && bounds.bottom > 0) item.dataset.inView = "true";
+        else revealObserver?.observe(item);
+      });
+    }
 
-      const vendingShowcase = document.querySelector<HTMLElement>("[data-scroll-vending]");
-      heroSection = vendingShowcase?.closest<HTMLElement>(".hero") ?? null;
-      if (heroSection) {
-        updateHeroMotion();
-        window.addEventListener("scroll", requestHeroUpdate, { passive: true });
-        window.addEventListener("resize", requestHeroUpdate);
-        motionPreference.addEventListener("change", requestHeroUpdate);
-      }
-    });
+    const vendingShowcase = document.querySelector<HTMLElement>("[data-scroll-vending]");
+    heroSection = vendingShowcase?.closest<HTMLElement>(".hero") ?? null;
+    if (heroSection) {
+      updateHeroMotion();
+      window.addEventListener("scroll", requestHeroUpdate, { passive: true });
+      window.addEventListener("resize", requestHeroUpdate);
+      motionPreference.addEventListener("change", requestHeroUpdate);
+    }
 
     return () => {
-      window.cancelAnimationFrame(setupFrame);
       if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
       revealObserver?.disconnect();
       window.removeEventListener("scroll", requestHeroUpdate);

@@ -35,6 +35,11 @@ const eslintConfig = defineConfig([
         version: "detect",
       },
     },
+    // Vinext's current Next Image client shim can hydrate with duplicate React.
+    // Keep direct local images until that runtime integration is stable.
+    rules: {
+      "@next/next/no-img-element": "off",
+    },
   },
 ]);
 

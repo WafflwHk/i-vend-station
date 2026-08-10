@@ -69,7 +69,7 @@ export default async function MachineDetailPage({ params }: Props) {
 
       <section className={styles.quote} data-animate="scale">
         <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send your location, product type, and preferred payment setup so the exact configuration can be checked.</p></div>
-        <a href={`mailto:hello@example.com?subject=Quotation request: ${encodeURIComponent(machine.code)}`}>Request quotation <span aria-hidden="true">&nearr;</span></a>
+        <a href={`mailto:hello@example.com?subject=Quotation request: ${encodeURIComponent(machine.code)}`}>Request quotation <span aria-hidden="true">&#8599;</span></a>
       </section>
 
       <Link className={styles.nextMachine} href={`/machines/${nextMachine.slug}`} data-animate="up"><span>Next machine</span><strong>{nextMachine.name}</strong><i aria-hidden="true">&rarr;</i></Link>

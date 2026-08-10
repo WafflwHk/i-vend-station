@@ -15,7 +15,7 @@ export default function StorePage() {
       <section className="collection-hero store-hero">
         <div className="section-index" data-animate="up">I VEND STATION STORE</div>
         <h1 data-animate="up" data-animate-delay="1">Machines and<br /><em>modern payments.</em></h1>
-        <div className="collection-hero-foot" data-animate="up" data-animate-delay="2"><p>Browse the vending range and cashless device. Prices stay quotation-based so the exact machine, location, and payment setup can be checked first.</p><Link href="/#contact">Request a quotation <span aria-hidden="true">&nearr;</span></Link></div>
+        <div className="collection-hero-foot" data-animate="up" data-animate-delay="2"><p>Browse the vending range and cashless device. Prices stay quotation-based so the exact machine, location, and payment setup can be checked first.</p><Link href="/#contact">Request a quotation <span aria-hidden="true">&#8599;</span></Link></div>
       </section>
 
       <section className="store-feature" aria-labelledby="cashless-store-title">

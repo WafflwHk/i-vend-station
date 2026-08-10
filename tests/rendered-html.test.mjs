@@ -1,20 +1,15 @@
 import assert from "node:assert/strict";
-import { access, readFile, readdir } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-const developmentPreviewMeta =
-  /<meta(?=[^>]*\bname=["']codex-preview["'])(?=[^>]*\bcontent=["']development["'])[^>]*>/i;
-const templateRoot = new URL("../", import.meta.url);
-const previewRoot = new URL("../app/_sites-preview/", import.meta.url);
-
-async function render() {
+async function render(pathname = "/", requestHeaders = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
+  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${pathname}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
+    new Request(`http://localhost${pathname}`, {
+      headers: { accept: "text/html", ...requestHeaders },
     }),
     {
       ASSETS: {
@@ -28,64 +23,74 @@ async function render() {
   );
 }
 
-test("server-renders the starter loading skeleton", async () => {
+test("server-renders the branded I Vend Station homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, developmentPreviewMeta);
-  assert.match(html, /<title>Your site is taking shape<\/title>/i);
-  assert.match(html, /Building your site/);
-  assert.match(html, /Your site is taking shape/);
-  assert.match(
-    html,
-    /Your first version will appear here automatically when it’s ready\./,
-  );
-  assert.doesNotMatch(html, /Codex/);
-  assert.match(html, /react-loading-skeleton/);
-  assert.match(html, /role="status"/);
+  assert.match(html, /<title>I Vend Station \| Vending Machines &amp; Cashless Payments<\/title>/i);
+  assert.match(html, /Machines built/);
+  assert.match(html, /Find your machine\./);
+  assert.match(html, /Cashless Device/);
+  assert.match(html, /i-vend-station-logo\.png/);
+  assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
+  assert.doesNotMatch(html, /&amp;nearr;/i);
 });
 
-test("keeps the loading skeleton scoped and disposable", async () => {
-  const [preview, css, page, layout, packageJson, files] = await Promise.all([
-    readFile(new URL("SkeletonPreview.tsx", previewRoot), "utf8"),
-    readFile(new URL("preview.css", previewRoot), "utf8"),
-    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+test("server-renders every public product route", async () => {
+  const routes = [
+    ["/store", /Shop the range\./],
+    ["/machines", /Choose a model\./],
+    ["/machines/hot-cold-coffee-machine", /Hot &amp; Cold Coffee Machine/],
+    ["/products/t05-cashless-device", /Cashless,/],
+  ];
+
+  for (const [pathname, expectedContent] of routes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} should render successfully`);
+    const html = await response.text();
+    assert.match(html, expectedContent);
+    assert.doesNotMatch(html, /&amp;nearr;/i);
+  }
+});
+
+test("contains the finished site assets and no starter scaffolding", async () => {
+  const [layout, packageJson] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
-    readdir(previewRoot),
   ]);
 
-  assert.deepEqual(files.sort(), ["SkeletonPreview.tsx", "preview.css"]);
-  assert.match(preview, /from "react-loading-skeleton"/);
-  assert.match(preview, /baseColor="#eceae7"/);
-  assert.match(preview, /highlightColor="#f9f8f6"/);
-  assert.match(preview, /duration=\{2\.8\}/);
-  assert.match(preview, /sites-skeleton-search-placeholder/);
-  assert.match(packageJson, /"react-loading-skeleton": "3\.5\.0"/);
+  assert.match(layout, /I Vend Station/);
+  assert.doesNotMatch(layout, /codex-preview|Starter Project|_sites-preview/);
+  assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  await Promise.all([
+    access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
+    access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
+    access(new URL("../public/t05-terminal-correct.png", import.meta.url)),
+    access(new URL("../public/hot-cold-coffee-machine.jpg", import.meta.url)),
+  ]);
+});
 
-  const shellIndex = preview.indexOf('className="sites-skeleton-shell"');
-  const statusIndex = preview.indexOf('className="sites-skeleton-status"');
-  assert.ok(shellIndex >= 0 && statusIndex > shellIndex);
-  assert.match(css, /position:\s*fixed/);
-  assert.match(css, /inset:\s*0/);
-  assert.match(css, /opacity:\s*0\.52/);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/);
-  assert.doesNotMatch(css, /#020617|canvas|pets|progress/i);
-  assert.doesNotMatch(
-    preview,
-    /loading-spinner|status-mark|status-progress|canvas|cookie|random/i,
+test("protects accounts and rejects unknown machine routes", async () => {
+  const anonymousAccount = await render("/account");
+  assert.equal(anonymousAccount.status, 307);
+  assert.equal(
+    anonymousAccount.headers.get("location"),
+    "/signin-with-chatgpt?return_to=%2Faccount",
   );
 
-  assert.match(page, /export const metadata:\s*Metadata/);
-  assert.match(page, /"codex-preview": "development"/);
-  assert.match(page, /<SkeletonPreview \/>/);
-  assert.match(layout, /title:\s*"Starter Project"/);
-  assert.doesNotMatch(layout, /codex-preview|_sites-preview|themeColor|\bViewport\b/);
-  assert.doesNotMatch(css, /(^|\s)(html|body)\s*\{/m);
+  const signedInAccount = await render("/account", {
+    "oai-authenticated-user-id": "test-user",
+    "oai-authenticated-user-email": "customer@example.com",
+    "oai-authenticated-user-full-name": "I%20Vend%20Customer",
+    "oai-authenticated-user-full-name-encoding": "percent-encoded-utf-8",
+  });
+  assert.equal(signedInAccount.status, 200);
+  const signedInHtml = await signedInAccount.text();
+  assert.match(signedInHtml, /I Vend Customer/);
+  assert.match(signedInHtml, /customer@example\.com/);
 
-  await assert.rejects(
-    access(new URL("public/_sites-preview", templateRoot)),
-  );
+  const unknownMachine = await render("/machines/not-a-real-machine");
+  assert.equal(unknownMachine.status, 404);
 });

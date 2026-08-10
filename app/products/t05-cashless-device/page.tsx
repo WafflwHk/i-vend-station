@@ -179,7 +179,7 @@ export default function T05CashlessPage() {
         <h2 data-animate="up" data-animate-delay="1">Make your next machine<br />easier to pay at.</h2>
         <p data-animate="up" data-animate-delay="2">Send us your vending-machine model and location. We&apos;ll confirm the setup before preparing your quotation.</p>
         <a href="mailto:hello@example.com?subject=T05 cashless compatibility and quotation" data-animate="up" data-animate-delay="3">
-          Request a T05 quotation <span aria-hidden="true">&nearr;</span>
+          Request a T05 quotation <span aria-hidden="true">&#8599;</span>
         </a>
         <small data-animate="up" data-animate-delay="3">Replace the email address with your business contact when ready.</small>
       </section>

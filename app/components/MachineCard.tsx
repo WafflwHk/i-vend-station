@@ -21,7 +21,7 @@ export default function MachineCard({ machine, index }: Props) {
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
           <Link className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></Link>
-          <a className="quote-icon" href={`mailto:hello@example.com?subject=Enquiry: ${encodeURIComponent(machine.code)}`} aria-label={`Request a quotation for ${machine.name}`} title="Request a quotation">&nearr;</a>
+          <a className="quote-icon" href={`mailto:hello@example.com?subject=Enquiry: ${encodeURIComponent(machine.code)}`} aria-label={`Request a quotation for ${machine.name}`} title="Request a quotation">&#8599;</a>
         </div>
       </div>
     </article>

@@ -35,7 +35,7 @@ export default function Home() {
           <div className="eyebrow"><span /> VENDING MACHINE SUPPLIER</div>
           <h1>Machines built<br /><em>for opportunity.</em></h1>
           <p>Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
-          <div className="hero-actions"><Link className="button dark" href="/machines">View all machines <b>&rarr;</b></Link><Link className="text-link" href="/store">Open the store <span>&nearr;</span></Link></div>
+          <div className="hero-actions"><Link className="button dark" href="/machines">View all machines <b>&rarr;</b></Link><Link className="text-link" href="/store">Open the store <span>&#8599;</span></Link></div>
         </div>
         <div className="hero-showcase" aria-label="Vending machine range" data-scroll-vending>
           <div className="hero-ring" />
@@ -61,7 +61,7 @@ export default function Home() {
 
       <section className="cashless" id="cashless">
         <div className="cashless-visual" data-animate="left"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device supplied by I Vend Station" /><span>TAP &bull; SCAN &bull; PAY</span></div>
-        <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&nearr;</b></a></div>
+        <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&#8599;</b></a></div>
       </section>
 
       <section className="guide" id="guide">
@@ -81,7 +81,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light" data-animate="up">06 &mdash; REQUEST A QUOTATION</div><h2 data-animate="up" data-animate-delay="1">Which machine<br />fits your plan?</h2><p data-animate="up" data-animate-delay="2">Send the model name, your location, and what you want to sell.</p><div className="contact-actions" data-animate="up" data-animate-delay="3"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&nearr;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
+      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light" data-animate="up">06 &mdash; REQUEST A QUOTATION</div><h2 data-animate="up" data-animate-delay="1">Which machine<br />fits your plan?</h2><p data-animate="up" data-animate-delay="2">Send the model name, your location, and what you want to sell.</p><div className="contact-actions" data-animate="up" data-animate-delay="3"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&#8599;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
 
       <SiteFooter />
     </main>
