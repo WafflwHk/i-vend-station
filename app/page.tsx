@@ -110,7 +110,7 @@ export default function Home() {
 
       <section className="cashless" id="cashless">
         <div className="cashless-visual"><div className="cash-orbit one"/><div className="cash-orbit two"/><img src="/t05-terminal.png" alt="T05 cashless payment terminal"/><span>TAP • SCAN • PAY</span></div>
-        <div className="cashless-copy"><div className="section-index light">02 — CASHLESS ADD-ON</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="mailto:hello@example.com?subject=T05 cashless device enquiry">Ask about T05 <b>↗</b></a></div>
+        <div className="cashless-copy"><div className="section-index light">02 — CASHLESS ADD-ON</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore T05 <b>↗</b></a></div>
       </section>
 
       <section className="guide" id="guide">
