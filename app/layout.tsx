@@ -5,18 +5,18 @@ import "./globals.css";
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "I Vend Station | Everyday Convenience",
-  description: "Drinks, snacks, and everyday essentials—right where you need them.",
+  title: "I Vend Station | Vending Machines & Cashless Payments",
+  description: "Japanese hot and cold coffee machines, TCN vending machines, and T05 cashless payment solutions.",
   openGraph: {
     title: "I Vend Station",
-    description: "Good things. Right where you are.",
-    images: [{ url: "/og.png", width: 1733, height: 909, alt: "I Vend Station vending catalogue" }],
+    description: "Vending machines. Coffee systems. Cashless payments.",
+    images: [{ url: "/og-machines.png", width: 1536, height: 1024, alt: "I Vend Station vending machines, coffee systems, and cashless payments" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "I Vend Station",
-    description: "Good things. Right where you are.",
-    images: ["/og.png"],
+    description: "Vending machines. Coffee systems. Cashless payments.",
+    images: ["/og-machines.png"],
   },
 };
 
