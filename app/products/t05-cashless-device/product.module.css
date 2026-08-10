@@ -605,6 +605,83 @@
   .footer > div { text-align: center; }
 }
 
+@media (max-width: 680px) {
+  .productNav {
+    top: calc(max(8px, env(safe-area-inset-top)) + 66px);
+    height: 62px;
+    margin-top: calc(max(8px, env(safe-area-inset-top)) + 66px);
+    padding: 0 max(14px, env(safe-area-inset-right)) 0 max(14px, env(safe-area-inset-left));
+  }
+
+  .productLinks { gap: 8px; }
+  .quotePill { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; }
+  .hero { min-height: 800px; padding: 88px 17px 58px; }
+  .hero h1 { margin: 23px 0; font-size: clamp(49px, 14vw, 58px); line-height: 0.93; letter-spacing: -3.7px; }
+  .heroIntro { font-size: 14px; line-height: 1.65; }
+  .primaryButton { width: 100%; min-height: 48px; padding: 0 18px; justify-content: space-between; }
+  .deviceStage { height: 350px; }
+  .deviceStage img { width: min(330px, 84%); }
+  .deviceNote { left: 50%; right: auto; bottom: 2%; width: max-content; max-width: 90%; transform: translateX(-50%); text-align: center; font-size: 10px; line-height: 1.4; }
+  .scrollCue { display: none; }
+
+  .paymentBand { min-height: auto; padding: 72px 17px; }
+  .paymentBand > p { margin-bottom: 30px; font-size: 39px; line-height: 1; letter-spacing: -2.5px; }
+  .paymentBand span { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; font-size: 11px; }
+  .paymentBand small { font-size: 10px; line-height: 1.5; }
+
+  .tapStory,
+  .controlSection,
+  .compatibility { padding: 76px 15px; }
+  .stickyCopy { padding-bottom: 22px; }
+  .stickyCopy h2,
+  .controlHeadline h2,
+  .compatibility h2,
+  .quote h2 { font-size: clamp(43px, 12.8vw, 52px); line-height: 0.95; letter-spacing: -3.2px; }
+  .sectionLabel,
+  .kicker { font-size: 10px; letter-spacing: 1.8px; }
+  .stickyCopy > p:last-child,
+  .controlHeadline > p:last-child,
+  .compatibilityCopy > p:last-child { font-size: 13px; line-height: 1.7; }
+  .storyCards { gap: 22px; }
+  .storyCard { min-height: 500px; padding: 28px 24px; }
+  .storyCard h3 { font-size: 31px; }
+  .storyCard p { font-size: 13px; }
+  .nfcVisual span { width: 190px; height: 190px; }
+  .nfcVisual span:nth-child(2) { width: 132px; height: 132px; }
+  .nfcVisual span:nth-child(3) { width: 74px; height: 74px; }
+
+  .controlHeadline > p:last-child { margin-bottom: 48px; }
+  .dashboard { min-height: 0; border-radius: 18px; transform: none; }
+  .dashboardTop { height: 50px; padding: 0 15px; }
+  .dashboardBody { min-height: 0; grid-template-columns: 1fr; }
+  .dashboardBody aside { display: none; }
+  .dashboardContent { padding: 28px 15px; }
+  .summaryRow { grid-template-columns: 1fr; gap: 8px; }
+  .summaryRow > div { padding: 16px; }
+  .summaryRow strong { font-size: 18px; }
+  .chart { height: 135px; padding: 18px 12px 0; gap: 7px; }
+  .toolGrid { margin-top: 48px; }
+  .toolGrid h3 { font-size: 20px; }
+  .toolGrid p { font-size: 12px; }
+
+  .connectionMap { margin-top: 45px; }
+  .mapNode { min-height: 155px; padding: 22px; }
+  .mapNode strong { font-size: 18px; }
+  .mapNode small { font-size: 10px; }
+  .compatibilityNote { margin-top: 24px; font-size: 10px; line-height: 1.55; }
+
+  .quote { min-height: 570px; padding: 90px 18px calc(90px + env(safe-area-inset-bottom)); }
+  .quoteAura { width: 340px; height: 340px; }
+  .quote > p:not(.sectionLabel) { font-size: 13px; }
+  .quote > a { width: 100%; min-height: 50px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; }
+  .quote > small { font-size: 10px; line-height: 1.45; }
+
+  .footer { padding: 40px 20px calc(40px + env(safe-area-inset-bottom)); }
+  .footer > p { max-width: 280px; margin: 0; font-size: 13px; line-height: 1.55; text-align: center; }
+  .footer span { font-size: 11px; }
+  .footer small { max-width: 300px; font-size: 10px; line-height: 1.5; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before, .page *::after {
     scroll-behavior: auto !important;

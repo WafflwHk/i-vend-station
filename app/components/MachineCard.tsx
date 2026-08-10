@@ -13,7 +13,7 @@ export default function MachineCard({ machine, index }: Props) {
       <div className="card-top"><span>{machine.type}</span><small>{String(index + 1).padStart(2, "0")}</small></div>
       <div className="card-art">
         <div className="card-glow" />
-        {machine.image ? <img className="machine-photo" src={machine.image} alt={machine.imageAlt ?? machine.name} /> : <MachineArt kind={machine.art} />}
+        {machine.image ? <img className="machine-photo" src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /> : <MachineArt kind={machine.art} />}
       </div>
       <div className="card-copy">
         <div className="model-code">{machine.code}</div>

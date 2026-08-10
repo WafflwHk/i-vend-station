@@ -1,0 +1,155 @@
+/* Dedicated phone layout: loaded after the desktop styles so touch UI stays intentional. */
+@media (max-width: 700px) {
+  html { scroll-padding-top: 88px; }
+  body { min-width: 320px; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  a,
+  button,
+  summary { -webkit-tap-highlight-color: transparent; }
+
+  #machines,
+  #cashless,
+  #guide,
+  #about,
+  #faq,
+  #contact { scroll-margin-top: 88px; }
+
+  #overview,
+  #features,
+  #compatibility,
+  #quote { scroll-margin-top: 154px; }
+
+  .section-index,
+  .eyebrow,
+  .model-code { letter-spacing: 1.55px; }
+
+  .hero {
+    min-height: 890px;
+    height: auto;
+    padding: 118px 16px 70px;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+  }
+
+  .hero::before { width: 390px; height: 390px; right: -250px; top: -150px; }
+  .hero-copy { min-width: 0; }
+  .hero h1 { margin: 25px 0 23px; font-size: clamp(48px, 14.5vw, 58px); line-height: 0.94; letter-spacing: -3.7px; }
+  .hero-copy > p { max-width: 34rem; font-size: 15px; line-height: 1.6; }
+  .hero-actions { width: 100%; margin-top: 28px; align-items: stretch; flex-direction: column; gap: 12px; }
+  .hero-actions .button { width: 100%; min-height: 50px; justify-content: space-between; padding: 0 18px; }
+  .hero-actions .text-link { min-height: 44px; padding: 0 4px; display: flex; align-items: center; justify-content: space-between; }
+
+  .hero-showcase { width: 100%; max-width: 390px; height: 390px; margin: 32px auto 0; }
+  .hero-ring { width: 340px; height: 340px; }
+  .showcase-badge { top: 8px; right: 4px; }
+  .unit-one { right: 1%; bottom: 9px; }
+  .unit-one .machine-art { width: 150px; height: 315px; }
+  .unit-two { left: 23%; bottom: 7px; }
+  .unit-two .machine-art { width: 129px; height: 270px; }
+  .unit-three { left: 0; bottom: 5px; }
+  .unit-three .machine-art { width: 96px; height: 205px; }
+  .hero-foot { bottom: 22px; width: calc(100% - 32px); gap: 8px; font-size: 7px; letter-spacing: 1px; }
+
+  .catalogue,
+  .guide { padding: 84px 14px; }
+  .catalogue-head { gap: 25px; }
+  .catalogue-head > p { font-size: 13px; }
+  .catalogue h2,
+  .guide h2 { margin-top: 16px; font-size: 46px; line-height: 0.98; letter-spacing: -3px; }
+  .category-pills { margin: 38px -14px 22px; padding: 20px 14px 2px; overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: none; }
+  .category-pills::-webkit-scrollbar { display: none; }
+  .category-pills span { min-height: 40px; padding: 0 15px; display: inline-flex; align-items: center; scroll-snap-align: start; }
+
+  .machine-grid { gap: 14px; }
+  .machine-card,
+  .machine-card.featured { min-height: 0; border-radius: 14px; }
+  .machine-card:hover { transform: none; box-shadow: none; }
+  .machine-card:hover .machine-photo,
+  .machine-card:hover .card-art .machine-art { transform: none; }
+  .card-top { min-height: 53px; padding: 18px; align-items: center; }
+  .card-art,
+  .featured .card-art { height: 295px; }
+  .card-art .machine-art,
+  .featured .card-art .machine-art { height: 255px; width: 133px; }
+  .card-art .double-art { width: 210px; }
+  .machine-photo { height: 270px; }
+  .card-copy { padding: 22px 18px 20px; }
+  .card-copy h3 { margin: 9px 0 10px; font-size: 21px; }
+  .card-copy p { min-height: 0; font-size: 12px; line-height: 1.65; }
+  .card-bottom { margin-top: 18px; padding-top: 14px; }
+  .card-bottom .view-machine-button,
+  .card-bottom .quote-icon { min-height: 46px; }
+  .card-bottom .view-machine-button { height: 46px; padding: 0 16px; font-size: 11px; }
+  .card-bottom .quote-icon { width: 46px; height: 46px; }
+  .catalogue-note { padding: 0 3px; font-size: 9px; line-height: 1.6; }
+
+  .cashless { grid-template-columns: minmax(0, 1fr); }
+  .cashless-visual { min-height: 420px; }
+  .cashless-visual img { width: min(72%, 310px); }
+  .cash-orbit.one { width: 330px; height: 330px; }
+  .cash-orbit.two { width: 430px; height: 430px; }
+  .cashless-visual > span { left: 20px; bottom: 20px; }
+  .cashless-copy { padding: 72px 20px 76px; }
+  .cashless h2 { font-size: 43px; line-height: 1; letter-spacing: -2.8px; }
+  .cashless-copy > p { font-size: 13px; }
+  .cashless li { min-height: 48px; align-items: center; padding: 11px 0; }
+  .cashless-copy > a { min-height: 46px; margin-top: 24px; display: inline-flex; align-items: center; }
+
+  .guide-grid { margin-top: 48px; }
+  .guide-grid > div,
+  .guide-grid > div + div { padding: 25px 3px; }
+  .guide-grid h3 { font-size: 19px; }
+  .guide-grid p { max-width: 33rem; font-size: 12px; }
+
+  .about-section,
+  .faq-section { padding: 84px 18px; }
+  .about-main,
+  .faq-head { gap: 26px; }
+  .about-main h2,
+  .faq-head h2 { font-size: 45px; line-height: 0.98; letter-spacing: -3px; }
+  .about-copy { margin-top: 46px; gap: 30px; }
+  .about-copy > p { font-size: 13px; }
+  .about-points div { min-height: 66px; grid-template-columns: 36px 1fr; font-size: 12px; line-height: 1.45; }
+  .faq-head { margin-bottom: 45px; }
+  .faq-head > p { font-size: 13px; }
+  .faq-list summary { min-height: 72px; grid-template-columns: 34px 1fr 36px; gap: 5px; font-size: 15px; line-height: 1.3; }
+  .faq-list summary span { width: 32px; height: 32px; }
+  .faq-list details p { margin: -1px 5px 25px 34px; font-size: 12px; }
+
+  .contact { min-height: 620px; padding: 82px 18px calc(82px + env(safe-area-inset-bottom)); }
+  .contact h2 { margin: 27px 0 20px; font-size: 52px; line-height: 0.96; letter-spacing: -3.5px; }
+  .contact > p { font-size: 14px; line-height: 1.6; }
+  .contact-actions { width: 100%; gap: 15px; }
+  .contact-actions .button { width: 100%; min-height: 50px; justify-content: space-between; padding: 0 18px; }
+
+  footer.site-footer { min-height: 240px; padding: 42px 20px calc(42px + env(safe-area-inset-bottom)); }
+  footer.site-footer > p { max-width: 260px; line-height: 1.5; }
+
+  .collection-hero { min-height: 590px; padding: 130px 18px 58px; }
+  .collection-hero h1 { margin: 24px 0 45px; font-size: clamp(51px, 15vw, 61px); line-height: 0.9; letter-spacing: -4px; }
+  .collection-hero-foot { gap: 24px; }
+  .collection-hero-foot p { font-size: 13px; }
+  .collection-hero-foot > a { width: 100%; min-height: 48px; padding: 0 17px; display: flex; align-items: center; justify-content: space-between; }
+  .collection-list { padding: 82px 14px; }
+  .collection-heading { margin-bottom: 36px; gap: 24px; }
+  .collection-heading h2 { font-size: 45px; letter-spacing: -3px; }
+  .collection-heading > p { font-size: 12px; }
+  .collection-link { min-height: 44px; display: inline-flex; align-items: center; }
+
+  .store-feature-visual { min-height: 430px; }
+  .store-feature-visual img { width: min(64%, 275px); }
+  .store-orbit { width: 320px; height: 320px; box-shadow: 0 0 0 60px #ffffff08, 0 0 0 120px #ffffff05; }
+  .store-feature-copy { padding: 68px 20px 72px; }
+  .store-feature h2 { font-size: 43px; line-height: 1; letter-spacing: -2.8px; }
+  .store-feature-copy > p { font-size: 13px; }
+  .store-feature-copy > a { width: 100%; min-height: 48px; padding: 0 17px; display: flex; align-items: center; justify-content: space-between; }
+  .store-feature-copy > small { font-size: 9px; line-height: 1.5; }
+}
+
+@media (max-width: 370px) {
+  .hero h1,
+  .collection-hero h1 { font-size: 48px; }
+  .catalogue h2,
+  .guide h2,
+  .about-main h2,
+  .faq-head h2 { font-size: 42px; }
+}

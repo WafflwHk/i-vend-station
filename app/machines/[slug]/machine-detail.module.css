@@ -45,13 +45,15 @@
   .nextMachine { width: calc(100% - 30px); }
   .breadcrumb { padding-top: 98px; }
   .intro { padding: 48px 0; grid-template-columns: 1fr; gap: 28px; }
-  .intro h1 { font-size: 58px; letter-spacing: -4px; }
+  .intro h1 { font-size: clamp(43px, 13vw, 58px); letter-spacing: -3.5px; overflow-wrap: anywhere; }
   .details { margin: 85px auto; grid-template-columns: 1fr; gap: 45px; }
-  .actualPhoto { padding: 85px 15px; grid-template-columns: 1fr; }
+  .actualPhoto { padding: 78px 15px; grid-template-columns: 1fr; }
+  .actualPhoto figure { padding: 18px; }
   .photoNotice { margin-top: 85px; padding: 85px 20px; }
-  .quote { margin: 80px auto; align-items: flex-start; flex-direction: column; border-radius: 22px; }
+  .quote { margin: 75px auto; padding: 32px 25px; align-items: flex-start; flex-direction: column; border-radius: 22px; }
   .quote h2 { font-size: 45px; letter-spacing: -3px; }
   .nextMachine { grid-template-columns: 1fr auto; }
   .nextMachine span { grid-column: 1 / -1; margin-bottom: 10px; }
-  .nextMachine strong { font-size: 16px; }
+  .nextMachine strong { min-width: 0; font-size: 16px; overflow-wrap: anywhere; }
+  .quote > a { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; }
 }

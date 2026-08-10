@@ -18,4 +18,28 @@
 .accountActions a:first-child span { margin-left: 7px; color: #1d65e8; }
 .accountActions a:last-child { color: #9ca3ad; font-size: 10px; text-decoration: underline; text-underline-offset: 5px; }
 .privacyNote { width: min(920px, 100%); margin: 20px 0 0; color: #565e69; font-size: 8px; text-align: center; }
-@media (max-width: 620px) { .page { padding-top: 105px; } .accountCard { border-radius: 22px; } .accountHeading, .profile { align-items: flex-start; flex-direction: column; } .accountGrid { grid-template-columns: 1fr; } .accountGrid article, .accountGrid article + article { min-height: 0; padding: 25px 0; border-right: 0; border-bottom: 1px solid #ffffff1a; } .accountActions { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 620px) {
+  .page { min-height: 100svh; padding: calc(98px + env(safe-area-inset-top)) 12px calc(46px + env(safe-area-inset-bottom)); place-items: stretch; align-content: start; }
+  .accountCard { padding: 25px 20px; border-radius: 22px; }
+  .accountHeading,
+  .profile { align-items: flex-start; flex-direction: column; }
+  .accountHeading { gap: 10px; }
+  .accountHeading p { font-size: 10px; }
+  .accountHeading span { font-size: 11px; }
+  .profile { padding: 36px 0; gap: 18px; }
+  .avatar { width: 64px; height: 64px; border-radius: 20px; font-size: 25px; }
+  .profile h1 { font-size: clamp(34px, 10.5vw, 44px); line-height: 1.02; letter-spacing: -2px; overflow-wrap: anywhere; }
+  .profile p { font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+  .accountGrid { grid-template-columns: 1fr; }
+  .accountGrid article,
+  .accountGrid article + article { min-height: 0; padding: 25px 0; border-right: 0; border-bottom: 1px solid #ffffff1a; }
+  .accountGrid span { font-size: 10px; }
+  .accountGrid h2 { margin: 18px 0 10px; font-size: 19px; }
+  .accountGrid p { max-width: none; font-size: 13px; line-height: 1.7; }
+  .accountActions { width: 100%; margin-top: 28px; align-items: stretch; flex-direction: column; gap: 10px; }
+  .accountActions a:first-child,
+  .accountActions a:last-child { width: 100%; min-height: 48px; padding: 0 17px; display: flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 12px; }
+  .accountActions a:first-child { justify-content: space-between; }
+  .accountActions a:last-child { color: #d1d5dc; background: #ffffff0b; text-decoration: none; }
+  .privacyNote { margin: 16px auto 0; padding: 0 8px; color: #747d89; font-size: 11px; line-height: 1.55; }
+}

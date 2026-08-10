@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./corrections.css";
 import "./storefront.css";
+import "./mobile.css";
 import SiteHeader from "./components/SiteHeader";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
@@ -25,6 +26,13 @@ export const metadata: Metadata = {
     description: "Vending machines. Coffee systems. Cashless payments.",
     images: ["/og-i-vend-station.png"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#f5f5f7",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

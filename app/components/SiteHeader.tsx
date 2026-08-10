@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import styles from "./site-header.module.css";
 
 const links = [
@@ -15,14 +16,38 @@ const links = [
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+
+  const isCurrent = (href: string) => {
+    if (href.includes("#")) return false;
+    if (href === "/machines") return pathname === "/machines" || pathname.startsWith("/machines/");
+    return pathname === href;
+  };
 
   useEffect(() => {
     if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusFrame = window.requestAnimationFrame(() => firstLinkRef.current?.focus());
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const closeOnDesktop = () => {
+      if (window.innerWidth > 880) setOpen(false);
     };
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    window.addEventListener("resize", closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("resize", closeOnDesktop);
+    };
   }, [open]);
 
   return (
@@ -33,12 +58,13 @@ export default function SiteHeader() {
         </Link>
 
         <nav className={styles.desktopNav} aria-label="Main navigation">
-          {links.map((link) => <Link key={link.label} href={link.href}>{link.label}</Link>)}
+          {links.map((link) => <Link key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</Link>)}
         </nav>
 
         <div className={styles.actions}>
           <Link className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></Link>
           <button
+            ref={menuButtonRef}
             className={styles.menuButton}
             type="button"
             aria-expanded={open}
@@ -51,10 +77,10 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <div className={`${styles.mobilePanel} ${open ? styles.mobilePanelOpen : ""}`} id="mobile-site-menu">
+      <div className={`${styles.mobilePanel} ${open ? styles.mobilePanelOpen : ""}`} id="mobile-site-menu" aria-hidden={!open} inert={!open}>
         <nav aria-label="Mobile navigation">
           {links.map((link, index) => (
-            <Link key={link.label} href={link.href} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{link.label}<span aria-hidden="true">&rarr;</span></Link>
+            <Link ref={index === 0 ? firstLinkRef : undefined} key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{link.label}<span aria-hidden="true">&rarr;</span></Link>
           ))}
         </nav>
         <Link className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></Link>

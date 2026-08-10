@@ -76,12 +76,18 @@
 
 .stage {
   position: relative;
+  width: 100%;
   height: 570px;
+  padding: 0;
+  border: 0;
   margin: 18px 0;
   display: grid;
   place-items: center;
   perspective: 1250px;
   cursor: grab;
+  color: inherit;
+  background: transparent;
+  font: inherit;
   touch-action: pan-y;
   user-select: none;
   outline: none;
@@ -89,6 +95,24 @@
 
 .stage:active { cursor: grabbing; }
 .stage:focus-visible { border-radius: 20px; box-shadow: inset 0 0 0 3px #1d65e8; }
+
+.swipeHint {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 18px;
+  translate: -50% 0;
+  padding: 8px 12px;
+  border: 1px solid #d9dde4;
+  border-radius: 999px;
+  color: #666c76;
+  background: #ffffffd9;
+  box-shadow: 0 7px 20px #25324a12;
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+}
 
 .floor {
   position: absolute;
@@ -205,17 +229,25 @@
   .viewer { padding: 20px 14px; border-radius: 22px; }
   .viewerTop { align-items: flex-start; flex-direction: column; gap: 12px; }
   .controls { align-items: stretch; flex-direction: column; }
+  .illustrativeBadge { font-size: 10px; }
   .viewButtons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
-  .controls button { padding: 0 8px; }
-  .stage { height: 500px; margin: 8px 0; }
+  .controls button { min-height: 46px; padding: 0 8px; font-size: 11px; touch-action: manipulation; }
+  .controls .spinButton { width: 100%; }
+  .stage { height: clamp(390px, 112vw, 470px); margin: 7px 0; }
   .model { scale: 0.82; }
+  .model[data-variant="double"] { scale: 0.74; }
   .viewerFoot { flex-direction: column; }
+  .viewerFoot strong { font-size: 12px; }
+  .viewerFoot span,
+  .disclaimer { font-size: 11px; line-height: 1.55; }
   .disclaimer { max-width: none; text-align: left; }
+  .swipeHint { bottom: 12px; font-size: 10px; }
 }
 
 @media (max-width: 420px) {
-  .model { scale: 0.72; }
-  .stage { height: 450px; }
+  .viewButtons { grid-template-columns: repeat(2, 1fr); }
+  .model { scale: 0.8; }
+  .model[data-variant="double"] { scale: 0.7; }
 }
 
 @media (prefers-reduced-motion: reduce) {

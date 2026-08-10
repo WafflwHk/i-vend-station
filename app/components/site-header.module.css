@@ -55,6 +55,8 @@
   color: #1d65e8;
 }
 
+.desktopNav a[aria-current="page"] { color: #1d65e8; }
+
 .actions {
   margin-left: auto;
   display: flex;
@@ -116,6 +118,12 @@
 .menuButton[aria-expanded="true"] span:first-child { transform: rotate(45deg); }
 .menuButton[aria-expanded="true"] span:last-child { transform: rotate(-45deg); }
 
+.menuButton:focus-visible,
+.mobilePanel a:focus-visible {
+  outline: 3px solid #67a0ff;
+  outline-offset: 2px;
+}
+
 .mobilePanel,
 .backdrop {
   display: none;
@@ -129,18 +137,26 @@
 }
 
 @media (max-width: 880px) {
-  .header { top: 10px; padding: 0 10px; }
-  .bar { min-height: 58px; padding-left: 14px; border-radius: 16px; }
-  .logo { width: 122px; }
+  .header { top: max(8px, env(safe-area-inset-top)); padding-right: max(8px, env(safe-area-inset-right)); padding-left: max(8px, env(safe-area-inset-left)); }
+  .bar { min-height: 58px; padding: 0 7px 0 13px; border-radius: 17px; }
+  .logo { width: 118px; }
   .desktopNav { display: none; }
-  .menuButton { position: relative; display: grid; }
+  .account,
+  .menuButton { min-height: 44px; height: 44px; }
+  .menuButton { position: relative; width: 44px; display: grid; }
   .mobilePanel {
-    position: relative;
+    position: fixed;
     z-index: 2;
-    width: min(520px, calc(100% - 20px));
-    margin: 8px auto 0 10px;
-    padding: 14px;
+    top: calc(max(8px, env(safe-area-inset-top)) + 66px);
+    left: 8px;
+    right: 8px;
+    width: auto;
+    max-height: calc(100dvh - max(8px, env(safe-area-inset-top)) - 78px);
+    margin: 0;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
     display: block;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
@@ -156,18 +172,19 @@
   .mobilePanelOpen { visibility: visible; opacity: 1; transform: translateY(0); pointer-events: auto; }
   .mobilePanel nav { display: grid; }
   .mobilePanel nav a {
-    min-height: 50px;
+    min-height: 56px;
     display: grid;
     grid-template-columns: 34px 1fr auto;
     align-items: center;
     border-bottom: 1px solid #e7e9ed;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 620;
   }
   .mobilePanel nav a:last-child { border-bottom: 0; }
+  .mobilePanel nav a[aria-current="page"] { color: #1d65e8; }
   .mobilePanel nav small { color: #a0a4ad; font-size: 8px; letter-spacing: 1px; }
   .mobilePanel nav span { color: #1d65e8; }
-  .mobileAccount { width: 100%; margin-top: 12px; justify-content: space-between; }
+  .mobileAccount { width: 100%; min-height: 50px; margin-top: 12px; justify-content: space-between; }
   .backdrop {
     position: fixed;
     z-index: 1;
@@ -180,8 +197,14 @@
 }
 
 @media (max-width: 430px) {
-  .account { padding: 0 12px; }
-  .logo { width: 112px; }
+  .account { padding: 0 11px; }
+  .logo { width: 108px; }
+}
+
+@media (max-width: 350px) {
+  .bar { padding-left: 10px; }
+  .logo { width: 98px; }
+  .account { padding: 0 9px; font-size: 9px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

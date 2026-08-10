@@ -61,7 +61,7 @@ export default async function MachineDetailPage({ params }: Props) {
       {machine.image ? (
         <section className={styles.actualPhoto}>
           <div><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above.</p></div>
-          <figure><img src={machine.image} alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
+          <figure><img src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
         </section>
       ) : (
         <section className={styles.photoNotice}><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>The 360&deg; model above is illustrative. When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>

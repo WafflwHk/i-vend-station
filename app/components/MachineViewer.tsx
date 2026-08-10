@@ -16,15 +16,18 @@ const views = [
   { label: "Left", angle: 90 },
 ] as const;
 
+const normaliseAngle = (angle: number) => Math.round(((angle % 360) + 360) % 360);
+
 export default function MachineViewer({ machine }: Props) {
   const modelRef = useRef<HTMLDivElement>(null);
   const yawRef = useRef(0);
   const frameRef = useRef<number | null>(null);
-  const dragRef = useRef<{ pointerId: number; x: number; yaw: number } | null>(null);
+  const dragRef = useRef<{ pointerId: number; x: number; yaw: number; moved: boolean } | null>(null);
   const [activeView, setActiveView] = useState<string>("Front");
   const [spinning, setSpinning] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [status, setStatus] = useState("Front illustrative view selected");
+  const [accessibleAngle, setAccessibleAngle] = useState(0);
 
   const writeYaw = useCallback((yaw: number, moving: boolean) => {
     yawRef.current = yaw;
@@ -65,36 +68,48 @@ export default function MachineViewer({ machine }: Props) {
     setActiveView(label);
     const nearestTarget = target + Math.round((yawRef.current - target) / 360) * 360;
     writeYaw(nearestTarget, false);
+    setAccessibleAngle(normaliseAngle(nearestTarget));
     setStatus(`${label} illustrative view selected`);
   };
 
   const nudge = (amount: number) => {
     setSpinning(false);
     setActiveView("");
-    writeYaw(yawRef.current + amount, false);
+    const nextAngle = yawRef.current + amount;
+    writeYaw(nextAngle, false);
+    setAccessibleAngle(normaliseAngle(nextAngle));
     setStatus("Custom illustrative angle selected");
   };
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (spinning) setStatus("360 degree spin paused");
     setSpinning(false);
-    setActiveView("");
-    dragRef.current = { pointerId: event.pointerId, x: event.clientX, yaw: yawRef.current };
+    dragRef.current = { pointerId: event.pointerId, x: event.clientX, yaw: yawRef.current, moved: false };
     event.currentTarget.setPointerCapture(event.pointerId);
-    writeYaw(yawRef.current, true);
   };
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
-    writeYaw(drag.yaw + (event.clientX - drag.x) * 0.55, true);
+    const distance = event.clientX - drag.x;
+    if (!drag.moved && Math.abs(distance) < 5) return;
+    if (!drag.moved) {
+      drag.moved = true;
+      setActiveView("");
+    }
+    writeYaw(drag.yaw + distance * 0.55, true);
   };
 
   const onPointerEnd = (event: PointerEvent<HTMLDivElement>) => {
     if (!dragRef.current || dragRef.current.pointerId !== event.pointerId) return;
+    const moved = dragRef.current.moved;
     dragRef.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
-    writeYaw(yawRef.current, false);
-    setStatus("Custom illustrative angle selected");
+    if (moved) {
+      writeYaw(yawRef.current, false);
+      setAccessibleAngle(normaliseAngle(yawRef.current));
+      setStatus("Custom illustrative angle selected");
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -149,8 +164,15 @@ export default function MachineViewer({ machine }: Props) {
 
       <div
         className={styles.stage}
-        role="application"
+        role="slider"
+        aria-roledescription="3D product viewer"
         aria-label={`Rotatable illustrative view of ${machine.name}. Drag left or right, or use the arrow keys.`}
+        aria-keyshortcuts="ArrowLeft ArrowRight Home"
+        aria-valuemin={0}
+        aria-valuemax={359}
+        aria-valuenow={accessibleAngle}
+        aria-valuetext={spinning ? "Illustrative 360 degree spin in progress" : status}
+        aria-orientation="horizontal"
         tabIndex={0}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -158,6 +180,7 @@ export default function MachineViewer({ machine }: Props) {
         onPointerCancel={onPointerEnd}
         onKeyDown={onKeyDown}
       >
+        <span className={styles.swipeHint}>Swipe to rotate</span>
         <div className={styles.floor} />
         <div className={styles.model} data-variant={machine.viewer.variant} data-moving="false" ref={modelRef} style={modelStyle}>
           <div className={`${styles.face} ${styles.front}`}>
