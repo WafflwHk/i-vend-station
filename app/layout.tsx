@@ -4,7 +4,9 @@ import "./globals.css";
 import "./corrections.css";
 import "./storefront.css";
 import "./mobile.css";
+import "./motion.css";
 import SiteHeader from "./components/SiteHeader";
+import ScrollMotion from "./components/ScrollMotion";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -36,5 +38,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={geist.variable}><SiteHeader />{children}</body></html>;
+  return <html lang="en"><body className={geist.variable}><SiteHeader /><ScrollMotion />{children}</body></html>;
 }

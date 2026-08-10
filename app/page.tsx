@@ -37,51 +37,51 @@ export default function Home() {
           <p>Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
           <div className="hero-actions"><Link className="button dark" href="/machines">View all machines <b>&rarr;</b></Link><Link className="text-link" href="/store">Open the store <span>&nearr;</span></Link></div>
         </div>
-        <div className="hero-showcase" aria-label="Vending machine range">
+        <div className="hero-showcase" aria-label="Vending machine range" data-scroll-vending>
           <div className="hero-ring" />
           <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
           <div className="showcase-unit unit-two"><MachineArt kind="touch-art" /></div>
           <div className="showcase-unit unit-three"><MachineArt kind="compact-art" /></div>
           <div className="showcase-badge"><span>07</span> MACHINE TYPES</div>
         </div>
-        <div className="hero-foot"><span>JAPAN SERIES</span><i /><span>TCN SERIES</span><i /><span>T05 CASHLESS</span></div>
+        <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>TCN SERIES</span><i /><span>T05 CASHLESS</span></div>
       </section>
 
       <section className="catalogue" id="machines">
-        <div className="catalogue-head">
+        <div className="catalogue-head" data-animate="up">
           <div><div className="section-index">01 &mdash; MACHINE CATALOGUE</div><h2>Find your machine.</h2></div>
           <p>Choose a machine, then use its View button to open a separate page with front, right, rear, left, and spin controls.</p>
         </div>
-        <div className="category-pills"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
+        <div className="category-pills" data-animate="up" data-animate-delay="1"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
         <div className="machine-grid">
           {machines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
         </div>
-        <p className="catalogue-note">Model availability and specifications are subject to confirmation. Product names are used for identification. Side and rear viewer angles are illustrative.</p>
+        <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification. Side and rear viewer angles are illustrative.</p>
       </section>
 
       <section className="cashless" id="cashless">
-        <div className="cashless-visual"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device supplied by I Vend Station" /><span>TAP &bull; SCAN &bull; PAY</span></div>
-        <div className="cashless-copy"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&nearr;</b></a></div>
+        <div className="cashless-visual" data-animate="left"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device supplied by I Vend Station" /><span>TAP &bull; SCAN &bull; PAY</span></div>
+        <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&nearr;</b></a></div>
       </section>
 
       <section className="guide" id="guide">
-        <div className="guide-head"><div className="section-index">03 &mdash; BEFORE YOU BUY</div><h2>Three details help us<br />recommend a machine.</h2></div>
-        <div className="guide-grid"><div><strong>01</strong><h3>What will it sell?</h3><p>Tell us the product type, package size, and whether it needs heating, cooling, or freezing.</p></div><div><strong>02</strong><h3>Where will it go?</h3><p>Share the location, available floor space, expected traffic, and indoor or sheltered placement.</p></div><div><strong>03</strong><h3>How should people pay?</h3><p>Choose the payment experience you want, including compatible cashless options.</p></div></div>
+        <div className="guide-head" data-animate="up"><div className="section-index">03 &mdash; BEFORE YOU BUY</div><h2>Three details help us<br />recommend a machine.</h2></div>
+        <div className="guide-grid"><div data-animate="up"><strong>01</strong><h3>What will it sell?</h3><p>Tell us the product type, package size, and whether it needs heating, cooling, or freezing.</p></div><div data-animate="up" data-animate-delay="1"><strong>02</strong><h3>Where will it go?</h3><p>Share the location, available floor space, expected traffic, and indoor or sheltered placement.</p></div><div data-animate="up" data-animate-delay="2"><strong>03</strong><h3>How should people pay?</h3><p>Choose the payment experience you want, including compatible cashless options.</p></div></div>
       </section>
 
       <section className="about-section" id="about">
-        <div className="about-main"><div className="section-index">04 &mdash; ABOUT US</div><h2>Equipment for<br /><em>unattended retail.</em></h2></div>
-        <div className="about-copy"><p>I Vend Station helps businesses compare vending equipment for modern unattended retail. The range includes Japanese hot-and-cold coffee machines, TCN vending systems, and compatible cashless payment devices.</p><div className="about-points"><div><span>01</span>Machine selection for different products and locations</div><div><span>02</span>Compatibility checks before cashless integration</div><div><span>03</span>Clear quotation planning for the customer&apos;s setup</div></div></div>
+        <div className="about-main" data-animate="up"><div className="section-index">04 &mdash; ABOUT US</div><h2>Equipment for<br /><em>unattended retail.</em></h2></div>
+        <div className="about-copy"><p data-animate="left">I Vend Station helps businesses compare vending equipment for modern unattended retail. The range includes Japanese hot-and-cold coffee machines, TCN vending systems, and compatible cashless payment devices.</p><div className="about-points" data-animate="right"><div><span>01</span>Machine selection for different products and locations</div><div><span>02</span>Compatibility checks before cashless integration</div><div><span>03</span>Clear quotation planning for the customer&apos;s setup</div></div></div>
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-head"><div><div className="section-index">05 &mdash; FAQ</div><h2>Good questions,<br />clear answers.</h2></div><p>Start here for pricing, machine views, cashless compatibility, and quotation information.</p></div>
+        <div className="faq-head" data-animate="up"><div><div className="section-index">05 &mdash; FAQ</div><h2>Good questions,<br />clear answers.</h2></div><p>Start here for pricing, machine views, cashless compatibility, and quotation information.</p></div>
         <div className="faq-list">
-          {faqs.map((faq, index) => <details key={faq.question}><summary><small>{String(index + 1).padStart(2, "0")}</small>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}
+          {faqs.map((faq, index) => <details key={faq.question} data-animate="up" data-animate-delay={String(index % 3)}><summary><small>{String(index + 1).padStart(2, "0")}</small>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}
         </div>
       </section>
 
-      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light">06 &mdash; REQUEST A QUOTATION</div><h2>Which machine<br />fits your plan?</h2><p>Send the model name, your location, and what you want to sell.</p><div className="contact-actions"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&nearr;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
+      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light" data-animate="up">06 &mdash; REQUEST A QUOTATION</div><h2 data-animate="up" data-animate-delay="1">Which machine<br />fits your plan?</h2><p data-animate="up" data-animate-delay="2">Send the model name, your location, and what you want to sell.</p><div className="contact-actions" data-animate="up" data-animate-delay="3"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&nearr;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
 
       <SiteFooter />
     </main>

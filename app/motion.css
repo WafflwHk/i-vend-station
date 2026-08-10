@@ -1,0 +1,158 @@
+:root { --vending-scroll: 0; }
+
+.motion-enabled [data-animate] {
+  --motion-x: 0px;
+  --motion-y: 34px;
+  --motion-scale: 0.985;
+  --motion-delay: 0ms;
+  opacity: 0;
+  translate: var(--motion-x) var(--motion-y);
+  scale: var(--motion-scale);
+  transition:
+    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay),
+    translate 880ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay),
+    scale 880ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay);
+  will-change: opacity, translate, scale;
+}
+
+.motion-enabled [data-animate="left"] { --motion-x: -48px; --motion-y: 0px; }
+.motion-enabled [data-animate="right"] { --motion-x: 48px; --motion-y: 0px; }
+.motion-enabled [data-animate="down"] { --motion-y: -24px; }
+.motion-enabled [data-animate="scale"] { --motion-y: 18px; --motion-scale: 0.955; }
+.motion-enabled [data-animate-delay="1"] { --motion-delay: 85ms; }
+.motion-enabled [data-animate-delay="2"] { --motion-delay: 170ms; }
+.motion-enabled [data-animate-delay="3"] { --motion-delay: 255ms; }
+.motion-enabled [data-animate][data-in-view="true"] {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  will-change: auto;
+}
+
+.hero .unit-one,
+.hero .unit-two,
+.hero .unit-three,
+.hero .hero-ring,
+.hero .showcase-badge {
+  transition: transform 120ms linear, opacity 120ms linear;
+  will-change: transform, opacity;
+}
+
+.hero .unit-one { transform: translate3d(calc(var(--vending-scroll) * 135px), calc(var(--vending-scroll) * 8px), 0) rotate(calc(var(--vending-scroll) * 4deg)); }
+.hero .unit-two { transform: translate3d(calc(var(--vending-scroll) * -36px), calc(var(--vending-scroll) * -12px), 0) rotate(calc(var(--vending-scroll) * -2deg)); }
+.hero .unit-three { transform: translate3d(calc(var(--vending-scroll) * -112px), calc(var(--vending-scroll) * 13px), 0) rotate(calc(var(--vending-scroll) * -5deg)); }
+.hero .hero-ring { transform: translate(-50%, -48%) scale(calc(1 - var(--vending-scroll) * 0.08)); opacity: calc(1 - var(--vending-scroll) * 0.45); }
+.hero .showcase-badge { transform: translate3d(calc(var(--vending-scroll) * 34px), calc(var(--vending-scroll) * -16px), 0); opacity: calc(1 - var(--vending-scroll) * 0.7); }
+
+.button,
+.view-machine-button,
+.quote-icon,
+.collection-hero-foot > a,
+.store-feature-copy > a,
+.cashless-copy > a {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: translate 220ms ease, scale 220ms ease, box-shadow 220ms ease, background 220ms ease, color 220ms ease;
+}
+
+.button::after,
+.view-machine-button::after,
+.collection-hero-foot > a::after,
+.store-feature-copy > a::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -40%;
+  bottom: -40%;
+  left: -35%;
+  width: 24%;
+  rotate: 18deg;
+  background: linear-gradient(90deg, transparent, #ffffff5c, transparent);
+  translate: -160% 0;
+  transition: translate 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.button b,
+.button span,
+.view-machine-button span,
+.text-link span,
+.collection-hero-foot > a span,
+.store-feature-copy > a span,
+.collection-link span,
+.cashless-copy > a b {
+  display: inline-block;
+  transition: translate 220ms ease, rotate 220ms ease;
+}
+
+.machine-card .card-glow,
+.machine-card .card-top small {
+  transition: scale 420ms cubic-bezier(0.22, 1, 0.36, 1), rotate 420ms cubic-bezier(0.22, 1, 0.36, 1), background 260ms ease;
+}
+
+.faq-list details p { animation: faqAnswer 360ms cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: top; }
+.faq-list summary { transition: color 220ms ease, padding 220ms ease, background 220ms ease; }
+.cashless-visual[data-in-view="true"] .cash-orbit.one { animation: orbitBreathe 7s ease-in-out infinite; }
+.cashless-visual[data-in-view="true"] .cash-orbit.two { animation: orbitBreathe 7s 1.3s ease-in-out infinite reverse; }
+.store-feature-visual[data-in-view="true"] .store-orbit { animation: orbitBreathe 7s ease-in-out infinite; }
+
+@keyframes faqAnswer {
+  from { opacity: 0; translate: 0 -8px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes orbitBreathe {
+  50% { scale: 1.055; opacity: 0.62; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover,
+  .view-machine-button:hover,
+  .collection-hero-foot > a:hover,
+  .store-feature-copy > a:hover { translate: 0 -2px; box-shadow: 0 14px 28px #10182824; }
+  .button:hover::after,
+  .view-machine-button:hover::after,
+  .collection-hero-foot > a:hover::after,
+  .store-feature-copy > a:hover::after { translate: 650% 0; }
+  .button:hover b,
+  .button:hover span,
+  .view-machine-button:hover span,
+  .text-link:hover span,
+  .collection-hero-foot > a:hover span,
+  .store-feature-copy > a:hover span,
+  .collection-link:hover span,
+  .cashless-copy > a:hover b { translate: 4px 0; rotate: 4deg; }
+  .machine-card:hover .card-glow { scale: 1.08; }
+  .machine-card:hover .card-top small { scale: 1.12; rotate: 8deg; }
+  .faq-list summary:hover { color: #1d65e8; padding-left: 5px; }
+}
+
+.button:active,
+.view-machine-button:active,
+.quote-icon:active,
+.collection-hero-foot > a:active,
+.store-feature-copy > a:active,
+.cashless-copy > a:active,
+button:not(:disabled):active { scale: 0.97; }
+
+@media (max-width: 700px) {
+  .motion-enabled [data-animate] { --motion-y: 24px; }
+  .motion-enabled [data-animate="left"] { --motion-x: -24px; --motion-y: 0px; }
+  .motion-enabled [data-animate="right"] { --motion-x: 24px; --motion-y: 0px; }
+  .hero .unit-one { transform: translate3d(calc(var(--vending-scroll) * 42px), calc(var(--vending-scroll) * 4px), 0) rotate(calc(var(--vending-scroll) * 2deg)); }
+  .hero .unit-two { transform: translate3d(calc(var(--vending-scroll) * -10px), calc(var(--vending-scroll) * -5px), 0); }
+  .hero .unit-three { transform: translate3d(calc(var(--vending-scroll) * -36px), calc(var(--vending-scroll) * 6px), 0) rotate(calc(var(--vending-scroll) * -2deg)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] { opacity: 1 !important; translate: none !important; scale: 1 !important; transition: none !important; }
+  .hero .unit-one,
+  .hero .unit-two,
+  .hero .unit-three,
+  .hero .hero-ring,
+  .hero .showcase-badge { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .hero .hero-ring { transform: translate(-50%, -48%) !important; }
+  .faq-list details p { animation: none; }
+  .cash-orbit,
+  .store-orbit { animation: none !important; }
+}

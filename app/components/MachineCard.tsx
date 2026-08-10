@@ -9,7 +9,7 @@ type Props = {
 
 export default function MachineCard({ machine, index }: Props) {
   return (
-    <article className={`machine-card ${machine.featured ? "featured" : ""}`}>
+    <article className={`machine-card ${machine.featured ? "featured" : ""}`} data-animate="up" data-animate-delay={String(index % 3)}>
       <div className="card-top"><span>{machine.type}</span><small>{String(index + 1).padStart(2, "0")}</small></div>
       <div className="card-art">
         <div className="card-glow" />

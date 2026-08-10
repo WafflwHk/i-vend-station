@@ -85,6 +85,33 @@
 
 .quotePill:hover { background: #4386ff; transform: translateY(-1px); }
 
+.quotePill,
+.primaryButton,
+.quote > a {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.quotePill::after,
+.primaryButton::after,
+.quote > a::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -40%;
+  bottom: -40%;
+  left: -30%;
+  width: 22%;
+  rotate: 18deg;
+  background: linear-gradient(90deg, transparent, #ffffff75, transparent);
+  translate: -170% 0;
+  transition: translate 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.primaryButton span,
+.quote > a span { display: inline-block; transition: translate 220ms ease, rotate 220ms ease; }
+
 .hero {
   position: relative;
   min-height: calc(100vh - 58px);
@@ -425,6 +452,14 @@
 }
 
 .chart i { width: 7%; border-radius: 5px 5px 0 0; background: linear-gradient(180deg, #4d91ff, #2767dd); box-shadow: 0 0 18px #2d7eff2a; }
+:global(.motion-enabled) .dashboard .chart i { scale: 1 0; transform-origin: bottom; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i { animation: chartGrow 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(2) { animation-delay: 70ms; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(3) { animation-delay: 140ms; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(4) { animation-delay: 210ms; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(5) { animation-delay: 280ms; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(6) { animation-delay: 350ms; }
+:global(.motion-enabled) .dashboard[data-in-view="true"] .chart i:nth-child(7) { animation-delay: 420ms; }
 .rows { display: grid; gap: 10px; margin-top: 18px; }
 .rows i { height: 9px; border-radius: 99px; background: linear-gradient(90deg, #2c323e 0 35%, #232833 35% 100%); }
 
@@ -545,17 +580,19 @@
 @keyframes breathe { 50% { transform: scale(1.04); opacity: 0.8; } }
 @keyframes nfcWave { 50% { transform: scale(1.07); opacity: 0.4; } }
 
-@supports (animation-timeline: view()) {
-  .storyCard, .dashboard, .mapNode {
-    animation: reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 8% cover 36%;
-  }
+@keyframes chartGrow {
+  to { scale: 1 1; }
+}
 
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(70px) scale(0.96); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
+@media (hover: hover) and (pointer: fine) {
+  .quotePill:hover::after,
+  .primaryButton:hover::after,
+  .quote > a:hover::after { translate: 680% 0; }
+  .primaryButton:hover span,
+  .quote > a:hover span { translate: 4px 0; rotate: 4deg; }
+  .productLinks > a:not(.quotePill) { position: relative; }
+  .productLinks > a:not(.quotePill)::after { content: ""; position: absolute; right: 0; bottom: -5px; left: 0; height: 1px; background: currentColor; scale: 0 1; transform-origin: right; transition: scale 220ms ease; }
+  .productLinks > a:not(.quotePill):hover::after { scale: 1 1; transform-origin: left; }
 }
 
 @media (max-width: 980px) {
@@ -688,4 +725,5 @@
     animation: none !important;
     transition: none !important;
   }
+  .dashboard .chart i { scale: 1 !important; animation: none !important; }
 }

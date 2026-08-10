@@ -145,7 +145,7 @@ export default function MachineViewer({ machine }: Props) {
   } as CSSProperties;
 
   return (
-    <section className={styles.viewer} aria-labelledby="viewer-title">
+    <section className={styles.viewer} aria-labelledby="viewer-title" data-animate="scale">
       <div className={styles.viewerTop}>
         <div><small>INTERACTIVE PRODUCT VIEW</small><h2 id="viewer-title">See every side.</h2></div>
         <span className={styles.illustrativeBadge}>Illustrative 360&deg; view</span>

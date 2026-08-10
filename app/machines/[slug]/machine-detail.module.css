@@ -29,12 +29,25 @@
 .quote { width: min(1220px, calc(100% - 64px)); margin: 120px auto; padding: clamp(42px, 6vw, 82px); display: flex; align-items: flex-end; justify-content: space-between; gap: 50px; border-radius: 28px; color: #fff; background: radial-gradient(circle at 86% 18%, #3f7df5 0, transparent 30%), #12151b; }
 .quote .label { color: #8992a0; }
 .quote > div > p:last-child { color: #9ea4af; }
-.quote > a { flex: 0 0 auto; padding: 16px 21px; border-radius: 999px; color: #15171c; background: #fff; font-size: 11px; font-weight: 720; }
+.quote > a { position: relative; flex: 0 0 auto; padding: 16px 21px; overflow: hidden; border-radius: 999px; color: #15171c; background: #fff; font-size: 11px; font-weight: 720; transition: translate 220ms ease, box-shadow 220ms ease; }
 .quote > a span { margin-left: 8px; color: #1d65e8; }
 .nextMachine { width: min(1220px, calc(100% - 64px)); margin: 0 auto 90px; padding: 30px 0; display: grid; grid-template-columns: 150px 1fr auto; align-items: center; border-top: 1px solid #dfe1e5; border-bottom: 1px solid #dfe1e5; }
 .nextMachine span { color: #92969e; font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; }
 .nextMachine strong { font-size: 20px; }
 .nextMachine i { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #17191e; font-style: normal; }
+.quote > a span,
+.nextMachine i { transition: translate 220ms ease, rotate 220ms ease, background 220ms ease; }
+.actualPhoto figure img { transition: scale 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .quote > a:hover { translate: 0 -2px; box-shadow: 0 15px 30px #0004; }
+  .quote > a:hover span { translate: 4px 0; rotate: 4deg; }
+  .nextMachine:hover i { translate: 5px 0; rotate: -4deg; background: #1d65e8; }
+  .actualPhoto figure:hover img { scale: 1.025; }
+}
+
+.quote > a:active,
+.nextMachine:active { scale: 0.98; }
 
 @media (max-width: 800px) {
   .breadcrumb,

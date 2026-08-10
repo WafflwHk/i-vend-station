@@ -46,14 +46,33 @@
 }
 
 .desktopNav a {
+  position: relative;
   padding: 20px 0;
   transition: color 180ms ease;
+}
+
+.desktopNav a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 13px;
+  left: 0;
+  height: 1.5px;
+  border-radius: 99px;
+  background: #1d65e8;
+  scale: 0 1;
+  transform-origin: right;
+  transition: scale 220ms ease;
 }
 
 .desktopNav a:hover,
 .desktopNav a:focus-visible {
   color: #1d65e8;
 }
+
+.desktopNav a:hover::after,
+.desktopNav a:focus-visible::after,
+.desktopNav a[aria-current="page"]::after { scale: 1 1; transform-origin: left; }
 
 .desktopNav a[aria-current="page"] { color: #1d65e8; }
 
@@ -87,6 +106,9 @@
   background: #1d65e8;
   transform: translateY(-1px);
 }
+
+.account:active,
+.mobileAccount:active { scale: 0.97; }
 
 .accountShort,
 .menuButton {
@@ -179,11 +201,17 @@
     border-bottom: 1px solid #e7e9ed;
     font-size: 16px;
     font-weight: 620;
+    transition: color 180ms ease, background 180ms ease, padding 180ms ease;
   }
   .mobilePanel nav a:last-child { border-bottom: 0; }
   .mobilePanel nav a[aria-current="page"] { color: #1d65e8; }
   .mobilePanel nav small { color: #a0a4ad; font-size: 8px; letter-spacing: 1px; }
   .mobilePanel nav span { color: #1d65e8; }
+  .mobilePanel nav a:hover,
+  .mobilePanel nav a:focus-visible { padding-right: 7px; color: #1d65e8; background: #f5f7fb; }
+  .mobilePanel nav a span { transition: translate 180ms ease; }
+  .mobilePanel nav a:hover span,
+  .mobilePanel nav a:focus-visible span { translate: 4px 0; }
   .mobileAccount { width: 100%; min-height: 50px; margin-top: 12px; justify-content: space-between; }
   .backdrop {
     position: fixed;

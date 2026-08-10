@@ -10,7 +10,7 @@ export default async function AccountPage() {
 
   return (
     <main className={styles.page}>
-      <section className={styles.accountCard}>
+      <section className={styles.accountCard} data-animate="scale">
         <div className={styles.accountHeading}><p>CUSTOMER ACCOUNT</p><span>Signed in with ChatGPT</span></div>
         <div className={styles.profile}>
           <div className={styles.avatar} aria-hidden="true">{initial}</div>
@@ -22,7 +22,7 @@ export default async function AccountPage() {
         </div>
         <div className={styles.accountActions}><Link href="/machines">Browse machines <span aria-hidden="true">&rarr;</span></Link><a href={chatGPTSignOutPath("/")}>Sign out</a></div>
       </section>
-      <p className={styles.privacyNote}>Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page.</p>
+      <p className={styles.privacyNote} data-animate="up" data-animate-delay="1">Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page.</p>
     </main>
   );
 }
