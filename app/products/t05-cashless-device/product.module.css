@@ -25,21 +25,13 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  font-weight: 680;
-  letter-spacing: -0.3px;
 }
 
-.brandMark {
-  width: 29px;
-  height: 29px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  color: #111318;
-  background: #fff;
-  font-weight: 850;
+.brandLogo {
+  display: block;
+  width: 132px;
+  height: auto;
+  filter: invert(1);
 }
 
 .globalLinks,
@@ -380,6 +372,7 @@
 }
 
 .dashboardTop div { width: 23px; height: 23px; border-radius: 50%; background: linear-gradient(145deg, var(--orange), #d73f25); }
+.dashboardLogo { width: 106px; height: auto; filter: invert(1); }
 .dashboardBody { min-height: 530px; display: grid; grid-template-columns: 72px 1fr; }
 
 .dashboardBody aside {
@@ -542,6 +535,7 @@
 }
 
 .footer > div { display: flex; flex-direction: column; gap: 7px; text-align: right; }
+.footer .brandLogo { width: 156px; }
 .footer small { color: #4f535b; font-size: 7px; }
 
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }

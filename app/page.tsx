@@ -62,14 +62,14 @@ function MachineArt({ kind }: { kind: string }) {
   if (kind === "double-art") {
     return <div className={`machine-art ${kind}`}><div className="cabinet left-cab"><div className="art-glass">{[1,2,3,4,5].map(i => <i key={i}/>)}</div><b/></div><div className="cabinet right-cab"><div className="art-screen"/><div className="art-pay"/><b/></div></div>;
   }
-  return <div className={`machine-art ${kind}`}><div className="cabinet"><div className="art-brand">IV</div><div className="art-glass">{[1,2,3,4,5].map(i => <i key={i}/>)}</div><div className="art-screen"/><div className="art-pay"/><b/></div></div>;
+  return <div className={`machine-art ${kind}`}><div className="cabinet"><img className="art-brand" src="/i-vend-station-icon.png" alt="" aria-hidden="true"/><div className="art-glass">{[1,2,3,4,5].map(i => <i key={i}/>)}</div><div className="art-screen"/><div className="art-pay"/><b/></div></div>;
 }
 
 export default function Home() {
   return (
     <main>
       <nav className="nav" aria-label="Main navigation">
-        <a className="brand" href="#top" aria-label="I Vend Station home"><span className="brand-mark">I</span><span>I Vend Station</span></a>
+        <a className="brand" href="#top" aria-label="I Vend Station home"><img className="brand-logo" src="/i-vend-station-logo.png" alt="" /></a>
         <div className="nav-links"><a href="#machines">Machines</a><a href="#cashless">Cashless</a><a href="#guide">Buying guide</a><a className="nav-cta" href="#contact">Get a quote <span>↗</span></a></div>
       </nav>
 
@@ -120,7 +120,7 @@ export default function Home() {
 
       <section className="contact" id="contact"><div className="contact-glow one"/><div className="contact-glow two"/><div className="section-index light">04 — REQUEST A QUOTATION</div><h2>Which machine<br/>fits your plan?</h2><p>Send the model name, your location, and what you want to sell.</p><div className="contact-actions"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>↗</b></a><span>Replace this with your phone,<br/>WhatsApp, or email when ready.</span></div></section>
 
-      <footer><a className="brand" href="#top"><span className="brand-mark">I</span><span>I Vend Station</span></a><p>Vending machines and cashless payment equipment.</p><div><span>© 2026 I Vend Station</span><small>Product names and trademarks belong to their respective owners.</small></div></footer>
+      <footer><a className="brand" href="#top" aria-label="I Vend Station home"><img className="brand-logo" src="/i-vend-station-logo.png" alt="" /></a><p>Vending machines and cashless payment equipment.</p><div><span>© 2026 I Vend Station</span><small>Product names and trademarks belong to their respective owners.</small></div></footer>
     </main>
   );
 }

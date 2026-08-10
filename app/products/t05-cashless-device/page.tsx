@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     description: "A simpler way to bring cashless payments to compatible vending machines.",
     images: [
       {
-        url: "/og-t05-correct.png",
+        url: "/og-i-vend-station.png",
         width: 1536,
         height: 1024,
-        alt: "I Vend Station vending machines with the actual grey T05 cashless device",
+        alt: "I Vend Station logo with vending machines and the actual grey T05 cashless device",
       },
     ],
   },
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "T05 Cashless | I Vend Station",
     description: "Tap, scan, and pay at compatible vending machines.",
-    images: ["/og-t05-correct.png"],
+    images: ["/og-i-vend-station.png"],
   },
 };
 
@@ -51,8 +51,7 @@ export default function T05CashlessPage() {
     <main className={styles.page}>
       <nav className={styles.globalNav} aria-label="I Vend Station navigation">
         <Link className={styles.brand} href="/" aria-label="I Vend Station home">
-          <span className={styles.brandMark}>I</span>
-          <span>I Vend Station</span>
+          <img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" />
         </Link>
         <div className={styles.globalLinks}>
           <Link href="/#machines">Machines</Link>
@@ -137,7 +136,7 @@ export default function T05CashlessPage() {
           </p>
         </div>
         <div className={styles.dashboard} aria-label="Illustrative transaction dashboard">
-          <div className={styles.dashboardTop}><span>I Vend Station</span><div /></div>
+          <div className={styles.dashboardTop}><img className={styles.dashboardLogo} src="/i-vend-station-logo.png" alt="I Vend Station" /><div /></div>
           <div className={styles.dashboardBody}>
             <aside><i className={styles.active} /><i /><i /><i /></aside>
             <div className={styles.dashboardContent}>
@@ -196,7 +195,7 @@ export default function T05CashlessPage() {
       </section>
 
       <footer className={styles.footer}>
-        <Link className={styles.brand} href="/"><span className={styles.brandMark}>I</span><span>I Vend Station</span></Link>
+        <Link className={styles.brand} href="/" aria-label="I Vend Station home"><img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" /></Link>
         <p>Vending machines and cashless payment equipment.</p>
         <div><span>&copy; 2026 I Vend Station</span><small>Payment availability and compatibility are subject to confirmation.</small></div>
       </footer>

@@ -8,7 +8,39 @@
   filter: drop-shadow(24px 32px 25px #07142773);
 }
 
+.brand-logo {
+  display: block;
+  width: 142px;
+  height: auto;
+}
+
+footer .brand-logo {
+  width: 156px;
+}
+
+.machine-art .art-brand {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  filter: invert(1);
+}
+
+.compact-art .art-brand,
+.coffee-art .art-brand,
+.frozen-art .art-brand {
+  filter: none;
+}
+
 @media (max-width: 650px) {
+  .brand-logo {
+    width: 132px;
+  }
+
   .cashless-visual img {
     width: min(72%, 390px);
   }
