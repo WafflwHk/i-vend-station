@@ -6,7 +6,7 @@
   max-width: 82%;
   object-fit: contain;
   border-radius: 5px;
-  box-shadow: 0 22px 35px #29313d30;
+  filter: drop-shadow(0 22px 18px #29313d30);
   transition: transform 0.5s ease;
 }
 

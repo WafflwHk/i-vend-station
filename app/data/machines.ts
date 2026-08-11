@@ -93,7 +93,8 @@ export const machines: Machine[] = [
     name: "TCN-D720 Classic Touchscreen Vending Machine",
     type: "Compact series",
     art: "compact-art",
-    image: null,
+    image: "/tcn-d720-product-cutout.png",
+    imageAlt: "Front view of the TCN-D720 vending machine with its background removed",
     copy: "A compact floor-standing format for locations where space and a clean footprint matter.",
     description:
       "A compact TCN floor-standing format for projects that need a smaller footprint. Product layout, temperature configuration, and payment equipment depend on the selected machine setup.",

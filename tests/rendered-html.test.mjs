@@ -36,6 +36,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /CHINA SERIES/);
   assert.match(html, /China Series/);
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
+  assert.match(html, /tcn-d720-product-cutout\.png/);
   assert.doesNotMatch(html, />Compact Vending Machine</);
   assert.match(html, /Ask IVS/);
   assert.match(html, /aria-label="Open Ask IVS product assistant"/);
@@ -195,6 +196,7 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
     access(new URL("../public/t05-terminal-correct.png", import.meta.url)),
     access(new URL("../public/hot-cold-coffee-machine.jpg", import.meta.url)),
+    access(new URL("../public/tcn-d720-product-cutout.png", import.meta.url)),
   ]);
 });
 
