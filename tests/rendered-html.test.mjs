@@ -34,6 +34,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /Coffee Machines/);
   assert.match(html, /TCN Machines/);
   assert.match(html, /CHINA SERIES/);
+  assert.match(html, /China Series/);
   assert.match(html, /Speak with AI/);
   assert.match(html, /aria-label="Open I Vend AI product assistant"/);
   assert.match(html, /hero-remade/);

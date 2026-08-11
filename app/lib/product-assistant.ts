@@ -147,7 +147,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "shortlist",
       title: "Start with the compact format",
-      text: "The TCN-D720-6G is worth comparing because the catalogue presents it as a compact floor-standing format. Share your actual available floor space before a quotation because physical dimensions are not published here.",
+      text: "The China Series compact machine is worth comparing because the catalogue presents it as a compact floor-standing format. Share your actual available floor space before a quotation because physical dimensions are not published here.",
       links: [machineLink("tcn-d720-6g"), { label: "Compare all machines", href: "/machines" }],
     };
   }
