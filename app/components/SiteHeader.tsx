@@ -4,6 +4,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import styles from "./site-header.module.css";
 
+type Appearance = "system" | "light" | "dark";
+
+const appearanceStorageKey = "ivend-appearance";
+const appearanceOptions: ReadonlyArray<{ value: Appearance; label: string }> = [
+  { value: "system", label: "System" },
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+];
+
 const links = [
   { label: "Store", href: "/store" },
   { label: "Machines", href: "/machines" },
@@ -13,8 +22,42 @@ const links = [
   { label: "Contact", href: "/#contact" },
 ];
 
+const normaliseAppearance = (value: string | null | undefined): Appearance => (
+  value === "light" || value === "dark" || value === "system" ? value : "system"
+);
+
+const applyAppearance = (appearance: Appearance) => {
+  const resolved = appearance === "system"
+    ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+    : appearance;
+  const root = document.documentElement;
+  root.dataset.appearance = appearance;
+  root.dataset.theme = resolved;
+  root.style.colorScheme = resolved;
+  const themeColor = document.getElementById("ivend-theme-color");
+  themeColor?.setAttribute("content", resolved === "dark" ? "#080a0e" : "#f5f5f7");
+};
+
+function AppearanceControl({ appearance, onChange }: { appearance: Appearance; onChange: (next: Appearance) => void }) {
+  return (
+    <div className={styles.appearanceControl} role="group" aria-label="Website appearance">
+      {appearanceOptions.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          aria-pressed={appearance === option.value}
+          onClick={() => onChange(option.value)}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [appearance, setAppearance] = useState<Appearance>("system");
   const pathname = usePathname();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -23,6 +66,42 @@ export default function SiteHeader() {
     if (href.includes("#")) return false;
     if (href === "/machines") return pathname === "/machines" || pathname.startsWith("/machines/");
     return pathname === href;
+  };
+
+  useEffect(() => {
+    const initialAppearance = normaliseAppearance(document.documentElement.dataset.appearance);
+    applyAppearance(initialAppearance);
+    const stateFrame = window.requestAnimationFrame(() => setAppearance(initialAppearance));
+
+    const preference = window.matchMedia("(prefers-color-scheme: dark)");
+    const syncSystemAppearance = () => {
+      const current = normaliseAppearance(document.documentElement.dataset.appearance);
+      if (current === "system") applyAppearance(current);
+    };
+    const syncStoredAppearance = (event: StorageEvent) => {
+      if (event.key !== appearanceStorageKey && event.key !== null) return;
+      const next = normaliseAppearance(event.newValue);
+      setAppearance(next);
+      applyAppearance(next);
+    };
+
+    preference.addEventListener("change", syncSystemAppearance);
+    window.addEventListener("storage", syncStoredAppearance);
+    return () => {
+      window.cancelAnimationFrame(stateFrame);
+      preference.removeEventListener("change", syncSystemAppearance);
+      window.removeEventListener("storage", syncStoredAppearance);
+    };
+  }, []);
+
+  const chooseAppearance = (next: Appearance) => {
+    setAppearance(next);
+    applyAppearance(next);
+    try {
+      window.localStorage.setItem(appearanceStorageKey, next);
+    } catch {
+      // The selected appearance still applies for this page when storage is unavailable.
+    }
   };
 
   useEffect(() => {
@@ -61,6 +140,9 @@ export default function SiteHeader() {
         </nav>
 
         <div className={styles.actions}>
+          <div className={styles.desktopAppearance}>
+            <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
+          </div>
           <a className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></a>
           <button
             ref={menuButtonRef}
@@ -82,6 +164,10 @@ export default function SiteHeader() {
             <a ref={index === 0 ? firstLinkRef : undefined} key={link.label} href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined} onClick={() => setOpen(false)}><small>{String(index + 1).padStart(2, "0")}</small>{link.label}<span aria-hidden="true">&rarr;</span></a>
           ))}
         </nav>
+        <div className={styles.mobileAppearance}>
+          <span>Appearance</span>
+          <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
+        </div>
         <a className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
       </div>
       {open ? <button className={styles.backdrop} type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}

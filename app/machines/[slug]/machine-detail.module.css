@@ -70,3 +70,106 @@
   .nextMachine strong { min-width: 0; font-size: 16px; overflow-wrap: anywhere; }
   .quote > a { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; }
 }
+
+/* The product itself keeps its configured finish; these overrides theme only the detail-page shell. */
+:global(:root[data-theme="dark"]) .page {
+  color: #f4f6fa;
+  background: #080a0e;
+}
+
+:global(:root[data-theme="dark"]) .breadcrumb {
+  color: #838a95;
+}
+
+:global(:root[data-theme="dark"]) .breadcrumb a {
+  color: #c9ced6;
+}
+
+:global(:root[data-theme="dark"]) .introCopy > p,
+:global(:root[data-theme="dark"]) .label {
+  color: #9ba2ad;
+}
+
+:global(:root[data-theme="dark"]) .modelCode {
+  color: #75a5ff;
+}
+
+:global(:root[data-theme="dark"]) .summary,
+:global(:root[data-theme="dark"]) .details > div > p:last-child,
+:global(:root[data-theme="dark"]) .actualPhoto > div > p:last-child,
+:global(:root[data-theme="dark"]) .photoNotice > p:last-child {
+  color: #a7adb7;
+}
+
+:global(:root[data-theme="dark"]) .details ol {
+  border-top-color: #303640;
+}
+
+:global(:root[data-theme="dark"]) .details li {
+  color: #e6e9ee;
+  border-bottom-color: #303640;
+}
+
+:global(:root[data-theme="dark"]) .details li span,
+:global(:root[data-theme="dark"]) .nextMachine > span {
+  color: #8d95a1;
+}
+
+:global(:root[data-theme="dark"]) .actualPhoto,
+:global(:root[data-theme="dark"]) .photoNotice {
+  background: #11151b;
+}
+
+:global(:root[data-theme="dark"]) .actualPhoto figure {
+  border: 1px solid #2b313a;
+  background: #191e26;
+  box-shadow: 0 28px 70px #0005;
+}
+
+:global(:root[data-theme="dark"]) .actualPhoto figcaption {
+  color: #929aa6;
+}
+
+:global(:root[data-theme="dark"]) .quote {
+  border: 1px solid #ffffff14;
+  box-shadow: 0 30px 80px #0006;
+}
+
+:global(:root[data-theme="dark"]) .nextMachine {
+  color: #f2f4f7;
+  border-top-color: #303640;
+  border-bottom-color: #303640;
+}
+
+:global(:root[data-theme="dark"]) .nextMachine i {
+  color: #0d1015;
+  background: #f4f6fa;
+}
+
+:global(:root[data-theme="dark"]) .page :global(.site-footer) {
+  color: #989faa;
+  background: #080a0e;
+  border-top: 1px solid #252b34;
+}
+
+:global(:root[data-theme="dark"]) .page :global(.site-footer) :global(.brand-logo) {
+  filter: invert(1);
+}
+
+:global(:root[data-theme="dark"]) .breadcrumb a:focus-visible,
+:global(:root[data-theme="dark"]) .nextMachine:focus-visible,
+:global(:root[data-theme="dark"]) .page :global(.site-footer) a:focus-visible {
+  outline: 3px solid #75a5ff;
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :global(:root[data-theme="dark"]) .breadcrumb a:hover {
+    color: #fff;
+  }
+
+  :global(:root[data-theme="dark"]) .nextMachine:hover i {
+    color: #fff;
+    background: #2f78ff;
+  }
+}

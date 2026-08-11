@@ -54,7 +54,7 @@
 }
 
 .controls button {
-  min-height: 37px;
+  min-height: 44px;
   padding: 0 14px;
   border: 1px solid #d6d9df;
   border-radius: 999px;
@@ -74,6 +74,150 @@
 .spinButton span { margin-right: 7px; font-size: 15px; }
 .spinButton[aria-pressed="true"] span { animation: spinIcon 1.4s linear infinite; }
 .controls button:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+.configurator {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.optionGroup {
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #dfe2e7;
+  border-radius: 20px;
+  background: #ffffffa8;
+}
+
+.optionGroup legend {
+  padding: 0 7px;
+  color: #888e98;
+  font-size: 8px;
+  font-weight: 780;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.optionHeading {
+  min-height: 28px;
+  margin-bottom: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.optionHeading strong { min-width: 0; font-size: 14px; letter-spacing: -0.3px; }
+.optionHeading span {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #69707b;
+  background: #eef1f5;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.finishOptions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.finishOption,
+.sizeOption { position: relative; min-width: 0; cursor: pointer; }
+
+.finishOption {
+  min-height: 94px;
+  padding: 8px 4px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 14px;
+  text-align: center;
+}
+
+.optionInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.finishSwatch {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #cfd3da;
+  border-radius: 50%;
+  background: #fff;
+  transition: border-color 220ms ease, box-shadow 220ms ease, scale 220ms ease;
+}
+
+.finishSwatch i {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #0000001f;
+  border-radius: 50%;
+  background: var(--finish-swatch);
+  box-shadow: inset 0 1px 2px #ffffff5e;
+}
+
+.optionInput:checked + .finishSwatch {
+  border-color: #1d65e8;
+  box-shadow: 0 0 0 2px #f7f9fc, 0 0 0 5px #1d65e8;
+  scale: 0.96;
+}
+
+.optionInput:focus-visible + .finishSwatch,
+.optionInput:focus-visible + .sizeCard { outline: 3px solid #67a0ff; outline-offset: 4px; }
+
+.optionName {
+  width: 100%;
+  overflow: hidden;
+  color: #424750;
+  font-size: 9px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.finishOption > small { color: #9297a0; font-size: 7px; }
+
+.sizeOptions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+
+.sizeCard {
+  min-height: 94px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-content: center;
+  align-items: center;
+  column-gap: 12px;
+  border: 1px solid #d5d9df;
+  border-radius: 15px;
+  color: #555b65;
+  background: #fff;
+  transition: border-color 220ms ease, box-shadow 220ms ease, translate 220ms ease, background 220ms ease;
+}
+
+.sizeCard > strong { grid-row: 1 / 3; font-size: 27px; line-height: 1; letter-spacing: -1.5px; }
+.sizeCard > span { min-width: 0; font-size: 9px; font-weight: 680; line-height: 1.35; }
+.sizeCard > small { color: #969ba4; font-size: 7px; }
+.optionInput:checked + .sizeCard { border-color: #1d65e8; box-shadow: inset 0 0 0 1px #1d65e8, 0 8px 20px #1d65e81a; background: #f7faff; }
+
+.optionNote { margin: 14px 0 0; color: #91969f; font-size: 8px; line-height: 1.5; }
 
 .stage {
   position: relative;
@@ -126,16 +270,20 @@
 }
 
 .model {
+  --viewer-yaw: 0deg;
+  --viewport-scale: 1;
+  --viewer-size-scale: 1;
   position: relative;
   width: var(--machine-w);
   height: var(--machine-h);
+  scale: calc(var(--viewport-scale) * var(--viewer-size-scale));
   transform-style: preserve-3d;
   transform: rotateX(-4deg) rotateY(var(--viewer-yaw));
-  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1), scale 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, scale;
 }
 
-.model[data-moving="true"] { transition: none; }
+.model[data-moving="true"] { transition: scale 520ms cubic-bezier(0.22, 1, 0.36, 1); }
 
 .face {
   position: absolute;
@@ -144,6 +292,7 @@
   background: var(--machine-body);
   box-shadow: inset 0 0 25px #ffffff1f, inset -8px 0 14px #00000018;
   backface-visibility: hidden;
+  transition: background-color 360ms ease, border-color 360ms ease, box-shadow 360ms ease;
 }
 
 .front,
@@ -189,7 +338,7 @@
 }
 
 .frontWindow i { height: 2px; background: #9aa6b8; box-shadow: 0 -12px 0 #ffffff11; }
-.frontScreen { position: absolute; top: 61px; right: 7%; width: 20%; height: 25%; border-radius: 4px; background: linear-gradient(145deg, var(--machine-accent), #10234b); box-shadow: 0 0 14px color-mix(in srgb, var(--machine-accent) 50%, transparent); }
+.frontScreen { position: absolute; top: 61px; right: 7%; width: 20%; height: 25%; border-radius: 4px; background: linear-gradient(145deg, var(--machine-accent), #10234b); box-shadow: 0 0 14px color-mix(in srgb, var(--machine-accent) 50%, transparent); transition: background 360ms ease, box-shadow 360ms ease; }
 .frontPay { position: absolute; top: 43%; right: 9%; width: 16%; height: 7%; border: 2px solid #69717d; border-radius: 3px; background: #090b0e; }
 .collectionBay { position: absolute; left: 22%; bottom: 7%; width: 48%; height: 9%; border-radius: 4px; background: #090b0e; box-shadow: inset 0 7px 6px #000; }
 .cabinetSeam { position: absolute; top: 0; bottom: 0; left: 51%; width: 2px; background: #0006; box-shadow: 1px 0 #ffffff18; }
@@ -213,9 +362,9 @@
 .servicePanel { position: absolute; inset: 38px 25px 85px; border: 2px solid color-mix(in srgb, var(--machine-trim) 65%, white); border-radius: 5px; box-shadow: inset 0 0 0 5px #ffffff0c; }
 .backVents { position: absolute; left: 50%; bottom: 43px; width: 42%; display: grid; gap: 4px; transform: translateX(-50%); }
 .backVents i,
-.sideVents i { height: 2px; border-radius: 99px; background: color-mix(in srgb, var(--machine-trim) 75%, white); opacity: 0.62; }
+.sideVents i { height: 2px; border-radius: 99px; background: color-mix(in srgb, var(--machine-trim) 75%, white); opacity: 0.62; transition: background-color 360ms ease; }
 .sideVents { position: absolute; top: 45px; left: 15%; width: 70%; display: grid; gap: 7px; }
-.sideHandle { position: absolute; top: 44%; right: 13px; width: 7px; height: 66px; border-radius: 99px; background: var(--machine-trim); box-shadow: inset 1px 0 #ffffff33; }
+.sideHandle { position: absolute; top: 44%; right: 13px; width: 7px; height: 66px; border-radius: 99px; background: var(--machine-trim); box-shadow: inset 1px 0 #ffffff33; transition: background-color 360ms ease; }
 .sidePanel { position: absolute; inset: 39% 17px 22%; border: 2px solid color-mix(in srgb, var(--machine-trim) 62%, white); border-radius: 4px; }
 
 .viewerFoot { align-items: flex-start; padding-top: 18px; border-top: 1px solid #dfe2e7; }
@@ -228,17 +377,105 @@
 
 @keyframes spinIcon { to { rotate: -360deg; } }
 
+@media (hover: hover) and (pointer: fine) {
+  .finishOption:hover .finishSwatch { border-color: #9ba3af; scale: 1.04; }
+  .finishOption:hover .optionInput:checked + .finishSwatch { scale: 0.99; }
+  .sizeOption:hover .sizeCard { border-color: #aeb5c0; translate: 0 -2px; }
+}
+
+:global(:root[data-theme="dark"]) .viewer {
+  color: #f4f6f9;
+  border-color: #2b313b;
+  background: linear-gradient(145deg, #161a21, #0d1015);
+  box-shadow: 0 30px 85px #0008;
+}
+
+:global(:root[data-theme="dark"]) .viewerTop small,
+:global(:root[data-theme="dark"]) .viewerFoot span,
+:global(:root[data-theme="dark"]) .disclaimer,
+:global(:root[data-theme="dark"]) .optionNote { color: #8f97a3; }
+
+:global(:root[data-theme="dark"]) .illustrativeBadge {
+  color: #c2c8d1;
+  border-color: #3a424f;
+  background: #1d222be6;
+}
+
+:global(:root[data-theme="dark"]) .controls,
+:global(:root[data-theme="dark"]) .viewerFoot { border-color: #2d333d; }
+
+:global(:root[data-theme="dark"]) .controls button {
+  color: #c3c9d2;
+  border-color: #3a424e;
+  background: #1b2028;
+}
+
+:global(:root[data-theme="dark"]) .controls button:hover { border-color: #667180; }
+:global(:root[data-theme="dark"]) .controls button[aria-pressed="true"],
+:global(:root[data-theme="dark"]) .controls .spinButton { color: #fff; border-color: #377ef2; background: #286cde; }
+
+:global(:root[data-theme="dark"]) .optionGroup {
+  border-color: #2d343f;
+  background: #11151bcc;
+}
+
+:global(:root[data-theme="dark"]) .optionGroup legend { color: #858e9b; }
+:global(:root[data-theme="dark"]) .optionHeading strong,
+:global(:root[data-theme="dark"]) .optionName { color: #e8ebf0; }
+
+:global(:root[data-theme="dark"]) .optionHeading span {
+  color: #aeb5c0;
+  background: #242a34;
+}
+
+:global(:root[data-theme="dark"]) .finishOption > small,
+:global(:root[data-theme="dark"]) .sizeCard > small { color: #818a97; }
+
+:global(:root[data-theme="dark"]) .finishSwatch {
+  border-color: #46505e;
+  background: #171b22;
+}
+
+:global(:root[data-theme="dark"]) .optionInput:checked + .finishSwatch {
+  border-color: #6ea1ff;
+  box-shadow: 0 0 0 2px #12161c, 0 0 0 5px #5a94ff;
+}
+
+:global(:root[data-theme="dark"]) .sizeCard {
+  color: #c9ced6;
+  border-color: #39414d;
+  background: #191e26;
+}
+
+:global(:root[data-theme="dark"]) .optionInput:checked + .sizeCard {
+  border-color: #5a94ff;
+  box-shadow: inset 0 0 0 1px #5a94ff, 0 10px 24px #0005;
+  background: #172338;
+}
+
+:global(:root[data-theme="dark"]) .swipeHint {
+  color: #c0c6cf;
+  border-color: #39414d;
+  background: #171c23e8;
+  box-shadow: 0 8px 24px #0005;
+}
+
+:global(:root[data-theme="dark"]) .floor { background: radial-gradient(ellipse, #8aa1c23d 0, #6e82a01a 38%, transparent 70%); }
+:global(:root[data-theme="dark"]) .stage:focus-visible { box-shadow: inset 0 0 0 3px #67a0ff; }
+
 @media (max-width: 700px) {
   .viewer { padding: 20px 14px; border-radius: 22px; }
   .viewerTop { align-items: flex-start; flex-direction: column; gap: 12px; }
   .controls { align-items: stretch; flex-direction: column; }
+  .configurator { grid-template-columns: 1fr; }
+  .optionGroup { padding: 18px; }
   .illustrativeBadge { font-size: 10px; }
   .viewButtons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
   .controls button { min-height: 46px; padding: 0 8px; font-size: 11px; touch-action: manipulation; }
   .controls .spinButton { width: 100%; }
   .stage { height: clamp(390px, 112vw, 470px); margin: 7px 0; }
-  .model { scale: 0.82; }
-  .model[data-variant="double"] { scale: 0.74; }
+  .model { --viewport-scale: 0.82; }
+  .model[data-variant="double"] { --viewport-scale: 0.74; }
   .viewerFoot { flex-direction: column; }
   .viewerFoot strong { font-size: 12px; }
   .viewerFoot span,
@@ -249,12 +486,71 @@
 
 @media (max-width: 420px) {
   .viewButtons { grid-template-columns: repeat(2, 1fr); }
-  .model { scale: 0.8; }
-  .model[data-variant="double"] { scale: 0.7; }
+  .optionGroup { padding: 16px 12px; }
+  .finishOptions { gap: 4px; }
+  .sizeCard { padding: 12px; column-gap: 9px; }
+  .model { --viewport-scale: 0.8; }
+  .model[data-variant="double"] { --viewport-scale: 0.7; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .model { transition: none; }
+  .model,
+  .face,
+  .frontScreen,
+  .backVents i,
+  .sideVents i,
+  .sideHandle,
+  .finishSwatch,
+  .sizeCard,
   .controls button { transition: none; }
+
+  .controls button:hover { transform: none; }
+  .finishOption:hover .finishSwatch { scale: 1; }
+  .finishOption:hover .optionInput:checked + .finishSwatch { scale: 0.96; }
+  .sizeOption:hover .sizeCard { translate: none; }
   .spinButton span { animation: none !important; }
+}
+
+@media (forced-colors: active) {
+  .viewer,
+  .illustrativeBadge,
+  .controls button,
+  .optionGroup,
+  .finishSwatch,
+  .sizeCard,
+  .swipeHint {
+    color: CanvasText;
+    border-color: ButtonText;
+    background: Canvas;
+    box-shadow: none;
+    forced-color-adjust: auto;
+  }
+
+  .finishSwatch i {
+    border-color: ButtonText;
+    background: CanvasText;
+    box-shadow: none;
+  }
+
+  .optionInput:checked + .finishSwatch,
+  .optionInput:checked + .sizeCard {
+    border-color: Highlight;
+    outline: 3px solid Highlight;
+    outline-offset: 3px;
+    box-shadow: none;
+  }
+
+  .optionInput:focus-visible + .finishSwatch,
+  .optionInput:focus-visible + .sizeCard,
+  .controls button:focus-visible,
+  .stage:focus-visible { outline-color: Highlight; }
+
+  .controls button[aria-pressed="true"],
+  .controls .spinButton {
+    color: HighlightText;
+    border-color: Highlight;
+    background: Highlight;
+  }
+
+  .floor { display: none; }
 }

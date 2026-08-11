@@ -28,6 +28,14 @@ export default function MachineViewer({ machine }: Props) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [status, setStatus] = useState("Front illustrative view selected");
   const [accessibleAngle, setAccessibleAngle] = useState(0);
+  const [selectedFinishId, setSelectedFinishId] = useState(machine.viewer.defaultFinishId);
+  const [selectedSizeId, setSelectedSizeId] = useState(machine.viewer.defaultSizeId);
+  const [configurationStatus, setConfigurationStatus] = useState("");
+
+  const selectedFinish = machine.viewer.finishes.find((finish) => finish.id === selectedFinishId) ?? machine.viewer.finishes[0];
+  const selectedSize = machine.viewer.sizes.find((size) => size.id === selectedSizeId) ?? machine.viewer.sizes[0];
+  const finishHintId = `finish-preview-note-${machine.slug}`;
+  const sizeHintId = `size-preview-note-${machine.slug}`;
 
   const writeYaw = useCallback((yaw: number, moving: boolean) => {
     yawRef.current = yaw;
@@ -134,14 +142,26 @@ export default function MachineViewer({ machine }: Props) {
     });
   };
 
+  const selectFinish = (finishId: string) => {
+    const finish = machine.viewer.finishes.find((option) => option.id === finishId) ?? machine.viewer.finishes[0];
+    setSelectedFinishId(finish.id);
+    setConfigurationStatus(`${finish.label} finish selected. ${finish.illustrative ? "Illustrative finish preview." : "Current finish preview."}`);
+  };
+
+  const selectSize = (sizeId: "s" | "l") => {
+    const size = machine.viewer.sizes.find((option) => option.id === sizeId) ?? machine.viewer.sizes[0];
+    setSelectedSizeId(size.id);
+    setConfigurationStatus(`${size.label} viewer size selected. ${size.illustrative ? "Illustrative viewer scale." : "Current viewer scale."}`);
+  };
+
   const modelStyle = {
     "--machine-w": `${machine.viewer.width}px`,
     "--machine-h": `${machine.viewer.height}px`,
     "--machine-d": `${machine.viewer.depth}px`,
-    "--machine-body": machine.viewer.body,
-    "--machine-trim": machine.viewer.trim,
-    "--machine-accent": machine.viewer.accent,
-    "--viewer-yaw": "0deg",
+    "--machine-body": selectedFinish.body,
+    "--machine-trim": selectedFinish.trim,
+    "--machine-accent": selectedFinish.accent,
+    "--viewer-size-scale": String(selectedSize.previewScale),
   } as CSSProperties;
 
   return (
@@ -162,11 +182,71 @@ export default function MachineViewer({ machine }: Props) {
         </button>
       </div>
 
+      <div className={styles.configurator} role="group" aria-label="Illustrative machine configuration preview">
+        <fieldset className={styles.optionGroup} aria-describedby={finishHintId}>
+          <legend>Finish</legend>
+          <div className={styles.optionHeading}>
+            <strong>{selectedFinish.label}</strong>
+            <span>{selectedFinish.illustrative ? "Illustrative" : "Current preview"}</span>
+          </div>
+          <div className={styles.finishOptions}>
+            {machine.viewer.finishes.map((finish) => (
+              <label className={styles.finishOption} key={finish.id}>
+                <input
+                  className={styles.optionInput}
+                  type="radio"
+                  name={`finish-${machine.slug}`}
+                  value={finish.id}
+                  checked={selectedFinish.id === finish.id}
+                  onChange={() => selectFinish(finish.id)}
+                />
+                <span className={styles.finishSwatch} style={{ "--finish-swatch": finish.swatch } as CSSProperties} aria-hidden="true"><i /></span>
+                <span className={styles.optionName}>{finish.label}</span>
+                <small>{finish.illustrative ? "Illustrative" : "Current"}</small>
+              </label>
+            ))}
+          </div>
+          <p className={styles.optionNote} id={finishHintId}>Alternative finishes are illustrative and do not confirm product availability.</p>
+        </fieldset>
+
+        <fieldset className={styles.optionGroup} aria-describedby={sizeHintId}>
+          <legend>Viewer size</legend>
+          <div className={styles.optionHeading}>
+            <strong>{selectedSize.label}</strong>
+            <span>{selectedSize.illustrative ? "Illustrative" : "Current preview"}</span>
+          </div>
+          <div className={styles.sizeOptions}>
+            {machine.viewer.sizes.map((size) => (
+              <label
+                className={styles.sizeOption}
+                key={size.id}
+                aria-label={`${size.label} viewer size, ${size.description}, ${size.illustrative ? "illustrative" : "current"}`}
+              >
+                <input
+                  className={styles.optionInput}
+                  type="radio"
+                  name={`viewer-size-${machine.slug}`}
+                  value={size.id}
+                  checked={selectedSize.id === size.id}
+                  onChange={() => selectSize(size.id)}
+                />
+                <span className={styles.sizeCard}>
+                  <strong>{size.label}</strong>
+                  <span>{size.description}</span>
+                  <small>{size.illustrative ? "Illustrative" : "Current"}</small>
+                </span>
+              </label>
+            ))}
+          </div>
+          <p className={styles.optionNote} id={sizeHintId}>S and L change only the viewer scale, not confirmed machine dimensions.</p>
+        </fieldset>
+      </div>
+
       <div
         className={styles.stage}
         role="slider"
         aria-roledescription="3D product viewer"
-        aria-label={`Rotatable illustrative view of ${machine.name}. Drag left or right, or use the arrow keys.`}
+        aria-label={`Rotatable illustrative view of ${machine.name} in ${selectedFinish.label} finish and ${selectedSize.label} viewer size. Drag left or right, or use the arrow keys.`}
         aria-keyshortcuts="ArrowLeft ArrowRight Home"
         aria-valuemin={0}
         aria-valuemax={359}
@@ -202,6 +282,7 @@ export default function MachineViewer({ machine }: Props) {
         <p className={styles.disclaimer}>Side and rear views are illustrative. Final appearance and specifications must be confirmed for the exact machine model.</p>
       </div>
       <p className={styles.liveStatus} aria-live="polite">{status}</p>
+      <p className={styles.liveStatus} aria-live="polite" aria-atomic="true">{configurationStatus}</p>
     </section>
   );
 }

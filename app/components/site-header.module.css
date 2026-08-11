@@ -18,11 +18,11 @@
   display: flex;
   align-items: center;
   gap: 28px;
-  border: 1px solid rgba(18, 22, 30, 0.1);
+  border: 1px solid var(--iv-glass-line);
   border-radius: 18px;
-  color: #20232a;
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 12px 35px rgba(20, 27, 39, 0.11);
+  color: var(--iv-text);
+  background: var(--iv-header-glass);
+  box-shadow: var(--iv-header-shadow);
   backdrop-filter: blur(22px) saturate(155%);
   pointer-events: auto;
 }
@@ -36,6 +36,7 @@
   display: block;
   width: 100%;
   height: auto;
+  filter: var(--iv-logo-filter);
 }
 
 .desktopNav {
@@ -61,7 +62,7 @@
   left: 0;
   height: 1.5px;
   border-radius: 99px;
-  background: #1d65e8;
+  background: var(--iv-accent);
   scale: 0 1;
   transform-origin: right;
   transition: scale 220ms ease;
@@ -69,14 +70,14 @@
 
 .desktopNav a:hover,
 .desktopNav a:focus-visible {
-  color: #1d65e8;
+  color: var(--iv-accent);
 }
 
 .desktopNav a:hover::after,
 .desktopNav a:focus-visible::after,
 .desktopNav a[aria-current="page"]::after { scale: 1 1; transform-origin: left; }
 
-.desktopNav a[aria-current="page"] { color: #1d65e8; }
+.desktopNav a[aria-current="page"] { color: var(--iv-accent); }
 
 .actions {
   margin-left: auto;
@@ -93,8 +94,8 @@
   min-height: 42px;
   padding: 0 17px;
   border-radius: 12px;
-  color: #fff;
-  background: #15171c;
+  color: var(--iv-on-primary);
+  background: var(--iv-primary);
   font-size: 10px;
   font-weight: 700;
   white-space: nowrap;
@@ -105,7 +106,8 @@
 .account:focus-visible,
 .mobileAccount:hover,
 .mobileAccount:focus-visible {
-  background: #1d65e8;
+  color: #fff;
+  background: var(--iv-accent);
   transform: translateY(-1px);
 }
 
@@ -123,7 +125,7 @@
   padding: 0;
   border: 0;
   border-radius: 12px;
-  background: #eef0f4;
+  background: var(--iv-control-bg);
   place-items: center;
   cursor: pointer;
 }
@@ -133,7 +135,7 @@
   width: 17px;
   height: 1.5px;
   border-radius: 999px;
-  background: #17191e;
+  background: var(--iv-text);
   transition: transform 180ms ease;
 }
 
@@ -144,7 +146,7 @@
 
 .menuButton:focus-visible,
 .mobilePanel a:focus-visible {
-  outline: 3px solid #67a0ff;
+  outline: 3px solid var(--iv-focus);
   outline-offset: 2px;
 }
 
@@ -152,6 +154,47 @@
 .backdrop {
   display: none;
 }
+
+.appearanceControl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--iv-line-soft);
+  border-radius: 12px;
+  background: var(--iv-control-bg);
+}
+
+.appearanceControl button {
+  min-width: 48px;
+  min-height: 34px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--iv-text-secondary);
+  background: transparent;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.appearanceControl button:hover { color: var(--iv-text); }
+.appearanceControl button:active { transform: scale(0.96); }
+.appearanceControl button[aria-pressed="true"] {
+  color: var(--iv-on-primary);
+  background: var(--iv-primary);
+  box-shadow: 0 3px 9px var(--iv-control-shadow);
+}
+.appearanceControl button:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid var(--iv-focus);
+  outline-offset: 1px;
+}
+
+.mobileAppearance { display: none; }
 
 @media (max-width: 1100px) {
   .bar { gap: 18px; }
@@ -184,11 +227,11 @@
     visibility: hidden;
     opacity: 0;
     transform: translateY(-10px);
-    border: 1px solid rgba(18, 22, 30, 0.1);
+    border: 1px solid var(--iv-glass-line);
     border-radius: 20px;
-    color: #17191e;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 24px 60px rgba(15, 21, 32, 0.22);
+    color: var(--iv-text);
+    background: var(--iv-header-glass-strong);
+    box-shadow: 0 24px 60px var(--iv-panel-shadow);
     backdrop-filter: blur(24px) saturate(150%);
     pointer-events: none;
     transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
@@ -200,20 +243,31 @@
     display: grid;
     grid-template-columns: 34px 1fr auto;
     align-items: center;
-    border-bottom: 1px solid #e7e9ed;
+    border-bottom: 1px solid var(--iv-line-soft);
     font-size: 16px;
     font-weight: 620;
     transition: color 180ms ease, background 180ms ease, padding 180ms ease;
   }
   .mobilePanel nav a:last-child { border-bottom: 0; }
-  .mobilePanel nav a[aria-current="page"] { color: #1d65e8; }
-  .mobilePanel nav small { color: #a0a4ad; font-size: 8px; letter-spacing: 1px; }
-  .mobilePanel nav span { color: #1d65e8; }
+  .mobilePanel nav a[aria-current="page"] { color: var(--iv-accent); }
+  .mobilePanel nav small { color: var(--iv-text-tertiary); font-size: 8px; letter-spacing: 1px; }
+  .mobilePanel nav span { color: var(--iv-accent); }
   .mobilePanel nav a:hover,
-  .mobilePanel nav a:focus-visible { padding-right: 7px; color: #1d65e8; background: #f5f7fb; }
+  .mobilePanel nav a:focus-visible { padding-right: 7px; color: var(--iv-accent); background: var(--iv-control-hover); }
   .mobilePanel nav a span { transition: translate 180ms ease; }
   .mobilePanel nav a:hover span,
   .mobilePanel nav a:focus-visible span { translate: 4px 0; }
+  .desktopAppearance { display: none; }
+  .mobileAppearance {
+    margin-top: 12px;
+    padding-top: 13px;
+    display: grid;
+    gap: 9px;
+    border-top: 1px solid var(--iv-line-soft);
+  }
+  .mobileAppearance > span { color: var(--iv-text-tertiary); font-size: 9px; font-weight: 750; letter-spacing: 1.3px; text-transform: uppercase; }
+  .mobileAppearance .appearanceControl { width: 100%; }
+  .mobileAppearance .appearanceControl button { min-width: 0; min-height: 44px; font-size: 11px; touch-action: manipulation; }
   .mobileAccount { width: 100%; min-height: 50px; margin-top: 12px; justify-content: space-between; }
   .backdrop {
     position: fixed;
@@ -221,7 +275,7 @@
     inset: 0;
     display: block;
     border: 0;
-    background: rgba(7, 10, 15, 0.25);
+    background: var(--iv-backdrop);
     pointer-events: auto;
   }
 }

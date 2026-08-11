@@ -5,6 +5,7 @@ import "./corrections.css";
 import "./storefront.css";
 import "./mobile.css";
 import "./motion.css";
+import "./theme.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollMotion from "./components/ScrollMotion";
 
@@ -34,9 +35,39 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#f5f5f7",
 };
 
+const appearanceBootstrap = `
+  (() => {
+    const root = document.documentElement;
+    const storageKey = "ivend-appearance";
+    const valid = new Set(["system", "light", "dark"]);
+    let appearance = "system";
+
+    try {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved && valid.has(saved)) appearance = saved;
+    } catch {}
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const resolved = appearance === "system" ? (prefersDark ? "dark" : "light") : appearance;
+    root.dataset.appearance = appearance;
+    root.dataset.theme = resolved;
+    root.style.colorScheme = resolved;
+
+    const themeColor = document.getElementById("ivend-theme-color");
+    if (themeColor) themeColor.setAttribute("content", resolved === "dark" ? "#080a0e" : "#f5f5f7");
+  })();
+`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className={geist.variable}><SiteHeader /><ScrollMotion />{children}</body></html>;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta id="ivend-theme-color" name="theme-color" content="#f5f5f7" />
+        <script dangerouslySetInnerHTML={{ __html: appearanceBootstrap }} />
+      </head>
+      <body className={geist.variable}><SiteHeader /><ScrollMotion />{children}</body>
+    </html>
+  );
 }

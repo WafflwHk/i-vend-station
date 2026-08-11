@@ -34,6 +34,10 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /Find your machine\./);
   assert.match(html, /Cashless Device/);
   assert.match(html, /i-vend-station-logo\.png/);
+  assert.match(html, /aria-label="Website appearance"/);
+  assert.match(html, />System</);
+  assert.match(html, />Light</);
+  assert.match(html, />Dark</);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
   assert.doesNotMatch(html, /&amp;nearr;/i);
 });
@@ -52,6 +56,28 @@ test("server-renders every public product route", async () => {
     const html = await response.text();
     assert.match(html, expectedContent);
     assert.doesNotMatch(html, /&amp;nearr;/i);
+  }
+});
+
+test("renders the accessible finish and size configurator on every machine page", async () => {
+  const machineRoutes = [
+    "/machines/hot-cold-coffee-machine",
+    "/machines/tcn-d720-6g",
+    "/machines/tcn-d720-10g",
+    "/machines/tcn-d720-10c-v22",
+    "/machines/tcn-d720-10c-v22-10r",
+    "/machines/tcn-fel-9c-v22",
+    "/machines/tcn-cfm-4c-h32",
+  ];
+
+  for (const pathname of machineRoutes) {
+    const response = await render(pathname);
+    assert.equal(response.status, 200, `${pathname} should render successfully`);
+    const html = await response.text();
+    assert.match(html, /aria-label="Illustrative machine configuration preview"/);
+    assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
+    assert.match(html, /S and L change only the viewer scale, not confirmed machine dimensions\./);
+    assert.match(html, /type="radio"/);
   }
 });
 
