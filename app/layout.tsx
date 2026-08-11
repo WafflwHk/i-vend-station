@@ -8,6 +8,7 @@ import "./motion.css";
 import "./theme.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollMotion from "./components/ScrollMotion";
+import LoadingScreen from "./components/LoadingScreen";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -41,8 +42,10 @@ const appearanceBootstrap = `
   (() => {
     const root = document.documentElement;
     const storageKey = "ivend-appearance";
+    const splashStorageKey = "ivend-loader-seen";
     const valid = new Set(["system", "light", "dark"]);
     let appearance = "system";
+    let splash = "show";
 
     try {
       const saved = window.localStorage.getItem(storageKey);
@@ -50,10 +53,35 @@ const appearanceBootstrap = `
     } catch {}
 
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    try {
+      if (window.sessionStorage.getItem(splashStorageKey) === "true") splash = "skip";
+    } catch {}
+    if (reducedMotion) splash = "skip";
+
     const resolved = appearance === "system" ? (prefersDark ? "dark" : "light") : appearance;
     root.dataset.appearance = appearance;
     root.dataset.theme = resolved;
+    root.dataset.splash = splash;
+    if (splash === "show") root.dataset.splashStartedAt = String(performance.now());
     root.style.colorScheme = resolved;
+
+    if (splash === "show") {
+      root.style.overflow = "hidden";
+      window.setTimeout(() => {
+        if (root.dataset.splash !== "show" && root.dataset.splash !== "leaving") return;
+        root.dataset.splash = "expired";
+        root.style.removeProperty("overflow");
+        document.body?.style.removeProperty("overflow");
+        const shell = document.getElementById("site-shell");
+        if (shell) {
+          shell.inert = false;
+          shell.removeAttribute("inert");
+          shell.removeAttribute("aria-hidden");
+        }
+      }, 2800);
+    }
 
     const themeColor = document.getElementById("ivend-theme-color");
     if (themeColor) themeColor.setAttribute("content", resolved === "dark" ? "#080a0e" : "#f5f5f7");
@@ -66,8 +94,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta id="ivend-theme-color" name="theme-color" content="#f5f5f7" />
         <script dangerouslySetInnerHTML={{ __html: appearanceBootstrap }} />
+        <noscript><style>{`[data-loading-screen]{display:none!important}`}</style></noscript>
       </head>
-      <body className={geist.variable}><SiteHeader /><ScrollMotion />{children}</body>
+      <body className={geist.variable}>
+        <LoadingScreen />
+        <div id="site-shell"><SiteHeader /><ScrollMotion />{children}</div>
+      </body>
     </html>
   );
 }

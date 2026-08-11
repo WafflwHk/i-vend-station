@@ -38,6 +38,9 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, />System</);
   assert.match(html, />Light</);
   assert.match(html, />Dark</);
+  assert.match(html, /data-loading-screen/);
+  assert.match(html, /aria-label="Loading I Vend Station"/);
+  assert.match(html, /i-vend-station-icon\.png/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton|Your site is taking shape/i);
   assert.doesNotMatch(html, /&amp;nearr;/i);
 });
@@ -55,6 +58,7 @@ test("server-renders every public product route", async () => {
     assert.equal(response.status, 200, `${pathname} should render successfully`);
     const html = await response.text();
     assert.match(html, expectedContent);
+    assert.match(html, /data-loading-screen/);
     assert.doesNotMatch(html, /&amp;nearr;/i);
   }
 });
@@ -82,14 +86,24 @@ test("renders the accessible finish and size configurator on every machine page"
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {
-  const [layout, packageJson] = await Promise.all([
+  const [layout, packageJson, loadingScreen, loadingStyles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/LoadingScreen.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/loading-screen.module.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /I Vend Station/);
   assert.doesNotMatch(layout, /codex-preview|Starter Project|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+  assert.match(layout, /dataset\.splash/);
+  assert.match(layout, /splash = "skip"/);
+  assert.match(layout, /prefers-reduced-motion/);
+  assert.match(loadingScreen, /sessionStorage/);
+  assert.match(loadingStyles, /\.loadingScreen\s*{[\s\S]*?display:\s*none;/);
+  assert.match(loadingStyles, /data-splash="show"/);
+  assert.match(loadingStyles, /loaderFailsafe/);
+  assert.match(loadingStyles, /prefers-reduced-motion/);
   await Promise.all([
     access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),

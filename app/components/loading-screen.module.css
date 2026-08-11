@@ -1,0 +1,128 @@
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: none;
+  place-items: center;
+  min-height: 100dvh;
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  color: #fff;
+  background: #050608;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: opacity 360ms ease, transform 400ms cubic-bezier(.22, 1, .36, 1), visibility 0s linear 400ms;
+  animation: loaderFailsafe 1ms linear 3s forwards;
+  isolation: isolate;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+:global(html[data-splash="show"]) .loadingScreen,
+:global(html[data-splash="leaving"]) .loadingScreen { display: grid; }
+
+.leaving {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.985);
+  pointer-events: none;
+}
+
+.loader {
+  display: grid;
+  place-items: center;
+  width: min(52vw, 180px);
+  transform: translateY(-3vh);
+}
+
+.vendingMark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 154px;
+  height: 154px;
+}
+
+.vendingMark::before {
+  position: absolute;
+  inset: 16% 18%;
+  content: "";
+  border-radius: 28px;
+  background: radial-gradient(circle, rgba(57, 125, 255, 0.22), transparent 70%);
+  filter: blur(14px);
+  opacity: 0.72;
+  animation: machineGlow 1.25s ease-in-out infinite;
+}
+
+.vendingMark img {
+  position: relative;
+  z-index: 1;
+  width: 154px;
+  height: 154px;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: 0.9;
+}
+
+.scan {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 35%, #2e7dff 49%, #8bb8ff 52%, transparent 66%, transparent 100%);
+  -webkit-mask: url("/i-vend-station-icon.png") center / contain no-repeat;
+  mask: url("/i-vend-station-icon.png") center / contain no-repeat;
+  transform: translateY(-78%);
+  animation: machineScan 1.25s cubic-bezier(.65, 0, .35, 1) infinite;
+}
+
+.dispensePulse {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 17px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px 2px 4px 4px;
+  background: #4f91ff;
+  box-shadow: 0 0 14px rgba(79, 145, 255, 0.9);
+  opacity: 0;
+  transform: translate(-50%, -7px) scale(0.8);
+  animation: productDrop 1.25s cubic-bezier(.22, 1, .36, 1) infinite;
+}
+
+@keyframes machineScan {
+  0%, 10% { opacity: 0; transform: translateY(-78%); }
+  28% { opacity: 1; }
+  72% { opacity: 1; }
+  88%, 100% { opacity: 0; transform: translateY(78%); }
+}
+
+@keyframes productDrop {
+  0%, 68% { opacity: 0; transform: translate(-50%, -7px) scale(0.8); }
+  76% { opacity: 1; }
+  92% { opacity: 0.85; transform: translate(-50%, 4px) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, 8px) scale(0.85); }
+}
+
+@keyframes machineGlow {
+  0%, 100% { opacity: 0.38; transform: scale(0.9); }
+  50% { opacity: 0.82; transform: scale(1); }
+}
+
+@keyframes loaderFailsafe {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+@media (max-width: 480px) {
+  .loader { width: 152px; transform: translateY(-2vh); }
+  .vendingMark,
+  .vendingMark img { width: 138px; height: 138px; }
+  .dispensePulse { bottom: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loadingScreen { display: none !important; transition: none; animation: none; }
+  .vendingMark::before,
+  .scan,
+  .dispensePulse { animation: none; }
+}
