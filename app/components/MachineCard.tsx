@@ -1,4 +1,5 @@
 import type { Machine } from "../data/machines";
+import AddToCartButton from "./AddToCartButton";
 import MachineArt from "./MachineArt";
 
 type Props = {
@@ -20,7 +21,7 @@ export default function MachineCard({ machine, index }: Props) {
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
           <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
-          <a className="quote-icon" href={`mailto:hello@example.com?subject=Enquiry: ${encodeURIComponent(machine.code)}`} aria-label={`Request a quotation for ${machine.name}`} title="Request a quotation">&#8599;</a>
+          <AddToCartButton productId={machine.slug} variant="compact" />
         </div>
       </div>
     </article>

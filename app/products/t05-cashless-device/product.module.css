@@ -185,6 +185,13 @@
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+}
+
 .deviceStage {
   position: relative;
   z-index: 2;
@@ -661,6 +668,8 @@
   .hero h1 { margin: 23px 0; font-size: clamp(49px, 14vw, 58px); line-height: 0.93; letter-spacing: -3.7px; }
   .heroIntro { font-size: 14px; line-height: 1.65; }
   .primaryButton { width: 100%; min-height: 48px; padding: 0 18px; justify-content: space-between; }
+  .heroActions { width: 100%; display: grid; }
+  .heroActions > button { width: 100%; min-height: 48px; }
   .deviceStage { height: 350px; }
   .deviceStage img { width: min(330px, 84%); }
   .deviceNote { left: 50%; right: auto; bottom: 2%; width: max-content; max-width: 90%; transform: translateX(-50%); text-align: center; font-size: 10px; line-height: 1.4; }

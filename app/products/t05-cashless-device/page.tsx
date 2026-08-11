@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AddToCartButton from "../../components/AddToCartButton";
 import styles from "./product.module.css";
 
 export const metadata: Metadata = {
@@ -69,9 +70,12 @@ export default function T05CashlessPage() {
           <p className={styles.heroIntro}>
             Give customers a faster way to pay at compatible vending machines&mdash;with contactless cards and supported QR or e-wallet methods.
           </p>
-          <a className={styles.primaryButton} href="#quote">
-            Check compatibility <span aria-hidden="true">&darr;</span>
-          </a>
+          <div className={styles.heroActions}>
+            <a className={styles.primaryButton} href="#quote">
+              Check compatibility <span aria-hidden="true">&darr;</span>
+            </a>
+            <AddToCartButton productId="t05-cashless-device" variant="blue" />
+          </div>
         </div>
         <div className={styles.deviceStage} aria-label="T05 cashless payment terminal">
           <div className={styles.signalRing} />

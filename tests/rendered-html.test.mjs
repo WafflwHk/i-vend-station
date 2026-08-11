@@ -51,6 +51,7 @@ test("server-renders every public product route", async () => {
     ["/machines", /Choose a model\./],
     ["/machines/hot-cold-coffee-machine", /Hot &amp; Cold Coffee Machine/],
     ["/products/t05-cashless-device", /Cashless,/],
+    ["/cart", /Your quote cart\./],
   ];
 
   for (const [pathname, expectedContent] of routes) {
@@ -82,7 +83,30 @@ test("renders the accessible finish and size configurator on every machine page"
     assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
     assert.match(html, /S and L change only the viewer scale, not confirmed machine dimensions\./);
     assert.match(html, /type="radio"/);
+    assert.match(html, /aria-label="Add [^"]+ to cart"/);
   }
+});
+
+test("renders the device-local quote cart without pretending to be checkout", async () => {
+  const response = await render("/cart");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>Quote Cart \| I Vend Station<\/title>/i);
+  assert.match(html, /Loading your quote cart/);
+  assert.match(html, /Continue shopping/);
+  assert.match(html, /aria-label="Shopping cart, 0 items"/);
+  assert.doesNotMatch(html, /Checkout|Subtotal|Buy now|RM\s*[\d,.]+|mailto:/i);
+
+  const t05Response = await render("/products/t05-cashless-device");
+  const t05Html = await t05Response.text();
+  assert.match(t05Html, /aria-label="Add T05 Cashless Device to cart"/);
+
+  const cartStore = await readFile(new URL("../app/components/cart-store.ts", import.meta.url), "utf8");
+  assert.match(cartStore, /ivend-quote-cart:v1/);
+  assert.match(cartStore, /ivend-cart-changed/);
+  assert.match(cartStore, /Math\.min\(99/);
+  assert.match(cartStore, /localStorage/);
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {

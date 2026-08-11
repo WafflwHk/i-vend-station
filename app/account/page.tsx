@@ -17,9 +17,9 @@ export default async function AccountPage() {
         </div>
         <div className={styles.accountGrid}>
           <article><span>01</span><h2>Your account is ready.</h2><p>You can use this identity for protected I Vend Station account features.</p></article>
-          <article><span>02</span><h2>Quotes stay by contact for now.</h2><p>Saved machines, quote history, and online orders are not enabled yet.</p></article>
+          <article><span>02</span><h2>Your quote cart stays local.</h2><p>Cart selections stay on this device. Quote history and submitted orders are not saved to your account yet.</p></article>
         </div>
-        <div className={styles.accountActions}><a href="/machines">Browse machines <span aria-hidden="true">&rarr;</span></a><a href={chatGPTSignOutPath("/")}>Sign out</a></div>
+        <div className={styles.accountActions}><a href="/cart">Open quote cart <span aria-hidden="true">&rarr;</span></a><a href={chatGPTSignOutPath("/")}>Sign out</a></div>
       </section>
       <p className={styles.privacyNote} data-animate="up" data-animate-delay="1">Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page.</p>
     </main>

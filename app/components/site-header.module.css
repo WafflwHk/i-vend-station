@@ -102,6 +102,62 @@
   transition: transform 180ms ease, background 180ms ease;
 }
 
+.cart {
+  position: relative;
+  min-width: 74px;
+  min-height: 42px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--iv-line-soft);
+  border-radius: 12px;
+  color: var(--iv-text);
+  background: var(--iv-control-bg);
+  font-size: 10px;
+  font-weight: 720;
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.cartBag {
+  position: relative;
+  width: 13px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px 3px 4px 4px;
+}
+
+.cartBag::before {
+  position: absolute;
+  top: -5px;
+  left: 3px;
+  width: 5px;
+  height: 5px;
+  content: "";
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.cart b {
+  min-width: 19px;
+  height: 19px;
+  padding: 0 4px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--iv-accent);
+  font-size: 8px;
+}
+
+.cart:hover,
+.cart:focus-visible,
+.cart[aria-current="page"] { color: var(--iv-on-primary); background: var(--iv-primary); }
+.cart:focus-visible { outline: 3px solid var(--iv-focus); outline-offset: 2px; }
+.cart:active { scale: 0.97; }
+
 .account:hover,
 .account:focus-visible,
 .mobileAccount:hover,
@@ -194,13 +250,17 @@
   outline-offset: 1px;
 }
 
-.mobileAppearance { display: none; }
+.mobileAppearance,
+.mobileCart { display: none; }
 
 @media (max-width: 1100px) {
   .bar { gap: 18px; }
   .desktopNav { gap: 14px; }
+  .appearanceControl button { min-width: 38px; padding: 0 5px; font-size: 8px; }
   .accountLong { display: none; }
   .accountShort { display: inline; }
+  .cart { min-width: 42px; padding: 0 9px; }
+  .cartText { display: none; }
 }
 
 @media (max-width: 880px) {
@@ -209,6 +269,7 @@
   .logo { width: 118px; }
   .desktopNav { display: none; }
   .account,
+  .cart,
   .menuButton { min-height: 44px; height: 44px; }
   .menuButton { position: relative; width: 44px; display: grid; }
   .mobilePanel {
@@ -268,6 +329,23 @@
   .mobileAppearance > span { color: var(--iv-text-tertiary); font-size: 9px; font-weight: 750; letter-spacing: 1.3px; text-transform: uppercase; }
   .mobileAppearance .appearanceControl { width: 100%; }
   .mobileAppearance .appearanceControl button { min-width: 0; min-height: 44px; font-size: 11px; touch-action: manipulation; }
+  .mobileCart {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 12px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--iv-line-soft);
+    border-radius: 12px;
+    color: var(--iv-text);
+    background: var(--iv-control-bg);
+    font-size: 11px;
+    font-weight: 720;
+  }
+  .mobileCart > span { display: flex; align-items: center; gap: 8px; color: var(--iv-text-secondary); }
+  .mobileCart i { color: var(--iv-accent); font-style: normal; }
   .mobileAccount { width: 100%; min-height: 50px; margin-top: 12px; justify-content: space-between; }
   .backdrop {
     position: fixed;
@@ -282,6 +360,8 @@
 
 @media (max-width: 430px) {
   .account { padding: 0 11px; }
+  .cart { width: 44px; min-width: 44px; padding: 0; gap: 0; }
+  .cart b { position: absolute; translate: 11px -12px; min-width: 17px; height: 17px; font-size: 7px; }
   .logo { width: 108px; }
 }
 
@@ -289,6 +369,7 @@
   .bar { padding-left: 10px; }
   .logo { width: 98px; }
   .account { padding: 0 9px; font-size: 9px; }
+  .actions { gap: 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

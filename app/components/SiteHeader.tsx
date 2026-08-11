@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useCartLines } from "./cart-store";
 import styles from "./site-header.module.css";
 
 type Appearance = "system" | "light" | "dark";
@@ -58,6 +59,8 @@ function AppearanceControl({ appearance, onChange }: { appearance: Appearance; o
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [appearance, setAppearance] = useState<Appearance>("system");
+  const cartLines = useCartLines();
+  const cartCount = cartLines.reduce((total, line) => total + line.quantity, 0);
   const pathname = usePathname();
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
@@ -143,6 +146,16 @@ export default function SiteHeader() {
           <div className={styles.desktopAppearance}>
             <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
           </div>
+          <a
+            className={styles.cart}
+            href="/cart"
+            aria-current={pathname === "/cart" ? "page" : undefined}
+            aria-label={`Shopping cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
+          >
+            <span className={styles.cartBag} aria-hidden="true" />
+            <span className={styles.cartText}>Cart</span>
+            <b aria-hidden="true">{cartCount > 99 ? "99+" : cartCount}</b>
+          </a>
           <a className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></a>
           <button
             ref={menuButtonRef}
@@ -168,6 +181,7 @@ export default function SiteHeader() {
           <span>Appearance</span>
           <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
         </div>
+        <a className={styles.mobileCart} href="/cart" onClick={() => setOpen(false)}>Shopping cart <span>{cartCount} {cartCount === 1 ? "item" : "items"} <i aria-hidden="true">&rarr;</i></span></a>
         <a className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
       </div>
       {open ? <button className={styles.backdrop} type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}

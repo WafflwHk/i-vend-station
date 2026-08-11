@@ -36,6 +36,7 @@
 .store-feature-copy > p { max-width: 500px; color: #989fa9; font-size: 13px; line-height: 1.75; }
 .store-feature-copy > a { align-self: flex-start; margin-top: 19px; padding: 14px 18px; border-radius: 999px; color: #111318; background: #fff; font-size: 10px; font-weight: 700; }
 .store-feature-copy > a span { margin-left: 8px; color: #1d65e8; }
+.store-feature-copy > button { align-self: flex-start; margin-top: 10px; }
 .store-feature-copy > small { margin-top: 17px; color: #5f6671; font-size: 8px; }
 
 .about-section { padding: 135px max(32px, calc((100vw - 1220px) / 2)); background: #f2f3f5; }
@@ -70,6 +71,8 @@
   .collection-list { padding: 90px 15px; }
   .store-feature { grid-template-columns: 1fr; }
   .store-feature-copy { padding: 75px 22px; }
+  .store-feature-copy > a,
+  .store-feature-copy > button { width: 100%; min-height: 48px; justify-content: center; }
   .about-section, .faq-section { padding: 95px 20px; }
   .about-main, .faq-head { grid-template-columns: 1fr; }
   .about-copy { margin: 55px 0 0; grid-template-columns: 1fr; gap: 35px; }

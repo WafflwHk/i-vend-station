@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import AddToCartButton from "../../components/AddToCartButton";
 import MachineViewer from "../../components/MachineViewer";
 import SiteFooter from "../../components/SiteFooter";
 import { getMachine, machines } from "../../data/machines";
@@ -67,8 +68,11 @@ export default async function MachineDetailPage({ params }: Props) {
       )}
 
       <section className={styles.quote} data-animate="scale">
-        <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send your location, product type, and preferred payment setup so the exact configuration can be checked.</p></div>
-        <a href={`mailto:hello@example.com?subject=Quotation request: ${encodeURIComponent(machine.code)}`}>Request quotation <span aria-hidden="true">&#8599;</span></a>
+        <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Add this model to your quote cart, then keep shopping or prepare one enquiry. Illustrative finish and S/L viewer choices are not order selections.</p></div>
+        <div className={styles.quoteActions} data-animate="right">
+          <AddToCartButton productId={machine.slug} variant="light" className={styles.addCartButton} />
+          <a href={`mailto:hello@example.com?subject=Quotation request: ${encodeURIComponent(machine.code)}`}>Request quotation <span aria-hidden="true">&#8599;</span></a>
+        </div>
       </section>
 
       <a className={styles.nextMachine} href={`/machines/${nextMachine.slug}`} data-animate="up"><span>Next machine</span><strong>{nextMachine.name}</strong><i aria-hidden="true">&rarr;</i></a>

@@ -1,0 +1,92 @@
+.button {
+  min-height: 44px;
+  padding: 0 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--iv-line);
+  border-radius: 999px;
+  color: var(--iv-text);
+  background: var(--iv-surface-raised);
+  box-shadow: 0 9px 24px var(--iv-control-shadow);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 740;
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, translate 180ms ease, box-shadow 180ms ease, scale 100ms ease;
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--iv-focus);
+  outline-offset: 3px;
+}
+
+.button:active { scale: 0.97; }
+
+.liveStatus {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.bag {
+  position: relative;
+  width: 14px;
+  height: 13px;
+  border: 1.5px solid currentColor;
+  border-radius: 3px 3px 4px 4px;
+}
+
+.bag::before {
+  position: absolute;
+  top: -5px;
+  left: 3px;
+  width: 6px;
+  height: 5px;
+  content: "";
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.compact {
+  min-width: 76px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--iv-text);
+  background: var(--iv-control-bg);
+  box-shadow: none;
+}
+
+.light {
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.blue {
+  border-color: #2f78ff;
+  color: #fff;
+  background: #2f78ff;
+  box-shadow: 0 12px 32px rgba(24, 89, 211, 0.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { translate: 0 -2px; border-color: var(--iv-accent); box-shadow: 0 14px 30px var(--iv-control-shadow); }
+  .compact:hover { color: #fff; background: var(--iv-accent); box-shadow: none; }
+  .light:hover { color: #111318; background: #fff; box-shadow: none; }
+  .blue:hover { background: #4386ff; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}
