@@ -266,11 +266,11 @@ export default function ProductAssistant() {
           aria-haspopup="dialog"
           aria-expanded="false"
           aria-controls="ivend-product-assistant"
-          aria-label="Open I Vend AI product assistant"
+          aria-label="Open Ask IVS product assistant"
           onClick={openAssistant}
         >
           <span className={styles.launcherMic} aria-hidden="true"><i /></span>
-          <span><strong>Speak with AI</strong><small>Product guide</small></span>
+          <span><strong>Ask IVS</strong><small>Product guide</small></span>
         </button>
       ) : (
         <section
