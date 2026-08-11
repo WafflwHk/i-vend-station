@@ -90,7 +90,7 @@ export const machines: Machine[] = [
   {
     slug: "tcn-d720-6g",
     code: "China Series",
-    name: "Compact Vending Machine",
+    name: "TCN-D720 Classic Touchscreen Vending Machine",
     type: "Compact series",
     art: "compact-art",
     image: null,
