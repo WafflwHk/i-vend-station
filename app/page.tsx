@@ -66,7 +66,7 @@ export default function Home() {
       </section>
 
       <section className="cashless" id="cashless">
-        <div className="cashless-visual" data-animate="left"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device supplied by I Vend Station" /><span>TAP &bull; SCAN &bull; PAY</span></div>
+        <div className="cashless-visual" data-animate="left"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" /><span>TAP &bull; SCAN &bull; PAY</span></div>
         <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&#8599;</b></a></div>
       </section>
 

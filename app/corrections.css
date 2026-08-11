@@ -4,7 +4,7 @@
 
 .cashless-visual img {
   width: min(64%, 440px);
-  transform: none;
+  transform: rotate(180deg);
   filter: drop-shadow(24px 32px 25px #07142773);
 }
 
