@@ -1,9 +1,4 @@
-type MachineArtProps = {
-  kind: string;
-  brand?: "tcn" | "fuji";
-};
-
-export default function MachineArt({ kind, brand }: MachineArtProps) {
+export default function MachineArt({ kind }: { kind: string }) {
   if (kind === "double-art") {
     return (
       <div className={`machine-art ${kind}`} aria-hidden="true">
@@ -16,13 +11,7 @@ export default function MachineArt({ kind, brand }: MachineArtProps) {
   return (
     <div className={`machine-art ${kind}`} aria-hidden="true">
       <div className="cabinet">
-        {brand ? (
-          <span className={`art-brand-label ${brand}`}>
-            {brand === "tcn" ? "TCN" : "FUJI COFFEE"}
-          </span>
-        ) : (
-          <img className="art-brand" src="/i-vend-station-icon.png" alt="" />
-        )}
+        <img className="art-brand" src="/i-vend-station-icon.png" alt="" />
         <div className="art-glass">{[1, 2, 3, 4, 5].map((item) => <i key={item} />)}</div>
         <div className="art-screen" />
         <div className="art-pay" />

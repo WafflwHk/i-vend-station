@@ -116,48 +116,17 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
   transition: none;
 }
 
-.hero-remade .unit-one { right: 0; bottom: 58px; z-index: 1; }
-.hero-remade .unit-two { left: 27%; bottom: 54px; z-index: 3; }
-.hero-remade .unit-three { left: 2%; bottom: 56px; z-index: 2; }
+.hero-remade .unit-one { right: 0; bottom: 58px; z-index: 1; height: 490px; }
+.hero-remade .unit-two { left: 22%; bottom: 50px; z-index: 4; height: 535px; }
+.hero-remade .unit-three { left: 0; bottom: 56px; z-index: 2; height: 340px; }
 
-.hero-remade .art-brand-label {
-  position: absolute;
-  z-index: 4;
-  top: 4%;
-  left: 7%;
-  display: inline-flex;
-  min-height: 17px;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  color: #fff;
-  background: #101317;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
-  font-size: 7px;
-  font-weight: 850;
-  line-height: 1;
-  letter-spacing: 0.7px;
-  white-space: nowrap;
-}
-
-.hero-remade .art-brand-label.tcn::after {
-  width: 0;
-  height: 0;
-  margin-left: 3px;
-  content: "";
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-left: 4px solid #ef3340;
-}
-
-.hero-remade .art-brand-label.fuji {
-  border-color: rgba(20, 31, 48, 0.28);
-  color: #111820;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 6px;
-  letter-spacing: 0.35px;
+.hero-product-image {
+  display: block;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero-remade .hero-ring {
@@ -261,6 +230,9 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
   }
   .hero-remade .hero-copy { max-width: 760px; }
   .hero-remade .hero-showcase { width: min(620px, 100%); height: 560px; margin: 0 auto; }
+  .hero-remade .unit-one { height: 430px; bottom: 50px; }
+  .hero-remade .unit-two { left: 22%; bottom: 44px; height: 475px; }
+  .hero-remade .unit-three { left: 0; bottom: 50px; height: 305px; }
   .hero-remade .unit-one .machine-art { width: 209px; height: 430px; }
   .hero-remade .unit-two .machine-art { width: 178px; height: 365px; }
   .hero-remade .unit-three .machine-art { width: 132px; height: 285px; }
@@ -278,14 +250,12 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
   .hero-remade .hero-actions { margin-top: 28px; }
   .hero-remade .hero-trust { margin-top: 25px; gap: 11px 15px; }
   .hero-remade .hero-showcase { width: 100%; max-width: 390px; height: clamp(350px, 92vw, 400px); margin-top: 4px; }
-  .hero-remade .unit-one { right: -1%; bottom: 37px; }
-  .hero-remade .unit-two { left: 25%; bottom: 35px; }
-  .hero-remade .unit-three { left: 0; bottom: 36px; }
+  .hero-remade .unit-one { right: -2%; bottom: 37px; height: 310px; }
+  .hero-remade .unit-two { left: 21%; bottom: 33px; height: 340px; }
+  .hero-remade .unit-three { left: -1%; bottom: 36px; height: 220px; }
   .hero-remade .unit-one .machine-art { width: 148px; height: 310px; }
   .hero-remade .unit-two .machine-art { width: 130px; height: 270px; }
   .hero-remade .unit-three .machine-art { width: 98px; height: 210px; }
-  .hero-remade .art-brand-label { min-height: 15px; padding: 2px 4px; font-size: 6px; }
-  .hero-remade .art-brand-label.fuji { font-size: 5px; }
   .hero-remade .hero-ring { width: 320px; height: 320px; }
   .hero-remade .showcase-badge { top: 3px; right: 2px; }
   .showcase-caption { bottom: 0; }
@@ -295,6 +265,9 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
 @media (max-width: 360px) {
   .hero-remade { min-height: 900px; }
   .hero-remade .hero-showcase { height: 350px; }
+  .hero-remade .unit-one { height: 288px; }
+  .hero-remade .unit-two { left: 20%; height: 315px; }
+  .hero-remade .unit-three { height: 205px; }
   .hero-remade .unit-one .machine-art { width: 137px; height: 288px; }
   .hero-remade .unit-two .machine-art { width: 120px; height: 250px; }
   .hero-remade .unit-three .machine-art { width: 91px; height: 195px; }

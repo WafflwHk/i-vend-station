@@ -46,9 +46,10 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-remade/);
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);
-  assert.match(html, /role="img" aria-label="Fuji Coffee and TCN vending machine models that slide to the right as the page scrolls"/);
-  assert.match(html, /art-brand-label tcn[^>]*>TCN</);
-  assert.match(html, /art-brand-label fuji[^>]*>FUJI COFFEE</);
+  assert.match(html, /role="img" aria-label="A large Fuji coffee machine in the center, a TCN vending machine on the left, and a supporting machine on the right, sliding together as the page scrolls"/);
+  assert.match(html, /hero-product-image hero-fuji-machine[^>]*hot-cold-coffee-machine-cutout\.png/);
+  assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
+  assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
   assert.match(html, /05[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
