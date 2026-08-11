@@ -31,6 +31,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   const html = await response.text();
   assert.match(html, /<title>I Vend Station \| Vending Machines &amp; Cashless Payments<\/title>/i);
   assert.match(html, /Machines built/);
+  assert.match(html, /Coffee Machines/);
   assert.match(html, /hero-remade/);
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);

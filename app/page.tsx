@@ -38,7 +38,7 @@ export default function Home() {
           </h1>
           <p className="hero-intro">Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
           <div className="hero-actions"><a className="button dark" href="/machines">View all machines <b>&rarr;</b></a><a className="text-link" href="/store">Open the store <span>&#8599;</span></a></div>
-          <div className="hero-trust" aria-label="Product range"><span>Japanese coffee</span><span>TCN systems</span><span>Cashless planning</span></div>
+          <div className="hero-trust" aria-label="Product range"><span>Coffee Machines</span><span>TCN systems</span><span>Cashless planning</span></div>
         </div>
         <div className="hero-showcase" role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls" data-scroll-vending>
           <div className="hero-ring" />
