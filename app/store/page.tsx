@@ -19,7 +19,7 @@ export default function StorePage() {
       </section>
 
       <section className="store-feature" aria-labelledby="cashless-store-title">
-        <div className="store-feature-visual" data-animate="left"><div className="store-orbit" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device supplied by I Vend Station" /></div>
+        <div className="store-feature-visual" data-animate="left"><div className="store-orbit" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" /></div>
         <div className="store-feature-copy" data-animate="right"><div className="section-index light">CASHLESS DEVICE</div><span className="store-t05">T05</span><h2 id="cashless-store-title">A cashless option for compatible machines.</h2><p>Explore supported contactless and QR payment capabilities, operator records, connectivity requirements, and the compatibility check.</p><a href="/products/t05-cashless-device">View cashless device <span aria-hidden="true">&rarr;</span></a><AddToCartButton productId="t05-cashless-device" variant="light" /><small>Available methods depend on the machine, merchant setup, and region.</small></div>
       </section>
 

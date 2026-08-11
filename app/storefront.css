@@ -28,7 +28,7 @@
 
 .store-feature { min-height: 730px; display: grid; grid-template-columns: 1fr 1fr; color: #fff; background: #101319; }
 .store-feature-visual { position: relative; min-height: 580px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #426996, #112b4d); }
-.store-feature-visual img { position: relative; z-index: 2; width: min(58%, 430px); filter: drop-shadow(25px 35px 28px #06122380); }
+.store-feature-visual img { position: relative; z-index: 2; width: min(58%, 430px); transform: rotate(180deg); filter: drop-shadow(-25px -35px 28px #06122380); }
 .store-orbit { position: absolute; width: 520px; height: 520px; border: 1px solid #ffffff30; border-radius: 50%; box-shadow: 0 0 0 90px #ffffff08, 0 0 0 180px #ffffff05; }
 .store-feature-copy { padding: 95px max(40px, calc((100vw - 1220px) / 2)) 85px 80px; display: flex; flex-direction: column; justify-content: center; }
 .store-t05 { margin: 32px 0 13px; color: #6f9cf4; font-size: 11px; font-weight: 800; letter-spacing: 2px; }

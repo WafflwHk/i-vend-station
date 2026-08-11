@@ -72,6 +72,16 @@ test("server-renders every public product route", async () => {
   }
 });
 
+test("shows the Store T05 image with its camera side rotated down", async () => {
+  const [storeResponse, storefrontStyles] = await Promise.all([
+    render("/store"),
+    readFile(new URL("../app/storefront.css", import.meta.url), "utf8"),
+  ]);
+  assert.equal(storeResponse.status, 200);
+  assert.match(await storeResponse.text(), /camera side facing down/);
+  assert.match(storefrontStyles, /\.store-feature-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
+});
+
 test("renders a private, voice-enabled catalogue product assistant", async () => {
   const [assistantSource, knowledgeSource] = await Promise.all([
     readFile(new URL("../app/components/ProductAssistant.tsx", import.meta.url), "utf8"),
