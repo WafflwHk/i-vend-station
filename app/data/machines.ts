@@ -65,8 +65,8 @@ export const machines: Machine[] = [
     name: "Hot & Cold Coffee Machine",
     type: "Coffee vending",
     art: "coffee-art",
-    image: "/hot-cold-coffee-machine.jpg",
-    imageAlt: "Actual hot and cold coffee vending machine available from I Vend Station",
+    image: "/hot-cold-coffee-machine-cutout.png",
+    imageAlt: "Front view of the actual hot and cold coffee vending machine with its background removed",
     copy: "The actual hot-and-cold coffee vending machine available from I Vend Station.",
     description:
       "A Japanese-style beverage vending machine for serving a hot-and-cold coffee selection from one cabinet. Final drink configuration, internal setup, and availability are confirmed when you request a quotation.",
