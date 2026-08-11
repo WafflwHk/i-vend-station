@@ -50,7 +50,7 @@ export default function Home() {
           <div className="showcase-badge"><span>07</span> MACHINE TYPES</div>
           <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
         </div>
-        <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>TCN SERIES</span><i /><span>T05 CASHLESS</span></div>
+        <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>CHINA SERIES</span><i /><span>T05 CASHLESS</span></div>
       </section>
 
       <section className="catalogue" id="machines">
