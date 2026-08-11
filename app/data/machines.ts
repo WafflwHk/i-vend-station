@@ -62,7 +62,7 @@ export const machines: Machine[] = [
   {
     slug: "hot-cold-coffee-machine",
     code: "JAPAN SERIES",
-    name: "Hot & Cold Coffee Machine",
+    name: "Fuji Coffee Machine (Hot & Cold)",
     type: "Coffee vending",
     art: "coffee-art",
     image: "/hot-cold-coffee-machine-cutout.png",

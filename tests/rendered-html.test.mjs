@@ -67,7 +67,7 @@ test("server-renders every public product route", async () => {
   const routes = [
     ["/store", /Shop the range\./],
     ["/machines", /Choose a model\./],
-    ["/machines/hot-cold-coffee-machine", /Hot &amp; Cold Coffee Machine/],
+    ["/machines/hot-cold-coffee-machine", /Fuji Coffee Machine \(Hot &amp; Cold\)/],
     ["/products/t05-cashless-device", /Cashless,/],
     ["/cart", /Your quote cart\./],
   ];
