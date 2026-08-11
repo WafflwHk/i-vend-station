@@ -40,12 +40,12 @@ export default function Home() {
           <div className="hero-actions"><a className="button dark" href="/machines">View all machines <b>&rarr;</b></a><a className="text-link" href="/store">Open the store <span>&#8599;</span></a></div>
           <div className="hero-trust" aria-label="Product range"><span>Coffee Machines</span><span>TCN Machines</span><span>Cashless planning</span></div>
         </div>
-        <div className="hero-showcase" role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls" data-scroll-vending>
+        <div className="hero-showcase" role="img" aria-label="Fuji Coffee and TCN vending machine models that slide to the right as the page scrolls" data-scroll-vending>
           <div className="hero-ring" />
           <div className="machine-cluster" data-vending-track>
-            <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
-            <div className="showcase-unit unit-two"><MachineArt kind="touch-art" /></div>
-            <div className="showcase-unit unit-three"><MachineArt kind="compact-art" /></div>
+            <div className="showcase-unit unit-one"><MachineArt kind="classic-art" brand="tcn" /></div>
+            <div className="showcase-unit unit-two"><MachineArt kind="touch-art" brand="tcn" /></div>
+            <div className="showcase-unit unit-three"><MachineArt kind="compact-art" brand="fuji" /></div>
           </div>
           <div className="showcase-badge"><span>{String(machines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
           <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>

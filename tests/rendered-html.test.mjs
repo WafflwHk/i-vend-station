@@ -46,7 +46,9 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-remade/);
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);
-  assert.match(html, /role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls"/);
+  assert.match(html, /role="img" aria-label="Fuji Coffee and TCN vending machine models that slide to the right as the page scrolls"/);
+  assert.match(html, /art-brand-label tcn[^>]*>TCN</);
+  assert.match(html, /art-brand-label fuji[^>]*>FUJI COFFEE</);
   assert.match(html, /Find your machine\./);
   assert.match(html, /05[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);

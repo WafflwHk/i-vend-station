@@ -120,6 +120,46 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
 .hero-remade .unit-two { left: 27%; bottom: 54px; z-index: 3; }
 .hero-remade .unit-three { left: 2%; bottom: 56px; z-index: 2; }
 
+.hero-remade .art-brand-label {
+  position: absolute;
+  z-index: 4;
+  top: 4%;
+  left: 7%;
+  display: inline-flex;
+  min-height: 17px;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: #fff;
+  background: #101317;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.24);
+  font-size: 7px;
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+
+.hero-remade .art-brand-label.tcn::after {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  content: "";
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 4px solid #ef3340;
+}
+
+.hero-remade .art-brand-label.fuji {
+  border-color: rgba(20, 31, 48, 0.28);
+  color: #111820;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 6px;
+  letter-spacing: 0.35px;
+}
+
 .hero-remade .hero-ring {
   z-index: 0;
   width: 530px;
@@ -244,6 +284,8 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
   .hero-remade .unit-one .machine-art { width: 148px; height: 310px; }
   .hero-remade .unit-two .machine-art { width: 130px; height: 270px; }
   .hero-remade .unit-three .machine-art { width: 98px; height: 210px; }
+  .hero-remade .art-brand-label { min-height: 15px; padding: 2px 4px; font-size: 6px; }
+  .hero-remade .art-brand-label.fuji { font-size: 5px; }
   .hero-remade .hero-ring { width: 320px; height: 320px; }
   .hero-remade .showcase-badge { top: 3px; right: 2px; }
   .showcase-caption { bottom: 0; }
