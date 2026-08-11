@@ -31,20 +31,10 @@
   scale: 1;
 }
 
-.hero .unit-one,
-.hero .unit-two,
-.hero .unit-three,
-.hero .hero-ring,
-.hero .showcase-badge {
-  transition: opacity 120ms linear;
-  will-change: transform, opacity;
+.hero [data-vending-track] {
+  transform: translate3d(calc(var(--vending-scroll) * clamp(72px, 8vw, 120px)), 0, 0);
+  will-change: transform;
 }
-
-.hero .unit-one { transform: translate3d(calc(var(--vending-scroll) * 135px), calc(var(--vending-scroll) * 8px), 0) rotate(calc(var(--vending-scroll) * 4deg)); }
-.hero .unit-two { transform: translate3d(calc(var(--vending-scroll) * -36px), calc(var(--vending-scroll) * -12px), 0) rotate(calc(var(--vending-scroll) * -2deg)); }
-.hero .unit-three { transform: translate3d(calc(var(--vending-scroll) * -112px), calc(var(--vending-scroll) * 13px), 0) rotate(calc(var(--vending-scroll) * -5deg)); }
-.hero .hero-ring { transform: translate(-50%, -48%) scale(calc(1 - var(--vending-scroll) * 0.08)); opacity: calc(1 - var(--vending-scroll) * 0.45); }
-.hero .showcase-badge { transform: translate3d(calc(var(--vending-scroll) * 34px), calc(var(--vending-scroll) * -16px), 0); opacity: calc(1 - var(--vending-scroll) * 0.7); }
 
 .button,
 .view-machine-button,
@@ -143,9 +133,11 @@ button:not(:disabled):active { scale: 0.97; }
   .motion-enabled [data-animate] { --motion-y: 24px; }
   .motion-enabled [data-animate="left"] { --motion-x: -24px; --motion-y: 0px; }
   .motion-enabled [data-animate="right"] { --motion-x: 24px; --motion-y: 0px; }
-  .hero .unit-one { transform: translate3d(calc(var(--vending-scroll) * 42px), calc(var(--vending-scroll) * 4px), 0) rotate(calc(var(--vending-scroll) * 2deg)); }
-  .hero .unit-two { transform: translate3d(calc(var(--vending-scroll) * -10px), calc(var(--vending-scroll) * -5px), 0); }
-  .hero .unit-three { transform: translate3d(calc(var(--vending-scroll) * -36px), calc(var(--vending-scroll) * 6px), 0) rotate(calc(var(--vending-scroll) * -2deg)); }
+  .hero [data-vending-track] { transform: translate3d(calc(var(--vending-scroll) * clamp(22px, 7vw, 30px)), 0, 0); }
+}
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  .hero [data-vending-track] { transform: translate3d(calc(var(--vending-scroll) * 68px), 0, 0); }
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -154,11 +146,7 @@ button:not(:disabled):active { scale: 0.97; }
 
 @media (prefers-reduced-motion: reduce) {
   [data-animate] { opacity: 1 !important; translate: none !important; scale: 1 !important; transition: none !important; }
-  .hero .unit-one,
-  .hero .unit-two,
-  .hero .unit-three,
-  .hero .hero-ring,
-  .hero .showcase-badge { transform: none !important; opacity: 1 !important; transition: none !important; }
+  .hero [data-vending-track] { transform: none !important; will-change: auto; }
   .hero .hero-ring { transform: translate(-50%, -48%) !important; }
   .faq-list details p { animation: none; }
   .cash-orbit,

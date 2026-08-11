@@ -29,19 +29,26 @@ const faqs = [
 export default function Home() {
   return (
     <main>
-      <section className="hero" id="top">
+      <section className="hero hero-remade" id="top">
         <div className="hero-copy">
-          <div className="eyebrow"><span /> VENDING MACHINE SUPPLIER</div>
-          <h1>Machines built<br /><em>for opportunity.</em></h1>
-          <p>Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
+          <div className="eyebrow hero-eyebrow"><span /> VENDING MACHINE SUPPLIER</div>
+          <h1 aria-label="Machines built for opportunity.">
+            <span className="hero-title-line"><span>Machines built</span></span>
+            <span className="hero-title-line"><span><em>for opportunity.</em></span></span>
+          </h1>
+          <p className="hero-intro">Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
           <div className="hero-actions"><a className="button dark" href="/machines">View all machines <b>&rarr;</b></a><a className="text-link" href="/store">Open the store <span>&#8599;</span></a></div>
+          <div className="hero-trust" aria-label="Product range"><span>Japanese coffee</span><span>TCN systems</span><span>Cashless planning</span></div>
         </div>
-        <div className="hero-showcase" aria-label="Vending machine range" data-scroll-vending>
+        <div className="hero-showcase" role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls" data-scroll-vending>
           <div className="hero-ring" />
-          <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
-          <div className="showcase-unit unit-two"><MachineArt kind="touch-art" /></div>
-          <div className="showcase-unit unit-three"><MachineArt kind="compact-art" /></div>
+          <div className="machine-cluster" data-vending-track>
+            <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
+            <div className="showcase-unit unit-two"><MachineArt kind="touch-art" /></div>
+            <div className="showcase-unit unit-three"><MachineArt kind="compact-art" /></div>
+          </div>
           <div className="showcase-badge"><span>07</span> MACHINE TYPES</div>
+          <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
         </div>
         <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>TCN SERIES</span><i /><span>T05 CASHLESS</span></div>
       </section>

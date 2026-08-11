@@ -24,19 +24,28 @@ export default function ScrollMotion() {
     let revealObserver: IntersectionObserver | null = null;
     let scrollFrame = 0;
     let heroSection: HTMLElement | null = null;
+    let lastHeroProgress = "";
     const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const updateHeroMotion = () => {
       scrollFrame = 0;
       if (!heroSection) return;
       if (motionPreference.matches) {
-        heroSection.style.setProperty("--vending-scroll", "0");
+        if (lastHeroProgress !== "0.000") {
+          lastHeroProgress = "0.000";
+          heroSection.style.setProperty("--vending-scroll", lastHeroProgress);
+        }
         return;
       }
       const bounds = heroSection.getBoundingClientRect();
-      const distance = Math.max(heroSection.offsetHeight * 0.72, 1);
-      const progress = Math.min(1, Math.max(0, -bounds.top / distance));
-      heroSection.style.setProperty("--vending-scroll", progress.toFixed(3));
+      const distance = Math.max(heroSection.offsetHeight * 0.78, 1);
+      const rawProgress = Math.min(1, Math.max(0, -bounds.top / distance));
+      const activeProgress = Math.min(1, Math.max(0, (rawProgress - 0.05) / 0.95));
+      const easedProgress = activeProgress * activeProgress * (3 - 2 * activeProgress);
+      const nextProgress = easedProgress.toFixed(3);
+      if (nextProgress === lastHeroProgress) return;
+      lastHeroProgress = nextProgress;
+      heroSection.style.setProperty("--vending-scroll", nextProgress);
     };
 
     const requestHeroUpdate = () => {

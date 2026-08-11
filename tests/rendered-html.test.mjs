@@ -31,6 +31,10 @@ test("server-renders the branded I Vend Station homepage", async () => {
   const html = await response.text();
   assert.match(html, /<title>I Vend Station \| Vending Machines &amp; Cashless Payments<\/title>/i);
   assert.match(html, /Machines built/);
+  assert.match(html, /hero-remade/);
+  assert.match(html, /hero-title-line/);
+  assert.match(html, /data-vending-track/);
+  assert.match(html, /role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls"/);
   assert.match(html, /Find your machine\./);
   assert.match(html, /Cashless Device/);
   assert.match(html, /i-vend-station-logo\.png/);
@@ -110,11 +114,13 @@ test("renders the device-local quote cart without pretending to be checkout", as
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {
-  const [layout, packageJson, loadingScreen, loadingStyles] = await Promise.all([
+  const [layout, packageJson, loadingScreen, loadingStyles, homeRefresh, motionStyles] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../app/components/LoadingScreen.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/loading-screen.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/home-refresh.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/motion.css", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /I Vend Station/);
@@ -128,6 +134,11 @@ test("contains the finished site assets and no starter scaffolding", async () =>
   assert.match(loadingStyles, /data-splash="show"/);
   assert.match(loadingStyles, /loaderFailsafe/);
   assert.match(loadingStyles, /prefers-reduced-motion/);
+  assert.match(homeRefresh, /\.hero-remade \.showcase-unit\s*{[\s\S]*?animation:\s*none\s*!important;/);
+  assert.match(homeRefresh, /@keyframes heroLineEnter/);
+  assert.match(motionStyles, /\.hero \[data-vending-track\]/);
+  assert.match(motionStyles, /clamp\(22px, 7vw, 30px\)/);
+  assert.doesNotMatch(motionStyles, /\.hero \.unit-(?:one|two|three)\s*{\s*transform:/);
   await Promise.all([
     access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
