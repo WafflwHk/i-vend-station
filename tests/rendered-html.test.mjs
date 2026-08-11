@@ -82,6 +82,16 @@ test("shows the Store T05 image with its camera side rotated down", async () => 
   assert.match(storefrontStyles, /\.store-feature-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
 });
 
+test("shows the T05 product hero with its camera side rotated down", async () => {
+  const [productResponse, productStyles] = await Promise.all([
+    render("/products/t05-cashless-device"),
+    readFile(new URL("../app/products/t05-cashless-device/product.module.css", import.meta.url), "utf8"),
+  ]);
+  assert.equal(productResponse.status, 200);
+  assert.match(await productResponse.text(), /camera side facing down/);
+  assert.match(productStyles, /\.deviceStage img\s*{[^}]*rotate:\s*180deg/);
+});
+
 test("renders a private, voice-enabled catalogue product assistant", async () => {
   const [assistantSource, knowledgeSource] = await Promise.all([
     readFile(new URL("../app/components/ProductAssistant.tsx", import.meta.url), "utf8"),

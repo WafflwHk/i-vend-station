@@ -80,7 +80,7 @@ export default function T05CashlessPage() {
         <div className={styles.deviceStage} aria-label="T05 cashless payment terminal">
           <div className={styles.signalRing} />
           <div className={`${styles.signalRing} ${styles.signalRingTwo}`} />
-          <img src="/t05-terminal-correct.png" width="1254" height="1254" fetchPriority="high" alt="Actual grey T05 cashless payment device supplied by I Vend Station" />
+          <img src="/t05-terminal-correct.png" width="1254" height="1254" fetchPriority="high" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" />
           <span className={styles.deviceNote}>Actual device photo supplied by I Vend Station.</span>
         </div>
         <div className={styles.scrollCue}><span>Scroll to explore</span><i /></div>
