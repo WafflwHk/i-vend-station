@@ -32,6 +32,8 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /<title>I Vend Station \| Vending Machines &amp; Cashless Payments<\/title>/i);
   assert.match(html, /Machines built/);
   assert.match(html, /Coffee Machines/);
+  assert.match(html, /Speak with AI/);
+  assert.match(html, /aria-label="Open I Vend AI product assistant"/);
   assert.match(html, /hero-remade/);
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);
@@ -65,8 +67,30 @@ test("server-renders every public product route", async () => {
     const html = await response.text();
     assert.match(html, expectedContent);
     assert.match(html, /data-loading-screen/);
+    assert.match(html, /aria-label="Open I Vend AI product assistant"/);
     assert.doesNotMatch(html, /&amp;nearr;/i);
   }
+});
+
+test("renders a private, voice-enabled catalogue product assistant", async () => {
+  const [assistantSource, knowledgeSource] = await Promise.all([
+    readFile(new URL("../app/components/ProductAssistant.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/product-assistant.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(assistantSource, /role="dialog"/);
+  assert.match(assistantSource, /role="log"/);
+  assert.match(assistantSource, /webkitSpeechRecognition/);
+  assert.match(assistantSource, /speechSynthesis/);
+  assert.match(assistantSource, /I Vend Station does not save recordings/);
+  assert.match(knowledgeSource, /A compatibility check is required/);
+  assert.match(knowledgeSource, /Viewer choices are illustrative/);
+  assert.match(knowledgeSource, /Quotation and availability are confirmed directly/);
+  assert.doesNotMatch(knowledgeSource, /fetch\s*\(|WebSocket|dangerouslySetInnerHTML|https?:\/\//);
+  assert.ok(
+    knowledgeSource.indexOf("high capacity") < knowledgeSource.indexOf('"dimension"'),
+    "high-capacity guidance must run before unpublished capacity specifications",
+  );
 });
 
 test("renders the accessible finish and size configurator on every machine page", async () => {

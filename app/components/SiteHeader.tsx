@@ -108,6 +108,17 @@ export default function SiteHeader() {
   };
 
   useEffect(() => {
+    const closeForAssistant = () => setOpen(false);
+    window.addEventListener("ivend-assistant-open", closeForAssistant);
+    return () => window.removeEventListener("ivend-assistant-open", closeForAssistant);
+  }, []);
+
+  const toggleMenu = () => {
+    if (!open) window.dispatchEvent(new Event("ivend-navigation-open"));
+    setOpen((current) => !current);
+  };
+
+  useEffect(() => {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -164,7 +175,7 @@ export default function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-site-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen((current) => !current)}
+            onClick={toggleMenu}
           >
             <span /><span />
           </button>

@@ -10,6 +10,7 @@ import "./home-refresh.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollMotion from "./components/ScrollMotion";
 import LoadingScreen from "./components/LoadingScreen";
+import ProductAssistant from "./components/ProductAssistant";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -99,7 +100,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className={geist.variable}>
         <LoadingScreen />
-        <div id="site-shell"><SiteHeader /><ScrollMotion />{children}</div>
+        <div id="site-shell"><SiteHeader /><ScrollMotion />{children}<ProductAssistant /></div>
       </body>
     </html>
   );
