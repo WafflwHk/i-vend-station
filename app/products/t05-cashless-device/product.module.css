@@ -207,8 +207,7 @@
   z-index: 2;
   width: min(540px, 82%);
   height: auto;
-  rotate: 180deg;
-  transform: translateY(-4px);
+  transform: translateY(-4px) rotate(180deg);
   filter: drop-shadow(-32px -42px 32px #000b) saturate(1.02);
   animation: deviceFloat 6.5s ease-in-out infinite;
 }
@@ -585,7 +584,7 @@
 
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes deviceFloat { 0%, 100% { transform: translateY(-4px); } 50% { transform: translateY(-18px); } }
+@keyframes deviceFloat { 0%, 100% { transform: translateY(-4px) rotate(180deg); } 50% { transform: translateY(-18px) rotate(180deg); } }
 @keyframes ringPulse { 0% { opacity: 0; transform: scale(0.72); } 45% { opacity: 0.65; } 100% { opacity: 0; transform: scale(1.22); } }
 @keyframes breathe { 50% { transform: scale(1.04); opacity: 0.8; } }
 @keyframes nfcWave { 50% { transform: scale(1.07); opacity: 0.4; } }

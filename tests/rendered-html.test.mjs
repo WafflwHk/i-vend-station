@@ -89,7 +89,8 @@ test("shows the T05 product hero with its camera side rotated down", async () =>
   ]);
   assert.equal(productResponse.status, 200);
   assert.match(await productResponse.text(), /camera side facing down/);
-  assert.match(productStyles, /\.deviceStage img\s*{[^}]*rotate:\s*180deg/);
+  assert.match(productStyles, /\.deviceStage img\s*{[^}]*transform:\s*translateY\(-4px\) rotate\(180deg\)/);
+  assert.match(productStyles, /@keyframes deviceFloat\s*{[^}]*rotate\(180deg\)/);
 });
 
 test("renders a private, voice-enabled catalogue product assistant", async () => {
