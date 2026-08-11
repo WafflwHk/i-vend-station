@@ -6,7 +6,7 @@ import { machines } from "./data/machines";
 const faqs = [
   {
     question: "What vending machines do you sell?",
-    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN compact, classic, touchscreen, and double-cabinet formats.",
+    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN standard-capacity, classic, touchscreen, and double-cabinet formats.",
   },
   {
     question: "Are prices displayed online?",

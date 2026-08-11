@@ -20,7 +20,7 @@ type ProductEntity = {
 const machineEntities: ProductEntity[] = [
   { id: "tcn-d720-10c-v22-10r", aliases: ["tcn d720 10c v22 10r", "10c v22 10r", "double cabinet", "two cabinet", "high capacity"] },
   { id: "tcn-d720-10c-v22", aliases: ["tcn d720 10c v22", "10c v22", "touchscreen vending", "touch screen vending"] },
-  { id: "tcn-d720-6g", aliases: ["tcn d720 6g", "d720 6g", "compact vending", "small vending"] },
+  { id: "tcn-d720-6g", aliases: ["tcn d720 6g", "d720 6g", "standard capacity vending", "snack and beverage vending"] },
   { id: "tcn-d720-10g", aliases: ["tcn d720 10g", "d720 10g", "classic vending", "standard vending"] },
   { id: "hot-cold-coffee-machine", aliases: ["hot cold coffee", "coffee machine", "coffee vending", "japan series"] },
 ];
@@ -62,7 +62,7 @@ const machineReply = (slug: string): AssistantReply => {
 const fallbackReply: AssistantReply = {
   kind: "fallback",
   title: "I can help with the product range",
-  text: "Ask me about coffee, compact, classic, touchscreen, or double-cabinet machines, the T05 cashless device, illustrative views, or preparing a quotation.",
+  text: "Ask me about coffee, standard-capacity, classic, touchscreen, or double-cabinet machines, the T05 cashless device, illustrative views, or preparing a quotation.",
   links: [{ label: "Browse all machines", href: "/machines" }, { label: "Open the quote cart", href: "/cart" }],
 };
 
@@ -146,9 +146,9 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (hasAny(query, ["small space", "tight space", "compact", "limited space", "small location"])) {
     return {
       kind: "shortlist",
-      title: "Start with the compact format",
-      text: "The China Series compact machine is worth comparing because the catalogue presents it as a compact floor-standing format. Share your actual available floor space before a quotation because physical dimensions are not published here.",
-      links: [machineLink("tcn-d720-6g"), { label: "Compare all machines", href: "/machines" }],
+      title: "Confirm the available floor space",
+      text: "Physical machine dimensions are not published in the current catalogue. Share your available floor space before choosing a model; the China Series machine is presented as a standard-capacity format, not a confirmed compact machine.",
+      links: [{ label: "Compare all machines", href: "/machines" }],
     };
   }
 
@@ -210,7 +210,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "catalogue",
       title: "Five machine formats are listed",
-      text: "The catalogue includes a hot-and-cold coffee machine plus compact, classic, touchscreen, and double-cabinet TCN formats. Each product page includes an illustrative interactive viewer.",
+      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity, classic, touchscreen, and double-cabinet TCN formats. Each product page includes an illustrative interactive viewer.",
       links: [{ label: "Browse all machines", href: "/machines" }],
     };
   }

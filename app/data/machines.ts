@@ -91,14 +91,14 @@ export const machines: Machine[] = [
     slug: "tcn-d720-6g",
     code: "China Series",
     name: "TCN-D720 Classic Touchscreen Vending Machine",
-    type: "Compact series",
+    type: "Standard-capacity series",
     art: "compact-art",
     image: "/tcn-d720-product-cutout.png",
     imageAlt: "Front view of the TCN-D720 vending machine with its background removed",
-    copy: "A compact floor-standing format for locations where space and a clean footprint matter.",
+    copy: "A standard-capacity snack and beverage vending machine for locations requiring a broader product selection. It also includes a built-in touchscreen.",
     description:
-      "A compact TCN floor-standing format for projects that need a smaller footprint. Product layout, temperature configuration, and payment equipment depend on the selected machine setup.",
-    highlights: ["Compact cabinet footprint", "Flexible product planning", "Cashless compatibility check available"],
+      "A standard-capacity TCN snack and beverage vending machine designed for a broader product selection, with a built-in touchscreen. Product layout, temperature configuration, and payment equipment depend on the selected machine setup.",
+    highlights: ["Standard-capacity format", "Built-in touchscreen", "Broader snack and beverage selection"],
     viewer: {
       width: 196,
       height: 390,

@@ -37,6 +37,8 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /China Series/);
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
   assert.match(html, /tcn-d720-product-cutout\.png/);
+  assert.match(html, /A standard-capacity snack and beverage vending machine for locations requiring a broader product selection\. It also includes a built-in touchscreen\./);
+  assert.doesNotMatch(html, /A compact floor-standing format for locations where space and a clean footprint matter\./);
   assert.doesNotMatch(html, />Compact Vending Machine</);
   assert.match(html, /Ask IVS/);
   assert.match(html, /aria-label="Open Ask IVS product assistant"/);
