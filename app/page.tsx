@@ -6,7 +6,7 @@ import { machines } from "./data/machines";
 const faqs = [
   {
     question: "What vending machines do you sell?",
-    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and several TCN formats, including compact, classic, touchscreen, double-cabinet, frozen-food, and hot-food machines.",
+    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN compact, classic, touchscreen, and double-cabinet formats.",
   },
   {
     question: "Are prices displayed online?",
@@ -47,7 +47,7 @@ export default function Home() {
             <div className="showcase-unit unit-two"><MachineArt kind="touch-art" /></div>
             <div className="showcase-unit unit-three"><MachineArt kind="compact-art" /></div>
           </div>
-          <div className="showcase-badge"><span>07</span> MACHINE TYPES</div>
+          <div className="showcase-badge"><span>{String(machines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
           <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
         </div>
         <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>CHINA SERIES</span><i /><span>T05 CASHLESS</span></div>

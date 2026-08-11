@@ -14,7 +14,7 @@ export default function MachinesPage() {
       <section className="collection-hero">
         <div className="section-index" data-animate="up">MACHINE COLLECTION</div>
         <h1 data-animate="up" data-animate-delay="1">Find your<br /><em>vending machine.</em></h1>
-        <div className="collection-hero-foot" data-animate="up" data-animate-delay="2"><p>Compare the current range, open any machine for a rotatable front, side, and rear view, then request the exact configuration.</p><span>07 machine types</span></div>
+        <div className="collection-hero-foot" data-animate="up" data-animate-delay="2"><p>Compare the current range, open any machine for a rotatable front, side, and rear view, then request the exact configuration.</p><span>{String(machines.length).padStart(2, "0")} machine types</span></div>
       </section>
 
       <section className="collection-list" aria-labelledby="machine-list-title">

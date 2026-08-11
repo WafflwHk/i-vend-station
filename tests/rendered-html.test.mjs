@@ -41,7 +41,9 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /data-vending-track/);
   assert.match(html, /role="img" aria-label="Three stationary vending machine models that slide to the right as the page scrolls"/);
   assert.match(html, /Find your machine\./);
+  assert.match(html, /05[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
+  assert.doesNotMatch(html, /Frozen Food Vending Machine|Hot Food Vending Machine/);
   assert.match(html, /i-vend-station-logo\.png/);
   assert.match(html, /aria-label="Website appearance"/);
   assert.match(html, />System</);
@@ -123,8 +125,6 @@ test("renders the accessible finish and size configurator on every machine page"
     "/machines/tcn-d720-10g",
     "/machines/tcn-d720-10c-v22",
     "/machines/tcn-d720-10c-v22-10r",
-    "/machines/tcn-fel-9c-v22",
-    "/machines/tcn-cfm-4c-h32",
   ];
 
   for (const pathname of machineRoutes) {
@@ -225,6 +225,12 @@ test("protects accounts and rejects unknown machine routes", async () => {
   assert.match(signedInHtml, /I Vend Customer/);
   assert.match(signedInHtml, /customer@example\.com/);
 
-  const unknownMachine = await render("/machines/not-a-real-machine");
-  assert.equal(unknownMachine.status, 404);
+  for (const pathname of [
+    "/machines/not-a-real-machine",
+    "/machines/tcn-fel-9c-v22",
+    "/machines/tcn-cfm-4c-h32",
+  ]) {
+    const unknownMachine = await render(pathname);
+    assert.equal(unknownMachine.status, 404, `${pathname} should not be listed`);
+  }
 });

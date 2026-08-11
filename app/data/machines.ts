@@ -191,58 +191,6 @@ export const machines: Machine[] = [
       ],
     },
   },
-  {
-    slug: "tcn-fel-9c-v22",
-    code: "TCN-FEL-9C (V22)",
-    name: "Frozen Food Vending Machine",
-    type: "Frozen series",
-    art: "frozen-art",
-    image: null,
-    copy: "A touchscreen machine format designed for frozen products and controlled cold storage.",
-    description:
-      "A specialised TCN machine format for selected frozen products. Product suitability, temperature requirements, loading format, and collection method need to be checked before purchase.",
-    highlights: ["Frozen-product format", "Touchscreen purchasing", "Product suitability check required"],
-    viewer: {
-      width: 230,
-      height: 412,
-      depth: 192,
-      variant: "frozen",
-      defaultFinishId: "ice-blue",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
-      finishes: [
-        { id: "ice-blue", label: "Ice blue", swatch: "#d8ebf5", body: "#d8ebf5", trim: "#477a96", accent: "#2878b8" },
-        { id: "polar-white-preview", label: "Polar white", swatch: "#f1f4f6", body: "#f1f4f6", trim: "#60727e", accent: "#3194c8", illustrative: true },
-        { id: "deep-ocean-preview", label: "Deep ocean", swatch: "#285b7c", body: "#285b7c", trim: "#102c3e", accent: "#61b4df", illustrative: true },
-      ],
-    },
-  },
-  {
-    slug: "tcn-cfm-4c-h32",
-    code: "TCN-CFM-4C (H32)",
-    name: "Hot Food Vending Machine",
-    type: "Hot food series",
-    art: "hot-art",
-    image: null,
-    copy: "An automated machine format for storing and preparing selected packaged meals for collection.",
-    description:
-      "A specialised TCN format for selected packaged hot-food applications. Food type, heating process, holding conditions, and local operating requirements must be confirmed for the final configuration.",
-    highlights: ["Hot-food application format", "Automated collection area", "Exact food setup must be verified"],
-    viewer: {
-      width: 232,
-      height: 412,
-      depth: 192,
-      variant: "hot",
-      defaultFinishId: "charcoal",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
-      finishes: [
-        { id: "charcoal", label: "Charcoal", swatch: "#34312f", body: "#34312f", trim: "#161311", accent: "#f07a39" },
-        { id: "stainless-preview", label: "Stainless", swatch: "#cfd1d1", body: "#cfd1d1", trim: "#3d3d3b", accent: "#f07a39", illustrative: true },
-        { id: "copper-preview", label: "Copper", swatch: "#754532", body: "#754532", trim: "#2d1710", accent: "#ff9860", illustrative: true },
-      ],
-    },
-  },
 ];
 
 export function getMachine(slug: string) {

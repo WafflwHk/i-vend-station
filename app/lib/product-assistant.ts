@@ -22,8 +22,6 @@ const machineEntities: ProductEntity[] = [
   { id: "tcn-d720-10c-v22", aliases: ["tcn d720 10c v22", "10c v22", "touchscreen vending", "touch screen vending"] },
   { id: "tcn-d720-6g", aliases: ["tcn d720 6g", "d720 6g", "compact vending", "small vending"] },
   { id: "tcn-d720-10g", aliases: ["tcn d720 10g", "d720 10g", "classic vending", "standard vending"] },
-  { id: "tcn-fel-9c-v22", aliases: ["tcn fel 9c v22", "fel 9c", "frozen food vending", "frozen vending"] },
-  { id: "tcn-cfm-4c-h32", aliases: ["tcn cfm 4c h32", "cfm 4c", "hot food vending", "meal vending"] },
   { id: "hot-cold-coffee-machine", aliases: ["hot cold coffee", "coffee machine", "coffee vending", "japan series"] },
 ];
 
@@ -64,7 +62,7 @@ const machineReply = (slug: string): AssistantReply => {
 const fallbackReply: AssistantReply = {
   kind: "fallback",
   title: "I can help with the product range",
-  text: "Ask me about coffee, compact, classic, touchscreen, double-cabinet, frozen-food or hot-food machines, the T05 cashless device, illustrative views, or preparing a quotation.",
+  text: "Ask me about coffee, compact, classic, touchscreen, or double-cabinet machines, the T05 cashless device, illustrative views, or preparing a quotation.",
   links: [{ label: "Browse all machines", href: "/machines" }, { label: "Open the quote cart", href: "/cart" }],
 };
 
@@ -211,8 +209,8 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (hasAny(query, ["all machines", "machine list", "what do you sell", "product range", "catalogue", "catalog"])) {
     return {
       kind: "catalogue",
-      title: "Seven machine formats are listed",
-      text: "The catalogue includes a hot-and-cold coffee machine plus compact, classic, touchscreen, double-cabinet, frozen-food, and hot-food TCN formats. Each product page includes an illustrative interactive viewer.",
+      title: "Five machine formats are listed",
+      text: "The catalogue includes a hot-and-cold coffee machine plus compact, classic, touchscreen, and double-cabinet TCN formats. Each product page includes an illustrative interactive viewer.",
       links: [{ label: "Browse all machines", href: "/machines" }],
     };
   }
@@ -229,8 +227,6 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (entities.length > 0) return machineReply(entities[0]);
 
   if (hasAny(query, ["coffee", "hot drink", "cold drink", "beverage"])) return machineReply("hot-cold-coffee-machine");
-  if (hasAny(query, ["frozen food", "frozen meal", "ice cream"])) return machineReply("tcn-fel-9c-v22");
-  if (hasAny(query, ["hot food", "packaged meal", "heated meal"])) return machineReply("tcn-cfm-4c-h32");
   if (hasAny(query, ["touchscreen", "touch screen", "visual screen"])) return machineReply("tcn-d720-10c-v22");
 
   return fallbackReply;
