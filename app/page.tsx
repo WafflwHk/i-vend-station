@@ -87,7 +87,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light" data-animate="up">06 &mdash; REQUEST A QUOTATION</div><h2 data-animate="up" data-animate-delay="1">Which machine<br />fits your plan?</h2><p data-animate="up" data-animate-delay="2">Send the model name, your location, and what you want to sell.</p><div className="contact-actions" data-animate="up" data-animate-delay="3"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&#8599;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
+      <section className="contact" id="contact">
+        <div className="contact-glow one" />
+        <div className="contact-glow two" />
+        <h2 data-animate="up">Tell Us What Vending Machine Support You Need</h2>
+        <div className="contact-copy" data-animate="up" data-animate-delay="1">
+          <p>Planning to buy, rent, or customize a vending machine? Already have a machine that needs repair?</p>
+          <p>Send us your product type, location and requirements. Our team will help you check the suitable machine, payment system or technical support needed.</p>
+        </div>
+        <div className="contact-actions" data-animate="up" data-animate-delay="2">
+          <button className="button white" type="button" disabled aria-describedby="whatsapp-contact-status">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></button>
+          <span id="whatsapp-contact-status">WhatsApp link will be enabled after the business number is added.</span>
+        </div>
+      </section>
 
       <SiteFooter />
     </main>

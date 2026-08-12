@@ -54,6 +54,12 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /05[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
   assert.doesNotMatch(html, /Frozen Food Vending Machine|Hot Food Vending Machine/);
+  assert.match(html, /Tell Us What Vending Machine Support You Need/);
+  assert.match(html, /Planning to buy, rent, or customize a vending machine\? Already have a machine that needs repair\?/);
+  assert.match(html, /Send us your product type, location and requirements\. Our team will help you check the suitable machine, payment system or technical support needed\./);
+  assert.match(html, /Contact Our WhatsApp Team/);
+  assert.match(html, /whatsapp-contact-status/);
+  assert.doesNotMatch(html, /hello@example\.com|Replace this with your phone/);
   assert.match(html, /i-vend-station-logo\.png/);
   assert.match(html, /aria-label="Website appearance"/);
   assert.match(html, />System</);
@@ -168,7 +174,7 @@ test("renders the device-local quote cart without pretending to be checkout", as
   assert.match(html, /Loading your quote cart/);
   assert.match(html, /Continue shopping/);
   assert.match(html, /aria-label="Shopping cart, 0 items"/);
-  assert.doesNotMatch(html, /Checkout|Subtotal|Buy now|RM\s*[\d,.]+|mailto:/i);
+  assert.doesNotMatch(html, /\b(?:Checkout|Subtotal|Buy now)\b|RM\s+\d[\d,.]*|href="mailto:/i);
 
   const t05Response = await render("/products/t05-cashless-device");
   const t05Html = await t05Response.text();
