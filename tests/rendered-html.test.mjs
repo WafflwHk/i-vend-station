@@ -79,6 +79,7 @@ test("server-renders every public product route", async () => {
     ["/machines/hot-cold-coffee-machine", /Fuji Coffee Machine \(Hot &amp; Cold\)/],
     ["/products/t05-cashless-device", /Cashless,/],
     ["/cart", /Your quote cart\./],
+    ["/privacy", /I Vend Station Privacy Policy/],
   ];
 
   for (const [pathname, expectedContent] of routes) {
@@ -88,8 +89,28 @@ test("server-renders every public product route", async () => {
     assert.match(html, expectedContent);
     assert.match(html, /data-loading-screen/);
     assert.match(html, /aria-label="Open Ask IVS product assistant"/);
+    assert.match(html, /href="\/privacy"[^>]*>Privacy Policy/);
     assert.doesNotMatch(html, /&amp;nearr;/i);
   }
+});
+
+test("publishes a bilingual, site-specific privacy policy", async () => {
+  const response = await render("/privacy");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>Privacy Policy \| I Vend Station<\/title>/i);
+  assert.match(html, /<time dateTime="2026-08-12">12 August 2026<\/time>/);
+  assert.match(html, /I Vend Station Privacy Policy/);
+  assert.match(html, /Notis Privasi I Vend Station/);
+  assert.match(html, /I Vend Station does not receive your ChatGPT password/);
+  assert.match(html, /quote cart and appearance preference use your browser/);
+  assert.match(html, /does not save voice recordings/);
+  assert.match(html, /hosting and security services may process request data/);
+  assert.match(html, /href="\/#contact"/);
+  assert.match(html, /official WhatsApp number or business privacy email still needs to be configured/);
+  assert.match(html, /Personal Data Protection Commissioner/);
+  assert.doesNotMatch(html, /hello@example\.com/);
 });
 
 test("shows the Store T05 image with its camera side rotated down", async () => {
@@ -134,6 +155,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   assert.match(assistantSource, /webkitSpeechRecognition/);
   assert.match(assistantSource, /speechSynthesis/);
   assert.match(assistantSource, /I Vend Station does not save recordings/);
+  assert.match(assistantSource, /href="\/privacy"/);
   assert.match(knowledgeSource, /A compatibility check is required/);
   assert.match(knowledgeSource, /Viewer choices are illustrative/);
   assert.match(knowledgeSource, /Quotation and availability are confirmed directly/);
@@ -251,6 +273,7 @@ test("protects accounts and rejects unknown machine routes", async () => {
   const signedInHtml = await signedInAccount.text();
   assert.match(signedInHtml, /I Vend Customer/);
   assert.match(signedInHtml, /customer@example\.com/);
+  assert.match(signedInHtml, /href="\/privacy"[^>]*>Read the Privacy Policy\./);
 
   for (const pathname of [
     "/machines/not-a-real-machine",

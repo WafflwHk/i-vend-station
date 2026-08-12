@@ -21,7 +21,7 @@ export default async function AccountPage() {
         </div>
         <div className={styles.accountActions}><a href="/cart">Open quote cart <span aria-hidden="true">&rarr;</span></a><a href={chatGPTSignOutPath("/")}>Sign out</a></div>
       </section>
-      <p className={styles.privacyNote} data-animate="up" data-animate-delay="1">Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page.</p>
+      <p className={styles.privacyNote} data-animate="up" data-animate-delay="1">Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page. <a href="/privacy">Read the Privacy Policy.</a></p>
     </main>
   );
 }

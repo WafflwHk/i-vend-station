@@ -581,6 +581,9 @@
 .footer > div { display: flex; flex-direction: column; gap: 7px; text-align: right; }
 .footer .brandLogo { width: 156px; }
 .footer small { color: #4f535b; font-size: 7px; }
+.privacyLink { align-self: flex-end; color: #858b96; font-size: 9px; text-decoration: underline; text-underline-offset: 4px; }
+.privacyLink:focus-visible { outline: 3px solid #71a4ff; outline-offset: 4px; border-radius: 3px; }
+@media (hover: hover) and (pointer: fine) { .privacyLink:hover { color: #6e9fff; } }
 
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -731,6 +734,7 @@
   .footer > p { max-width: 280px; margin: 0; font-size: 13px; line-height: 1.55; text-align: center; }
   .footer span { font-size: 11px; }
   .footer small { max-width: 300px; font-size: 10px; line-height: 1.5; }
+  .privacyLink { align-self: center; min-height: 44px; display: inline-flex; align-items: center; font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

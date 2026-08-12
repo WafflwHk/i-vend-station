@@ -190,7 +190,7 @@ export default function T05CashlessPage() {
       <footer className={styles.footer} data-animate="up">
         <a className={styles.brand} href="/" aria-label="I Vend Station home"><img className={styles.brandLogo} src="/i-vend-station-logo.png" alt="" /></a>
         <p>Vending machines and cashless payment equipment.</p>
-        <div><span>&copy; 2026 I Vend Station</span><small>Payment availability and compatibility are subject to confirmation.</small></div>
+        <div><span>&copy; 2026 I Vend Station</span><a className={styles.privacyLink} href="/privacy">Privacy Policy</a><small>Payment availability and compatibility are subject to confirmation.</small></div>
       </footer>
     </main>
   );
