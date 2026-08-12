@@ -183,7 +183,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "guide",
       title: "Contact and quotation planning",
-      text: "Prepare the model names, what you plan to sell, your location, available space, temperature needs, and preferred payment method. The quotation section is where I Vend Station’s final contact details can be used.",
+      text: "Prepare the model names, what you plan to sell, your location, available space, temperature needs, and preferred payment method. The quotation section opens I Vend Station’s official WhatsApp contact.",
       links: [{ label: "Go to quotation section", href: "/#contact" }, { label: "Prepare a quote cart", href: "/cart" }],
     };
   }

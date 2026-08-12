@@ -3,6 +3,17 @@ import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
 import { machines } from "./data/machines";
 
+const whatsappNumber = "601133180812";
+const whatsappMessage = [
+  "Hello I Vend Station, I need help with a vending machine.",
+  "",
+  "Support needed (buy, rent, customize, or repair):",
+  "Product type:",
+  "Location:",
+  "Requirements:",
+].join("\n");
+const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
 const faqs = [
   {
     question: "What vending machines do you sell?",
@@ -22,7 +33,7 @@ const faqs = [
   },
   {
     question: "What details are needed for a quotation?",
-    answer: "Share the machine model, what you plan to sell, your location, available space, temperature needs, and preferred payment method. Replace the temporary contact email with your own contact details when ready.",
+    answer: "Share the machine model, what you plan to sell, your location, available space, temperature needs, and preferred payment method. Then contact our WhatsApp team to confirm availability, configuration, and quotation details.",
   },
 ];
 
@@ -96,8 +107,7 @@ export default function Home() {
           <p>Send us your product type, location and requirements. Our team will help you check the suitable machine, payment system or technical support needed.</p>
         </div>
         <div className="contact-actions" data-animate="up" data-animate-delay="2">
-          <button className="button white" type="button" disabled aria-describedby="whatsapp-contact-status">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></button>
-          <span id="whatsapp-contact-status">WhatsApp link will be enabled after the business number is added.</span>
+          <a className="button white" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="Contact our WhatsApp team (opens in a new tab)">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></a>
         </div>
       </section>
 

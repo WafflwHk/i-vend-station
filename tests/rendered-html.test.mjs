@@ -58,7 +58,14 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /Planning to buy, rent, or customize a vending machine\? Already have a machine that needs repair\?/);
   assert.match(html, /Send us your product type, location and requirements\. Our team will help you check the suitable machine, payment system or technical support needed\./);
   assert.match(html, /Contact Our WhatsApp Team/);
-  assert.match(html, /whatsapp-contact-status/);
+  assert.match(html, /href="https:\/\/wa\.me\/601133180812\?text=Hello%20I%20Vend%20Station/);
+  assert.match(html, /Product%20type%3A/);
+  assert.match(html, /Location%3A/);
+  assert.match(html, /Requirements%3A/);
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /rel="noopener noreferrer"/);
+  assert.match(html, /aria-label="Contact our WhatsApp team \(opens in a new tab\)"/);
+  assert.doesNotMatch(html, /whatsapp-contact-status|WhatsApp link will be enabled|<button[^>]*disabled[^>]*>Contact Our WhatsApp Team/);
   assert.doesNotMatch(html, /hello@example\.com|Replace this with your phone/);
   assert.match(html, /i-vend-station-logo\.png/);
   assert.match(html, /aria-label="Website appearance"/);
@@ -110,8 +117,10 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   assert.match(html, /quote cart and appearance preference use your browser/);
   assert.match(html, /does not save voice recordings/);
   assert.match(html, /hosting and security services may process request data/);
-  assert.match(html, /href="\/#contact"/);
-  assert.match(html, /official WhatsApp number or business privacy email still needs to be configured/);
+  assert.match(html, /href="https:\/\/wa\.me\/601133180812"/);
+  assert.match(html, /official WhatsApp number/);
+  assert.match(html, /may process it outside Malaysia/);
+  assert.doesNotMatch(html, /still needs to be configured|official channel becomes available|does not provide an active online privacy-request channel/);
   assert.match(html, /Personal Data Protection Commissioner/);
   assert.doesNotMatch(html, /hello@example\.com/);
 });
