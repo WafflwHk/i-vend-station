@@ -8,7 +8,7 @@
 .heroMeta > div { padding-top: 15px; display: grid; gap: 7px; border-top: 1px solid var(--iv-line); }
 .heroMeta span { color: var(--iv-text-tertiary); font-size: 9px; font-weight: 750; letter-spacing: 1.2px; text-transform: uppercase; }
 .heroMeta time, .heroMeta strong { color: var(--iv-text-secondary); font-size: 12px; font-weight: 590; line-height: 1.6; }
-.heroMeta nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.heroMeta nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .heroMeta nav a { min-height: 46px; padding: 0 15px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--iv-line); border-radius: 999px; background: var(--iv-surface-raised); font-size: 11px; font-weight: 700; transition: border-color 180ms ease, color 180ms ease, background 180ms ease; }
 .quickFacts { padding: 0 max(32px, calc((100vw - 1220px) / 2)); display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--iv-line); }
 .quickFacts article { min-height: 240px; padding: 45px 36px 40px 0; border-right: 1px solid var(--iv-line); }

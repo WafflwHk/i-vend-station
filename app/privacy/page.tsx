@@ -17,6 +17,11 @@ const malayContents = [
   ["ms-perkongsian", "Perkongsian dan pemindahan"], ["ms-penyimpanan", "Penyimpanan dan keselamatan"], ["ms-hak", "Hak anda"], ["ms-hubungi", "Hubungi"],
 ] as const;
 
+const chineseContents = [
+  ["zh-scope", "范围"], ["zh-data", "我们处理的数据"], ["zh-use", "我们如何使用数据"], ["zh-storage", "设备存储"],
+  ["zh-sharing", "共享与传输"], ["zh-retention", "保留与安全"], ["zh-rights", "您的权利"], ["zh-contact", "联系我们"],
+] as const;
+
 export default function PrivacyPage() {
   return (
     <main className={styles.page}>
@@ -29,7 +34,7 @@ export default function PrivacyPage() {
         <div className={styles.heroMeta} data-animate="up" data-animate-delay="1">
           <div><span>Effective</span><time dateTime="2026-08-12">12 August 2026</time></div>
           <div><span>Applies to</span><strong>This website and its account, cart, and product-guide features</strong></div>
-          <nav aria-label="Choose privacy policy language"><a href="#english">English</a><a href="#bahasa-malaysia" lang="ms">Bahasa Malaysia</a></nav>
+          <nav aria-label="Choose privacy policy language"><a href="#english">English</a><a href="#bahasa-malaysia" lang="ms">Bahasa Malaysia</a><a href="#simplified-chinese" lang="zh-Hans">简体中文</a></nav>
         </div>
       </section>
 
@@ -46,6 +51,8 @@ export default function PrivacyPage() {
           <nav aria-label="English privacy policy contents">{englishContents.map(([id, label], index) => <a href={`#${id}`} key={id}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a>)}</nav>
           <a className={styles.languageHeading} href="#bahasa-malaysia" lang="ms">Notis Bahasa Malaysia</a>
           <nav aria-label="Kandungan notis privasi Bahasa Malaysia" lang="ms">{malayContents.map(([id, label], index) => <a href={`#${id}`} key={id}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a>)}</nav>
+          <a className={styles.languageHeading} href="#simplified-chinese" lang="zh-Hans">简体中文通知</a>
+          <nav aria-label="简体中文隐私政策目录" lang="zh-Hans">{chineseContents.map(([id, label], index) => <a href={`#${id}`} key={id}><span>{String(index + 1).padStart(2, "0")}</span>{label}</a>)}</nav>
         </aside>
 
         <div className={styles.policyContent}>
@@ -99,6 +106,32 @@ export default function PrivacyPage() {
             <article id="ms-hak" data-animate="up"><span>07</span><div><h3>Hak dan pilihan anda</h3><p>Tertakluk pada undang-undang Malaysia yang terpakai, anda boleh bertanya sama ada I Vend Station memegang data peribadi anda dan meminta akses, pembetulan, penarikan balik persetujuan, had pemprosesan, pemadaman jika berkenaan, atau pemberhentian pemasaran langsung. Anda juga boleh memadam troli dan pilihan setempat melalui kawalan laman web atau pelayar, memilih untuk tidak mendaftar masuk, menaip tanpa menggunakan suara dan menentukan maklumat yang disertakan dalam pertanyaan.</p><p>Permintaan mungkin dihadkan jika undang-undang membenarkan atau mewajibkan pemprosesan diteruskan. Jika anda percaya data peribadi telah disalahkendalikan, anda juga boleh menghubungi <a href="https://www.pdp.gov.my/ppdpv1/" target="_blank" rel="noreferrer">Pesuruhjaya Perlindungan Data Peribadi Malaysia</a>.</p></div></article>
 
             <article id="ms-hubungi" data-animate="up"><span>08</span><div><h3>Hubungi dan perubahan kepada notis ini</h3><p>Untuk pertanyaan atau permintaan privasi, lawati <a href="/#contact">bahagian Hubungi I Vend Station</a>. Nombor WhatsApp rasmi atau e-mel privasi perniagaan masih perlu dikonfigurasi; sehingga itu, laman web tidak menyediakan saluran permintaan privasi dalam talian yang aktif. Notis ini akan dikemas kini apabila saluran tersebut diaktifkan atau apabila amalan laman web berubah secara ketara.</p><p>Laman web ini ditujukan kepada pelanggan perniagaan dan tidak direka untuk mengumpul data peribadi kanak-kanak secara sedar. Jika anda percaya seorang kanak-kanak telah memberikan maklumat, hubungi I Vend Station apabila saluran rasmi tersedia.</p></div></article>
+          </section>
+
+          <section className={styles.languageSection} id="simplified-chinese" lang="zh-Hans" aria-labelledby="chinese-title">
+            <header data-animate="up"><p>简体中文</p><h2 id="chinese-title">I Vend Station 隐私政策</h2><p>I Vend Station 经营本自动贩卖机产品目录网站。本通知说明本网站截至上述生效日期的运作方式。本通知不涵盖由自动贩卖机、T05 终端、商户收单机构或付款服务提供商另行处理的付款或交易数据。</p></header>
+
+            <article id="zh-scope" data-animate="up"><span>01</span><div><h3>范围和信息来源</h3><p>我们会处理您在登录、使用网站功能或联系本企业时选择提供的信息。我们也可能通过托管和保护本网站的服务接收有限的技术信息。信息可能直接来自您、ChatGPT 登录服务、您的浏览器或设备，或您选择使用的通信服务。</p></div></article>
+
+            <article id="zh-data" data-animate="up"><span>02</span><div><h3>我们处理的个人数据和其他信息</h3><ul>
+              <li><strong>账户资料：</strong>如果您使用 ChatGPT 登录，本网站会收到用户识别码、电邮地址，以及在可用情况下收到您的姓名。I Vend Station 不会收到您的 ChatGPT 密码。</li>
+              <li><strong>咨询资料：</strong>如果您通过本网站以外的方式联系本企业，您可以自愿提供姓名、电话号码、电邮地址、产品类型、地点、要求、消息或附件。</li>
+              <li><strong>设备本地选项：</strong>报价购物车会存储产品识别码和数量。外观控制会存储“跟随系统”、“浅色”或“深色”选项。会话标记会记住加载画面已经显示过。</li>
+              <li><strong>产品指南内容：</strong>在 Ask IVS 中输入的问题及其回复会保留在当前页面的内存中。本网站不会将这些内容发送至外部 AI API。</li>
+              <li><strong>技术数据：</strong>网站托管和安全服务可能会处理请求数据，例如 IP 地址、浏览器或设备类型、所请求的页面、日期和时间、来源页面，以及错误或安全事件。</li>
+            </ul></div></article>
+
+            <article id="zh-use" data-animate="up"><span>03</span><div><h3>我们为何使用这些信息</h3><p>这些信息用于提供本网站和受保护的账户页面；记住您的本地购物车和外观选择；回答产品目录问题；回复咨询；准备报价和兼容性检查；维护安全性和可靠性；防止滥用；履行法律义务；以及保护用户、I Vend Station 或其他人的权利。</p><p>除非您所请求的功能需要相关信息，否则提供信息是自愿的。如果不使用 ChatGPT 登录，受保护的账户页面将无法打开。如果没有足够的产品、地点和联系信息，I Vend Station 可能无法回复咨询或准备合适的报价。</p><p>本网站不会出售个人数据、将其用于行为定向广告、对您作出具有重大影响的自动化决定，或收集完整的付款卡资料。</p></div></article>
+
+            <article id="zh-storage" data-animate="up"><span>04</span><div><h3>本地存储、语音和 Cookie</h3><p>报价购物车和外观偏好使用您浏览器的本地存储。这些数据会一直保留，直到您将其清除、清除网站数据，或浏览器将其移除。加载画面标记使用会话存储，通常会在浏览器会话结束时终止。您可以使用浏览器控制项移除这些数据。</p><p>Ask IVS 消息会保留在页面内存中，直到您开始新对话、重新加载页面或离开页面。只有当您按下麦克风按钮时，语音输入才会启动。I Vend Station 网站不会保存语音录音，但您的浏览器或设备语音服务可能会处理音频，并可能根据其自身的隐私条款使用互联网。语音回复使用您浏览器的语音合成功能。</p><p>本应用不会设置广告或分析 Cookie。ChatGPT 登录服务以及托管或安全服务可能会使用提供、验证或保护其服务所必需的 Cookie 或类似技术。</p></div></article>
+
+            <article id="zh-sharing" data-animate="up"><span>05</span><div><h3>谁可能接收数据及个人数据跨境传输</h3><p>视您选择的功能而定，数据可能由以下各方处理：网站托管和安全服务提供商；ChatGPT 登录服务提供商；您的浏览器或设备语音服务提供商；您选择使用的 WhatsApp、电邮或其他通信服务提供商；专业顾问；或在法律允许或要求披露时的公共机关。</p><p>部分服务提供商可能会在马来西亚境外处理数据，其服务适用其自身的隐私条款和保障措施。I Vend Station 无法控制您的浏览器语音服务提供商、ChatGPT 账户、WhatsApp、电邮服务提供商、商户收单机构或付款服务如何独立处理信息。</p></div></article>
+
+            <article id="zh-retention" data-animate="up"><span>06</span><div><h3>保留期限、准确性和安全</h3><p>设备本地数据的保留期限如上所述。Ask IVS 页面内存中的消息不会由 I Vend Station 服务器保留。业务通信只会在合理所需的期限内保留，以便回复咨询、准备或支持报价、解决问题、保存必要记录及履行法律义务。</p><p>I Vend Station 会根据相关信息和网站的性质，采取合理的组织和技术措施。任何互联网传输或存储系统都无法保证绝对安全。请确保您提供的信息准确，并且不要发送密码、完整的付款卡资料或不必要的敏感信息。</p></div></article>
+
+            <article id="zh-rights" data-animate="up"><span>07</span><div><h3>您的权利和选择</h3><p>在适用的马来西亚法律约束下，您可以询问 I Vend Station 是否持有您的个人数据，并可请求查阅、更正、撤回同意、限制处理、在适用情况下删除数据，或停止直接营销。您也可以使用本网站或浏览器的控制项清除本地购物车和偏好设置；选择不登录；选择输入文字而不使用语音；以及自行决定在咨询中提供哪些信息。</p><p>如果法律允许或要求继续处理，您的请求可能会受到限制。如果您认为个人数据遭到不当处理，也可以联系<a href="https://www.pdp.gov.my/ppdpv1/" target="_blank" rel="noreferrer">马来西亚个人数据保护专员（Personal Data Protection Commissioner）</a>。</p></div></article>
+
+            <article id="zh-contact" data-animate="up"><span>08</span><div><h3>联系我们及本政策的变更</h3><p>如有隐私问题或请求，请前往 I Vend Station 的<a href="/#contact">“联系我们”部分</a>。正式 WhatsApp 号码或企业隐私事务电邮仍有待配置；在完成配置之前，本网站不提供有效的在线隐私请求渠道。当该渠道启用，或本网站的处理方式发生重大变化时，本政策将会更新。</p><p>本网站面向企业客户，并非设计用于在知情情况下收集儿童的个人数据。如果您认为儿童已经提供了信息，请在正式联系渠道可用后联系 I Vend Station。</p></div></article>
           </section>
 
           <aside className={styles.reviewNote} data-animate="up"><strong>Business owner action required</strong><p>Add the official legal business name, postal address, and active WhatsApp number or privacy email before relying on this notice for operational compliance. The policy should also be reviewed whenever new analytics, forms, payment services, or data-storage tools are introduced.</p></aside>

@@ -94,7 +94,7 @@ test("server-renders every public product route", async () => {
   }
 });
 
-test("publishes a bilingual, site-specific privacy policy", async () => {
+test("publishes a trilingual, site-specific privacy policy", async () => {
   const response = await render("/privacy");
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -103,6 +103,9 @@ test("publishes a bilingual, site-specific privacy policy", async () => {
   assert.match(html, /<time dateTime="2026-08-12">12 August 2026<\/time>/);
   assert.match(html, /I Vend Station Privacy Policy/);
   assert.match(html, /Notis Privasi I Vend Station/);
+  assert.match(html, /I Vend Station 隐私政策/);
+  assert.match(html, /href="#simplified-chinese"[^>]*lang="zh-Hans"[^>]*>简体中文/);
+  assert.match(html, /本网站不会将这些内容发送至外部 AI API/);
   assert.match(html, /I Vend Station does not receive your ChatGPT password/);
   assert.match(html, /quote cart and appearance preference use your browser/);
   assert.match(html, /does not save voice recordings/);
