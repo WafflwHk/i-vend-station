@@ -37,7 +37,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /China Series/);
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
   assert.match(html, /tcn-d720-product-cutout\.png/);
-  assert.match(html, /fuji-coffee-machine-3d-cutout\.webp/);
+  assert.match(html, /hot-cold-coffee-machine-cutout\.png/);
   assert.match(html, /A standard-capacity snack and beverage vending machine for locations requiring a broader product selection\. It also includes a built-in touchscreen\./);
   assert.doesNotMatch(html, /A compact floor-standing format for locations where space and a clean footprint matter\./);
   assert.doesNotMatch(html, />Compact Vending Machine</);
@@ -47,7 +47,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);
   assert.match(html, /role="img" aria-label="A large Fuji coffee machine in the center, a TCN vending machine on the left, and a supporting machine on the right, sliding together as the page scrolls"/);
-  assert.match(html, /hero-product-image hero-fuji-machine[^>]*fuji-coffee-machine-3d-cutout\.webp/);
+  assert.match(html, /hero-product-image hero-fuji-machine[^>]*hot-cold-coffee-machine-cutout\.png/);
   assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
@@ -292,7 +292,7 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/t05-views/t05-right-angle-camera-down.webp", import.meta.url)),
     access(new URL("../public/t05-views/t05-back-camera-down.webp", import.meta.url)),
     access(new URL("../public/t05-views/t05-left-angle-camera-down.webp", import.meta.url)),
-    access(new URL("../public/fuji-coffee-machine-3d-cutout.webp", import.meta.url)),
+    access(new URL("../public/hot-cold-coffee-machine-cutout.png", import.meta.url)),
     access(new URL("../public/tcn-d720-product-cutout.png", import.meta.url)),
   ]);
 });

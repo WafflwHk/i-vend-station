@@ -60,8 +60,8 @@ export default async function MachineDetailPage({ params }: Props) {
 
       {machine.image ? (
         <section className={styles.actualPhoto}>
-          <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>{machine.slug === "hot-cold-coffee-machine" ? "This actual three-quarter photograph has its workshop background removed so the cabinet shape is easier to inspect. The interactive side and rear views above remain illustrative." : "This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above."}</p></div>
-          <figure data-animate="right"><img className={machine.slug === "hot-cold-coffee-machine" ? styles.actualPhotoStatic : undefined} src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
+          <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above.</p></div>
+          <figure data-animate="right"><img src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
         </section>
       ) : (
         <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>The 360&deg; model above is illustrative. When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>
