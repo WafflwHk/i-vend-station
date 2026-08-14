@@ -37,7 +37,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /China Series/);
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
   assert.match(html, /tcn-d720-product-cutout\.png/);
-  assert.match(html, /hot-cold-coffee-machine-cutout\.png/);
+  assert.match(html, /fuji-coffee-machine-3d-cutout\.webp/);
   assert.match(html, /A standard-capacity snack and beverage vending machine for locations requiring a broader product selection\. It also includes a built-in touchscreen\./);
   assert.doesNotMatch(html, /A compact floor-standing format for locations where space and a clean footprint matter\./);
   assert.doesNotMatch(html, />Compact Vending Machine</);
@@ -47,7 +47,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-title-line/);
   assert.match(html, /data-vending-track/);
   assert.match(html, /role="img" aria-label="A large Fuji coffee machine in the center, a TCN vending machine on the left, and a supporting machine on the right, sliding together as the page scrolls"/);
-  assert.match(html, /hero-product-image hero-fuji-machine[^>]*hot-cold-coffee-machine-cutout\.png/);
+  assert.match(html, /hero-product-image hero-fuji-machine[^>]*fuji-coffee-machine-3d-cutout\.webp/);
   assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
@@ -125,14 +125,19 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   assert.doesNotMatch(html, /hello@example\.com/);
 });
 
-test("shows the Store T05 image with its camera side rotated down", async () => {
-  const [storeResponse, storefrontStyles] = await Promise.all([
-    render("/store"),
-    readFile(new URL("../app/storefront.css", import.meta.url), "utf8"),
-  ]);
+test("shows the Store T05 four-angle viewer with its camera side down", async () => {
+  const storeResponse = await render("/store");
   assert.equal(storeResponse.status, 200);
-  assert.match(await storeResponse.text(), /camera side facing down/);
-  assert.match(storefrontStyles, /\.store-feature-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
+  const html = await storeResponse.text();
+  assert.match(html, /aria-label="T05 four-angle photo viewer"/);
+  assert.match(html, /t05-front-camera-down\.webp/);
+  assert.match(html, /Four supplied T05 product photos with backgrounds removed/);
+  assert.match(html, />Front</);
+  assert.match(html, />Right angle</);
+  assert.match(html, />Back</);
+  assert.match(html, />Left angle</);
+  assert.match(html, /Play four views/);
+  assert.doesNotMatch(html, /t05-terminal-correct\.png/);
 });
 
 test("shows the homepage T05 image with its camera side rotated down", async () => {
@@ -145,15 +150,47 @@ test("shows the homepage T05 image with its camera side rotated down", async () 
   assert.match(correctionStyles, /\.cashless-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
 });
 
-test("shows the T05 product hero with its camera side rotated down", async () => {
-  const [productResponse, productStyles] = await Promise.all([
-    render("/products/t05-cashless-device"),
-    readFile(new URL("../app/products/t05-cashless-device/product.module.css", import.meta.url), "utf8"),
-  ]);
+test("shows the T05 product hero as an accessible four-angle viewer", async () => {
+  const productResponse = await render("/products/t05-cashless-device");
   assert.equal(productResponse.status, 200);
-  assert.match(await productResponse.text(), /camera side facing down/);
-  assert.match(productStyles, /\.deviceStage img\s*{[^}]*transform:\s*translateY\(-4px\) rotate\(180deg\)/);
-  assert.match(productStyles, /@keyframes deviceFloat\s*{[^}]*rotate\(180deg\)/);
+  const html = await productResponse.text();
+  assert.match(html, /aria-label="T05 four-angle photo viewer"/);
+  assert.match(html, /role="slider"/);
+  assert.match(html, /aria-valuemin="1"/);
+  assert.match(html, /aria-valuemax="4"/);
+  assert.match(html, /t05-front-camera-down\.webp/);
+  assert.match(html, /fetchPriority="high"/);
+  assert.match(html, /aria-pressed="true"[^>]*>\s*<span>01<\/span>\s*Front/);
+  assert.match(html, /aria-label="Show previous T05 view"/);
+  assert.match(html, /aria-label="Show next T05 view"/);
+  assert.match(html, /aria-live="polite"/);
+  assert.doesNotMatch(html, /t05-terminal-correct\.png/);
+});
+
+test("implements drag, keyboard, spin, and reduced-motion controls for T05 views", async () => {
+  const [viewerSource, photoData, viewerStyles] = await Promise.all([
+    readFile(new URL("../app/components/T05PhotoViewer.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/t05-photos.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/t05-photo-viewer.module.css", import.meta.url), "utf8"),
+  ]);
+
+  for (const filename of [
+    "t05-front-camera-down.webp",
+    "t05-right-angle-camera-down.webp",
+    "t05-back-camera-down.webp",
+    "t05-left-angle-camera-down.webp",
+  ]) {
+    assert.match(photoData, new RegExp(filename.replaceAll(".", "\\.")));
+  }
+  assert.match(viewerSource, /setPointerCapture/);
+  assert.match(viewerSource, /onPointerMove/);
+  assert.match(viewerSource, /ArrowLeft/);
+  assert.match(viewerSource, /ArrowRight/);
+  assert.match(viewerSource, /prefers-reduced-motion: reduce/);
+  assert.match(viewerSource, /visibilitychange/);
+  assert.match(viewerStyles, /touch-action:\s*pan-y/);
+  assert.match(viewerStyles, /min-height:\s*46px/);
+  assert.match(viewerStyles, /prefers-reduced-motion:\s*reduce/);
 });
 
 test("renders a private, voice-enabled catalogue product assistant", async () => {
@@ -251,7 +288,11 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
     access(new URL("../public/t05-terminal-correct.png", import.meta.url)),
-    access(new URL("../public/hot-cold-coffee-machine-cutout.png", import.meta.url)),
+    access(new URL("../public/t05-views/t05-front-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-right-angle-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-back-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-left-angle-camera-down.webp", import.meta.url)),
+    access(new URL("../public/fuji-coffee-machine-3d-cutout.webp", import.meta.url)),
     access(new URL("../public/tcn-d720-product-cutout.png", import.meta.url)),
   ]);
 });

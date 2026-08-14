@@ -28,7 +28,7 @@
 
 .store-feature { min-height: 730px; display: grid; grid-template-columns: 1fr 1fr; color: #fff; background: #101319; }
 .store-feature-visual { position: relative; min-height: 580px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #426996, #112b4d); }
-.store-feature-visual img { position: relative; z-index: 2; width: min(58%, 430px); transform: rotate(180deg); filter: drop-shadow(-25px -35px 28px #06122380); }
+.store-feature-visual .store-t05-viewer { width: min(84%, 520px); }
 .store-orbit { position: absolute; width: 520px; height: 520px; border: 1px solid #ffffff30; border-radius: 50%; box-shadow: 0 0 0 90px #ffffff08, 0 0 0 180px #ffffff05; }
 .store-feature-copy { padding: 95px max(40px, calc((100vw - 1220px) / 2)) 85px 80px; display: flex; flex-direction: column; justify-content: center; }
 .store-t05 { margin: 32px 0 13px; color: #6f9cf4; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
@@ -81,7 +81,8 @@
 @media (max-width: 560px) {
   .collection-hero h1 { font-size: 58px; }
   .collection-heading h2, .about-main h2, .faq-head h2 { font-size: 48px; letter-spacing: -3.2px; }
-  .store-feature-visual { min-height: 470px; }
+  .store-feature-visual { min-height: 610px; padding: 28px 14px; }
+  .store-feature-visual .store-t05-viewer { width: min(100%, 410px); }
   .store-feature h2 { font-size: 46px; letter-spacing: -3px; }
   .faq-list summary { min-height: 75px; grid-template-columns: 36px 1fr auto; font-size: 15px; }
   .faq-list details p { margin-left: 36px; }

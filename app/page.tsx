@@ -55,7 +55,7 @@ export default function Home() {
           <div className="hero-ring" />
           <div className="machine-cluster" data-vending-track>
             <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
-            <div className="showcase-unit unit-two"><img className="hero-product-image hero-fuji-machine" src="/hot-cold-coffee-machine-cutout.png" width="1023" height="1537" alt="" aria-hidden="true" /></div>
+            <div className="showcase-unit unit-two"><img className="hero-product-image hero-fuji-machine" src="/fuji-coffee-machine-3d-cutout.webp" width="941" height="1672" alt="" aria-hidden="true" /></div>
             <div className="showcase-unit unit-three"><img className="hero-product-image hero-tcn-machine" src="/tcn-d720-product-cutout.png" width="1024" height="1536" alt="" aria-hidden="true" /></div>
           </div>
           <div className="showcase-badge"><span>{String(machines.length).padStart(2, "0")}</span> MACHINE TYPES</div>

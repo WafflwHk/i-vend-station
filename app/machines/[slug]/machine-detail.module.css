@@ -40,12 +40,13 @@
 .quoteActions > a span,
 .nextMachine i { transition: translate 220ms ease, rotate 220ms ease, background 220ms ease; }
 .actualPhoto figure img { transition: scale 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+.actualPhoto figure img.actualPhotoStatic { scale: 1; transition: none; }
 
 @media (hover: hover) and (pointer: fine) {
   .quoteActions > a:hover { translate: 0 -2px; box-shadow: 0 15px 30px #0004; }
   .quoteActions > a:hover span { translate: 4px 0; rotate: 4deg; }
   .nextMachine:hover i { translate: 5px 0; rotate: -4deg; background: #1d65e8; }
-  .actualPhoto figure:hover img { scale: 1.025; }
+  .actualPhoto figure:hover img:not(.actualPhotoStatic) { scale: 1.025; }
 }
 
 .quoteActions > a:active,

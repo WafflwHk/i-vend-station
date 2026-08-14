@@ -136,8 +136,8 @@
   .collection-heading > p { font-size: 12px; }
   .collection-link { min-height: 44px; display: inline-flex; align-items: center; }
 
-  .store-feature-visual { min-height: 430px; }
-  .store-feature-visual img { width: min(64%, 275px); }
+  .store-feature-visual { min-height: 610px; padding: 28px 14px; }
+  .store-feature-visual .store-t05-viewer { width: min(100%, 410px); }
   .store-orbit { width: 320px; height: 320px; box-shadow: 0 0 0 60px #ffffff08, 0 0 0 120px #ffffff05; }
   .store-feature-copy { padding: 68px 20px 72px; }
   .store-feature h2 { font-size: 43px; line-height: 1; letter-spacing: -2.8px; }

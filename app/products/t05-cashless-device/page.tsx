@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AddToCartButton from "../../components/AddToCartButton";
+import T05PhotoViewer from "../../components/T05PhotoViewer";
 import styles from "./product.module.css";
 
 export const metadata: Metadata = {
@@ -77,11 +78,10 @@ export default function T05CashlessPage() {
             <AddToCartButton productId="t05-cashless-device" variant="blue" />
           </div>
         </div>
-        <div className={styles.deviceStage} aria-label="T05 cashless payment terminal">
+        <div className={styles.deviceStage}>
           <div className={styles.signalRing} />
           <div className={`${styles.signalRing} ${styles.signalRingTwo}`} />
-          <img src="/t05-terminal-correct.png" width="1254" height="1254" fetchPriority="high" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" />
-          <span className={styles.deviceNote}>Actual device photo supplied by I Vend Station.</span>
+          <T05PhotoViewer className={styles.heroPhotoViewer} priority />
         </div>
         <div className={styles.scrollCue}><span>Scroll to explore</span><i /></div>
       </section>

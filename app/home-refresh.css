@@ -129,6 +129,12 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
   user-select: none;
 }
 
+.hero-fuji-machine {
+  animation: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+
 .hero-remade .hero-ring {
   z-index: 0;
   width: 530px;
