@@ -1,5 +1,7 @@
 # I Vend Station
 
+Website releases follow the permanent rules in [VERSIONING.md](VERSIONING.md). Release history is recorded in [CHANGELOG.md](CHANGELOG.md).
+
 The IVEND vending-machine website, built with React, TypeScript, Vinext, Vite,
 and the OpenAI Sites/Cloudflare Worker runtime.
 
