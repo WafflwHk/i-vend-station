@@ -109,9 +109,9 @@ test("renders the central IVEND website version in every footer", async () => {
 
   assert.equal(homeResponse.status, 200);
   assert.equal(t05Response.status, 200);
-  assert.match(await homeResponse.text(), /v1\.1\.0/);
-  assert.match(await t05Response.text(), /v1\.1\.0/);
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.0"/);
+  assert.match(await homeResponse.text(), /v1\.1\.1/);
+  assert.match(await t05Response.text(), /v1\.1\.1/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.1"/);
 });
 
 test("publishes a trilingual, site-specific privacy policy", async () => {
@@ -251,11 +251,12 @@ test("renders the accessible finish and size configurator on every machine page"
 });
 
 test("renders quotation actions and removes the legacy shopping route", async () => {
-  const [homeResponse, storeResponse, t05Response, quoteLinkSource, whatsappSource] = await Promise.all([
+  const [homeResponse, storeResponse, t05Response, quoteLinkSource, quoteLinkStyles, whatsappSource] = await Promise.all([
     render("/"),
     render("/store"),
     render("/products/t05-cashless-device"),
     readFile(new URL("../app/components/RequestQuoteLink.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/request-quote-link.module.css", import.meta.url), "utf8"),
     readFile(new URL("../app/lib/whatsapp.ts", import.meta.url), "utf8"),
   ]);
 
@@ -267,6 +268,9 @@ test("renders quotation actions and removes the legacy shopping route", async ()
   assert.match(combinedHtml, /rel="noopener noreferrer"/);
   assert.doesNotMatch(combinedHtml, /hello@example\.com|href="mailto:/i);
   assert.match(quoteLinkSource, /createWhatsAppQuoteHref/);
+  assert.match(quoteLinkStyles, /\.button\.compact\s*{[\s\S]*?width:\s*auto;/);
+  assert.match(quoteLinkStyles, /\.button\.compact\s*{[\s\S]*?min-width:\s*122px;/);
+  assert.match(quoteLinkStyles, /@media \(max-width: 650px\)[\s\S]*?min-height:\s*46px;/);
   assert.match(whatsappSource, /Please confirm price, availability, configuration, and compatibility/);
 
   const removedCommercePath = `/${"ca"}${"rt"}`;

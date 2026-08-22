@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.1.1 — 2026-08-22
+
+- Fixed the catalogue quotation button layout.
+- Updated quotation buttons to a stable blue responsive design.
+
 ## v1.1.0 — 2026-08-22
 
 - Replaced the shopping-cart workflow with product-aware WhatsApp quotation requests.
@@ -9,4 +14,3 @@
 ## v1.0.0 — 2026-08-22
 
 - Established the initial public IVEND website version.
-
