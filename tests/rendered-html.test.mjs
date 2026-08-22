@@ -100,6 +100,20 @@ test("server-renders every public product route", async () => {
   }
 });
 
+test("renders the central IVEND website version in every footer", async () => {
+  const [homeResponse, t05Response, versionSource] = await Promise.all([
+    render("/"),
+    render("/products/t05-cashless-device"),
+    readFile(new URL("../app/config/site.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.equal(homeResponse.status, 200);
+  assert.equal(t05Response.status, 200);
+  assert.match(await homeResponse.text(), /v1\.1\.0/);
+  assert.match(await t05Response.text(), /v1\.1\.0/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.0"/);
+});
+
 test("publishes a trilingual, site-specific privacy policy", async () => {
   const response = await render("/privacy");
   assert.equal(response.status, 200);
