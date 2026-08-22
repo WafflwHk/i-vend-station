@@ -2,17 +2,9 @@ import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
 import { machines } from "./data/machines";
+import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
-const whatsappNumber = "601133180812";
-const whatsappMessage = [
-  "Hello I Vend Station, I need help with a vending machine.",
-  "",
-  "Support needed (buy, rent, customize, or repair):",
-  "Product type:",
-  "Location:",
-  "Requirements:",
-].join("\n");
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappHref = createWhatsAppQuoteHref();
 
 const faqs = [
   {

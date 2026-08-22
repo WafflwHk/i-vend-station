@@ -59,7 +59,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /Send us your product type, location and requirements\. Our team will help you check the suitable machine, payment system or technical support needed\./);
   assert.match(html, /Contact Our WhatsApp Team/);
   assert.match(html, /href="https:\/\/wa\.me\/601133180812\?text=Hello%20I%20Vend%20Station/);
-  assert.match(html, /Product%20type%3A/);
+  assert.match(html, /Support%20needed%20\(buy%2C%20rent%2C%20customize%2C%20or%20repair\)%3A/);
   assert.match(html, /Location%3A/);
   assert.match(html, /Requirements%3A/);
   assert.match(html, /target="_blank"/);
@@ -85,7 +85,6 @@ test("server-renders every public product route", async () => {
     ["/machines", /Choose a model\./],
     ["/machines/hot-cold-coffee-machine", /Fuji Coffee Machine \(Hot &amp; Cold\)/],
     ["/products/t05-cashless-device", /Cashless,/],
-    ["/cart", /Your quote cart\./],
     ["/privacy", /I Vend Station Privacy Policy/],
   ];
 
@@ -107,14 +106,14 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   const html = await response.text();
 
   assert.match(html, /<title>Privacy Policy \| I Vend Station<\/title>/i);
-  assert.match(html, /<time dateTime="2026-08-12">12 August 2026<\/time>/);
+  assert.match(html, /<time dateTime="2026-08-22">22 August 2026<\/time>/);
   assert.match(html, /I Vend Station Privacy Policy/);
   assert.match(html, /Notis Privasi I Vend Station/);
   assert.match(html, /I Vend Station 隐私政策/);
   assert.match(html, /href="#simplified-chinese"[^>]*lang="zh-Hans"[^>]*>简体中文/);
   assert.match(html, /本网站不会将这些内容发送至外部 AI API/);
   assert.match(html, /I Vend Station does not receive your ChatGPT password/);
-  assert.match(html, /quote cart and appearance preference use your browser/);
+  assert.match(html, /appearance preference uses your browser/);
   assert.match(html, /does not save voice recordings/);
   assert.match(html, /hosting and security services may process request data/);
   assert.match(html, /href="https:\/\/wa\.me\/601133180812"/);
@@ -232,30 +231,32 @@ test("renders the accessible finish and size configurator on every machine page"
     assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
     assert.match(html, /S and L change only the viewer scale, not confirmed machine dimensions\./);
     assert.match(html, /type="radio"/);
-    assert.match(html, /aria-label="Add [^"]+ to cart"/);
+    assert.match(html, /Request a Quote/);
+    assert.match(html, /Request a quotation for [^"]+ via WhatsApp \(opens in a new tab\)/);
   }
 });
 
-test("renders the device-local quote cart without pretending to be checkout", async () => {
-  const response = await render("/cart");
-  assert.equal(response.status, 200);
-  const html = await response.text();
+test("renders quotation actions and removes the legacy shopping route", async () => {
+  const [homeResponse, storeResponse, t05Response, quoteLinkSource, whatsappSource] = await Promise.all([
+    render("/"),
+    render("/store"),
+    render("/products/t05-cashless-device"),
+    readFile(new URL("../app/components/RequestQuoteLink.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/whatsapp.ts", import.meta.url), "utf8"),
+  ]);
 
-  assert.match(html, /<title>Quote Cart \| I Vend Station<\/title>/i);
-  assert.match(html, /Loading your quote cart/);
-  assert.match(html, /Continue shopping/);
-  assert.match(html, /aria-label="Shopping cart, 0 items"/);
-  assert.doesNotMatch(html, /\b(?:Checkout|Subtotal|Buy now)\b|RM\s+\d[\d,.]*|href="mailto:/i);
+  for (const response of [homeResponse, storeResponse, t05Response]) assert.equal(response.status, 200);
+  const combinedHtml = `${await homeResponse.text()}${await storeResponse.text()}${await t05Response.text()}`;
+  assert.match(combinedHtml, /Request a Quote/);
+  assert.match(combinedHtml, /wa\.me\/601133180812/);
+  assert.match(combinedHtml, /target="_blank"/);
+  assert.match(combinedHtml, /rel="noopener noreferrer"/);
+  assert.doesNotMatch(combinedHtml, /hello@example\.com|href="mailto:/i);
+  assert.match(quoteLinkSource, /createWhatsAppQuoteHref/);
+  assert.match(whatsappSource, /Please confirm price, availability, configuration, and compatibility/);
 
-  const t05Response = await render("/products/t05-cashless-device");
-  const t05Html = await t05Response.text();
-  assert.match(t05Html, /aria-label="Add T05 Cashless Device to cart"/);
-
-  const cartStore = await readFile(new URL("../app/components/cart-store.ts", import.meta.url), "utf8");
-  assert.match(cartStore, /ivend-quote-cart:v1/);
-  assert.match(cartStore, /ivend-cart-changed/);
-  assert.match(cartStore, /Math\.min\(99/);
-  assert.match(cartStore, /localStorage/);
+  const removedCommercePath = `/${"ca"}${"rt"}`;
+  assert.equal((await render(removedCommercePath)).status, 404);
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {

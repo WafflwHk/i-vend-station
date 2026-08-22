@@ -1,6 +1,6 @@
 import type { Machine } from "../data/machines";
-import AddToCartButton from "./AddToCartButton";
 import MachineArt from "./MachineArt";
+import RequestQuoteLink from "./RequestQuoteLink";
 
 type Props = {
   machine: Machine;
@@ -21,7 +21,7 @@ export default function MachineCard({ machine, index }: Props) {
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
           <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
-          <AddToCartButton productId={machine.slug} variant="compact" />
+          <RequestQuoteLink code={machine.code} name={machine.name} variant="compact" />
         </div>
       </div>
     </article>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import AddToCartButton from "../components/AddToCartButton";
 import MachineCard from "../components/MachineCard";
+import RequestQuoteLink from "../components/RequestQuoteLink";
 import SiteFooter from "../components/SiteFooter";
 import T05PhotoViewer from "../components/T05PhotoViewer";
 import { machines } from "../data/machines";
@@ -21,7 +21,7 @@ export default function StorePage() {
 
       <section className="store-feature" aria-labelledby="cashless-store-title">
         <div className="store-feature-visual" data-animate="left"><div className="store-orbit" /><T05PhotoViewer className="store-t05-viewer" /></div>
-        <div className="store-feature-copy" data-animate="right"><div className="section-index light">CASHLESS DEVICE</div><span className="store-t05">T05</span><h2 id="cashless-store-title">A cashless option for compatible machines.</h2><p>Explore supported contactless and QR payment capabilities, operator records, connectivity requirements, and the compatibility check.</p><a href="/products/t05-cashless-device">View cashless device <span aria-hidden="true">&rarr;</span></a><AddToCartButton productId="t05-cashless-device" variant="light" /><small>Available methods depend on the machine, merchant setup, and region.</small></div>
+        <div className="store-feature-copy" data-animate="right"><div className="section-index light">CASHLESS DEVICE</div><span className="store-t05">T05</span><h2 id="cashless-store-title">A cashless option for compatible machines.</h2><p>Explore supported contactless and QR payment capabilities, operator records, connectivity requirements, and the compatibility check.</p><a href="/products/t05-cashless-device">View cashless device <span aria-hidden="true">&rarr;</span></a><RequestQuoteLink code="T05" name="Cashless Device" context="cashless" variant="light" className="store-quote-button" /><small>Available methods depend on the machine, merchant setup, and region.</small></div>
       </section>
 
       <section className="collection-list" aria-labelledby="store-machine-title">

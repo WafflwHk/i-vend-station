@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import AddToCartButton from "../../components/AddToCartButton";
+import RequestQuoteLink from "../../components/RequestQuoteLink";
 import T05PhotoViewer from "../../components/T05PhotoViewer";
+import { createWhatsAppQuoteHref } from "../../lib/whatsapp";
 import styles from "./product.module.css";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
 };
 
 const paymentOptions = ["Contactless", "Card", "QR payment", "E-wallet"];
+const t05QuoteHref = createWhatsAppQuoteHref({ code: "T05", name: "Cashless Device", context: "cashless" });
 
 const operatorTools = [
   {
@@ -75,7 +77,7 @@ export default function T05CashlessPage() {
             <a className={styles.primaryButton} href="#quote">
               Check compatibility <span aria-hidden="true">&darr;</span>
             </a>
-            <AddToCartButton productId="t05-cashless-device" variant="blue" />
+            <RequestQuoteLink code="T05" name="Cashless Device" context="cashless" variant="blue" />
           </div>
         </div>
         <div className={styles.deviceStage}>
@@ -96,7 +98,7 @@ export default function T05CashlessPage() {
 
       <section className={styles.tapStory}>
         <div className={styles.stickyCopy} data-animate="left">
-          <p className={styles.sectionLabel}>A BETTER CHECKOUT</p>
+          <p className={styles.sectionLabel}>A BETTER PAYMENT EXPERIENCE</p>
           <h2>Tap.<br />Scan.<br />Done.</h2>
           <p>
             A clear payment flow helps customers buy without searching for exact change. The terminal handles the supported digital payment while the compatible vending machine completes the sale.
@@ -181,10 +183,10 @@ export default function T05CashlessPage() {
         <p className={styles.sectionLabel} data-animate="up">T05 CASHLESS</p>
         <h2 data-animate="up" data-animate-delay="1">Make your next machine<br />easier to pay at.</h2>
         <p data-animate="up" data-animate-delay="2">Send us your vending-machine model and location. We&apos;ll confirm the setup before preparing your quotation.</p>
-        <a href="mailto:hello@example.com?subject=T05 cashless compatibility and quotation" data-animate="up" data-animate-delay="3">
+        <a href={t05QuoteHref} target="_blank" rel="noopener noreferrer" data-animate="up" data-animate-delay="3" aria-label="Request a T05 quotation via WhatsApp (opens in a new tab)">
           Request a T05 quotation <span aria-hidden="true">&#8599;</span>
         </a>
-        <small data-animate="up" data-animate-delay="3">Replace the email address with your business contact when ready.</small>
+        <small data-animate="up" data-animate-delay="3">Price, availability, configuration, and machine compatibility are confirmed before quotation.</small>
       </section>
 
       <footer className={styles.footer} data-animate="up">

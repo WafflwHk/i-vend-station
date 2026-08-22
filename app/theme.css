@@ -188,12 +188,10 @@ body { accent-color: var(--iv-accent); }
   background: var(--iv-surface-raised);
   border-color: var(--iv-line-soft);
 }
-.card-bottom a,
 .card-bottom .view-machine-button {
   color: var(--iv-on-primary);
   background: var(--iv-primary);
 }
-.card-bottom a:hover,
 .card-bottom .view-machine-button:hover { color: #fff; background: var(--iv-accent); }
 
 .collection-page {
