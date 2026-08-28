@@ -27,6 +27,30 @@
   pointer-events: auto;
 }
 
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.releaseBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 6px;
+  border: 1px solid color-mix(in srgb, var(--iv-accent) 32%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--iv-accent) 9%, transparent);
+  color: var(--iv-accent);
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .logo {
   width: 132px;
   flex: 0 0 auto;
@@ -287,6 +311,8 @@
 }
 
 @media (max-width: 350px) {
+  .brandGroup { gap: 5px; }
+  .bar { gap: 10px; }
   .bar { padding-left: 10px; }
   .logo { width: 98px; }
   .account { padding: 0 9px; font-size: 9px; }

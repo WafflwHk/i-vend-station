@@ -4,6 +4,8 @@ The public website uses Semantic Versioning: `MAJOR.MINOR.PATCH`.
 
 The single source of truth is `app/config/site.ts`. Website components must import `IVEND_VERSION` from that file instead of hardcoding a public version.
 
+Release status is controlled by `IVEND_RELEASE_STATUS` in the same file. Set it to `"Beta"` or `"Stable"`; the header badge appears only for Beta, and both footers display the selected status.
+
 ## Release levels
 
 - **PATCH**: bug fixes, copy corrections, image replacements, small CSS/responsive/UI/performance fixes, or small website cleanup.
@@ -23,4 +25,3 @@ Prefer PATCH when uncertain unless the update introduces a genuinely new custome
 7. Report the previous version, new version, change type, reason, and validation results.
 
 Inspection-only work does not change the version.
-
