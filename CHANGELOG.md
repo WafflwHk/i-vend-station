@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.1.3 — 2026-08-30
+
+- Added “Vending Solutions & Service” beneath the IVS branding.
+
 ## v1.1.2 — 2026-08-28
 
 - Added a subtle BETA header badge and footer release status from central configuration.

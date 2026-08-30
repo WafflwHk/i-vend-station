@@ -144,10 +144,13 @@ export default function SiteHeader() {
     <header className={styles.header}>
       <div className={styles.bar}>
         <div className={styles.brandGroup}>
-        <a className={styles.logo} href="/" aria-label="I Vend Station home" onClick={() => setOpen(false)}>
-          <img src="/i-vend-station-logo.png" alt="I Vend Station" />
-        </a>
-        {IVEND_RELEASE_STATUS === "Beta" ? <span className={styles.releaseBadge} title="Website under active development">{IVEND_RELEASE_STATUS}</span> : null}
+          <div className={styles.brandTopline}>
+            <a className={styles.logo} href="/" aria-label="I Vend Station home" onClick={() => setOpen(false)}>
+              <img src="/i-vend-station-logo.png" alt="I Vend Station" />
+            </a>
+            {IVEND_RELEASE_STATUS === "Beta" ? <span className={styles.releaseBadge} title="Website under active development">{IVEND_RELEASE_STATUS}</span> : null}
+          </div>
+          <span className={styles.tagline}>Vending Solutions &amp; Service</span>
         </div>
 
         <nav className={styles.desktopNav} aria-label="Main navigation">

@@ -111,14 +111,15 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.1\.2(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.1\.3(?:<!-- -->|\s)*Beta/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.2"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.3"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
   assert.match(headerSource, /IVEND_RELEASE_STATUS === "Beta"/);
+  assert.match(headerSource, /Vending Solutions &amp; Service/);
 });
 
 test("publishes a trilingual, site-specific privacy policy", async () => {
