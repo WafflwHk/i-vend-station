@@ -39,6 +39,7 @@ export type Machine = {
   description: string;
   highlights: string[];
   featured?: boolean;
+  comingSoon?: boolean;
   viewer: MachineViewerConfig;
 };
 
@@ -125,6 +126,7 @@ export const machines: Machine[] = [
     description:
       "A full-size TCN platform with a broad merchandising window. The exact tray layout, cooling configuration, and payment setup must be confirmed for the unit being quoted.",
     highlights: ["Full-size merchandising area", "Configurable product layout", "Multiple payment setup options"],
+    comingSoon: true,
     viewer: {
       width: 226,
       height: 410,

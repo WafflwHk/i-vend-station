@@ -111,6 +111,18 @@ test("removes the TCN-D720-10C (V22) machine from catalogue listings", async () 
   }
 });
 
+test("marks the TCN-D720-10G catalogue card as coming soon", async () => {
+  const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
+
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /TCN-D720-10G is coming soon/);
+    assert.match(html, /availability-badge[^>]*>Coming Soon<\/span>/);
+    assert.doesNotMatch(html, /Product%3A%20TCN-D720-10G/);
+  }
+});
+
 test("renders the central IVEND website version in every footer", async () => {
   const [homeResponse, t05Response, versionSource] = await Promise.all([
     render("/"),
@@ -122,10 +134,10 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.1\.4(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.1\.5(?:<!-- -->|\s)*Beta/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.4"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.5"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

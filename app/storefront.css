@@ -9,6 +9,9 @@
 .card-bottom .view-machine-button { width: auto; height: 38px; padding: 0 15px; flex: 1; display: flex; align-items: center; justify-content: space-between; border-radius: 9px; color: #fff; background: #16171b; font-size: 10px; font-weight: 700; }
 .card-bottom .view-machine-button:hover { background: #1d65e8; }
 .card-bottom .quote-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+.model-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.availability-badge { padding: 5px 8px; border: 1px solid color-mix(in srgb, var(--iv-accent) 30%, transparent); border-radius: 999px; color: var(--iv-accent); background: color-mix(in srgb, var(--iv-accent) 9%, transparent); font-size: 8px; line-height: 1; font-weight: 760; letter-spacing: 0.7px; text-transform: uppercase; white-space: nowrap; }
+.coming-soon-action { width: auto; min-width: 122px; height: 38px; flex: 0 0 auto; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--iv-line); border-radius: 9px; color: var(--iv-text-secondary); background: var(--iv-control-bg); font-size: 10px; font-weight: 740; white-space: nowrap; }
 
 .collection-page { min-height: 100vh; color: #16171c; background: #fff; }
 .collection-hero { min-height: 680px; padding: 170px max(32px, calc((100vw - 1220px) / 2)) 80px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: radial-gradient(circle at 75% 25%, #dce7fb 0, transparent 28%), linear-gradient(145deg, #fafafa, #eef1f6); }
@@ -86,4 +89,5 @@
   .store-feature h2 { font-size: 46px; letter-spacing: -3px; }
   .faq-list summary { min-height: 75px; grid-template-columns: 36px 1fr auto; font-size: 15px; }
   .faq-list details p { margin-left: 36px; }
+  .coming-soon-action { min-width: 128px; height: 46px; padding: 0 16px; font-size: 11px; }
 }
