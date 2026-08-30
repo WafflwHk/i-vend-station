@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.1.4 — 2026-08-30
+
+- Removed the TCN-D720-10C (V22) touchscreen machine from catalogue listings.
+
 ## v1.1.3 — 2026-08-30
 
 - Added “Vending Solutions & Service” beneath the IVS branding.

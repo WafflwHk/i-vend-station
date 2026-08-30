@@ -3,7 +3,7 @@ import MachineCard from "../components/MachineCard";
 import RequestQuoteLink from "../components/RequestQuoteLink";
 import SiteFooter from "../components/SiteFooter";
 import T05PhotoViewer from "../components/T05PhotoViewer";
-import { machines } from "../data/machines";
+import { catalogueMachines } from "../data/machines";
 
 export const metadata: Metadata = {
   title: "Store | I Vend Station",
@@ -26,7 +26,7 @@ export default function StorePage() {
 
       <section className="collection-list" aria-labelledby="store-machine-title">
         <div className="collection-heading" data-animate="up"><div><div className="section-index">VENDING MACHINES</div><h2 id="store-machine-title">Shop the range.</h2></div><a className="collection-link" href="/machines">See all machine details <span aria-hidden="true">&rarr;</span></a></div>
-        <div className="machine-grid collection-grid">{machines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}</div>
+        <div className="machine-grid collection-grid">{catalogueMachines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}</div>
       </section>
       <SiteFooter />
     </main>

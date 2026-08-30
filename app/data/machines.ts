@@ -194,6 +194,8 @@ export const machines: Machine[] = [
   },
 ];
 
+export const catalogueMachines = machines.filter((machine) => machine.slug !== "tcn-d720-10c-v22");
+
 export function getMachine(slug: string) {
   return machines.find((machine) => machine.slug === slug);
 }

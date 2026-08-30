@@ -1,7 +1,7 @@
 import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
-import { machines } from "./data/machines";
+import { catalogueMachines } from "./data/machines";
 import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
 const whatsappHref = createWhatsAppQuoteHref();
@@ -50,7 +50,7 @@ export default function Home() {
             <div className="showcase-unit unit-two"><img className="hero-product-image hero-fuji-machine" src="/hot-cold-coffee-machine-cutout.png" width="1023" height="1537" alt="" aria-hidden="true" /></div>
             <div className="showcase-unit unit-three"><img className="hero-product-image hero-tcn-machine" src="/tcn-d720-product-cutout.png" width="1024" height="1536" alt="" aria-hidden="true" /></div>
           </div>
-          <div className="showcase-badge"><span>{String(machines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
+          <div className="showcase-badge"><span>{String(catalogueMachines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
           <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
         </div>
         <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>CHINA SERIES</span><i /><span>T05 CASHLESS</span></div>
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
         <div className="category-pills" data-animate="up" data-animate-delay="1"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
         <div className="machine-grid">
-          {machines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
+          {catalogueMachines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
         </div>
         <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification. Side and rear viewer angles are illustrative.</p>
       </section>
