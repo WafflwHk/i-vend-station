@@ -51,7 +51,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
-  assert.match(html, /04[\s\S]*MACHINE TYPES/);
+  assert.match(html, /03[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
   assert.doesNotMatch(html, /Frozen Food Vending Machine|Hot Food Vending Machine/);
   assert.match(html, /Tell Us What Vending Machine Support You Need/);
@@ -111,6 +111,17 @@ test("removes the TCN-D720-10C (V22) machine from catalogue listings", async () 
   }
 });
 
+test("removes the Double Cabinet Machine from catalogue listings", async () => {
+  const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
+
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.doesNotMatch(html, />TCN-D720-10C \(V22\) \+ 10R</);
+    assert.doesNotMatch(html, />Double Cabinet Machine<\/h3>/);
+  }
+});
+
 test("marks the TCN-D720-10G catalogue card as coming soon", async () => {
   const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
 
@@ -134,10 +145,10 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.1\.5(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.1\.6(?:<!-- -->|\s)*Beta/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.5"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.6"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

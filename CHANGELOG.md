@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.1.6 — 2026-08-31
+
+- Removed the TCN-D720-10C (V22) + 10R Double Cabinet Machine from catalogue listings.
+
 ## v1.1.5 — 2026-08-31
 
 - Marked the TCN-D720-10G Classic Vending Machine as coming soon in catalogue listings.

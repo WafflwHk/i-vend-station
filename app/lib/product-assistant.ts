@@ -209,8 +209,8 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (hasAny(query, ["all machines", "machine list", "what do you sell", "product range", "catalogue", "catalog"])) {
     return {
       kind: "catalogue",
-      title: "Five machine formats are listed",
-      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity, classic, touchscreen, and double-cabinet TCN formats. Each product page includes an illustrative interactive viewer.",
+      title: "Three machine formats are listed",
+      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity touchscreen and classic TCN formats. Each listed model includes an illustrative interactive viewer.",
       links: [{ label: "Browse all machines", href: "/machines" }],
     };
   }

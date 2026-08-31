@@ -9,7 +9,7 @@ const whatsappHref = createWhatsAppQuoteHref();
 const faqs = [
   {
     question: "What vending machines do you sell?",
-    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN standard-capacity, classic, touchscreen, and double-cabinet formats.",
+    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN standard-capacity and classic vending formats.",
   },
   {
     question: "Are prices displayed online?",

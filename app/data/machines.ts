@@ -196,7 +196,9 @@ export const machines: Machine[] = [
   },
 ];
 
-export const catalogueMachines = machines.filter((machine) => machine.slug !== "tcn-d720-10c-v22");
+const hiddenCatalogueSlugs = new Set(["tcn-d720-10c-v22", "tcn-d720-10c-v22-10r"]);
+
+export const catalogueMachines = machines.filter((machine) => !hiddenCatalogueSlugs.has(machine.slug));
 
 export function getMachine(slug: string) {
   return machines.find((machine) => machine.slug === slug);
