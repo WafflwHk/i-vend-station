@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.3.4 — 2026-09-05
+
+- Removed viewer-size choices from all machine pages, preserving default scale, finish selection and rotation controls.
+
 ## v1.3.3 — 2026-09-04
 
 - Changed the header tagline to “アイ・ヴェンド・ステーション” with Japanese language metadata.

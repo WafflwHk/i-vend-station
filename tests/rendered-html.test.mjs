@@ -221,11 +221,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.3\.3(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.3\.4(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.3"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.4"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -347,7 +347,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   );
 });
 
-test("renders the accessible finish and size configurator on every machine page", async () => {
+test("keeps finish controls and removes viewer-size controls on every machine page", async () => {
   const machineRoutes = [
     "/machines/hot-cold-coffee-machine",
     "/machines/tcn-d720-6g",
@@ -362,7 +362,8 @@ test("renders the accessible finish and size configurator on every machine page"
     const html = await response.text();
     assert.match(html, /aria-label="Illustrative machine configuration preview"/);
     assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
-    assert.match(html, /S and L change only the viewer scale, not confirmed machine dimensions\./);
+    assert.doesNotMatch(html, /Viewer size|viewer-size-|Smaller viewer scale|S and L change/);
+    assert.match(html, /Choose a machine view/);
     assert.match(html, /type="radio"/);
     assert.match(html, /Request a Quote/);
     assert.match(html, /Request a quotation for [^"]+ via WhatsApp \(opens in a new tab\)/);

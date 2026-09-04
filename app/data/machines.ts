@@ -8,23 +8,13 @@ export type MachineFinishOption = {
   illustrative?: boolean;
 };
 
-export type MachineViewerSizeOption = {
-  id: "s" | "l";
-  label: "S" | "L";
-  description: string;
-  previewScale: number;
-  illustrative?: boolean;
-};
-
 export type MachineViewerConfig = {
   width: number;
   height: number;
   depth: number;
   variant: "coffee" | "compact" | "classic" | "touch" | "double" | "frozen" | "hot";
   finishes: readonly [MachineFinishOption, ...MachineFinishOption[]];
-  sizes: readonly [MachineViewerSizeOption, ...MachineViewerSizeOption[]];
   defaultFinishId: string;
-  defaultSizeId: MachineViewerSizeOption["id"];
 };
 
 export type Machine = {
@@ -42,22 +32,6 @@ export type Machine = {
   comingSoon?: boolean;
   viewer: MachineViewerConfig;
 };
-
-const viewerSizeOptions: readonly [MachineViewerSizeOption, MachineViewerSizeOption] = [
-  {
-    id: "s",
-    label: "S",
-    description: "Smaller viewer scale",
-    previewScale: 0.88,
-    illustrative: true,
-  },
-  {
-    id: "l",
-    label: "L",
-    description: "Current viewer scale",
-    previewScale: 1,
-  },
-];
 
 export const machines: Machine[] = [
   {
@@ -79,8 +53,6 @@ export const machines: Machine[] = [
       depth: 188,
       variant: "coffee",
       defaultFinishId: "original-white",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
       finishes: [
         { id: "original-white", label: "Original white", swatch: "#eff0f2", body: "#eff0f2", trim: "#24282e", accent: "#c5a04b" },
         { id: "midnight-preview", label: "Midnight", swatch: "#292d34", body: "#292d34", trim: "#090b0e", accent: "#c5a04b", illustrative: true },
@@ -106,8 +78,6 @@ export const machines: Machine[] = [
       depth: 170,
       variant: "compact",
       defaultFinishId: "soft-silver",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
       finishes: [
         { id: "soft-silver", label: "Soft silver", swatch: "#e6e8eb", body: "#e6e8eb", trim: "#20242a", accent: "#1d65e8" },
         { id: "graphite-preview", label: "Graphite", swatch: "#30343a", body: "#30343a", trim: "#0d0f12", accent: "#4d91ff", illustrative: true },
@@ -133,8 +103,6 @@ export const machines: Machine[] = [
       depth: 188,
       variant: "classic",
       defaultFinishId: "midnight-black",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
       finishes: [
         { id: "midnight-black", label: "Midnight black", swatch: "#20242a", body: "#20242a", trim: "#090b0e", accent: "#2878ff" },
         { id: "silver-preview", label: "Silver", swatch: "#dfe2e6", body: "#dfe2e6", trim: "#31363d", accent: "#2878ff", illustrative: true },
@@ -159,8 +127,6 @@ export const machines: Machine[] = [
       depth: 190,
       variant: "touch",
       defaultFinishId: "space-black",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
       finishes: [
         { id: "space-black", label: "Space black", swatch: "#171a1f", body: "#171a1f", trim: "#07090c", accent: "#2c78ff" },
         { id: "silver-preview", label: "Silver", swatch: "#d8dce2", body: "#d8dce2", trim: "#303640", accent: "#367fff", illustrative: true },
@@ -185,8 +151,6 @@ export const machines: Machine[] = [
       depth: 190,
       variant: "double",
       defaultFinishId: "graphite",
-      defaultSizeId: "l",
-      sizes: viewerSizeOptions,
       finishes: [
         { id: "graphite", label: "Graphite", swatch: "#1f2329", body: "#1f2329", trim: "#090b0e", accent: "#2d7eff" },
         { id: "silver-preview", label: "Silver", swatch: "#d5d9df", body: "#d5d9df", trim: "#343a43", accent: "#367fff", illustrative: true },
