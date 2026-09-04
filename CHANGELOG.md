@@ -1,5 +1,26 @@
 # IVEND Changelog
 
+## v1.3.3 — 2026-09-04
+
+- Changed the header tagline to “アイ・ヴェンド・ステーション” with Japanese language metadata.
+
+## v1.3.2 — 2026-09-04
+
+- Replaced the header account text with an accessible person icon, preserving sign-in navigation.
+
+## v1.3.1 — 2026-09-04
+
+- Removed Request quote buttons from machine listing cards, retaining product-page enquiries and View machine links.
+
+## v1.3.0 — 2026-09-04
+
+- Added “Latest from IVEND” with reusable highlight data and clearly labelled sample content.
+- Added native swipeable cards on mobile and a three-card desktop layout.
+
+## v1.2.0 — 2026-09-04
+
+- Added accessible header search for catalogue machines, cashless equipment, service enquiries and key pages.
+
 ## v1.1.6 — 2026-08-31
 
 - Removed the TCN-D720-10C (V22) + 10R Double Cabinet Machine from catalogue listings.

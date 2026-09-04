@@ -1,6 +1,82 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
+import { transpileModule, ModuleKind } from "typescript";
+
+test("header account control is an accessible icon link", async () => {
+  const html = await (await render("/")).text();
+  assert.match(html, /href="\/account" aria-label="Sign in or open your account" title="Sign in \/ Account"><svg[^>]*aria-hidden="true"/);
+  assert.doesNotMatch(html, />Sign in \/ Account<\/span>/);
+});
+
+test("machine listings keep view links without quotation buttons", async () => {
+  for (const pathname of ["/", "/store", "/machines"]) {
+    const html = await (await render(pathname)).text();
+    const cards = html.match(/<article class="machine-card[\s\S]*?<\/article>/g) ?? [];
+    assert.equal(cards.length, 3);
+    for (const card of cards) {
+      assert.match(card, /View machine/);
+      assert.doesNotMatch(card, /Request quote|wa\.me/);
+    }
+  }
+});
+
+test("renders honest sample highlights with native scrolling and server components", async () => {
+  const html = await (await render("/")).text();
+  assert.match(html, /Latest from IVEND/);
+  assert.match(html, /Preview content\. Official updates will be added here\./);
+  assert.equal((html.match(/>Sample · Not an announcement<\/span>/g) ?? []).length, 3);
+  assert.match(html, /aria-label="IVEND updates"[^>]*tabindex="0"/i);
+  assert.match(html, /Browse current machines/);
+  for (const file of ["page.tsx", "components/LatestIvend.tsx", "components/HighlightCard.tsx"]) {
+    assert.doesNotMatch(await readFile(new URL(`../app/${file}`, import.meta.url), "utf8"), /["']use client["']/);
+  }
+  const styles = await readFile(new URL("../app/components/latest-ivend.module.css", import.meta.url), "utf8");
+  assert.match(styles, /overflow-x: auto/);
+  assert.match(styles, /scroll-snap-type: x proximity/);
+  assert.match(styles, /touch-action: pan-x pan-y pinch-zoom/);
+  const source = await readFile(new URL("../app/data/highlights.ts", import.meta.url), "utf8");
+  const code = transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext } }).outputText;
+  const { highlights } = await import(`data:text/javascript;base64,${Buffer.from(code).toString("base64")}`);
+  assert.equal(new Set(highlights.map((item) => item.id)).size, highlights.length);
+  for (const item of highlights) {
+    assert.equal(item.sample, true);
+    assert.equal(item.date, undefined);
+    assert.ok(item.imageAlt.length > 0);
+    await access(new URL(`../public${item.image}`, import.meta.url));
+    assert.equal((await render(item.href.split("#")[0] || "/")).status, 200);
+  }
+});
+
+test("searches the visible catalogue and existing destinations", async () => {
+  const compile = (source) => `data:text/javascript;base64,${Buffer.from(transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext } }).outputText).toString("base64")}`;
+  const machines = compile(await readFile(new URL("../app/data/machines.ts", import.meta.url), "utf8"));
+  const navigation = compile(await readFile(new URL("../app/data/navigation.ts", import.meta.url), "utf8"));
+  const source = (await readFile(new URL("../app/lib/site-search.ts", import.meta.url), "utf8"))
+    .replace('"../data/machines"', JSON.stringify(machines))
+    .replace('"../data/navigation"', JSON.stringify(navigation));
+  const { searchSite, searchIndex } = await import(compile(source));
+  assert.equal(searchSite("COFFEE")[0].href, "/machines/hot-cold-coffee-machine");
+  assert.equal(searchSite("T05")[0].href, "/products/t05-cashless-device");
+  assert.equal(searchSite("repair maintenance")[0].href, "/#contact");
+  assert.match(searchSite("TCN-D720-10G")[0].description, /Coming soon/);
+  assert.equal(searchSite("notarealmachine").length, 0);
+  assert.equal(searchSite("!!!").length, 0);
+  assert.ok(searchSite("").length > 0);
+  assert.ok(!searchIndex.some((entry) => entry.href.includes("10c-v22")));
+  assert.equal(new Set(searchIndex.map((entry) => entry.href)).size, searchIndex.length);
+});
+
+test("renders accessible search on home and product headers", async () => {
+  for (const path of ["/", "/products/t05-cashless-device"]) {
+    const html = await (await render(path)).text();
+    assert.match(html, /aria-label="Search IVEND"/);
+    assert.match(html, /aria-controls="ivend-site-search"/);
+    assert.match(html, /<dialog[^>]*aria-labelledby="ivend-search-title"/);
+    assert.match(html, /aria-label="Close search"/);
+    assert.match(html, /href="\/account"/);
+  }
+});
 
 async function render(pathname = "/", requestHeaders = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -145,15 +221,16 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.1\.6(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.3\.3(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.1\.6"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.3"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
   assert.match(headerSource, /IVEND_RELEASE_STATUS === "Beta"/);
-  assert.match(headerSource, /Vending Solutions &amp; Service/);
+  assert.match(headerSource, /アイ・ヴェンド・ステーション/);
 });
 
 test("publishes a trilingual, site-specific privacy policy", async () => {

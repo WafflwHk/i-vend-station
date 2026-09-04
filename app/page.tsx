@@ -1,6 +1,7 @@
 import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
+import LatestIvend from "./components/LatestIvend";
 import { catalogueMachines } from "./data/machines";
 import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
@@ -89,6 +90,8 @@ export default function Home() {
           {faqs.map((faq, index) => <details key={faq.question} data-animate="up" data-animate-delay={String(index % 3)}><summary><small>{String(index + 1).padStart(2, "0")}</small>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}
         </div>
       </section>
+
+      <LatestIvend />
 
       <section className="contact" id="contact">
         <div className="contact-glow one" />

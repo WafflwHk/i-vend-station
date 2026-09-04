@@ -1,6 +1,5 @@
 import type { Machine } from "../data/machines";
 import MachineArt from "./MachineArt";
-import RequestQuoteLink from "./RequestQuoteLink";
 
 type Props = {
   machine: Machine;
@@ -24,9 +23,7 @@ export default function MachineCard({ machine, index }: Props) {
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
           <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
-          {machine.comingSoon
-            ? <span className="coming-soon-action" aria-label={`${machine.code} is coming soon`}>Coming soon</span>
-            : <RequestQuoteLink code={machine.code} name={machine.name} variant="compact" />}
+          {machine.comingSoon && <span className="coming-soon-action" aria-label={`${machine.code} is coming soon`}>Coming soon</span>}
         </div>
       </div>
     </article>

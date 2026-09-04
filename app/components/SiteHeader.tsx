@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import styles from "./site-header.module.css";
 import { IVEND_RELEASE_STATUS } from "../config/site";
+import { navigationLinks as links } from "../data/navigation";
+import SiteSearch from "./SiteSearch";
 
 type Appearance = "system" | "light" | "dark";
 
@@ -12,15 +14,6 @@ const appearanceOptions: ReadonlyArray<{ value: Appearance; label: string }> = [
   { value: "system", label: "System" },
   { value: "light", label: "Light" },
   { value: "dark", label: "Dark" },
-];
-
-const links = [
-  { label: "Store", href: "/store" },
-  { label: "Machines", href: "/machines" },
-  { label: "Cashless Device", href: "/products/t05-cashless-device" },
-  { label: "About Us", href: "/#about" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "Contact", href: "/#contact" },
 ];
 
 const normaliseAppearance = (value: string | null | undefined): Appearance => (
@@ -150,7 +143,7 @@ export default function SiteHeader() {
             </a>
             {IVEND_RELEASE_STATUS === "Beta" ? <span className={styles.releaseBadge} title="Website under active development">{IVEND_RELEASE_STATUS}</span> : null}
           </div>
-          <span className={styles.tagline}>Vending Solutions &amp; Service</span>
+          <span className={styles.tagline} lang="ja">アイ・ヴェンド・ステーション</span>
         </div>
 
         <nav className={styles.desktopNav} aria-label="Main navigation">
@@ -161,7 +154,10 @@ export default function SiteHeader() {
           <div className={styles.desktopAppearance}>
             <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
           </div>
-          <a className={styles.account} href="/account"><span className={styles.accountLong}>Sign in / Account</span><span className={styles.accountShort}>Account</span></a>
+          <SiteSearch onOpen={() => setOpen(false)} />
+          <a className={styles.account} href="/account" aria-label="Sign in or open your account" title="Sign in / Account">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5" /><path d="M5 20v-1a7 7 0 0 1 14 0v1" /></svg>
+          </a>
           <button
             ref={menuButtonRef}
             className={styles.menuButton}

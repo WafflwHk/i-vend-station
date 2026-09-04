@@ -155,7 +155,6 @@
 .account:active,
 .mobileAccount:active { scale: 0.97; }
 
-.accountShort,
 .menuButton {
   display: none;
 }
@@ -241,8 +240,6 @@
   .bar { gap: 18px; }
   .desktopNav { gap: 14px; }
   .appearanceControl button { min-width: 38px; padding: 0 5px; font-size: 8px; }
-  .accountLong { display: none; }
-  .accountShort { display: inline; }
 }
 
 @media (max-width: 880px) {
@@ -323,7 +320,8 @@
 }
 
 @media (max-width: 430px) {
-  .account { padding: 0 11px; }
+  .bar { gap: 8px; }
+  .actions { gap: 4px; }
   .logo { width: 108px; }
   .tagline { font-size: 8px; }
 }
@@ -332,11 +330,13 @@
   .brandTopline { gap: 5px; }
   .bar { gap: 10px; }
   .bar { padding-left: 10px; }
-  .logo { width: 98px; }
+  .logo { width: 80px; }
   .tagline { font-size: 7.5px; letter-spacing: 0; }
-  .account { padding: 0 9px; font-size: 9px; }
   .actions { gap: 5px; }
 }
+
+.account { flex: 0 0 44px; width: 44px; height: 44px; min-height: 44px; padding: 0; touch-action: manipulation; }
+.account:focus-visible { outline: 3px solid var(--iv-focus); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   .header * { transition: none !important; }
