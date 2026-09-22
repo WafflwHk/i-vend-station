@@ -116,8 +116,9 @@
   .faq-list details p { margin: -1px 5px 25px 34px; font-size: 12px; }
 
   .contact { min-height: 620px; padding: 82px 18px calc(82px + env(safe-area-inset-bottom)); }
-  .contact h2 { margin: 27px 0 20px; font-size: 52px; line-height: 0.96; letter-spacing: -3.5px; }
-  .contact > p { font-size: 14px; line-height: 1.6; }
+  .contact h2 { width: 100%; margin: 0 0 24px; font-size: clamp(40px, 11.8vw, 52px); line-height: 0.98; letter-spacing: -3px; }
+  .contact-copy { width: 100%; gap: 14px; }
+  .contact-copy p { font-size: 14px; line-height: 1.6; }
   .contact-actions { width: 100%; gap: 15px; }
   .contact-actions .button { width: 100%; min-height: 50px; justify-content: space-between; padding: 0 18px; }
 
@@ -135,8 +136,8 @@
   .collection-heading > p { font-size: 12px; }
   .collection-link { min-height: 44px; display: inline-flex; align-items: center; }
 
-  .store-feature-visual { min-height: 430px; }
-  .store-feature-visual img { width: min(64%, 275px); }
+  .store-feature-visual { min-height: 610px; padding: 28px 14px; }
+  .store-feature-visual .store-t05-viewer { width: min(100%, 410px); }
   .store-orbit { width: 320px; height: 320px; box-shadow: 0 0 0 60px #ffffff08, 0 0 0 120px #ffffff05; }
   .store-feature-copy { padding: 68px 20px 72px; }
   .store-feature h2 { font-size: 43px; line-height: 1; letter-spacing: -2.8px; }

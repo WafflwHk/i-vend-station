@@ -1,5 +1,4 @@
 import type { Machine } from "../data/machines";
-import AddToCartButton from "./AddToCartButton";
 import MachineArt from "./MachineArt";
 
 type Props = {
@@ -16,12 +15,15 @@ export default function MachineCard({ machine, index }: Props) {
         {machine.image ? <img className="machine-photo" src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /> : <MachineArt kind={machine.art} />}
       </div>
       <div className="card-copy">
-        <div className="model-code">{machine.code}</div>
+        <div className="model-line">
+          <div className="model-code">{machine.code}</div>
+          {machine.comingSoon ? <span className="availability-badge">Coming Soon</span> : null}
+        </div>
         <h3>{machine.name}</h3>
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
           <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
-          <AddToCartButton productId={machine.slug} variant="compact" />
+          {machine.comingSoon && <span className="coming-soon-action" aria-label={`${machine.code} is coming soon`}>Coming soon</span>}
         </div>
       </div>
     </article>

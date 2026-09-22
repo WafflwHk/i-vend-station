@@ -55,7 +55,7 @@ const machineReply = (slug: string): AssistantReply => {
     kind: "catalogue",
     title: machine.name,
     text: `${machine.code}: ${machine.description}`,
-    links: [machineLink(slug), { label: "Open the quote cart", href: "/cart" }],
+    links: [machineLink(slug), { label: "Request a quotation", href: "/#contact" }],
   };
 };
 
@@ -63,7 +63,7 @@ const fallbackReply: AssistantReply = {
   kind: "fallback",
   title: "I can help with the product range",
   text: "Ask me about coffee, standard-capacity, classic, touchscreen, or double-cabinet machines, the T05 cashless device, illustrative views, or preparing a quotation.",
-  links: [{ label: "Browse all machines", href: "/machines" }, { label: "Open the quote cart", href: "/cart" }],
+  links: [{ label: "Browse all machines", href: "/machines" }, { label: "Request a quotation", href: "/#contact" }],
 };
 
 export function getProductAssistantReply(input: string, currentMachineSlug?: string): AssistantReply {
@@ -108,7 +108,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
       kind: "confirmation",
       title: "Quotation and availability are confirmed directly",
       text: "The website does not publish fixed prices, stock, delivery times, warranty, or installation promises. A quotation depends on the exact model, configuration, availability, destination, and payment setup.",
-      links: [{ label: "Prepare a quote cart", href: "/cart" }, { label: "Quotation details", href: "/#contact" }],
+      links: [{ label: "Request a quotation", href: "/#contact" }, { label: "Browse machines", href: "/machines" }],
     };
   }
 
@@ -157,16 +157,16 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
       kind: "catalogue",
       title: "T05 cashless payment device",
       text: "T05 is a cashless option for compatible vending machines. Approved setups may support contactless or card payments, QR or e-wallet methods, transaction records, reporting, and Wi-Fi or 4G processing. Machine, network, region, terminal, and merchant checks are required.",
-      links: [{ label: "Explore T05", href: "/products/t05-cashless-device" }, { label: "Open the quote cart", href: "/cart" }],
+      links: [{ label: "Explore T05", href: "/products/t05-cashless-device" }, { label: "Request a quotation", href: "/#contact" }],
     };
   }
 
-  if (hasAny(query, ["quote", "quotation", "order", "buy", "purchase", "cart"])) {
+  if (hasAny(query, ["quote", "quotation", "order", "buy", "purchase"])) {
     return {
       kind: "guide",
       title: "Prepare a quotation request",
-      text: "Add machines or T05 to the quote cart, set quantities, and copy the enquiry summary. This prepares a quotation list only; it does not place an order or take payment. Final price, availability, configuration, and compatibility are confirmed directly.",
-      links: [{ label: "Open quote cart", href: "/cart" }, { label: "Continue shopping", href: "/store" }],
+      text: "Choose a machine or the T05 device, then contact I Vend Station with the product name, quantity, location, and requirements. The team will confirm final price, availability, configuration, and compatibility directly.",
+      links: [{ label: "Request a quotation", href: "/#contact" }, { label: "Browse the catalogue", href: "/store" }],
     };
   }
 
@@ -183,8 +183,8 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "guide",
       title: "Contact and quotation planning",
-      text: "Prepare the model names, what you plan to sell, your location, available space, temperature needs, and preferred payment method. The quotation section is where I Vend Station’s final contact details can be used.",
-      links: [{ label: "Go to quotation section", href: "/#contact" }, { label: "Prepare a quote cart", href: "/cart" }],
+      text: "Prepare the model names, what you plan to sell, your location, available space, temperature needs, and preferred payment method. The quotation section opens I Vend Station’s official WhatsApp contact.",
+      links: [{ label: "Go to quotation section", href: "/#contact" }, { label: "Browse machines", href: "/machines" }],
     };
   }
 
@@ -201,16 +201,16 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "guide",
       title: "I Vend Station account",
-      text: "Use the account page to sign in or view your profile. Your quote cart is stored only on this browser and device; it is not an order history or a completed purchase.",
-      links: [{ label: "Open account", href: "/account" }, { label: "Open quote cart", href: "/cart" }],
+      text: "Use the account page to sign in or view your profile. Product enquiries and quotation history are not saved to the account; contact I Vend Station when you are ready to request a quotation.",
+      links: [{ label: "Open account", href: "/account" }, { label: "Request a quotation", href: "/#contact" }],
     };
   }
 
   if (hasAny(query, ["all machines", "machine list", "what do you sell", "product range", "catalogue", "catalog"])) {
     return {
       kind: "catalogue",
-      title: "Five machine formats are listed",
-      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity, classic, touchscreen, and double-cabinet TCN formats. Each product page includes an illustrative interactive viewer.",
+      title: "Three machine formats are listed",
+      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity touchscreen and classic TCN formats. Each listed model includes an illustrative interactive viewer.",
       links: [{ label: "Browse all machines", href: "/machines" }],
     };
   }

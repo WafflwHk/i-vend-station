@@ -1,0 +1,206 @@
+.viewer {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 560px);
+  display: grid;
+  gap: 10px;
+  color: #f7f9ff;
+  user-select: none;
+}
+
+.photoStage {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 28px;
+  outline: none;
+  cursor: grab;
+  touch-action: pan-y;
+  isolation: isolate;
+}
+
+.photoStage::before {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4a8dff26 0, #1b5cb11c 48%, transparent 72%);
+  content: "";
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.photoStage:active { cursor: grabbing; }
+
+.photoStage:focus-visible {
+  outline: 3px solid #8ab4ff;
+  outline-offset: 3px;
+}
+
+.photoStage img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 28px 24px #02071475) saturate(1.02);
+  animation: frameReveal 280ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.dragHint {
+  position: absolute;
+  z-index: 2;
+  right: 15px;
+  bottom: 14px;
+  min-height: 30px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ffffff22;
+  border-radius: 999px;
+  color: #cbd7eb;
+  background: #070b12b8;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  backdrop-filter: blur(9px);
+}
+
+.viewOptions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.viewOptions button,
+.transport button {
+  min-height: 46px;
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  color: #d9e1ee;
+  background: #070b12c9;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, scale 100ms ease;
+}
+
+.viewOptions button {
+  padding: 7px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.viewOptions button > span {
+  color: #739ce4;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.viewOptions button[aria-pressed="true"] {
+  border-color: #6da1ff;
+  color: #fff;
+  background: #1d65e8;
+  box-shadow: 0 0 0 1px #6da1ff inset, 0 10px 25px #07193666;
+}
+
+.transport {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) 46px;
+  gap: 7px;
+}
+
+.transport button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.transport button > span { color: #78a5f8; }
+
+.transport button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.viewOptions button:focus-visible,
+.transport button:focus-visible {
+  outline: 3px solid #9dc0ff;
+  outline-offset: 2px;
+}
+
+.viewerMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #dce6f7;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.viewerMeta strong { font-size: 10px; }
+.viewerMeta span { color: #8292aa; }
+
+.caption,
+.motionNote {
+  margin: 0;
+  color: #8d9bb1;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.motionNote { color: #c7d5ed; }
+
+.liveStatus {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .viewOptions button:hover,
+  .transport button:not(:disabled):hover {
+    border-color: #6d9ce8;
+    color: #fff;
+    background: #17243a;
+  }
+}
+
+.viewOptions button:active,
+.transport button:not(:disabled):active { scale: .98; }
+
+@keyframes frameReveal {
+  from { opacity: .35; scale: .975; }
+  to { opacity: 1; scale: 1; }
+}
+
+@media (max-width: 540px) {
+  .viewer { width: min(100%, 410px); gap: 8px; }
+  .photoStage { border-radius: 22px; }
+  .viewOptions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .viewOptions button { min-height: 46px; font-size: 11px; }
+  .dragHint { right: 10px; bottom: 10px; min-height: 28px; font-size: 8px; }
+  .caption, .motionNote { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoStage img { animation: none !important; }
+  .viewOptions button,
+  .transport button { transition: none !important; }
+  .viewOptions button:active,
+  .transport button:not(:disabled):active { scale: 1; }
+}

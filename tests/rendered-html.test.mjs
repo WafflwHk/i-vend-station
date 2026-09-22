@@ -1,6 +1,82 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
+import { transpileModule, ModuleKind } from "typescript";
+
+test("header account control is an accessible icon link", async () => {
+  const html = await (await render("/")).text();
+  assert.match(html, /href="\/account" aria-label="Sign in or open your account" title="Sign in \/ Account"><svg[^>]*aria-hidden="true"/);
+  assert.doesNotMatch(html, />Sign in \/ Account<\/span>/);
+});
+
+test("machine listings keep view links without quotation buttons", async () => {
+  for (const pathname of ["/", "/store", "/machines"]) {
+    const html = await (await render(pathname)).text();
+    const cards = html.match(/<article class="machine-card[\s\S]*?<\/article>/g) ?? [];
+    assert.equal(cards.length, 3);
+    for (const card of cards) {
+      assert.match(card, /View machine/);
+      assert.doesNotMatch(card, /Request quote|wa\.me/);
+    }
+  }
+});
+
+test("renders honest sample highlights with native scrolling and server components", async () => {
+  const html = await (await render("/")).text();
+  assert.match(html, /Latest from IVEND/);
+  assert.match(html, /Preview content\. Official updates will be added here\./);
+  assert.equal((html.match(/>Sample · Not an announcement<\/span>/g) ?? []).length, 3);
+  assert.match(html, /aria-label="IVEND updates"[^>]*tabindex="0"/i);
+  assert.match(html, /Browse current machines/);
+  for (const file of ["page.tsx", "components/LatestIvend.tsx", "components/HighlightCard.tsx"]) {
+    assert.doesNotMatch(await readFile(new URL(`../app/${file}`, import.meta.url), "utf8"), /["']use client["']/);
+  }
+  const styles = await readFile(new URL("../app/components/latest-ivend.module.css", import.meta.url), "utf8");
+  assert.match(styles, /overflow-x: auto/);
+  assert.match(styles, /scroll-snap-type: x proximity/);
+  assert.match(styles, /touch-action: pan-x pan-y pinch-zoom/);
+  const source = await readFile(new URL("../app/data/highlights.ts", import.meta.url), "utf8");
+  const code = transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext } }).outputText;
+  const { highlights } = await import(`data:text/javascript;base64,${Buffer.from(code).toString("base64")}`);
+  assert.equal(new Set(highlights.map((item) => item.id)).size, highlights.length);
+  for (const item of highlights) {
+    assert.equal(item.sample, true);
+    assert.equal(item.date, undefined);
+    assert.ok(item.imageAlt.length > 0);
+    await access(new URL(`../public${item.image}`, import.meta.url));
+    assert.equal((await render(item.href.split("#")[0] || "/")).status, 200);
+  }
+});
+
+test("searches the visible catalogue and existing destinations", async () => {
+  const compile = (source) => `data:text/javascript;base64,${Buffer.from(transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext } }).outputText).toString("base64")}`;
+  const machines = compile(await readFile(new URL("../app/data/machines.ts", import.meta.url), "utf8"));
+  const navigation = compile(await readFile(new URL("../app/data/navigation.ts", import.meta.url), "utf8"));
+  const source = (await readFile(new URL("../app/lib/site-search.ts", import.meta.url), "utf8"))
+    .replace('"../data/machines"', JSON.stringify(machines))
+    .replace('"../data/navigation"', JSON.stringify(navigation));
+  const { searchSite, searchIndex } = await import(compile(source));
+  assert.equal(searchSite("COFFEE")[0].href, "/machines/hot-cold-coffee-machine");
+  assert.equal(searchSite("T05")[0].href, "/products/t05-cashless-device");
+  assert.equal(searchSite("repair maintenance")[0].href, "/#contact");
+  assert.match(searchSite("TCN-D720-10G")[0].description, /Coming soon/);
+  assert.equal(searchSite("notarealmachine").length, 0);
+  assert.equal(searchSite("!!!").length, 0);
+  assert.ok(searchSite("").length > 0);
+  assert.ok(!searchIndex.some((entry) => entry.href.includes("10c-v22")));
+  assert.equal(new Set(searchIndex.map((entry) => entry.href)).size, searchIndex.length);
+});
+
+test("renders accessible search on home and product headers", async () => {
+  for (const path of ["/", "/products/t05-cashless-device"]) {
+    const html = await (await render(path)).text();
+    assert.match(html, /aria-label="Search IVEND"/);
+    assert.match(html, /aria-controls="ivend-site-search"/);
+    assert.match(html, /<dialog[^>]*aria-labelledby="ivend-search-title"/);
+    assert.match(html, /aria-label="Close search"/);
+    assert.match(html, /href="\/account"/);
+  }
+});
 
 async function render(pathname = "/", requestHeaders = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -51,9 +127,22 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
-  assert.match(html, /05[\s\S]*MACHINE TYPES/);
+  assert.match(html, /03[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
   assert.doesNotMatch(html, /Frozen Food Vending Machine|Hot Food Vending Machine/);
+  assert.match(html, /Tell Us What Vending Machine Support You Need/);
+  assert.match(html, /Planning to buy, rent, or customize a vending machine\? Already have a machine that needs repair\?/);
+  assert.match(html, /Send us your product type, location and requirements\. Our team will help you check the suitable machine, payment system or technical support needed\./);
+  assert.match(html, /Contact Our WhatsApp Team/);
+  assert.match(html, /href="https:\/\/wa\.me\/601133180812\?text=Hello%20I%20Vend%20Station/);
+  assert.match(html, /Support%20needed%20\(buy%2C%20rent%2C%20customize%2C%20or%20repair\)%3A/);
+  assert.match(html, /Location%3A/);
+  assert.match(html, /Requirements%3A/);
+  assert.match(html, /target="_blank"/);
+  assert.match(html, /rel="noopener noreferrer"/);
+  assert.match(html, /aria-label="Contact our WhatsApp team \(opens in a new tab\)"/);
+  assert.doesNotMatch(html, /whatsapp-contact-status|WhatsApp link will be enabled|<button[^>]*disabled[^>]*>Contact Our WhatsApp Team/);
+  assert.doesNotMatch(html, /hello@example\.com|Replace this with your phone/);
   assert.match(html, /i-vend-station-logo\.png/);
   assert.match(html, /aria-label="Website appearance"/);
   assert.match(html, />System</);
@@ -72,7 +161,7 @@ test("server-renders every public product route", async () => {
     ["/machines", /Choose a model\./],
     ["/machines/hot-cold-coffee-machine", /Fuji Coffee Machine \(Hot &amp; Cold\)/],
     ["/products/t05-cashless-device", /Cashless,/],
-    ["/cart", /Your quote cart\./],
+    ["/privacy", /I Vend Station Privacy Policy/],
   ];
 
   for (const [pathname, expectedContent] of routes) {
@@ -82,18 +171,105 @@ test("server-renders every public product route", async () => {
     assert.match(html, expectedContent);
     assert.match(html, /data-loading-screen/);
     assert.match(html, /aria-label="Open Ask IVS product assistant"/);
+    assert.match(html, /href="\/privacy"[^>]*>Privacy Policy/);
     assert.doesNotMatch(html, /&amp;nearr;/i);
   }
 });
 
-test("shows the Store T05 image with its camera side rotated down", async () => {
-  const [storeResponse, storefrontStyles] = await Promise.all([
-    render("/store"),
-    readFile(new URL("../app/storefront.css", import.meta.url), "utf8"),
+test("removes the TCN-D720-10C (V22) machine from catalogue listings", async () => {
+  const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
+
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.doesNotMatch(html, />TCN-D720-10C \(V22\)</);
+    assert.doesNotMatch(html, />Touchscreen Vending Machine<\/h3>/);
+  }
+});
+
+test("removes the Double Cabinet Machine from catalogue listings", async () => {
+  const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
+
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.doesNotMatch(html, />TCN-D720-10C \(V22\) \+ 10R</);
+    assert.doesNotMatch(html, />Double Cabinet Machine<\/h3>/);
+  }
+});
+
+test("marks the TCN-D720-10G catalogue card as coming soon", async () => {
+  const responses = await Promise.all([render("/"), render("/store"), render("/machines")]);
+
+  for (const response of responses) {
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /TCN-D720-10G is coming soon/);
+    assert.match(html, /availability-badge[^>]*>Coming Soon<\/span>/);
+    assert.doesNotMatch(html, /Product%3A%20TCN-D720-10G/);
+  }
+});
+
+test("renders the central IVEND website version in every footer", async () => {
+  const [homeResponse, t05Response, versionSource] = await Promise.all([
+    render("/"),
+    render("/products/t05-cashless-device"),
+    readFile(new URL("../app/config/site.ts", import.meta.url), "utf8"),
   ]);
+
+  assert.equal(homeResponse.status, 200);
+  assert.equal(t05Response.status, 200);
+  for (const response of [homeResponse, t05Response]) {
+    const html = await response.text();
+    assert.match(html, /v1\.3\.4(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
+    assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
+  }
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.4"/);
+  assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
+  const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
+  assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
+  assert.match(headerSource, /IVEND_RELEASE_STATUS === "Beta"/);
+  assert.match(headerSource, /アイ・ヴェンド・ステーション/);
+});
+
+test("publishes a trilingual, site-specific privacy policy", async () => {
+  const response = await render("/privacy");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>Privacy Policy \| I Vend Station<\/title>/i);
+  assert.match(html, /<time dateTime="2026-08-22">22 August 2026<\/time>/);
+  assert.match(html, /I Vend Station Privacy Policy/);
+  assert.match(html, /Notis Privasi I Vend Station/);
+  assert.match(html, /I Vend Station 隐私政策/);
+  assert.match(html, /href="#simplified-chinese"[^>]*lang="zh-Hans"[^>]*>简体中文/);
+  assert.match(html, /本网站不会将这些内容发送至外部 AI API/);
+  assert.match(html, /I Vend Station does not receive your ChatGPT password/);
+  assert.match(html, /appearance preference uses your browser/);
+  assert.match(html, /does not save voice recordings/);
+  assert.match(html, /hosting and security services may process request data/);
+  assert.match(html, /href="https:\/\/wa\.me\/601133180812"/);
+  assert.match(html, /official WhatsApp number/);
+  assert.match(html, /may process it outside Malaysia/);
+  assert.doesNotMatch(html, /still needs to be configured|official channel becomes available|does not provide an active online privacy-request channel/);
+  assert.match(html, /Personal Data Protection Commissioner/);
+  assert.doesNotMatch(html, /hello@example\.com/);
+});
+
+test("shows the Store T05 four-angle viewer with its camera side down", async () => {
+  const storeResponse = await render("/store");
   assert.equal(storeResponse.status, 200);
-  assert.match(await storeResponse.text(), /camera side facing down/);
-  assert.match(storefrontStyles, /\.store-feature-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
+  const html = await storeResponse.text();
+  assert.match(html, /aria-label="T05 four-angle photo viewer"/);
+  assert.match(html, /t05-front-camera-down\.webp/);
+  assert.match(html, /Four supplied T05 product photos with backgrounds removed/);
+  assert.match(html, />Front</);
+  assert.match(html, />Right angle</);
+  assert.match(html, />Back</);
+  assert.match(html, />Left angle</);
+  assert.match(html, /Play four views/);
+  assert.doesNotMatch(html, /t05-terminal-correct\.png/);
 });
 
 test("shows the homepage T05 image with its camera side rotated down", async () => {
@@ -106,15 +282,47 @@ test("shows the homepage T05 image with its camera side rotated down", async () 
   assert.match(correctionStyles, /\.cashless-visual img\s*{[^}]*transform:\s*rotate\(180deg\)/);
 });
 
-test("shows the T05 product hero with its camera side rotated down", async () => {
-  const [productResponse, productStyles] = await Promise.all([
-    render("/products/t05-cashless-device"),
-    readFile(new URL("../app/products/t05-cashless-device/product.module.css", import.meta.url), "utf8"),
-  ]);
+test("shows the T05 product hero as an accessible four-angle viewer", async () => {
+  const productResponse = await render("/products/t05-cashless-device");
   assert.equal(productResponse.status, 200);
-  assert.match(await productResponse.text(), /camera side facing down/);
-  assert.match(productStyles, /\.deviceStage img\s*{[^}]*transform:\s*translateY\(-4px\) rotate\(180deg\)/);
-  assert.match(productStyles, /@keyframes deviceFloat\s*{[^}]*rotate\(180deg\)/);
+  const html = await productResponse.text();
+  assert.match(html, /aria-label="T05 four-angle photo viewer"/);
+  assert.match(html, /role="slider"/);
+  assert.match(html, /aria-valuemin="1"/);
+  assert.match(html, /aria-valuemax="4"/);
+  assert.match(html, /t05-front-camera-down\.webp/);
+  assert.match(html, /fetchPriority="high"/);
+  assert.match(html, /aria-pressed="true"[^>]*>\s*<span>01<\/span>\s*Front/);
+  assert.match(html, /aria-label="Show previous T05 view"/);
+  assert.match(html, /aria-label="Show next T05 view"/);
+  assert.match(html, /aria-live="polite"/);
+  assert.doesNotMatch(html, /t05-terminal-correct\.png/);
+});
+
+test("implements drag, keyboard, spin, and reduced-motion controls for T05 views", async () => {
+  const [viewerSource, photoData, viewerStyles] = await Promise.all([
+    readFile(new URL("../app/components/T05PhotoViewer.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/data/t05-photos.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/t05-photo-viewer.module.css", import.meta.url), "utf8"),
+  ]);
+
+  for (const filename of [
+    "t05-front-camera-down.webp",
+    "t05-right-angle-camera-down.webp",
+    "t05-back-camera-down.webp",
+    "t05-left-angle-camera-down.webp",
+  ]) {
+    assert.match(photoData, new RegExp(filename.replaceAll(".", "\\.")));
+  }
+  assert.match(viewerSource, /setPointerCapture/);
+  assert.match(viewerSource, /onPointerMove/);
+  assert.match(viewerSource, /ArrowLeft/);
+  assert.match(viewerSource, /ArrowRight/);
+  assert.match(viewerSource, /prefers-reduced-motion: reduce/);
+  assert.match(viewerSource, /visibilitychange/);
+  assert.match(viewerStyles, /touch-action:\s*pan-y/);
+  assert.match(viewerStyles, /min-height:\s*46px/);
+  assert.match(viewerStyles, /prefers-reduced-motion:\s*reduce/);
 });
 
 test("renders a private, voice-enabled catalogue product assistant", async () => {
@@ -128,6 +336,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   assert.match(assistantSource, /webkitSpeechRecognition/);
   assert.match(assistantSource, /speechSynthesis/);
   assert.match(assistantSource, /I Vend Station does not save recordings/);
+  assert.match(assistantSource, /href="\/privacy"/);
   assert.match(knowledgeSource, /A compatibility check is required/);
   assert.match(knowledgeSource, /Viewer choices are illustrative/);
   assert.match(knowledgeSource, /Quotation and availability are confirmed directly/);
@@ -138,7 +347,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   );
 });
 
-test("renders the accessible finish and size configurator on every machine page", async () => {
+test("keeps finish controls and removes viewer-size controls on every machine page", async () => {
   const machineRoutes = [
     "/machines/hot-cold-coffee-machine",
     "/machines/tcn-d720-6g",
@@ -153,32 +362,39 @@ test("renders the accessible finish and size configurator on every machine page"
     const html = await response.text();
     assert.match(html, /aria-label="Illustrative machine configuration preview"/);
     assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
-    assert.match(html, /S and L change only the viewer scale, not confirmed machine dimensions\./);
+    assert.doesNotMatch(html, /Viewer size|viewer-size-|Smaller viewer scale|S and L change/);
+    assert.match(html, /Choose a machine view/);
     assert.match(html, /type="radio"/);
-    assert.match(html, /aria-label="Add [^"]+ to cart"/);
+    assert.match(html, /Request a Quote/);
+    assert.match(html, /Request a quotation for [^"]+ via WhatsApp \(opens in a new tab\)/);
   }
 });
 
-test("renders the device-local quote cart without pretending to be checkout", async () => {
-  const response = await render("/cart");
-  assert.equal(response.status, 200);
-  const html = await response.text();
+test("renders quotation actions and removes the legacy shopping route", async () => {
+  const [homeResponse, storeResponse, t05Response, quoteLinkSource, quoteLinkStyles, whatsappSource] = await Promise.all([
+    render("/"),
+    render("/store"),
+    render("/products/t05-cashless-device"),
+    readFile(new URL("../app/components/RequestQuoteLink.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/request-quote-link.module.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/whatsapp.ts", import.meta.url), "utf8"),
+  ]);
 
-  assert.match(html, /<title>Quote Cart \| I Vend Station<\/title>/i);
-  assert.match(html, /Loading your quote cart/);
-  assert.match(html, /Continue shopping/);
-  assert.match(html, /aria-label="Shopping cart, 0 items"/);
-  assert.doesNotMatch(html, /Checkout|Subtotal|Buy now|RM\s*[\d,.]+|mailto:/i);
+  for (const response of [homeResponse, storeResponse, t05Response]) assert.equal(response.status, 200);
+  const combinedHtml = `${await homeResponse.text()}${await storeResponse.text()}${await t05Response.text()}`;
+  assert.match(combinedHtml, /Request a Quote/);
+  assert.match(combinedHtml, /wa\.me\/601133180812/);
+  assert.match(combinedHtml, /target="_blank"/);
+  assert.match(combinedHtml, /rel="noopener noreferrer"/);
+  assert.doesNotMatch(combinedHtml, /hello@example\.com|href="mailto:/i);
+  assert.match(quoteLinkSource, /createWhatsAppQuoteHref/);
+  assert.match(quoteLinkStyles, /\.button\.compact\s*{[\s\S]*?width:\s*auto;/);
+  assert.match(quoteLinkStyles, /\.button\.compact\s*{[\s\S]*?min-width:\s*122px;/);
+  assert.match(quoteLinkStyles, /@media \(max-width: 650px\)[\s\S]*?min-height:\s*46px;/);
+  assert.match(whatsappSource, /Please confirm price, availability, configuration, and compatibility/);
 
-  const t05Response = await render("/products/t05-cashless-device");
-  const t05Html = await t05Response.text();
-  assert.match(t05Html, /aria-label="Add T05 Cashless Device to cart"/);
-
-  const cartStore = await readFile(new URL("../app/components/cart-store.ts", import.meta.url), "utf8");
-  assert.match(cartStore, /ivend-quote-cart:v1/);
-  assert.match(cartStore, /ivend-cart-changed/);
-  assert.match(cartStore, /Math\.min\(99/);
-  assert.match(cartStore, /localStorage/);
+  const removedCommercePath = `/${"ca"}${"rt"}`;
+  assert.equal((await render(removedCommercePath)).status, 404);
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {
@@ -211,6 +427,10 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
     access(new URL("../public/t05-terminal-correct.png", import.meta.url)),
+    access(new URL("../public/t05-views/t05-front-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-right-angle-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-back-camera-down.webp", import.meta.url)),
+    access(new URL("../public/t05-views/t05-left-angle-camera-down.webp", import.meta.url)),
     access(new URL("../public/hot-cold-coffee-machine-cutout.png", import.meta.url)),
     access(new URL("../public/tcn-d720-product-cutout.png", import.meta.url)),
   ]);
@@ -245,6 +465,7 @@ test("protects accounts and rejects unknown machine routes", async () => {
   const signedInHtml = await signedInAccount.text();
   assert.match(signedInHtml, /I Vend Customer/);
   assert.match(signedInHtml, /customer@example\.com/);
+  assert.match(signedInHtml, /href="\/privacy"[^>]*>Read the Privacy Policy\./);
 
   for (const pathname of [
     "/machines/not-a-real-machine",

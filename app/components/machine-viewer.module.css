@@ -78,7 +78,7 @@
 .configurator {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -126,8 +126,7 @@
   gap: 8px;
 }
 
-.finishOption,
-.sizeOption { position: relative; min-width: 0; cursor: pointer; }
+.finishOption { position: relative; min-width: 0; cursor: pointer; }
 
 .finishOption {
   min-height: 94px;
@@ -179,8 +178,7 @@
   scale: 0.96;
 }
 
-.optionInput:focus-visible + .finishSwatch,
-.optionInput:focus-visible + .sizeCard { outline: 3px solid #67a0ff; outline-offset: 4px; }
+.optionInput:focus-visible + .finishSwatch { outline: 3px solid #67a0ff; outline-offset: 4px; }
 
 .optionName {
   width: 100%;
@@ -193,29 +191,6 @@
 }
 
 .finishOption > small { color: #9297a0; font-size: 7px; }
-
-.sizeOptions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-
-.sizeCard {
-  min-height: 94px;
-  padding: 15px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  align-content: center;
-  align-items: center;
-  column-gap: 12px;
-  border: 1px solid #d5d9df;
-  border-radius: 15px;
-  color: #555b65;
-  background: #fff;
-  transition: border-color 220ms ease, box-shadow 220ms ease, translate 220ms ease, background 220ms ease;
-}
-
-.sizeCard > strong { grid-row: 1 / 3; font-size: 27px; line-height: 1; letter-spacing: -1.5px; }
-.sizeCard > span { min-width: 0; font-size: 9px; font-weight: 680; line-height: 1.35; }
-.sizeCard > small { color: #969ba4; font-size: 7px; }
-.optionInput:checked + .sizeCard { border-color: #1d65e8; box-shadow: inset 0 0 0 1px #1d65e8, 0 8px 20px #1d65e81a; background: #f7faff; }
 
 .optionNote { margin: 14px 0 0; color: #91969f; font-size: 8px; line-height: 1.5; }
 
@@ -272,11 +247,10 @@
 .model {
   --viewer-yaw: 0deg;
   --viewport-scale: 1;
-  --viewer-size-scale: 1;
   position: relative;
   width: var(--machine-w);
   height: var(--machine-h);
-  scale: calc(var(--viewport-scale) * var(--viewer-size-scale));
+  scale: var(--viewport-scale);
   transform-style: preserve-3d;
   transform: rotateX(-4deg) rotateY(var(--viewer-yaw));
   transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1), scale 520ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -380,7 +354,6 @@
 @media (hover: hover) and (pointer: fine) {
   .finishOption:hover .finishSwatch { border-color: #9ba3af; scale: 1.04; }
   .finishOption:hover .optionInput:checked + .finishSwatch { scale: 0.99; }
-  .sizeOption:hover .sizeCard { border-color: #aeb5c0; translate: 0 -2px; }
 }
 
 :global(:root[data-theme="dark"]) .viewer {
@@ -428,8 +401,7 @@
   background: #242a34;
 }
 
-:global(:root[data-theme="dark"]) .finishOption > small,
-:global(:root[data-theme="dark"]) .sizeCard > small { color: #818a97; }
+:global(:root[data-theme="dark"]) .finishOption > small { color: #818a97; }
 
 :global(:root[data-theme="dark"]) .finishSwatch {
   border-color: #46505e;
@@ -441,17 +413,7 @@
   box-shadow: 0 0 0 2px #12161c, 0 0 0 5px #5a94ff;
 }
 
-:global(:root[data-theme="dark"]) .sizeCard {
-  color: #c9ced6;
-  border-color: #39414d;
-  background: #191e26;
-}
 
-:global(:root[data-theme="dark"]) .optionInput:checked + .sizeCard {
-  border-color: #5a94ff;
-  box-shadow: inset 0 0 0 1px #5a94ff, 0 10px 24px #0005;
-  background: #172338;
-}
 
 :global(:root[data-theme="dark"]) .swipeHint {
   color: #c0c6cf;
@@ -488,7 +450,6 @@
   .viewButtons { grid-template-columns: repeat(2, 1fr); }
   .optionGroup { padding: 16px 12px; }
   .finishOptions { gap: 4px; }
-  .sizeCard { padding: 12px; column-gap: 9px; }
   .model { --viewport-scale: 0.8; }
   .model[data-variant="double"] { --viewport-scale: 0.7; }
 }
@@ -501,13 +462,11 @@
   .sideVents i,
   .sideHandle,
   .finishSwatch,
-  .sizeCard,
   .controls button { transition: none; }
 
   .controls button:hover { transform: none; }
   .finishOption:hover .finishSwatch { scale: 1; }
   .finishOption:hover .optionInput:checked + .finishSwatch { scale: 0.96; }
-  .sizeOption:hover .sizeCard { translate: none; }
   .spinButton span { animation: none !important; }
 }
 
@@ -517,7 +476,6 @@
   .controls button,
   .optionGroup,
   .finishSwatch,
-  .sizeCard,
   .swipeHint {
     color: CanvasText;
     border-color: ButtonText;
@@ -532,8 +490,7 @@
     box-shadow: none;
   }
 
-  .optionInput:checked + .finishSwatch,
-  .optionInput:checked + .sizeCard {
+  .optionInput:checked + .finishSwatch {
     border-color: Highlight;
     outline: 3px solid Highlight;
     outline-offset: 3px;
@@ -541,7 +498,6 @@
   }
 
   .optionInput:focus-visible + .finishSwatch,
-  .optionInput:focus-visible + .sizeCard,
   .controls button:focus-visible,
   .stage:focus-visible { outline-color: Highlight; }
 

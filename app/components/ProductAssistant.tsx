@@ -346,7 +346,7 @@ export default function ProductAssistant() {
           </form>
 
           <p className={styles.speechStatus} role="status">{speechStatus}</p>
-          <p className={styles.disclosure}>Automated guidance from this website&apos;s catalogue. Voice starts only when you press the microphone. I Vend Station does not save recordings; your browser or device&apos;s speech service may process audio and use the internet. Do not share passwords or card details.</p>
+          <p className={styles.disclosure}>Automated guidance from this website&apos;s catalogue. Voice starts only when you press the microphone. I Vend Station does not save recordings; your browser or device&apos;s speech service may process audio and use the internet. Do not share passwords or card details. <a href="/privacy">Privacy Policy</a></p>
         </section>
       )}
     </div>

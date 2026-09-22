@@ -1,12 +1,16 @@
 import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
-import { machines } from "./data/machines";
+import LatestIvend from "./components/LatestIvend";
+import { catalogueMachines } from "./data/machines";
+import { createWhatsAppQuoteHref } from "./lib/whatsapp";
+
+const whatsappHref = createWhatsAppQuoteHref();
 
 const faqs = [
   {
     question: "What vending machines do you sell?",
-    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN standard-capacity, classic, touchscreen, and double-cabinet formats.",
+    answer: "The current catalogue includes a Japanese hot-and-cold coffee machine and TCN standard-capacity and classic vending formats.",
   },
   {
     question: "Are prices displayed online?",
@@ -22,7 +26,7 @@ const faqs = [
   },
   {
     question: "What details are needed for a quotation?",
-    answer: "Share the machine model, what you plan to sell, your location, available space, temperature needs, and preferred payment method. Replace the temporary contact email with your own contact details when ready.",
+    answer: "Share the machine model, what you plan to sell, your location, available space, temperature needs, and preferred payment method. Then contact our WhatsApp team to confirm availability, configuration, and quotation details.",
   },
 ];
 
@@ -47,7 +51,7 @@ export default function Home() {
             <div className="showcase-unit unit-two"><img className="hero-product-image hero-fuji-machine" src="/hot-cold-coffee-machine-cutout.png" width="1023" height="1537" alt="" aria-hidden="true" /></div>
             <div className="showcase-unit unit-three"><img className="hero-product-image hero-tcn-machine" src="/tcn-d720-product-cutout.png" width="1024" height="1536" alt="" aria-hidden="true" /></div>
           </div>
-          <div className="showcase-badge"><span>{String(machines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
+          <div className="showcase-badge"><span>{String(catalogueMachines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
           <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
         </div>
         <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>CHINA SERIES</span><i /><span>T05 CASHLESS</span></div>
@@ -60,7 +64,7 @@ export default function Home() {
         </div>
         <div className="category-pills" data-animate="up" data-animate-delay="1"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
         <div className="machine-grid">
-          {machines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
+          {catalogueMachines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
         </div>
         <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification. Side and rear viewer angles are illustrative.</p>
       </section>
@@ -87,7 +91,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact" id="contact"><div className="contact-glow one" /><div className="contact-glow two" /><div className="section-index light" data-animate="up">06 &mdash; REQUEST A QUOTATION</div><h2 data-animate="up" data-animate-delay="1">Which machine<br />fits your plan?</h2><p data-animate="up" data-animate-delay="2">Send the model name, your location, and what you want to sell.</p><div className="contact-actions" data-animate="up" data-animate-delay="3"><a className="button white" href="mailto:hello@example.com?subject=I Vend Station machine quotation">Contact I Vend Station <b>&#8599;</b></a><span>Replace this with your phone,<br />WhatsApp, or email when ready.</span></div></section>
+      <LatestIvend />
+
+      <section className="contact" id="contact">
+        <div className="contact-glow one" />
+        <div className="contact-glow two" />
+        <h2 data-animate="up">Tell Us What Vending Machine Support You Need</h2>
+        <div className="contact-copy" data-animate="up" data-animate-delay="1">
+          <p>Planning to buy, rent, or customize a vending machine? Already have a machine that needs repair?</p>
+          <p>Send us your product type, location and requirements. Our team will help you check the suitable machine, payment system or technical support needed.</p>
+        </div>
+        <div className="contact-actions" data-animate="up" data-animate-delay="2">
+          <a className="button white" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="Contact our WhatsApp team (opens in a new tab)">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></a>
+        </div>
+      </section>
 
       <SiteFooter />
     </main>

@@ -188,12 +188,10 @@ body { accent-color: var(--iv-accent); }
   background: var(--iv-surface-raised);
   border-color: var(--iv-line-soft);
 }
-.card-bottom a,
 .card-bottom .view-machine-button {
   color: var(--iv-on-primary);
   background: var(--iv-primary);
 }
-.card-bottom a:hover,
 .card-bottom .view-machine-button:hover { color: #fff; background: var(--iv-accent); }
 
 .collection-page {
@@ -231,6 +229,10 @@ body { accent-color: var(--iv-accent); }
 .site-footer .brand { color: var(--iv-text); }
 .site-footer small { color: var(--iv-text-tertiary); }
 .site-footer .brand-logo { filter: var(--iv-logo-filter); }
+.footer-legal-link { align-self: flex-end; color: var(--iv-text-secondary); font-size: 9px; text-decoration: underline; text-underline-offset: 4px; }
+.footer-legal-link:focus-visible { outline: 3px solid var(--iv-focus); outline-offset: 4px; border-radius: 3px; }
+@media (hover: hover) and (pointer: fine) { .footer-legal-link:hover { color: var(--iv-accent); } }
+@media (max-width: 650px) { .footer-legal-link { align-self: center; min-height: 44px; display: inline-flex; align-items: center; font-size: 11px; } }
 
 @media (prefers-reduced-motion: no-preference) {
   body,

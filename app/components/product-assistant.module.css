@@ -363,6 +363,9 @@
   line-height: 1.45;
 }
 
+.disclosure a { color: var(--iv-accent); text-decoration: underline; text-underline-offset: 3px; }
+.disclosure a:focus-visible { outline: 2px solid var(--iv-focus); outline-offset: 2px; border-radius: 2px; }
+
 .srOnly {
   position: absolute;
   width: 1px;

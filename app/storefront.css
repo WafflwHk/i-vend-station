@@ -9,6 +9,9 @@
 .card-bottom .view-machine-button { width: auto; height: 38px; padding: 0 15px; flex: 1; display: flex; align-items: center; justify-content: space-between; border-radius: 9px; color: #fff; background: #16171b; font-size: 10px; font-weight: 700; }
 .card-bottom .view-machine-button:hover { background: #1d65e8; }
 .card-bottom .quote-icon { width: 38px; height: 38px; flex: 0 0 auto; }
+.model-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.availability-badge { padding: 5px 8px; border: 1px solid color-mix(in srgb, var(--iv-accent) 30%, transparent); border-radius: 999px; color: var(--iv-accent); background: color-mix(in srgb, var(--iv-accent) 9%, transparent); font-size: 8px; line-height: 1; font-weight: 760; letter-spacing: 0.7px; text-transform: uppercase; white-space: nowrap; }
+.coming-soon-action { width: auto; min-width: 122px; height: 38px; flex: 0 0 auto; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--iv-line); border-radius: 9px; color: var(--iv-text-secondary); background: var(--iv-control-bg); font-size: 10px; font-weight: 740; white-space: nowrap; }
 
 .collection-page { min-height: 100vh; color: #16171c; background: #fff; }
 .collection-hero { min-height: 680px; padding: 170px max(32px, calc((100vw - 1220px) / 2)) 80px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: radial-gradient(circle at 75% 25%, #dce7fb 0, transparent 28%), linear-gradient(145deg, #fafafa, #eef1f6); }
@@ -28,7 +31,7 @@
 
 .store-feature { min-height: 730px; display: grid; grid-template-columns: 1fr 1fr; color: #fff; background: #101319; }
 .store-feature-visual { position: relative; min-height: 580px; display: grid; place-items: center; overflow: hidden; background: linear-gradient(145deg, #426996, #112b4d); }
-.store-feature-visual img { position: relative; z-index: 2; width: min(58%, 430px); transform: rotate(180deg); filter: drop-shadow(-25px -35px 28px #06122380); }
+.store-feature-visual .store-t05-viewer { width: min(84%, 520px); }
 .store-orbit { position: absolute; width: 520px; height: 520px; border: 1px solid #ffffff30; border-radius: 50%; box-shadow: 0 0 0 90px #ffffff08, 0 0 0 180px #ffffff05; }
 .store-feature-copy { padding: 95px max(40px, calc((100vw - 1220px) / 2)) 85px 80px; display: flex; flex-direction: column; justify-content: center; }
 .store-t05 { margin: 32px 0 13px; color: #6f9cf4; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
@@ -36,7 +39,8 @@
 .store-feature-copy > p { max-width: 500px; color: #989fa9; font-size: 13px; line-height: 1.75; }
 .store-feature-copy > a { align-self: flex-start; margin-top: 19px; padding: 14px 18px; border-radius: 999px; color: #111318; background: #fff; font-size: 10px; font-weight: 700; }
 .store-feature-copy > a span { margin-left: 8px; color: #1d65e8; }
-.store-feature-copy > button { align-self: flex-start; margin-top: 10px; }
+.store-feature-copy > a.store-quote-button { margin-top: 10px; color: #fff; background: #ffffff1a; }
+.store-feature-copy > a.store-quote-button b { color: #6f9cf4; }
 .store-feature-copy > small { margin-top: 17px; color: #5f6671; font-size: 8px; }
 
 .about-section { padding: 135px max(32px, calc((100vw - 1220px) / 2)); background: #f2f3f5; }
@@ -71,8 +75,7 @@
   .collection-list { padding: 90px 15px; }
   .store-feature { grid-template-columns: 1fr; }
   .store-feature-copy { padding: 75px 22px; }
-  .store-feature-copy > a,
-  .store-feature-copy > button { width: 100%; min-height: 48px; justify-content: center; }
+  .store-feature-copy > a { width: 100%; min-height: 48px; justify-content: center; }
   .about-section, .faq-section { padding: 95px 20px; }
   .about-main, .faq-head { grid-template-columns: 1fr; }
   .about-copy { margin: 55px 0 0; grid-template-columns: 1fr; gap: 35px; }
@@ -81,8 +84,10 @@
 @media (max-width: 560px) {
   .collection-hero h1 { font-size: 58px; }
   .collection-heading h2, .about-main h2, .faq-head h2 { font-size: 48px; letter-spacing: -3.2px; }
-  .store-feature-visual { min-height: 470px; }
+  .store-feature-visual { min-height: 610px; padding: 28px 14px; }
+  .store-feature-visual .store-t05-viewer { width: min(100%, 410px); }
   .store-feature h2 { font-size: 46px; letter-spacing: -3px; }
   .faq-list summary { min-height: 75px; grid-template-columns: 36px 1fr auto; font-size: 15px; }
   .faq-list details p { margin-left: 36px; }
+  .coming-soon-action { min-width: 128px; height: 46px; padding: 0 16px; font-size: 11px; }
 }

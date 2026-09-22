@@ -112,9 +112,7 @@
 
 .hero {
   position: relative;
-  min-height: calc(100vh - 58px);
-  height: 890px;
-  max-height: 980px;
+  min-height: max(calc(100vh - 58px), 940px);
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   align-items: center;
@@ -195,21 +193,17 @@
 .deviceStage {
   position: relative;
   z-index: 2;
-  height: 680px;
+  min-height: 760px;
   display: grid;
   place-items: center;
   perspective: 1000px;
   animation: fadeIn 1.2s 180ms both;
 }
 
-.deviceStage img {
+.heroPhotoViewer {
   position: relative;
   z-index: 2;
-  width: min(540px, 82%);
-  height: auto;
-  transform: translateY(-4px) rotate(180deg);
-  filter: drop-shadow(-32px -42px 32px #000b) saturate(1.02);
-  animation: deviceFloat 6.5s ease-in-out infinite;
+  width: min(570px, 96%);
 }
 
 .signalRing {
@@ -223,15 +217,6 @@
 }
 
 .signalRingTwo { animation-delay: -2s; }
-
-.deviceNote {
-  position: absolute;
-  right: 0;
-  bottom: 18%;
-  color: #60646d;
-  font-size: 8px;
-  letter-spacing: 0.3px;
-}
 
 .scrollCue {
   position: absolute;
@@ -581,10 +566,12 @@
 .footer > div { display: flex; flex-direction: column; gap: 7px; text-align: right; }
 .footer .brandLogo { width: 156px; }
 .footer small { color: #4f535b; font-size: 7px; }
+.privacyLink { align-self: flex-end; color: #858b96; font-size: 9px; text-decoration: underline; text-underline-offset: 4px; }
+.privacyLink:focus-visible { outline: 3px solid #71a4ff; outline-offset: 4px; border-radius: 3px; }
+@media (hover: hover) and (pointer: fine) { .privacyLink:hover { color: #6e9fff; } }
 
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes deviceFloat { 0%, 100% { transform: translateY(-4px) rotate(180deg); } 50% { transform: translateY(-18px) rotate(180deg); } }
 @keyframes ringPulse { 0% { opacity: 0; transform: scale(0.72); } 45% { opacity: 0.65; } 100% { opacity: 0; transform: scale(1.22); } }
 @keyframes breathe { 50% { transform: scale(1.04); opacity: 0.8; } }
 @keyframes nfcWave { 50% { transform: scale(1.07); opacity: 0.4; } }
@@ -611,7 +598,7 @@
   .hero { height: auto; min-height: 1050px; grid-template-columns: 1fr; padding-top: 125px; }
   .heroCopy { text-align: center; }
   .heroIntro { margin-left: auto; margin-right: auto; }
-  .deviceStage { height: 520px; }
+  .deviceStage { min-height: 680px; }
   .tapStory { grid-template-columns: 1fr; }
   .stickyCopy { position: static; padding-bottom: 30px; }
   .compatibilityCopy { grid-template-columns: 1fr; }
@@ -623,13 +610,12 @@
   .productNav { top: 78px; margin-top: 78px; }
   .productNav { padding: 0 16px; }
   .productNav small, .productLinks > a:not(.quotePill) { display: none; }
-  .hero { min-height: 870px; padding: 105px 20px 70px; }
+  .hero { min-height: 1120px; padding: 105px 20px 70px; }
   .hero h1 { font-size: 60px; letter-spacing: -4px; }
   .heroIntro { font-size: 14px; }
-  .deviceStage { height: 390px; }
-  .deviceStage img { width: min(370px, 88%); }
+  .deviceStage { min-height: 640px; }
+  .heroPhotoViewer { width: min(520px, 100%); }
   .signalRing { width: 300px; height: 300px; }
-  .deviceNote { right: auto; bottom: 5%; }
   .paymentBand { padding: 80px 18px; }
   .paymentBand > p { font-size: 42px; letter-spacing: -2.8px; }
   .tapStory, .controlSection, .compatibility { padding: 95px 16px; }
@@ -664,15 +650,14 @@
 
   .productLinks { gap: 8px; }
   .quotePill { min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; }
-  .hero { min-height: 800px; padding: 88px 17px 58px; }
+  .hero { min-height: 1080px; padding: 88px 17px 58px; }
   .hero h1 { margin: 23px 0; font-size: clamp(49px, 14vw, 58px); line-height: 0.93; letter-spacing: -3.7px; }
   .heroIntro { font-size: 14px; line-height: 1.65; }
   .primaryButton { width: 100%; min-height: 48px; padding: 0 18px; justify-content: space-between; }
   .heroActions { width: 100%; display: grid; }
-  .heroActions > button { width: 100%; min-height: 48px; }
-  .deviceStage { height: 350px; }
-  .deviceStage img { width: min(330px, 84%); }
-  .deviceNote { left: 50%; right: auto; bottom: 2%; width: max-content; max-width: 90%; transform: translateX(-50%); text-align: center; font-size: 10px; line-height: 1.4; }
+  .heroActions > a { width: 100%; min-height: 48px; }
+  .deviceStage { min-height: 610px; }
+  .heroPhotoViewer { width: min(410px, 100%); }
   .scrollCue { display: none; }
 
   .paymentBand { min-height: auto; padding: 72px 17px; }
@@ -731,6 +716,7 @@
   .footer > p { max-width: 280px; margin: 0; font-size: 13px; line-height: 1.55; text-align: center; }
   .footer span { font-size: 11px; }
   .footer small { max-width: 300px; font-size: 10px; line-height: 1.5; }
+  .privacyLink { align-self: center; min-height: 44px; display: inline-flex; align-items: center; font-size: 11px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
