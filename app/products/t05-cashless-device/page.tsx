@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     description: "A simpler way to bring cashless payments to compatible vending machines.",
     images: [
       {
-        url: "/og-i-vend-station.png",
-        width: 1536,
-        height: 1024,
-        alt: "I Vend Station logo with vending machines and the actual grey T05 cashless device",
+        url: "/ivend-social-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "I Vend Station",
       },
     ],
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "T05 Cashless | I Vend Station",
     description: "Tap, scan, and pay at compatible vending machines.",
-    images: ["/og-i-vend-station.png"],
+    images: ["/ivend-social-preview.png"],
   },
 };
 

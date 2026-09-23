@@ -105,7 +105,11 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>I Vend Station \| Vending Machines &amp; Cashless Payments<\/title>/i);
+  assert.match(html, /<title>I Vend Station<\/title>/i);
+  assert.match(html, /<meta name="description" content="Vending Solutions &amp; Service"\/>/i);
+  assert.match(html, /<meta property="og:image" content="https:\/\/ivend-official\.vercel\.app\/ivend-social-preview\.png"\/>/i);
+  assert.match(html, /<meta property="og:image:width" content="1200"\/>/i);
+  assert.match(html, /<meta property="og:image:height" content="630"\/>/i);
   assert.match(html, /Machines built/);
   assert.match(html, /Coffee Machines/);
   assert.match(html, /TCN Machines/);
