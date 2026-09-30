@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.3.6 — 2026-09-30
+
+- Added supplied Fuji coffee-machine specifications in a responsive IVEND product-page layout.
+
 ## v1.3.5 — 2026-09-30
 
 - Added distinct descriptions across machine cards, search results, and IVEND update cards.

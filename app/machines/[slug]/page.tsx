@@ -59,6 +59,24 @@ export default async function MachineDetailPage({ params }: Props) {
         </ol>
       </section>
 
+      {machine.specifications ? (
+        <section className={styles.specifications} aria-labelledby="specifications-title">
+          <div className={styles.specificationIntro} data-animate="left">
+            <p className={styles.label}>MACHINE SPECIFICATIONS</p>
+            <h2 id="specifications-title">Designed for a complete coffee service.</h2>
+            <p>Specification details supplied for this Fuji coffee machine. Confirm final configuration with IVEND before purchase.</p>
+          </div>
+          <dl className={styles.specificationGrid}>
+            {machine.specifications.map((specification, index) => (
+              <div key={specification.label} data-animate="up" data-animate-delay={String(index % 3)}>
+                <dt>{specification.label}</dt>
+                <dd>{specification.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ) : null}
+
       {machine.image ? (
         <section className={styles.actualPhoto}>
           <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above.</p></div>

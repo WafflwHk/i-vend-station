@@ -17,6 +17,11 @@ export type MachineViewerConfig = {
   defaultFinishId: string;
 };
 
+export type MachineSpecification = {
+  label: string;
+  value: string;
+};
+
 export type Machine = {
   slug: string;
   code: string;
@@ -28,6 +33,7 @@ export type Machine = {
   copy: string;
   description: string;
   highlights: string[];
+  specifications?: readonly MachineSpecification[];
   featured?: boolean;
   comingSoon?: boolean;
   viewer: MachineViewerConfig;
@@ -46,6 +52,18 @@ export const machines: Machine[] = [
     description:
       "A Japanese-style beverage vending machine for serving a hot-and-cold coffee selection from one cabinet. Final drink configuration, internal setup, and availability are confirmed when you request a quotation.",
     highlights: ["Hot and cold drink format", "Large product selection area", "Quotation based on the exact available unit"],
+    specifications: [
+      { label: "Dimensions (H × W × D)", value: "1830 × 990 × 780 mm" },
+      { label: "Weight", value: "290 kg" },
+      { label: "Power", value: "240VAC, 50/60Hz, 15A" },
+      { label: "Selection", value: "24 flavor cards, 56 buttons" },
+      { label: "Cup capacity", value: "1,538 cups (6.5/7oz, 9oz, 12oz)" },
+      { label: "Hot water tank", value: "7L" },
+      { label: "Ice storage", value: "3.5kg" },
+      { label: "Drainage", value: "14L drainage bucket" },
+      { label: "Powder ingredients", value: "Regular Coffee (4.3L ×2), Instant Coffee (3.3L ×1), Premix (4.3L ×5), Sugar (3.3L ×1), Cream (3.3L ×1)" },
+      { label: "Syrup tank", value: "20L ×2 (5 gallon), CO2 tank ×1" },
+    ],
     featured: true,
     viewer: {
       width: 232,
