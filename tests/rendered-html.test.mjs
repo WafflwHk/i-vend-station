@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.3\.6(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.4\.0(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.6"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.0"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -383,6 +383,21 @@ test("renders the supplied Fuji coffee-machine specifications in an IVEND layout
   assert.match(html, /24 flavor cards, 56 buttons/);
   assert.match(html, /Regular Coffee \(4\.3L ×2\), Instant Coffee \(3\.3L ×1\)/);
   assert.match(html, /20L ×2 \(5 gallon\), CO2 tank ×1/);
+});
+
+test("renders all supplied Fuji product highlights without the actual-photo block", async () => {
+  const response = await render("/machines/hot-cold-coffee-machine");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /PRODUCT HIGHLIGHTS/);
+  assert.match(html, /Hot, Cold &amp; Sparkling/);
+  assert.match(html, /Holds up to 1,583 cups in multiple sizes \(6\.5oz to 16oz\)/);
+  assert.match(html, /Large Ingredient Storage/);
+  assert.match(html, /Multiple Drink Combinations/);
+  assert.match(html, /Trusted Fuji Brand/);
+  assert.match(html, /Flexible Payment Options/);
+  assert.doesNotMatch(html, /The machine you supplied/);
+  assert.doesNotMatch(html, /ACTUAL UNIT PHOTO/);
 });
 
 test("renders quotation actions and removes the legacy shopping route", async () => {

@@ -77,7 +77,24 @@ export default async function MachineDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      {machine.image ? (
+      {machine.productHighlights ? (
+        <section className={styles.productHighlights} aria-labelledby="product-highlights-title">
+          <div className={styles.productHighlightsIntro} data-animate="left">
+            <p className={styles.label}>FUJI COFFEE MACHINE</p>
+            <h2 id="product-highlights-title">PRODUCT HIGHLIGHTS</h2>
+            <p>Key service, capacity, and configuration benefits supplied for this hot-and-cold coffee machine.</p>
+          </div>
+          <ol className={styles.productHighlightGrid}>
+            {machine.productHighlights.map((highlight, itemIndex) => (
+              <li key={highlight.title} data-animate="up" data-animate-delay={String(itemIndex % 3)}>
+                <span>{String(itemIndex + 1).padStart(2, "0")}</span>
+                <h3>{highlight.title}</h3>
+                <p>{highlight.description}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : machine.image ? (
         <section className={styles.actualPhoto}>
           <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above.</p></div>
           <figure data-animate="right"><img src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>

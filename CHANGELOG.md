@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.0 — 2026-09-30
+
+- Replaced the Fuji actual-photo block with supplied product highlights in a bespoke IVEND layout.
+
 ## v1.3.6 — 2026-09-30
 
 - Added supplied Fuji coffee-machine specifications in a responsive IVEND product-page layout.

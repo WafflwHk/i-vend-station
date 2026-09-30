@@ -22,6 +22,11 @@ export type MachineSpecification = {
   value: string;
 };
 
+export type MachineProductHighlight = {
+  title: string;
+  description: string;
+};
+
 export type Machine = {
   slug: string;
   code: string;
@@ -34,6 +39,7 @@ export type Machine = {
   description: string;
   highlights: string[];
   specifications?: readonly MachineSpecification[];
+  productHighlights?: readonly MachineProductHighlight[];
   featured?: boolean;
   comingSoon?: boolean;
   viewer: MachineViewerConfig;
@@ -63,6 +69,14 @@ export const machines: Machine[] = [
       { label: "Drainage", value: "14L drainage bucket" },
       { label: "Powder ingredients", value: "Regular Coffee (4.3L ×2), Instant Coffee (3.3L ×1), Premix (4.3L ×5), Sugar (3.3L ×1), Cream (3.3L ×1)" },
       { label: "Syrup tank", value: "20L ×2 (5 gallon), CO2 tank ×1" },
+    ],
+    productHighlights: [
+      { title: "Hot, Cold & Sparkling", description: "Serves hot coffee, chilled beverages, and carbonated drinks in one machine" },
+      { title: "High Capacity", description: "Holds up to 1,583 cups in multiple sizes (6.5oz to 16oz)" },
+      { title: "Large Ingredient Storage", description: "Multiple powder and syrup tanks for extended operation" },
+      { title: "Multiple Drink Combinations", description: "Fully configurable to suit your location and customer preferences" },
+      { title: "Trusted Fuji Brand", description: "Proven reliability backed by one of the industry’s most established names" },
+      { title: "Flexible Payment Options", description: "Cash, Coin, E-Wallet QR, Card (Customizable)" },
     ],
     featured: true,
     viewer: {
