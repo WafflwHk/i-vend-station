@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.3.5 — 2026-09-30
+
+- Added distinct descriptions across machine cards, search results, and IVEND update cards.
+- Removed outdated viewer-size wording from customer-facing guidance.
+
 ## v1.3.4 — 2026-09-05
 
 - Removed viewer-size choices from all machine pages, preserving default scale, finish selection and rotation controls.

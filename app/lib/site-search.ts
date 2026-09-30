@@ -4,11 +4,11 @@ import { navigationLinks } from "../data/navigation";
 export type SearchEntry = { title: string; description: string; href: string; keywords: string };
 
 const pageDetails: Record<string, { title?: string; description: string; keywords: string }> = {
-  "/store": { description: "Browse vending equipment and cashless devices.", keywords: "products equipment catalogue" },
-  "/machines": { description: "Compare the current vending machine range.", keywords: "vending machines models catalogue" },
+  "/store": { description: "Browse quotation-based machines and a compatible cashless device.", keywords: "products equipment catalogue" },
+  "/machines": { description: "Compare coffee, touchscreen and full-size vending formats.", keywords: "vending machines models catalogue" },
   "/products/t05-cashless-device": { title: "T05 Cashless Device", description: "Contactless, card and QR payments for compatible machines.", keywords: "T05 payment terminal e-wallet cashless" },
-  "/#about": { description: "Learn about I Vend Station and vending equipment solutions.", keywords: "IVEND IVS company Japan imported" },
-  "/#faq": { description: "Answers about machines, quotations and compatibility.", keywords: "questions help specifications price" },
+  "/#about": { description: "See how IVEND helps plan equipment for unattended retail.", keywords: "IVEND IVS company Japan imported" },
+  "/#faq": { description: "Find practical answers about quotations, compatibility and machine views.", keywords: "questions help specifications price" },
   "/#contact": { title: "Vending Machine Sales & Service Enquiries", description: "Ask about buying, renting, customization, repairs or maintenance.", keywords: "contact whatsapp quote quotation support service servicing refurbished second hand repair maintenance" },
 };
 

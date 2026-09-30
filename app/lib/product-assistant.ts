@@ -98,7 +98,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "confirmation",
       title: "That specification needs confirmation",
-      text: "Physical dimensions, weight, electrical requirements, capacity, temperature range, outdoor rating, and certification are not published in the current catalogue. The S and L viewer controls change only the on-screen preview scale.",
+      text: "Physical dimensions, weight, electrical requirements, capacity, temperature range, outdoor rating, and certification are not published in the current catalogue. Confirm these details for the exact machine before quotation.",
       links: entities.length ? [machineLink(entities[0])] : [{ label: "Browse machines", href: "/machines" }],
     };
   }
@@ -121,11 +121,11 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     };
   }
 
-  if (hasAny(query, ["colour", "color", "finish", "finishes", "blue finish", "size option", "s size", "l size"])) {
+  if (hasAny(query, ["colour", "color", "finish", "finishes", "blue finish"])) {
     return {
       kind: "guide",
       title: "Viewer choices are illustrative",
-      text: "Alternative finishes do not confirm product availability. The S and L choices change only the viewer scale, not real machine dimensions or an orderable machine size. Final configuration is confirmed during quotation.",
+      text: "Alternative finishes do not confirm product availability or an orderable colour. Final machine configuration is confirmed during quotation.",
       links: entities.length ? [machineLink(entities[0])] : [{ label: "Open the machine viewers", href: "/machines" }],
     };
   }

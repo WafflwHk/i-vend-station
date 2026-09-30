@@ -118,7 +118,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
   assert.match(html, /tcn-d720-product-cutout\.png/);
   assert.match(html, /hot-cold-coffee-machine-cutout\.png/);
-  assert.match(html, /A standard-capacity snack and beverage vending machine for locations requiring a broader product selection\. It also includes a built-in touchscreen\./);
+  assert.match(html, /Touchscreen snack and beverage vending for locations needing a broad selection in one cabinet\./);
   assert.doesNotMatch(html, /A compact floor-standing format for locations where space and a clean footprint matter\./);
   assert.doesNotMatch(html, />Compact Vending Machine</);
   assert.match(html, /Ask IVS/);
@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.3\.4(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.3\.5(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.4"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.3\.5"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

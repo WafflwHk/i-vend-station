@@ -42,7 +42,7 @@ export const machines: Machine[] = [
     art: "coffee-art",
     image: "/hot-cold-coffee-machine-cutout.png",
     imageAlt: "Front view of the actual hot and cold coffee vending machine with its background removed",
-    copy: "The actual hot-and-cold coffee vending machine available from I Vend Station.",
+    copy: "Hot-and-cold coffee vending for offering several drink choices from one cabinet.",
     description:
       "A Japanese-style beverage vending machine for serving a hot-and-cold coffee selection from one cabinet. Final drink configuration, internal setup, and availability are confirmed when you request a quotation.",
     highlights: ["Hot and cold drink format", "Large product selection area", "Quotation based on the exact available unit"],
@@ -68,7 +68,7 @@ export const machines: Machine[] = [
     art: "compact-art",
     image: "/tcn-d720-product-cutout.png",
     imageAlt: "Front view of the TCN-D720 vending machine with its background removed",
-    copy: "A standard-capacity snack and beverage vending machine for locations requiring a broader product selection. It also includes a built-in touchscreen.",
+    copy: "Touchscreen snack and beverage vending for locations needing a broad selection in one cabinet.",
     description:
       "A standard-capacity TCN snack and beverage vending machine designed for a broader product selection, with a built-in touchscreen. Product layout, temperature configuration, and payment equipment depend on the selected machine setup.",
     highlights: ["Standard-capacity format", "Built-in touchscreen", "Broader snack and beverage selection"],
@@ -92,7 +92,7 @@ export const machines: Machine[] = [
     type: "Standard series",
     art: "classic-art",
     image: null,
-    copy: "A full-size machine platform with a larger display area and flexible product configuration.",
+    copy: "Full-size vending platform for product plans that need more display space and a flexible layout.",
     description:
       "A full-size TCN platform with a broad merchandising window. The exact tray layout, cooling configuration, and payment setup must be confirmed for the unit being quoted.",
     highlights: ["Full-size merchandising area", "Configurable product layout", "Multiple payment setup options"],
@@ -117,7 +117,7 @@ export const machines: Machine[] = [
     type: "Touchscreen series",
     art: "touch-art",
     image: null,
-    copy: "A modern vending format with a visual touchscreen purchasing experience.",
+    copy: "Screen-led vending format for a more visual product-selection journey.",
     description:
       "A touchscreen-led TCN vending format designed for a more visual product-selection flow. Screen, tray, temperature, and payment specifications are confirmed before quotation.",
     highlights: ["Large touchscreen format", "Visual product-selection flow", "Configuration confirmed per project"],
@@ -141,7 +141,7 @@ export const machines: Machine[] = [
     type: "High-capacity series",
     art: "double-art",
     image: null,
-    copy: "An expanded two-cabinet format for larger capacity and a broader product plan.",
+    copy: "Two-cabinet vending format for operators planning a wider product range.",
     description:
       "An expanded two-cabinet TCN configuration for operators planning more product capacity. The paired cabinet arrangement and all technical specifications require confirmation for the exact project.",
     highlights: ["Two-cabinet format", "Expanded product capacity", "Project-specific configuration"],
