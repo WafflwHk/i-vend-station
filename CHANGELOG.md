@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.1 — 2026-10-19
+
+- Added a privacy-conscious cookie-preference banner with Accept all cookies and Essential only choices.
+
 ## v1.4.0 — 2026-09-30
 
 - Replaced the Fuji actual-photo block with supplied product highlights in a bespoke IVEND layout.

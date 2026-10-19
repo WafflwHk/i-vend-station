@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.4\.0(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.4\.1(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.0"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.1"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -243,15 +243,17 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   const html = await response.text();
 
   assert.match(html, /<title>Privacy Policy \| I Vend Station<\/title>/i);
-  assert.match(html, /<time dateTime="2026-08-22">22 August 2026<\/time>/);
+  assert.match(html, /<time dateTime="2026-10-19">19 October 2026<\/time>/);
   assert.match(html, /I Vend Station Privacy Policy/);
   assert.match(html, /Notis Privasi I Vend Station/);
   assert.match(html, /I Vend Station 隐私政策/);
   assert.match(html, /href="#simplified-chinese"[^>]*lang="zh-Hans"[^>]*>简体中文/);
   assert.match(html, /本网站不会将这些内容发送至外部 AI API/);
   assert.match(html, /I Vend Station does not receive your ChatGPT password/);
-  assert.match(html, /appearance preference uses your browser/);
+  assert.match(html, /appearance preference and your cookie-preference choice use your browser/);
   assert.match(html, /does not save voice recordings/);
+  assert.match(html, /cookie-preference choice use your browser/);
+  assert.match(html, /does not activate advertising or analytics/);
   assert.match(html, /hosting and security services may process request data/);
   assert.match(html, /href="https:\/\/wa\.me\/601133180812"/);
   assert.match(html, /official WhatsApp number/);
@@ -259,6 +261,23 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   assert.doesNotMatch(html, /still needs to be configured|official channel becomes available|does not provide an active online privacy-request channel/);
   assert.match(html, /Personal Data Protection Commissioner/);
   assert.doesNotMatch(html, /hello@example\.com/);
+});
+
+test("provides a local cookie-preference choice without adding tracking", async () => {
+  const [layoutSource, consentSource, consentStyles] = await Promise.all([
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/CookieConsent.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/cookie-consent.module.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(layoutSource, /CookieConsent/);
+  assert.match(consentSource, /Accept all cookies/);
+  assert.match(consentSource, /Essential only/);
+  assert.match(consentSource, /ivend-cookie-preference/);
+  assert.match(consentSource, /href="\/privacy"/);
+  assert.doesNotMatch(consentSource, /document\.cookie|fetch\s*\(/);
+  assert.match(consentStyles, /@media \(max-width: 720px\)/);
+  assert.match(consentStyles, /prefers-reduced-motion/);
 });
 
 test("shows the Store T05 four-angle viewer with its camera side down", async () => {
