@@ -21,8 +21,8 @@ const faqs = [
     answer: "No universal compatibility is promised. The machine controller, supported interface, network connection, terminal setup, and merchant requirements must be checked before a cashless configuration is confirmed.",
   },
   {
-    question: "Are the 360 degree machine views exact photographs?",
-    answer: "The side and rear views are clearly marked as illustrative because exact angle photos have not been supplied yet. The coffee-machine listing also shows the actual unit photo you provided.",
+    question: "Can I see product photos before I request a quotation?",
+    answer: "Supplied product photos appear on the relevant machine page. Contact IVEND to confirm the exact available unit, configuration, and any additional product photos.",
   },
   {
     question: "What details are needed for a quotation?",
@@ -60,13 +60,13 @@ export default function Home() {
       <section className="catalogue" id="machines">
         <div className="catalogue-head" data-animate="up">
           <div><div className="section-index">01 &mdash; MACHINE CATALOGUE</div><h2>Find your machine.</h2></div>
-          <p>Choose a machine, then use its View button to open a separate page with front, right, rear, left, and spin controls.</p>
+          <p>Choose a machine, then use its View button to open its product details and request a quotation.</p>
         </div>
         <div className="category-pills" data-animate="up" data-animate-delay="1"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
         <div className="machine-grid">
           {catalogueMachines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
         </div>
-        <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification. Side and rear viewer angles are illustrative.</p>
+        <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification.</p>
       </section>
 
       <section className="cashless" id="cashless">
@@ -85,7 +85,7 @@ export default function Home() {
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-head" data-animate="up"><div><div className="section-index">05 &mdash; FAQ</div><h2>Good questions,<br />clear answers.</h2></div><p>Start here for pricing, machine views, cashless compatibility, and quotation information.</p></div>
+        <div className="faq-head" data-animate="up"><div><div className="section-index">05 &mdash; FAQ</div><h2>Good questions,<br />clear answers.</h2></div><p>Start here for pricing, product information, cashless compatibility, and quotation information.</p></div>
         <div className="faq-list">
           {faqs.map((faq, index) => <details key={faq.question} data-animate="up" data-animate-delay={String(index % 3)}><summary><small>{String(index + 1).padStart(2, "0")}</small>{faq.question}<span aria-hidden="true">+</span></summary><p>{faq.answer}</p></details>)}
         </div>

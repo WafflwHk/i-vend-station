@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.2 — 2026-10-20
+
+- Removed the illustrative interactive vending-machine viewer from machine detail pages.
+
 ## v1.4.1 — 2026-10-19
 
 - Added a privacy-conscious cookie-preference banner with Accept all cookies and Essential only choices.

@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.4\.1(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.4\.2(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.1"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.2"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -361,7 +361,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   assert.match(assistantSource, /I Vend Station does not save recordings/);
   assert.match(assistantSource, /href="\/privacy"/);
   assert.match(knowledgeSource, /A compatibility check is required/);
-  assert.match(knowledgeSource, /Viewer choices are illustrative/);
+  assert.match(knowledgeSource, /Machine configurations are confirmed during quotation/);
   assert.match(knowledgeSource, /Quotation and availability are confirmed directly/);
   assert.doesNotMatch(knowledgeSource, /fetch\s*\(|WebSocket|dangerouslySetInnerHTML|https?:\/\//);
   assert.ok(
@@ -370,7 +370,7 @@ test("renders a private, voice-enabled catalogue product assistant", async () =>
   );
 });
 
-test("keeps finish controls and removes viewer-size controls on every machine page", async () => {
+test("removes the illustrative interactive viewer from every machine page", async () => {
   const machineRoutes = [
     "/machines/hot-cold-coffee-machine",
     "/machines/tcn-d720-6g",
@@ -383,11 +383,8 @@ test("keeps finish controls and removes viewer-size controls on every machine pa
     const response = await render(pathname);
     assert.equal(response.status, 200, `${pathname} should render successfully`);
     const html = await response.text();
-    assert.match(html, /aria-label="Illustrative machine configuration preview"/);
-    assert.match(html, /Alternative finishes are illustrative and do not confirm product availability\./);
+    assert.doesNotMatch(html, /INTERACTIVE PRODUCT VIEW|See every side\.|Illustrative 360|Spin 360|Alternative finishes are illustrative/);
     assert.doesNotMatch(html, /Viewer size|viewer-size-|Smaller viewer scale|S and L change/);
-    assert.match(html, /Choose a machine view/);
-    assert.match(html, /type="radio"/);
     assert.match(html, /Request a Quote/);
     assert.match(html, /Request a quotation for [^"]+ via WhatsApp \(opens in a new tab\)/);
   }

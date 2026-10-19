@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import MachineViewer from "../../components/MachineViewer";
 import SiteFooter from "../../components/SiteFooter";
 import { getMachine, machines } from "../../data/machines";
 import { createWhatsAppQuoteHref } from "../../lib/whatsapp";
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!machine) return {};
   return {
     title: `${machine.name} | I Vend Station`,
-    description: `${machine.copy} Explore an illustrative 360 degree view and request a quotation.`,
+    description: `${machine.copy} Review the machine details and request a quotation.`,
   };
 }
 
@@ -45,8 +44,6 @@ export default async function MachineDetailPage({ params }: Props) {
         </div>
         <p className={styles.summary} data-animate="right">{machine.description}</p>
       </section>
-
-      <MachineViewer machine={machine} />
 
       <section className={styles.details}>
         <div data-animate="left">
@@ -96,11 +93,11 @@ export default async function MachineDetailPage({ params }: Props) {
         </section>
       ) : machine.image ? (
         <section className={styles.actualPhoto}>
-          <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. Add front, right, rear, and left photos later to replace the illustrative angles above.</p></div>
+          <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. More product photos can be added later when they are available.</p></div>
           <figure data-animate="right"><img src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
         </section>
       ) : (
-        <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>The 360&deg; model above is illustrative. When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>
+        <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>
       )}
 
       <section className={styles.quote} data-animate="scale">

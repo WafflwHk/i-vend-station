@@ -124,9 +124,9 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (hasAny(query, ["colour", "color", "finish", "finishes", "blue finish"])) {
     return {
       kind: "guide",
-      title: "Viewer choices are illustrative",
-      text: "Alternative finishes do not confirm product availability or an orderable colour. Final machine configuration is confirmed during quotation.",
-      links: entities.length ? [machineLink(entities[0])] : [{ label: "Open the machine viewers", href: "/machines" }],
+      title: "Machine configurations are confirmed during quotation",
+      text: "Colours and finishes shown in product images do not confirm product availability or an orderable colour. Final machine configuration is confirmed during quotation.",
+      links: entities.length ? [machineLink(entities[0])] : [{ label: "Browse machines", href: "/machines" }],
     };
   }
 
@@ -173,9 +173,9 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
   if (hasAny(query, ["photo", "photos", "360", "spin", "front view", "side view", "rear view", "back view"])) {
     return {
       kind: "guide",
-      title: "Machine views help you explore the format",
-      text: "The front, side, rear, and spin views are illustrative unless a supplied image is explicitly marked as an actual product photo. Use them to compare the format, then confirm the exact unit before purchase.",
-      links: [{ label: "Open machine viewers", href: "/machines" }],
+      title: "Product photos and exact units",
+      text: "Supplied product photos are identified on each machine page. Contact I Vend Station to confirm the exact unit, configuration, and any additional photos before purchase.",
+      links: [{ label: "Browse machines", href: "/machines" }],
     };
   }
 
@@ -192,7 +192,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "guide",
       title: "Frequently asked questions",
-      text: "The FAQ covers the machine range, quotation-based pricing, T05 compatibility, illustrative 360-degree views, and the details needed for a quotation.",
+      text: "The FAQ covers the machine range, quotation-based pricing, T05 compatibility, product information, and the details needed for a quotation.",
       links: [{ label: "Open the FAQ", href: "/#faq" }],
     };
   }
@@ -210,7 +210,7 @@ export function getProductAssistantReply(input: string, currentMachineSlug?: str
     return {
       kind: "catalogue",
       title: "Three machine formats are listed",
-      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity touchscreen and classic TCN formats. Each listed model includes an illustrative interactive viewer.",
+      text: "The catalogue includes a hot-and-cold coffee machine plus standard-capacity touchscreen and classic TCN formats. Each listed model includes product details and a quotation route.",
       links: [{ label: "Browse all machines", href: "/machines" }],
     };
   }
