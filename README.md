@@ -101,3 +101,14 @@ Future GLB or GLTF models should be stored under
 The Sites deployment configuration is kept in `.openai/hosting.json`. D1 and
 R2 are currently disabled, so a local database, storage bucket, or secret file
 is not required to run the present website.
+
+For the Vercel project `ivend-official`, `vercel.json` selects
+`npm run build:vercel` and disables framework auto-detection. This runs
+`vite build --mode vercel`, enabling the Nitro Vercel preset in `vite.config.ts`.
+The pinned Nitro version generates Vercel Build Output API files directly in
+`.vercel/output`, including server functions, static assets, and `config.json`.
+Leave the Vercel Output Directory override unset; do not select `dist` or
+`.output`, or add an SPA rewrite that would bypass server rendering.
+
+`npm run build` and `npm test` retain the Sites/Cloudflare build path. To check
+both deployment targets locally, run `npm test` and `npm run build:vercel`.
