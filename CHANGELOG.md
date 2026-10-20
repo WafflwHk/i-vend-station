@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.4 — 2026-10-20
+
+- Removed the caption beneath the machine specifications artwork.
+
 ## v1.4.3 — 2026-10-20
 
 - Added illustrated machine artwork alongside the coffee-machine specifications.

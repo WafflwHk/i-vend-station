@@ -65,7 +65,6 @@ export default async function MachineDetailPage({ params }: Props) {
           </div>
           <figure className={styles.specificationVisual}>
             <img src="/coffee-machine-neon-blueprint.png" alt="Illustrative white neon outline of an open vending machine cabinet" loading="lazy" decoding="async" />
-            <figcaption>Illustrative machine artwork</figcaption>
           </figure>
           <dl className={styles.specificationGrid}>
             {machine.specifications.map((specification, index) => (

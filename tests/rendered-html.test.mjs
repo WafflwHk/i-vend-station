@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.4\.3(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.4\.4(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.3"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.4\.4"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -396,7 +396,6 @@ test("renders the supplied Fuji coffee-machine specifications in an IVEND layout
   const html = await response.text();
   assert.match(html, /MACHINE SPECIFICATIONS/);
   assert.match(html, /coffee-machine-neon-blueprint\.png/);
-  assert.match(html, /Illustrative machine artwork/);
   assert.match(html, /1830 × 990 × 780 mm/);
   assert.match(html, /24 flavor cards, 56 buttons/);
   assert.match(html, /Regular Coffee \(4\.3L ×2\), Instant Coffee \(3\.3L ×1\)/);
