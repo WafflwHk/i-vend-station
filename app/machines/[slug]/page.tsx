@@ -64,7 +64,7 @@ export default async function MachineDetailPage({ params }: Props) {
             <p>Specification details supplied for this Fuji coffee machine. Confirm final configuration with IVEND before purchase.</p>
           </div>
           <figure className={styles.specificationVisual}>
-            <img src="/coffee-machine-neon-blueprint.png" alt="Illustrative white neon outline of an open vending machine cabinet" loading="lazy" decoding="async" />
+            <img src="/coffee-machine-wireframe-transparent.png" width="941" height="1672" alt="Illustrative glowing white wireframe of an open vending machine cabinet" loading="lazy" decoding="async" />
           </figure>
           <dl className={styles.specificationGrid}>
             {machine.specifications.map((specification, index) => (

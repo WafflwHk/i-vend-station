@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.5 — 2026-10-20
+
+- Replaced the specifications artwork with the supplied transparent wireframe image and removed its background panel.
+
 ## v1.4.4 — 2026-10-20
 
 - Removed the caption beneath the machine specifications artwork.

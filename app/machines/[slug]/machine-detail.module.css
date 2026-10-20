@@ -25,7 +25,7 @@
 .specificationIntro .label { color: #87aeff; }
 .specificationIntro h2 { margin: 22px 0; font-size: clamp(42px, 4.8vw, 64px); line-height: .98; letter-spacing: -4px; }
 .specificationIntro > p:last-child { max-width: 360px; margin: 0; color: #aeb6c2; font-size: 13px; line-height: 1.7; }
-.specificationVisual { position: sticky; top: 100px; margin: 0; padding: 18px; overflow: hidden; border: 1px solid #ffffff1a; border-radius: 22px; background: #05070a; box-shadow: 0 24px 60px #0004; text-align: center; }
+.specificationVisual { position: sticky; top: 100px; margin: 0; padding: 18px; text-align: center; }
 .specificationVisual img { display: block; width: 100%; height: min(66vh, 660px); object-fit: contain; }
 .specificationGrid { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .specificationGrid > div { min-height: 132px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 20px; border: 1px solid #ffffff1a; border-radius: 18px; background: #ffffff0a; box-shadow: inset 0 1px #ffffff0c; }
