@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.4.3 — 2026-10-20
+
+- Added illustrated machine artwork alongside the coffee-machine specifications.
+
 ## v1.4.2 — 2026-10-20
 
 - Removed the illustrative interactive vending-machine viewer from machine detail pages.
