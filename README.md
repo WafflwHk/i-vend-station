@@ -105,5 +105,5 @@ is not required to run the present website.
 Vercel uses `vercel.json` to install with `npm ci` and build with
 `npm run build:vercel`. This creates the Nitro/Vercel output separately from
 the Sites/Cloudflare build. The existing ChatGPT account sign-in endpoints
-are supplied by Sites hosting and are not available on Vercel without a
-separate authentication integration.
+are supplied by Sites hosting. On Vercel, `/account` redirects to the existing
+IVEND account page on Sites so the current sign-in flow remains available.

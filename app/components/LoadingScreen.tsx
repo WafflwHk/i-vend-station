@@ -87,6 +87,7 @@ export default function LoadingScreen() {
             width={512}
             height={512}
             priority
+            unoptimized
           />
           <span className={styles.scan} />
           <span className={styles.dispensePulse} />

@@ -4,6 +4,7 @@
 
 - Fixed clean dependency installation and pinned supported Node.js releases for Vercel deployment.
 - Added explicit Vercel build configuration.
+- Kept the loading icon working across hosts and routed Vercel account links to the existing hosted sign-in.
 
 ## v1.4.5 — 2026-10-20
 

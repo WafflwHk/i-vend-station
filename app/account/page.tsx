@@ -1,10 +1,15 @@
 import { chatGPTSignOutPath, requireChatGPTUser } from "../chatgpt-auth";
+import { redirect } from "next/navigation";
 import { createWhatsAppQuoteHref } from "../lib/whatsapp";
 import styles from "./account.module.css";
 
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
+  // Sites supplies the existing sign-in endpoints; Vercel serves the catalogue.
+  if (process.env.VERCEL === "1") {
+    redirect("https://i-vend-station.derrickfan1778.chatgpt.site/account");
+  }
   const user = await requireChatGPTUser("/account");
   const initial = user.displayName.trim().charAt(0).toUpperCase() || "I";
   const quoteHref = createWhatsAppQuoteHref();
