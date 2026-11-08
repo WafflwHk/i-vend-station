@@ -7,7 +7,7 @@ and the OpenAI Sites/Cloudflare Worker runtime.
 
 ## Requirements
 
-- Node.js 22.13.0 or newer
+- Node.js 22.13.0 or newer in the 22.x line, or Node.js 24.x
 - npm
 
 Check the installed tools before setup:
@@ -101,3 +101,9 @@ Future GLB or GLTF models should be stored under
 The Sites deployment configuration is kept in `.openai/hosting.json`. D1 and
 R2 are currently disabled, so a local database, storage bucket, or secret file
 is not required to run the present website.
+
+Vercel uses `vercel.json` to install with `npm ci` and build with
+`npm run build:vercel`. This creates the Nitro/Vercel output separately from
+the Sites/Cloudflare build. The existing ChatGPT account sign-in endpoints
+are supplied by Sites hosting and are not available on Vercel without a
+separate authentication integration.

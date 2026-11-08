@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.4.6 — 2026-11-08
+
+- Fixed clean dependency installation and pinned supported Node.js releases for Vercel deployment.
+- Added explicit Vercel build configuration.
+
 ## v1.4.5 — 2026-10-20
 
 - Replaced the specifications artwork with the supplied transparent wireframe image and removed its background panel.
