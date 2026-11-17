@@ -34,6 +34,20 @@ test("machine listings keep view links without quotation buttons", async () => {
   }
 });
 
+test("keeps all button surfaces 90 percent transparent without fading their contents", async () => {
+  const styles = await readFile(new URL("../app/liquid-glass.css", import.meta.url), "utf8");
+  const tints = [...styles.matchAll(/--iv-glass-(?:tint|accent-tint|overlay-tint):\s*rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\)/g)];
+  assert.equal(tints.length, 6);
+  assert.ok(tints.every((match) => Number(match[1]) === 0.1));
+  assert.match(styles, /background:\s*var\(--glass-tint\)/);
+  assert.match(styles, /border-color:\s*transparent/);
+  assert.match(styles, /opacity:\s*1/);
+  assert.match(styles, /\.collection-hero-foot > a/);
+  assert.match(styles, /button:not\(\[data-glass="none"\]\)/);
+  assert.match(styles, /:focus-visible/);
+  assert.doesNotMatch(styles, /radial-gradient|linear-gradient|80%/);
+});
+
 test("renders honest sample highlights with native scrolling and server components", async () => {
   const html = await (await render("/")).text();
   assert.match(html, /Latest from IVEND/);
@@ -237,11 +251,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.8\.1(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.8\.2(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.1"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.2"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

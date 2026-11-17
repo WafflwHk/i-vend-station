@@ -1,17 +1,12 @@
 /* Shared button materials. Components still own their layout and hit areas. */
 :root {
-  --iv-glass-tint: rgba(255, 255, 255, 0.12);
+  --iv-glass-tint: rgba(255, 255, 255, 0.1);
   --iv-glass-ink: #14223b;
-  --iv-glass-rim: rgba(38, 76, 137, 0.45);
-  --iv-glass-edge: rgba(255, 255, 255, 0.72);
-  --iv-glass-sheen: rgba(255, 255, 255, 0.26);
-  --iv-glass-shade: rgba(48, 91, 159, 0.04);
-  --iv-glass-shadow: rgba(40, 61, 98, 0.09);
   --iv-glass-focus: #1b5fc7;
   --iv-glass-accent-tint: rgba(29, 101, 232, 0.10);
-  --iv-glass-accent-rim: rgba(25, 86, 179, 0.72);
+  --iv-glass-selected-ink: #174f9f;
   --iv-glass-recording-ink: #821e36;
-  --iv-glass-overlay-tint: rgba(243, 248, 255, 0.65);
+  --iv-glass-overlay-tint: rgba(243, 248, 255, 0.1);
 }
 
 html[data-theme="dark"],
@@ -19,18 +14,13 @@ html[data-theme="dark"],
 .contact,
 .cashless-copy,
 .store-feature-copy {
-  --iv-glass-tint: rgba(18, 39, 74, 0.16);
+  --iv-glass-tint: rgba(18, 39, 74, 0.1);
   --iv-glass-ink: #f3f7ff;
-  --iv-glass-rim: rgba(164, 200, 255, 0.48);
-  --iv-glass-edge: rgba(211, 230, 255, 0.38);
-  --iv-glass-sheen: rgba(189, 217, 255, 0.08);
-  --iv-glass-shade: rgba(7, 15, 31, 0.12);
-  --iv-glass-shadow: rgba(0, 0, 0, 0.29);
   --iv-glass-focus: #93c1ff;
-  --iv-glass-accent-tint: rgba(18, 39, 74, 0.30);
-  --iv-glass-accent-rim: rgba(137, 194, 255, 0.84);
+  --iv-glass-accent-tint: rgba(18, 39, 74, 0.1);
+  --iv-glass-selected-ink: #b4d2ff;
   --iv-glass-recording-ink: #ffe2e8;
-  --iv-glass-overlay-tint: rgba(15, 28, 47, 0.68);
+  --iv-glass-overlay-tint: rgba(15, 28, 47, 0.1);
 }
 
 :is(#site-shell, [data-cookie-consent]) :is(
@@ -41,31 +31,22 @@ html[data-theme="dark"],
   .hero-actions > a.text-link,
   .cashless-copy > a,
   .store-feature-copy > a,
+  .collection-hero-foot > a,
   .view-machine-button,
   .faq-list summary > span
 ) {
   --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-tint));
   --glass-ink: var(--iv-glass-ink);
-  --glass-rim: var(--iv-glass-rim);
-  --glass-edge: var(--iv-glass-edge);
-  --glass-sheen: var(--iv-glass-sheen);
-  --glass-shade: var(--iv-glass-shade);
   color: var(--glass-ink);
-  background:
-    radial-gradient(ellipse at 27% 0%, var(--glass-sheen), transparent 67%),
-    linear-gradient(170deg, transparent 42%, var(--glass-shade)),
-    var(--glass-tint);
-  border-color: var(--glass-rim);
-  box-shadow:
-    inset 0 1px 1px var(--glass-edge),
-    inset 0 0 0 1px var(--glass-rim),
-    inset 0 -1px 1px var(--glass-shade),
-    0 3px 9px var(--iv-glass-shadow);
+  background: var(--glass-tint);
+  border-color: transparent;
+  box-shadow: none;
+  opacity: 1;
   -webkit-backdrop-filter: blur(8px) saturate(145%);
   backdrop-filter: blur(8px) saturate(145%);
 }
 
-/* Accent and selected controls rely on their brighter rim, not a solid fill. */
+/* Accent and selected controls use ink, not a stronger background or outline. */
 :is(#site-shell, [data-cookie-consent]) :is(
   [data-glass="accent"]:not(:disabled),
   .hero-actions > .button,
@@ -75,14 +56,19 @@ html[data-theme="dark"],
   .faq-list details[open] summary > span
 ) {
   --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-accent-tint));
-  --glass-rim: var(--iv-glass-accent-rim);
+  --glass-ink: var(--iv-glass-selected-ink);
+}
+
+/* Selected text remains identifiable without a decorative rim. */
+#site-shell button:is([aria-pressed="true"], [aria-expanded="true"]):not(:disabled) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* The microphone retains its recording-state colour. */
 #site-shell button[data-glass="recording"][aria-pressed="true"]:not(:disabled) {
-  --glass-tint: rgba(237, 77, 108, 0.14);
+  --glass-tint: rgba(237, 77, 108, 0.1);
   --glass-ink: var(--iv-glass-recording-ink);
-  --glass-rim: rgba(237, 77, 108, 0.76);
 }
 
 #site-shell :is(.hero-actions > a.text-link, .cashless-copy > a) {
@@ -119,14 +105,12 @@ html[data-theme="dark"],
     .hero-actions > a.text-link,
     .cashless-copy > a,
     .store-feature-copy > a,
+    .collection-hero-foot > a,
     .view-machine-button
   ):hover,
   #site-shell :is(.faq-list summary:hover > span, a:hover > [data-glass="indicator"]) {
-    box-shadow:
-      inset 0 1px 1px var(--glass-edge),
-      inset 0 0 0 1px var(--iv-glass-focus),
-      inset 0 -1px 1px var(--glass-shade),
-      0 5px 13px var(--iv-glass-shadow);
+    box-shadow: none;
+    border-color: transparent;
   }
 }
 
@@ -137,6 +121,7 @@ html[data-theme="dark"],
   .hero-actions > a.text-link,
   .cashless-copy > a,
   .store-feature-copy > a,
+  .collection-hero-foot > a,
   .view-machine-button,
   .faq-list summary
 ):focus-visible {
@@ -145,9 +130,10 @@ html[data-theme="dark"],
 }
 
 :is(#site-shell, [data-cookie-consent]) button:disabled:not([data-glass="none"]) {
-  opacity: 0.56;
+  opacity: 1;
+  color: var(--iv-text-secondary);
   cursor: not-allowed;
-  box-shadow: inset 0 0 0 1px var(--glass-rim);
+  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -158,6 +144,7 @@ html[data-theme="dark"],
     .hero-actions > a.text-link,
     .cashless-copy > a,
     .store-feature-copy > a,
+    .collection-hero-foot > a,
     .view-machine-button
   ) {
     transition: none;
@@ -166,11 +153,7 @@ html[data-theme="dark"],
   }
 }
 
-/* A borderless search surface: only its background is 20% transparent. */
-#site-shell button[data-glass="search"][aria-controls="ivend-site-search"],
-#site-shell button[data-glass="search"][aria-controls="ivend-site-search"]:hover {
-  border: 0;
-  background: color-mix(in srgb, var(--iv-control-bg) 80%, transparent);
-  box-shadow: none;
-  color: var(--iv-text);
+/* Remove legacy decorative sheens without touching icon strokes or backdrops. */
+#site-shell :is(a[data-glass], a.button, .view-machine-button, .collection-hero-foot > a, .store-feature-copy > a)::after {
+  display: none;
 }

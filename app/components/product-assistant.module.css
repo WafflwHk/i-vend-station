@@ -46,9 +46,9 @@
   flex: 0 0 42px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--iv-glass-rim);
+  border: 0;
   border-radius: 14px;
-  background: var(--iv-glass-tint);
+  background: transparent;
 }
 
 .launcherMic::before,

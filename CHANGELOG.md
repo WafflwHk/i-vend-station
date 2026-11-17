@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.8.2 — 2026-11-18
+
+- Set all button backgrounds to 90% transparency and removed decorative borders, sheens, and shadows while preserving labels, icons, and keyboard focus.
+- Local feature-branch update; not published.
+
 ## v1.8.1 — 2026-11-18
 
 - Removed the Search button's decorative rim and set its background to 20% transparency, preserving the icon and keyboard-focus indicator.

@@ -200,9 +200,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   padding: 3px;
-  border: 1px solid var(--iv-line-soft);
+  border: 1px solid transparent;
   border-radius: 12px;
-  background: var(--iv-control-bg);
+  background: transparent;
 }
 
 .appearanceControl button {
