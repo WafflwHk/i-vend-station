@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.6.0 — 2026-11-17
+
+- Added a theme-aware homepage glow that eases in on load and drifts as visitors scroll, with a static reduced-motion fallback.
+
 ## v1.5.0 — 2026-11-17
 
 - Added Lenis desktop scrolling, GSAP-powered machine motion, and a React Bits reveal for the homepage updates heading.

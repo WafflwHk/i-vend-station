@@ -12,16 +12,51 @@ html[data-splash="skip"] { --hero-intro-delay: 70ms; }
 }
 
 .hero-remade::after {
+  --hero-glow-scroll-x: -92px;
+  --hero-glow-scroll-y: 56px;
+  --hero-glow-entry-x: 12%;
+  --hero-glow-entry-y: -9%;
   position: absolute;
   z-index: 0;
-  top: 15%;
-  right: -8%;
-  width: min(50vw, 700px);
+  top: 4%;
+  right: -11%;
+  width: min(67vw, 920px);
   aspect-ratio: 1;
   content: "";
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--iv-accent) 13%, transparent), transparent 68%);
+  background:
+    radial-gradient(ellipse 44% 43% at 55% 45%, color-mix(in srgb, var(--iv-accent) 21%, transparent), transparent),
+    radial-gradient(ellipse 38% 35% at 40% 63%, color-mix(in srgb, var(--iv-accent) 11%, transparent), transparent);
   pointer-events: none;
+}
+
+/* The intro drift and scroll parallax compose without affecting the hero content. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-remade::after {
+    animation: hero-glow-arrive 4s cubic-bezier(0.2, 0.6, 0.35, 1) both;
+    transform: translate3d(
+      calc(var(--hero-glow-scroll-x) * var(--vending-scroll, 0)),
+      calc(var(--hero-glow-scroll-y) * var(--vending-scroll, 0)),
+      0
+    );
+  }
+}
+
+@keyframes hero-glow-arrive {
+  from { opacity: 0.32; translate: var(--hero-glow-entry-x) var(--hero-glow-entry-y); scale: 0.88; }
+  to { opacity: 1; translate: 0 0; scale: 1; }
+}
+
+@media (max-width: 800px) {
+  .hero-remade::after {
+    --hero-glow-scroll-x: -28px;
+    --hero-glow-scroll-y: 24px;
+    --hero-glow-entry-x: 6%;
+    --hero-glow-entry-y: -5%;
+    top: auto;
+    right: -15%;
+    bottom: -10%;
+    width: min(108vw, 690px);
+  }
 }
 
 .hero-remade .hero-copy {

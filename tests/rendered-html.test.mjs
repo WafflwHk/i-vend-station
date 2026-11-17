@@ -225,11 +225,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.5\.0(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.6\.0(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.5\.0"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.6\.0"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
