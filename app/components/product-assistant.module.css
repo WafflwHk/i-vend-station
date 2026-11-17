@@ -8,6 +8,7 @@
 .panel { pointer-events: auto; }
 
 .launcher {
+  --iv-glass-floating-tint: var(--iv-glass-overlay-tint);
   position: fixed;
   z-index: 900;
   right: max(20px, env(safe-area-inset-right));
@@ -36,7 +37,7 @@
 }
 
 .launcher strong { font-size: 12px; letter-spacing: -0.1px; }
-.launcher small { color: rgba(255, 255, 255, 0.72); font-size: 8px; font-weight: 650; letter-spacing: 0.7px; text-transform: uppercase; }
+.launcher small { color: inherit; font-size: 8px; font-weight: 650; letter-spacing: 0.7px; text-transform: uppercase; }
 
 .launcherMic {
   position: relative;
@@ -45,9 +46,9 @@
   flex: 0 0 42px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--iv-glass-rim);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.14);
+  background: var(--iv-glass-tint);
 }
 
 .launcherMic::before,

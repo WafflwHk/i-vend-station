@@ -10,13 +10,15 @@ test("header account control is an accessible icon link", async () => {
 });
 
 test("applies the shared glass styles without changing quotation links or the menu backdrop", async () => {
-  const [storeResponse, deviceResponse, header] = await Promise.all([
+  const [storeResponse, deviceResponse, machineResponse, header] = await Promise.all([
     render("/store"),
     render("/products/t05-cashless-device"),
+    render("/machines/hot-cold-coffee-machine"),
     readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8"),
   ]);
   assert.match(await storeResponse.text(), /<a[^>]*data-glass="accent"[^>]*href="https:\/\/wa\.me\//);
   assert.match(await deviceResponse.text(), /<main[^>]*data-glass-theme="dark"/);
+  assert.match(await machineResponse.text(), /<section[^>]*data-glass-theme="dark">[\s\S]*?data-glass="accent"[^>]*Request a quotation/);
   assert.match(header, /className=\{styles\.backdrop\} data-glass="none"/);
 });
 
@@ -236,11 +238,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.7\.0(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.7\.1(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.7\.0"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.7\.1"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

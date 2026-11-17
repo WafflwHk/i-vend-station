@@ -1,27 +1,36 @@
 /* Shared button materials. Components still own their layout and hit areas. */
 :root {
-  --iv-glass-tint: rgba(233, 241, 255, 0.78);
+  --iv-glass-tint: rgba(255, 255, 255, 0.12);
   --iv-glass-ink: #14223b;
-  --iv-glass-rim: rgba(38, 76, 137, 0.21);
-  --iv-glass-edge: rgba(255, 255, 255, 0.92);
-  --iv-glass-sheen: rgba(255, 255, 255, 0.76);
-  --iv-glass-shade: rgba(48, 91, 159, 0.11);
-  --iv-glass-shadow: rgba(40, 61, 98, 0.15);
+  --iv-glass-rim: rgba(38, 76, 137, 0.45);
+  --iv-glass-edge: rgba(255, 255, 255, 0.72);
+  --iv-glass-sheen: rgba(255, 255, 255, 0.26);
+  --iv-glass-shade: rgba(48, 91, 159, 0.04);
+  --iv-glass-shadow: rgba(40, 61, 98, 0.09);
   --iv-glass-focus: #1b5fc7;
+  --iv-glass-accent-tint: rgba(29, 101, 232, 0.10);
+  --iv-glass-accent-rim: rgba(25, 86, 179, 0.72);
+  --iv-glass-recording-ink: #821e36;
+  --iv-glass-overlay-tint: rgba(243, 248, 255, 0.65);
 }
 
 html[data-theme="dark"],
 [data-glass-theme="dark"],
+.contact,
 .cashless-copy,
 .store-feature-copy {
-  --iv-glass-tint: rgba(27, 42, 65, 0.83);
+  --iv-glass-tint: rgba(18, 39, 74, 0.16);
   --iv-glass-ink: #f3f7ff;
-  --iv-glass-rim: rgba(164, 200, 255, 0.32);
-  --iv-glass-edge: rgba(211, 230, 255, 0.46);
-  --iv-glass-sheen: rgba(189, 217, 255, 0.22);
-  --iv-glass-shade: rgba(7, 15, 31, 0.34);
-  --iv-glass-shadow: rgba(0, 0, 0, 0.36);
+  --iv-glass-rim: rgba(164, 200, 255, 0.48);
+  --iv-glass-edge: rgba(211, 230, 255, 0.38);
+  --iv-glass-sheen: rgba(189, 217, 255, 0.08);
+  --iv-glass-shade: rgba(7, 15, 31, 0.12);
+  --iv-glass-shadow: rgba(0, 0, 0, 0.29);
   --iv-glass-focus: #93c1ff;
+  --iv-glass-accent-tint: rgba(18, 39, 74, 0.30);
+  --iv-glass-accent-rim: rgba(137, 194, 255, 0.84);
+  --iv-glass-recording-ink: #ffe2e8;
+  --iv-glass-overlay-tint: rgba(15, 28, 47, 0.68);
 }
 
 :is(#site-shell, [data-cookie-consent]) :is(
@@ -35,7 +44,7 @@ html[data-theme="dark"],
   .view-machine-button,
   .faq-list summary > span
 ) {
-  --glass-tint: var(--iv-glass-tint);
+  --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-tint));
   --glass-ink: var(--iv-glass-ink);
   --glass-rim: var(--iv-glass-rim);
   --glass-edge: var(--iv-glass-edge);
@@ -56,7 +65,7 @@ html[data-theme="dark"],
   backdrop-filter: blur(8px) saturate(145%);
 }
 
-/* Accent buttons and selected controls keep light labels on a deep blue base. */
+/* Accent and selected controls rely on their brighter rim, not a solid fill. */
 :is(#site-shell, [data-cookie-consent]) :is(
   [data-glass="accent"]:not(:disabled),
   .hero-actions > .button,
@@ -65,22 +74,15 @@ html[data-theme="dark"],
   button[aria-expanded="true"]:not(:disabled),
   .faq-list details[open] summary > span
 ) {
-  --glass-tint: rgba(18, 62, 124, 0.96);
-  --glass-ink: #fff;
-  --glass-rim: rgba(137, 194, 255, 0.62);
-  --glass-edge: rgba(212, 237, 255, 0.68);
-  --glass-sheen: rgba(130, 185, 255, 0.39);
-  --glass-shade: rgba(10, 38, 93, 0.44);
+  --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-accent-tint));
+  --glass-rim: var(--iv-glass-accent-rim);
 }
 
 /* The microphone retains its recording-state colour. */
 #site-shell button[data-glass="recording"][aria-pressed="true"]:not(:disabled) {
-  --glass-tint: rgba(129, 27, 48, 0.96);
-  --glass-ink: #fff;
-  --glass-rim: rgba(255, 139, 159, 0.6);
-  --glass-edge: rgba(255, 211, 220, 0.66);
-  --glass-sheen: rgba(255, 161, 178, 0.28);
-  --glass-shade: rgba(59, 8, 21, 0.44);
+  --glass-tint: rgba(237, 77, 108, 0.14);
+  --glass-ink: var(--iv-glass-recording-ink);
+  --glass-rim: rgba(237, 77, 108, 0.76);
 }
 
 #site-shell :is(.hero-actions > a.text-link, .cashless-copy > a) {

@@ -244,12 +244,25 @@
 
 @media (max-width: 880px) {
   .header { top: max(8px, env(safe-area-inset-top)); padding-right: max(8px, env(safe-area-inset-right)); padding-left: max(8px, env(safe-area-inset-left)); }
-  .bar { min-height: 58px; padding: 0 7px 0 13px; border-radius: 17px; }
-  .logo { width: 118px; }
+  .bar {
+    min-height: 58px;
+    padding: 0 7px 0 13px;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    pointer-events: none;
+  }
+  .bar .logo,
+  .bar .actions > :is(button, a) { pointer-events: auto; }
+  .actions { --iv-glass-floating-tint: var(--iv-glass-overlay-tint); }
+  .logo { width: 118px; filter: drop-shadow(0 0 2px var(--iv-bg)); }
+  .tagline { text-shadow: 0 0 4px var(--iv-bg), 0 1px 2px var(--iv-bg); }
   .desktopNav { display: none; }
   .account,
   .menuButton { min-height: 44px; height: 44px; }
   .menuButton { position: relative; width: 44px; display: grid; }
+  .menuButton span { background: currentColor; }
   .mobilePanel {
     position: fixed;
     z-index: 2;

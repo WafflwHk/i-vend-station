@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.7.1 — 2026-11-17
+
+- Removed the mobile header bar while preserving its logo and navigation controls.
+- Lightened the glass button fills in both themes while keeping text and selected states distinct.
+
 ## v1.7.0 — 2026-11-17
 
 - Redesigned IVEND’s buttons with theme-aware liquid glass, preserving keyboard focus and distinct selected and disabled states.

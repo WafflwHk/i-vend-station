@@ -103,7 +103,7 @@ export default async function MachineDetailPage({ params }: Props) {
         <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>
       )}
 
-      <section className={styles.quote} data-animate="scale">
+      <section className={styles.quote} data-animate="scale" data-glass-theme="dark">
         <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send this model to our WhatsApp team to request details and a quotation. Illustrative finish previews are not order selections.</p></div>
         <div className={styles.quoteActions} data-animate="right">
           <a href={quoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" aria-label={`Request a quotation for ${machine.code} via WhatsApp (opens in a new tab)`}>Request a Quote <span aria-hidden="true">&#8599;</span></a>
