@@ -84,6 +84,7 @@ test("renders accessible search on home and product headers", async () => {
   for (const path of ["/", "/products/t05-cashless-device"]) {
     const html = await (await render(path)).text();
     assert.match(html, /aria-label="Search IVEND"/);
+    assert.match(html, /data-glass="search"[^>]*aria-label="Search IVEND"/);
     assert.match(html, /aria-controls="ivend-site-search"/);
     assert.match(html, /<dialog[^>]*aria-labelledby="ivend-search-title"/);
     assert.match(html, /aria-label="Close search"/);
@@ -236,11 +237,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.8\.0(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.8\.1(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.0"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.1"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

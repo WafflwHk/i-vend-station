@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.8.1 — 2026-11-18
+
+- Removed the Search button's decorative rim and set its background to 20% transparency, preserving the icon and keyboard-focus indicator.
+- Local feature-branch update; not published.
+
 ## v1.8.0 — 2026-11-18
 
 - Recomposed the homepage hero and introduced a consistent typography, spacing, card, and product-image system.

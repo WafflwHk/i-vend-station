@@ -165,3 +165,12 @@ html[data-theme="dark"],
     scale: none;
   }
 }
+
+/* A borderless search surface: only its background is 20% transparent. */
+#site-shell button[data-glass="search"][aria-controls="ivend-site-search"],
+#site-shell button[data-glass="search"][aria-controls="ivend-site-search"]:hover {
+  border: 0;
+  background: color-mix(in srgb, var(--iv-control-bg) 80%, transparent);
+  box-shadow: none;
+  color: var(--iv-text);
+}

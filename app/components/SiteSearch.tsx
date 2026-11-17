@@ -23,7 +23,7 @@ export default function SiteSearch({ onOpen }: { onOpen: () => void }) {
   };
 
   return <>
-    <button ref={buttonRef} className={styles.trigger} type="button" aria-label="Search IVEND" aria-haspopup="dialog" aria-expanded={open} aria-controls="ivend-site-search" onClick={openSearch}>
+    <button ref={buttonRef} className={styles.trigger} data-glass="search" type="button" aria-label="Search IVEND" aria-haspopup="dialog" aria-expanded={open} aria-controls="ivend-site-search" onClick={openSearch}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
     </button>
     {/* Native modal dialog handles Escape and backdrop dismissal; it is intentionally interactive. */}
