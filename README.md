@@ -96,6 +96,14 @@ or use installed package names; no computer-specific filesystem path is needed.
 Future GLB or GLTF models should be stored under
 `public/models/vending-machines/` and referenced with root-relative web paths.
 
+## Homepage motion
+
+[GSAP ScrollTrigger](https://gsap.com/docs/v3/Plugins/ScrollTrigger/) drives the
+machine showcase. [Lenis](https://lenis.dev/) smooths desktop wheel scrolling
+only, leaving touch scrolling and nested areas native. An adapted
+[React Bits Animated Content](https://reactbits.dev/animations/animated-content)
+reveals the updates heading. The homepage honors reduced-motion preferences.
+
 ## Deployment notes
 
 The Sites deployment configuration is kept in `.openai/hosting.json`. D1 and

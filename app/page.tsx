@@ -2,6 +2,7 @@ import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
 import LatestIvend from "./components/LatestIvend";
+import HomeMotion from "./components/HomeMotion";
 import { catalogueMachines } from "./data/machines";
 import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
@@ -33,6 +34,7 @@ const faqs = [
 export default function Home() {
   return (
     <main>
+      <HomeMotion />
       <section className="hero hero-remade" id="top">
         <div className="hero-copy">
           <div className="eyebrow hero-eyebrow"><span /> VENDING MACHINE SUPPLIER</div>

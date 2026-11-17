@@ -1,5 +1,8 @@
 :root { --vending-scroll: 0; }
 
+/* Lenis animates desktop wheel input; don't add CSS smoothing on top. */
+html.lenis { scroll-behavior: auto; }
+
 .motion-enabled [data-animate] {
   --motion-x: 0px;
   --motion-y: 34px;

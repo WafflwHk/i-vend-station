@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.5.0 — 2026-11-17
+
+- Added Lenis desktop scrolling, GSAP-powered machine motion, and a React Bits reveal for the homepage updates heading.
+
 ## v1.4.6 — 2026-11-08
 
 - Fixed clean dependency installation and pinned supported Node.js releases for Vercel deployment.
