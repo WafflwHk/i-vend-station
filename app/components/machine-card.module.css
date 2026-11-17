@@ -1,0 +1,31 @@
+.card.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--iv-line);
+  border-radius: var(--iv-radius-card, 24px);
+  background: var(--iv-surface);
+  box-shadow: none;
+}
+.card.card:hover { box-shadow: none; transform: none; }
+.card.card :global(.card-top) { min-height: 60px; padding: 22px 24px 8px; font-size: 10px; font-weight: 600; letter-spacing: .08em; color: var(--iv-text-secondary); }
+.card.card :global(.card-top small) { font-size: 10px; scale: none; rotate: none; }
+.card.card :global(.card-art) { height: 330px; display: grid; place-items: center; overflow: hidden; position: relative; padding: 16px 24px 28px; background: transparent; }
+.card.card :global(.machine-photo) { position: static; width: 100%; height: 100%; max-width: 100%; max-height: 285px; margin: 0; object-fit: contain; transform: none; filter: none; }
+.card.card :global(.machine-art) { position: relative; top: auto; left: auto; right: auto; bottom: auto; margin: 0; transform: scale(.7); transform-origin: center; }
+.preview { position: absolute; bottom: 16px; left: 0; width: 100%; text-align: center; color: var(--iv-text-secondary); font-size: 10px; }
+.card.card :global(.card-copy) { display: flex; flex: 1; flex-direction: column; padding: 24px; border-top: 1px solid var(--iv-line); background: var(--iv-surface-raised); }
+.card.card :global(.model-line) { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; justify-content: space-between; margin-bottom: 14px; }
+.card.card :global(.model-code) { margin: 0; font-size: 10px; line-height: 1.5; font-weight: 650; letter-spacing: .07em; color: var(--iv-text-secondary); }
+.card.card h3 { margin: 0 0 16px; font-size: clamp(22px, 2vw, 27px); line-height: 1.18; font-weight: 560; letter-spacing: -.035em; text-wrap: balance; }
+.card.card p { margin: 0 0 28px; min-height: 0; font-size: 15px; line-height: 1.7; color: var(--iv-text-secondary); }
+.card.card :global(.card-bottom) { margin-top: auto; padding-top: 20px; border-color: var(--iv-line); display: flex; flex-wrap: wrap; gap: 10px; }
+.card.card :global(.view-machine-button) { flex: 1 1 auto; min-height: 46px; height: auto; width: auto; padding: 0 16px; font-size: 13px; border-radius: 999px; }
+.card.card :global(.availability-badge) { font-size: 9px; line-height: 1.5; }
+.card.card :global(.coming-soon-action) { min-height: 44px; width: auto; flex: 0 1 auto; padding: 0 10px; font-size: 11px; border: 0; color: var(--iv-text-secondary); background: transparent; }
+@media (max-width: 700px) {
+  .card.card :global(.card-art) { height: 340px; }
+  .card.card :global(.machine-photo) { max-height: 295px; }
+  .card.card :global(.card-copy) { padding: 24px; }
+}

@@ -1,5 +1,12 @@
 # IVEND Changelog
 
+## v1.8.0 — 2026-11-18
+
+- Recomposed the homepage hero and introduced a consistent typography, spacing, card, and product-image system.
+- Added a reversible GSAP catalogue product study with labelled illustrative artwork and a native mobile/reduced-motion layout.
+- Brought actual machine photography into product introductions and kept next-machine navigation within the visible catalogue.
+- Feature-branch review only; not approved for production.
+
 ## v1.7.1 — 2026-11-17
 
 - Removed the mobile header bar while preserving its logo and navigation controls.

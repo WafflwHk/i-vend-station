@@ -1,5 +1,6 @@
 import type { Machine } from "../data/machines";
 import MachineArt from "./MachineArt";
+import styles from "./machine-card.module.css";
 
 type Props = {
   machine: Machine;
@@ -8,11 +9,10 @@ type Props = {
 
 export default function MachineCard({ machine, index }: Props) {
   return (
-    <article className={`machine-card ${machine.featured ? "featured" : ""}`} data-animate="up" data-animate-delay={String(index % 3)}>
+    <article className={`machine-card ${machine.featured ? "featured" : ""} ${styles.card}`} data-animate="up" data-animate-delay={String(index % 3)}>
       <div className="card-top"><span>{machine.type}</span><small>{String(index + 1).padStart(2, "0")}</small></div>
       <div className="card-art">
-        <div className="card-glow" />
-        {machine.image ? <img className="machine-photo" src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /> : <MachineArt kind={machine.art} />}
+        {machine.image ? <img className="machine-photo" src={machine.image} width="1024" height="1536" loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /> : <><MachineArt kind={machine.art} /><span className={styles.preview}>Illustrative preview</span></>}
       </div>
       <div className="card-copy">
         <div className="model-line">

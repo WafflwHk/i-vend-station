@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function StorePage() {
   return (
-    <main className="collection-page store-page">
+    <main className="collection-page store-page premium-page">
       <section className="collection-hero store-hero">
         <div className="section-index" data-animate="up">I VEND STATION STORE</div>
         <h1 data-animate="up" data-animate-delay="1">Machines and<br /><em>modern payments.</em></h1>

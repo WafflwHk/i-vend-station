@@ -1,8 +1,6 @@
-import MachineArt from "./components/MachineArt";
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
 import LatestIvend from "./components/LatestIvend";
-import HomeMotion from "./components/HomeMotion";
 import { catalogueMachines } from "./data/machines";
 import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
@@ -33,46 +31,45 @@ const faqs = [
 
 export default function Home() {
   return (
-    <main>
-      <HomeMotion />
-      <section className="hero hero-remade" id="top">
-        <div className="hero-copy">
-          <div className="eyebrow hero-eyebrow"><span /> VENDING MACHINE SUPPLIER</div>
-          <h1 aria-label="Machines built for opportunity.">
-            <span className="hero-title-line"><span>Machines built</span></span>
-            <span className="hero-title-line"><span><em>for opportunity.</em></span></span>
+    <main className="premium-home premium-page">
+      <section className="premium-hero" id="top" aria-labelledby="home-title">
+        <p className="premium-eyebrow">IVEND / VENDING MACHINE SUPPLIER</p>
+        <div className="premium-hero-heading">
+          <h1 id="home-title" aria-label="Machines built for opportunity.">
+            <span className="premium-title-line">Machines built</span>
+            <span className="premium-title-line">for <em>opportunity.</em></span>
           </h1>
-          <p className="hero-intro">Explore Japanese coffee machines, TCN vending systems, and a cashless upgrade for modern unattended retail.</p>
-          <div className="hero-actions"><a className="button dark" href="/machines">View all machines <b>&rarr;</b></a><a className="text-link" href="/store">Open the store <span>&#8599;</span></a></div>
-          <div className="hero-trust" aria-label="Product range"><span>Coffee Machines</span><span>TCN Machines</span><span>Cashless planning</span></div>
         </div>
-        <div className="hero-showcase" role="img" aria-label="A large Fuji coffee machine in the center, a TCN vending machine on the left, and a supporting machine on the right, sliding together as the page scrolls" data-scroll-vending>
-          <div className="hero-ring" />
-          <div className="machine-cluster" data-vending-track>
-            <div className="showcase-unit unit-one"><MachineArt kind="classic-art" /></div>
-            <div className="showcase-unit unit-two"><img className="hero-product-image hero-fuji-machine" src="/hot-cold-coffee-machine-cutout.png" width="1023" height="1537" alt="" aria-hidden="true" /></div>
-            <div className="showcase-unit unit-three"><img className="hero-product-image hero-tcn-machine" src="/tcn-d720-product-cutout.png" width="1024" height="1536" alt="" aria-hidden="true" /></div>
+        <div className="premium-hero-bottom">
+          <div className="premium-hero-note">
+            <span className="premium-rule" aria-hidden="true" />
+            <p>Japanese coffee machines.<br />Modern vending systems.<br />A setup that works for you.</p>
           </div>
-          <div className="showcase-badge"><span>{String(catalogueMachines.length).padStart(2, "0")}</span> MACHINE TYPES</div>
-          <div className="showcase-caption"><span>BUILT TO STAY READY</span><i /><b>Scroll to move the range</b></div>
+          <div className="premium-hero-intro">
+            <p>Explore refurbished machines, compatible cashless payments, and support for your next vending project.</p>
+            <div className="premium-actions">
+              <a className="button premium-primary" data-glass="accent" href="/machines">Explore Product Catalog <b aria-hidden="true">↗</b></a>
+              <a className="premium-text-link" href="/#contact">Talk to IVEND <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
         </div>
-        <div className="hero-foot" data-animate="up"><span>JAPAN SERIES</span><i /><span>CHINA SERIES</span><i /><span>T05 CASHLESS</span></div>
+        <div className="premium-hero-range" aria-label="Product range"><span>Coffee Machines</span><span>TCN Machines</span><span>T05 Cashless</span><a href="#machines">Discover the range <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <section className="catalogue" id="machines">
         <div className="catalogue-head" data-animate="up">
           <div><div className="section-index">01 &mdash; MACHINE CATALOGUE</div><h2>Find your machine.</h2></div>
-          <p>Choose a machine, then use its View button to open its product details and request a quotation.</p>
+          <p>Three formats. Different possibilities. Explore the details, then confirm the exact setup with IVEND.</p>
         </div>
-        <div className="category-pills" data-animate="up" data-animate-delay="1"><span className="active">All machines</span><span>Japanese coffee</span><span>TCN standard</span><span>Touchscreen</span><span>Specialised</span></div>
         <div className="machine-grid">
           {catalogueMachines.map((machine, index) => <MachineCard machine={machine} index={index} key={machine.slug} />)}
         </div>
         <p className="catalogue-note" data-animate="up">Model availability and specifications are subject to confirmation. Product names are used for identification.</p>
+        <a className="premium-text-link" href="/machines">Inside the Product Catalog <span aria-hidden="true">↗</span></a>
       </section>
 
       <section className="cashless" id="cashless">
-        <div className="cashless-visual" data-animate="left"><div className="cash-orbit one" /><div className="cash-orbit two" /><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" /><span>TAP &bull; SCAN &bull; PAY</span></div>
+        <div className="cashless-visual" data-animate="up"><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" /><span>TAP &bull; SCAN &bull; PAY</span></div>
         <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&#8599;</b></a></div>
       </section>
 
@@ -96,8 +93,6 @@ export default function Home() {
       <LatestIvend />
 
       <section className="contact" id="contact">
-        <div className="contact-glow one" />
-        <div className="contact-glow two" />
         <h2 data-animate="up">Tell Us What Vending Machine Support You Need</h2>
         <div className="contact-copy" data-animate="up" data-animate-delay="1">
           <p>Planning to buy, rent, or customize a vending machine? Already have a machine that needs repair?</p>

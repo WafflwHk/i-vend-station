@@ -727,3 +727,36 @@
   }
   .dashboard .chart i { scale: 1 !important; animation: none !important; }
 }
+
+/* Keep T05's dark product photography, with the same restrained IVEND rhythm. */
+.hero { min-height: 0; padding: 64px max(var(--iv-gutter), calc((100% - var(--iv-layout-wide)) / 2)) 72px; background: #080c12; gap: 48px; }
+.heroGlow, .signalRing, .quoteAura { display: none; }
+.hero h1 { font-size: clamp(48px, 5.5vw, 78px); line-height: 1.06; letter-spacing: -.05em; font-weight: 560; background: none; color: #f3f5f8; }
+.heroCopy { animation: none; }
+.deviceStage { min-height: 620px; animation: none; }
+.heroIntro { font-size: 17px; color: #b0b8c4; }
+.heroActions > a { font-size: 13px; min-height: 46px; }
+.kicker, .sectionLabel { font-size: 11px; color: #a9b6c8; letter-spacing: .1em; }
+.scrollCue { display: none; }
+.tapStory, .controlSection, .compatibility { padding: var(--iv-section-space) max(var(--iv-gutter), calc((100% - var(--iv-layout-wide)) / 2)); }
+.stickyCopy h2, .controlHeadline h2, .compatibility h2, .quote h2 { font-size: clamp(36px, 4.2vw, 60px); font-weight: 550; line-height: 1.08; letter-spacing: -.045em; }
+.stickyCopy > p:last-child, .controlHeadline > p:last-child, .compatibilityCopy > p:last-child, .storyCard p, .toolGrid p { font-size: 15px; line-height: 1.7; }
+.storyCard { border-radius: var(--iv-radius-card); box-shadow: none; }
+.nfcVisual span { animation: none; }
+.quote { background: #14243d; padding: var(--iv-section-space) var(--iv-gutter); min-height: 0; }
+.quote > p:not(.sectionLabel) { font-size: 16px; }
+.quote > small { font-size: 11px; color: #b0b8c4; line-height: 1.6; }
+.quote > a { font-size: 13px; }
+@media (max-width: 980px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding-top: 48px; gap: 32px; }
+  .heroCopy { text-align: left; }
+  .heroIntro { margin-left: 0; }
+  .deviceStage { min-height: 0; }
+  .heroPhotoViewer { width: min(570px, 100%); }
+}
+@media (max-width: 680px) {
+  .hero h1 { font-size: clamp(46px, 12vw, 60px); }
+  .heroIntro { font-size: 16px; }
+  .heroActions { gap: 12px; }
+  .paymentBand > p { font-size: 36px; line-height: 1.1; letter-spacing: -.04em; }
+}

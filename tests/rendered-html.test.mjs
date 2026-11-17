@@ -126,7 +126,7 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /Machines built/);
   assert.match(html, /Coffee Machines/);
   assert.match(html, /TCN Machines/);
-  assert.match(html, /CHINA SERIES/);
+  assert.match(html, /China Series/i);
   assert.match(html, /China Series/);
   assert.match(html, /TCN-D720 Classic Touchscreen Vending Machine/);
   assert.match(html, /tcn-d720-product-cutout\.png/);
@@ -136,15 +136,13 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.doesNotMatch(html, />Compact Vending Machine</);
   assert.match(html, /Ask IVS/);
   assert.match(html, /aria-label="Open Ask IVS product assistant"/);
-  assert.match(html, /hero-remade/);
-  assert.match(html, /hero-title-line/);
-  assert.match(html, /data-vending-track/);
-  assert.match(html, /role="img" aria-label="A large Fuji coffee machine in the center, a TCN vending machine on the left, and a supporting machine on the right, sliding together as the page scrolls"/);
-  assert.match(html, /hero-product-image hero-fuji-machine[^>]*hot-cold-coffee-machine-cutout\.png/);
-  assert.match(html, /hero-product-image hero-tcn-machine[^>]*tcn-d720-product-cutout\.png/);
+  assert.match(html, /premium-hero/);
+  assert.match(html, /premium-title-line/);
+  const hero = html.match(/<section class="premium-hero"[\s\S]*?<\/section>/)?.[0] ?? "";
+  assert.match(hero, /href="\/machines"[^>]*>Explore Product Catalog/);
+  assert.doesNotMatch(hero, /<img|machine-cluster|data-vending-track/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
-  assert.match(html, /03[\s\S]*MACHINE TYPES/);
   assert.match(html, /Cashless Device/);
   assert.doesNotMatch(html, /Frozen Food Vending Machine|Hot Food Vending Machine/);
   assert.match(html, /Tell Us What Vending Machine Support You Need/);
@@ -238,11 +236,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.7\.1(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.8\.0(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.7\.1"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.0"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -458,13 +456,13 @@ test("renders quotation actions and removes the legacy shopping route", async ()
 });
 
 test("contains the finished site assets and no starter scaffolding", async () => {
-  const [layout, packageJson, loadingScreen, loadingStyles, homeRefresh, motionStyles] = await Promise.all([
+  const [layout, packageJson, loadingScreen, loadingStyles, premiumStyles, showcaseMotion] = await Promise.all([
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
     readFile(new URL("../app/components/LoadingScreen.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/components/loading-screen.module.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/home-refresh.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/motion.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/premium-design.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/product-showcase-motion.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(layout, /I Vend Station/);
@@ -478,11 +476,10 @@ test("contains the finished site assets and no starter scaffolding", async () =>
   assert.match(loadingStyles, /data-splash="show"/);
   assert.match(loadingStyles, /loaderFailsafe/);
   assert.match(loadingStyles, /prefers-reduced-motion/);
-  assert.match(homeRefresh, /\.hero-remade \.showcase-unit\s*{[\s\S]*?animation:\s*none\s*!important;/);
-  assert.match(homeRefresh, /@keyframes heroLineEnter/);
-  assert.match(motionStyles, /\.hero \[data-vending-track\]/);
-  assert.match(motionStyles, /clamp\(22px, 7vw, 30px\)/);
-  assert.doesNotMatch(motionStyles, /\.hero \.unit-(?:one|two|three)\s*{\s*transform:/);
+  assert.match(layout, /premium-design\.css/);
+  assert.match(premiumStyles, /--iv-layout-wide:\s*1240px/);
+  assert.match(premiumStyles, /prefers-reduced-motion/);
+  assert.match(showcaseMotion, /ScrollTrigger\.create/);
   await Promise.all([
     access(new URL("../public/i-vend-station-logo.png", import.meta.url)),
     access(new URL("../public/i-vend-station-icon.png", import.meta.url)),
@@ -494,6 +491,32 @@ test("contains the finished site assets and no starter scaffolding", async () =>
     access(new URL("../public/hot-cold-coffee-machine-cutout.png", import.meta.url)),
     access(new URL("../public/tcn-d720-product-cutout.png", import.meta.url)),
   ]);
+});
+
+test("server-renders an honest product study before the catalogue range", async () => {
+  const response = await render("/machines");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /PRODUCT CATALOG/);
+  assert.match(html, /A closer look\./);
+  assert.match(html, /href="#machine-range"[^>]*>Skip to all machines/);
+  assert.match(html, /Illustrative interior · Prototype/);
+  assert.match(html, /not a physically accurate door-opening sequence/);
+  assert.match(html, /1830 × 990 × 780 mm/);
+  assert.match(html, /240VAC, 50\/60Hz, 15A/);
+  assert.match(html, /1,538 cups/);
+  assert.match(html, /View product details/);
+  assert.ok(html.indexOf('id="product-showcase"') < html.indexOf('id="machine-range"'));
+  const source = await readFile(new URL("../app/components/ProductShowcase.tsx", import.meta.url), "utf8");
+  assert.doesNotMatch(source, /["']use client["']/);
+  assert.match(source, /machine\.specifications/);
+  const motion = await readFile(new URL("../app/lib/product-showcase-motion.ts", import.meta.url), "utf8");
+  assert.match(motion, /min-width: 1100px/);
+  assert.match(motion, /prefers-reduced-motion: no-preference/);
+  assert.match(motion, /pin:\s*true/);
+  assert.match(motion, /scrub:\s*0\.7/);
+  assert.match(motion, /media\.revert/);
+  assert.doesNotMatch(motion, /new Lenis|preventDefault|window\.scrollTo/);
 });
 
 test("uses reliable native navigation instead of the broken Vinext Link shim", async () => {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SiteFooter from "../../components/SiteFooter";
-import { getMachine, machines } from "../../data/machines";
+import { getMachine, machines, catalogueMachines } from "../../data/machines";
 import { createWhatsAppQuoteHref } from "../../lib/whatsapp";
 import styles from "./machine-detail.module.css";
 
@@ -28,8 +28,8 @@ export default async function MachineDetailPage({ params }: Props) {
   const machine = getMachine(slug);
   if (!machine) notFound();
 
-  const index = machines.findIndex((item) => item.slug === machine.slug);
-  const nextMachine = machines[(index + 1) % machines.length];
+  const index = catalogueMachines.findIndex((item) => item.slug === machine.slug);
+  const nextMachine = catalogueMachines[(index + 1) % catalogueMachines.length];
   const quoteHref = createWhatsAppQuoteHref({ code: machine.code, name: machine.name });
 
   return (
@@ -41,11 +41,16 @@ export default async function MachineDetailPage({ params }: Props) {
           <p>{machine.type}</p>
           <h1>{machine.name}</h1>
           <span className={styles.modelCode}>{machine.code}</span>
+          <p className={styles.summary}>{machine.description}</p>
+          <a className={styles.introLink} href={machine.specifications ? "#specifications-title" : "#machine-overview"}>Explore the details <span aria-hidden="true">↓</span></a>
         </div>
-        <p className={styles.summary} data-animate="right">{machine.description}</p>
+        <figure className={styles.productPortrait}>
+          {machine.image ? <img src={machine.image} width="1024" height="1536" fetchPriority="high" alt={machine.imageAlt ?? machine.name} /> : <div className={styles.portraitPlaceholder}><span>COMING SOON</span><strong>{machine.code}</strong><p>Product photography will be added when the unit is confirmed.</p></div>}
+          {machine.image ? <figcaption>Actual machine photograph</figcaption> : null}
+        </figure>
       </section>
 
-      <section className={styles.details}>
+      <section id="machine-overview" className={styles.details}>
         <div data-animate="left">
           <p className={styles.label}>MACHINE OVERVIEW</p>
           <h2>Plan the right setup.</h2>
@@ -96,15 +101,15 @@ export default async function MachineDetailPage({ params }: Props) {
         </section>
       ) : machine.image ? (
         <section className={styles.actualPhoto}>
-          <div data-animate="left"><p className={styles.label}>ACTUAL UNIT PHOTO</p><h2>The machine you supplied.</h2><p>This is the real photo currently provided for this listing. More product photos can be added later when they are available.</p></div>
+          <div data-animate="left"><p className={styles.label}>PRODUCT PHOTOGRAPHY</p><h2>See the actual unit.</h2><p>Review the supplied machine photo. Contact IVEND to confirm availability and request additional views of the exact unit.</p></div>
           <figure data-animate="right"><img src={machine.image} loading="lazy" decoding="async" alt={machine.imageAlt ?? machine.name} /><figcaption>Actual machine photograph supplied by I Vend Station.</figcaption></figure>
         </section>
       ) : (
-        <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Ready for your exact machine photos.</h2><p>When you provide real front, right, rear, and left photographs, they can be added here for a more exact customer view.</p></section>
+        <section className={styles.photoNotice} data-animate="scale"><p className={styles.label}>PRODUCT PHOTOS</p><h2>Product views to follow.</h2><p>Contact IVEND for current unit availability, configuration, and photography.</p></section>
       )}
 
       <section className={styles.quote} data-animate="scale" data-glass-theme="dark">
-        <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send this model to our WhatsApp team to request details and a quotation. Illustrative finish previews are not order selections.</p></div>
+        <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send this model to our WhatsApp team to confirm the exact unit, configuration, availability, and quotation.</p></div>
         <div className={styles.quoteActions} data-animate="right">
           <a href={quoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" aria-label={`Request a quotation for ${machine.code} via WhatsApp (opens in a new tab)`}>Request a Quote <span aria-hidden="true">&#8599;</span></a>
         </div>
