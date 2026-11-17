@@ -262,6 +262,7 @@ export default function ProductAssistant() {
         <button
           ref={launcherRef}
           className={styles.launcher}
+          data-glass="accent"
           type="button"
           aria-haspopup="dialog"
           aria-expanded="false"
@@ -304,7 +305,7 @@ export default function ProductAssistant() {
                 <p>{message.text}</p>
                 {message.links?.length ? (
                   <div className={styles.messageLinks}>
-                    {message.links.map((link) => <a key={`${message.id}-${link.href}`} href={link.href}>{link.label}<span aria-hidden="true">&rarr;</span></a>)}
+                    {message.links.map((link) => <a key={`${message.id}-${link.href}`} data-glass="neutral" href={link.href}>{link.label}<span aria-hidden="true">&rarr;</span></a>)}
                   </div>
                 ) : null}
                 {message.role === "assistant" ? (
@@ -332,6 +333,7 @@ export default function ProductAssistant() {
             <div className={styles.composerButtons}>
               <button
                 className={`${styles.micButton} ${listening ? styles.listening : ""}`}
+                data-glass={listening ? "recording" : undefined}
                 type="button"
                 aria-pressed={listening}
                 aria-label={listening ? "Stop listening" : "Speak your question"}
@@ -341,7 +343,7 @@ export default function ProductAssistant() {
               >
                 <span aria-hidden="true"><i /></span>
               </button>
-              <button className={styles.sendButton} type="submit" disabled={!input.trim()} aria-label="Send question"><span aria-hidden="true">&uarr;</span></button>
+              <button className={styles.sendButton} data-glass="accent" type="submit" disabled={!input.trim()} aria-label="Send question"><span aria-hidden="true">&uarr;</span></button>
             </div>
           </form>
 

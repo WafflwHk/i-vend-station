@@ -26,7 +26,7 @@ export default async function AccountPage() {
           <article><span>01</span><h2>Your account is ready.</h2><p>You can use this identity for protected I Vend Station account features.</p></article>
           <article><span>02</span><h2>Quotation help is one message away.</h2><p>Product enquiries and quotation history are not saved to your account. Contact the IVEND team when you are ready.</p></article>
         </div>
-        <div className={styles.accountActions}><a href={quoteHref} target="_blank" rel="noopener noreferrer">Request a Quote <span aria-hidden="true">&#8599;</span></a><a href={chatGPTSignOutPath("/")}>Sign out</a></div>
+        <div className={styles.accountActions}><a href={quoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer">Request a Quote <span aria-hidden="true">&#8599;</span></a><a href={chatGPTSignOutPath("/")} data-glass="neutral">Sign out</a></div>
       </section>
       <p className={styles.privacyNote} data-animate="up" data-animate-delay="1">Your website account uses your ChatGPT sign-in. I Vend Station does not receive or store a password through this page. <a href="/privacy">Read the Privacy Policy.</a></p>
     </main>

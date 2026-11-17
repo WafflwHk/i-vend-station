@@ -48,7 +48,7 @@ export default function CookieConsent() {
       </div>
       <div className={styles.actions}>
         <button type="button" className={styles.secondary} onClick={() => saveChoice("essential")}>Essential only</button>
-        <button type="button" className={styles.primary} onClick={() => saveChoice("all")}>Accept all cookies</button>
+        <button type="button" className={styles.primary} data-glass="accent" onClick={() => saveChoice("all")}>Accept all cookies</button>
       </div>
     </aside>
   );

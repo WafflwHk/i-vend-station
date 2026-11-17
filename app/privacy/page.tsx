@@ -34,7 +34,7 @@ export default function PrivacyPage() {
         <div className={styles.heroMeta} data-animate="up" data-animate-delay="1">
           <div><span>Effective</span><time dateTime="2026-10-19">19 October 2026</time></div>
           <div><span>Applies to</span><strong>This website and its account, appearance, and product-guide features</strong></div>
-          <nav aria-label="Choose privacy policy language"><a href="#english">English</a><a href="#bahasa-malaysia" lang="ms">Bahasa Malaysia</a><a href="#simplified-chinese" lang="zh-Hans">简体中文</a></nav>
+          <nav aria-label="Choose privacy policy language"><a href="#english" data-glass="neutral">English</a><a href="#bahasa-malaysia" data-glass="neutral" lang="ms">Bahasa Malaysia</a><a href="#simplified-chinese" data-glass="neutral" lang="zh-Hans">简体中文</a></nav>
         </div>
       </section>
 

@@ -155,7 +155,7 @@ export default function SiteHeader() {
             <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
           </div>
           <SiteSearch onOpen={() => setOpen(false)} />
-          <a className={styles.account} href="/account" aria-label="Sign in or open your account" title="Sign in / Account">
+          <a className={styles.account} data-glass="neutral" href="/account" aria-label="Sign in or open your account" title="Sign in / Account">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5" /><path d="M5 20v-1a7 7 0 0 1 14 0v1" /></svg>
           </a>
           <button
@@ -182,9 +182,9 @@ export default function SiteHeader() {
           <span>Appearance</span>
           <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
         </div>
-        <a className={styles.mobileAccount} href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
+        <a className={styles.mobileAccount} data-glass="neutral" href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
       </div>
-      {open ? <button className={styles.backdrop} type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
+      {open ? <button className={styles.backdrop} data-glass="none" type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
     </header>
   );
 }

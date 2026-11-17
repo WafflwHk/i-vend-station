@@ -7,6 +7,7 @@ import "./mobile.css";
 import "./motion.css";
 import "./theme.css";
 import "./home-refresh.css";
+import "./liquid-glass.css";
 import SiteHeader from "./components/SiteHeader";
 import ScrollMotion from "./components/ScrollMotion";
 import LoadingScreen from "./components/LoadingScreen";

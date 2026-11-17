@@ -1,0 +1,165 @@
+/* Shared button materials. Components still own their layout and hit areas. */
+:root {
+  --iv-glass-tint: rgba(233, 241, 255, 0.78);
+  --iv-glass-ink: #14223b;
+  --iv-glass-rim: rgba(38, 76, 137, 0.21);
+  --iv-glass-edge: rgba(255, 255, 255, 0.92);
+  --iv-glass-sheen: rgba(255, 255, 255, 0.76);
+  --iv-glass-shade: rgba(48, 91, 159, 0.11);
+  --iv-glass-shadow: rgba(40, 61, 98, 0.15);
+  --iv-glass-focus: #1b5fc7;
+}
+
+html[data-theme="dark"],
+[data-glass-theme="dark"],
+.cashless-copy,
+.store-feature-copy {
+  --iv-glass-tint: rgba(27, 42, 65, 0.83);
+  --iv-glass-ink: #f3f7ff;
+  --iv-glass-rim: rgba(164, 200, 255, 0.32);
+  --iv-glass-edge: rgba(211, 230, 255, 0.46);
+  --iv-glass-sheen: rgba(189, 217, 255, 0.22);
+  --iv-glass-shade: rgba(7, 15, 31, 0.34);
+  --iv-glass-shadow: rgba(0, 0, 0, 0.36);
+  --iv-glass-focus: #93c1ff;
+}
+
+:is(#site-shell, [data-cookie-consent]) :is(
+  button:not([data-glass="none"]),
+  a[data-glass],
+  [data-glass="indicator"],
+  a.button,
+  .hero-actions > a.text-link,
+  .cashless-copy > a,
+  .store-feature-copy > a,
+  .view-machine-button,
+  .faq-list summary > span
+) {
+  --glass-tint: var(--iv-glass-tint);
+  --glass-ink: var(--iv-glass-ink);
+  --glass-rim: var(--iv-glass-rim);
+  --glass-edge: var(--iv-glass-edge);
+  --glass-sheen: var(--iv-glass-sheen);
+  --glass-shade: var(--iv-glass-shade);
+  color: var(--glass-ink);
+  background:
+    radial-gradient(ellipse at 27% 0%, var(--glass-sheen), transparent 67%),
+    linear-gradient(170deg, transparent 42%, var(--glass-shade)),
+    var(--glass-tint);
+  border-color: var(--glass-rim);
+  box-shadow:
+    inset 0 1px 1px var(--glass-edge),
+    inset 0 0 0 1px var(--glass-rim),
+    inset 0 -1px 1px var(--glass-shade),
+    0 3px 9px var(--iv-glass-shadow);
+  -webkit-backdrop-filter: blur(8px) saturate(145%);
+  backdrop-filter: blur(8px) saturate(145%);
+}
+
+/* Accent buttons and selected controls keep light labels on a deep blue base. */
+:is(#site-shell, [data-cookie-consent]) :is(
+  [data-glass="accent"]:not(:disabled),
+  .hero-actions > .button,
+  .contact-actions > .button,
+  button[aria-pressed="true"]:not(:disabled),
+  button[aria-expanded="true"]:not(:disabled),
+  .faq-list details[open] summary > span
+) {
+  --glass-tint: rgba(18, 62, 124, 0.96);
+  --glass-ink: #fff;
+  --glass-rim: rgba(137, 194, 255, 0.62);
+  --glass-edge: rgba(212, 237, 255, 0.68);
+  --glass-sheen: rgba(130, 185, 255, 0.39);
+  --glass-shade: rgba(10, 38, 93, 0.44);
+}
+
+/* The microphone retains its recording-state colour. */
+#site-shell button[data-glass="recording"][aria-pressed="true"]:not(:disabled) {
+  --glass-tint: rgba(129, 27, 48, 0.96);
+  --glass-ink: #fff;
+  --glass-rim: rgba(255, 139, 159, 0.6);
+  --glass-edge: rgba(255, 211, 220, 0.66);
+  --glass-sheen: rgba(255, 161, 178, 0.28);
+  --glass-shade: rgba(59, 8, 21, 0.44);
+}
+
+#site-shell :is(.hero-actions > a.text-link, .cashless-copy > a) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+}
+
+#site-shell .store-feature-copy > a > span,
+#site-shell .cashless-copy > a > b,
+#site-shell .contact-actions > .button > b,
+#site-shell [data-glass="accent"] > :is(b, span[aria-hidden="true"]) {
+  color: currentColor;
+}
+
+/* Keep dense control groups and decorative indicators inexpensive to draw. */
+#site-shell :is(
+  [data-glass="indicator"],
+  .faq-list summary > span,
+  [role="group"] button[aria-pressed]
+) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :is(#site-shell, [data-cookie-consent]) :is(
+    button:not([data-glass="none"], :disabled),
+    a[data-glass],
+    a.button,
+    .hero-actions > a.text-link,
+    .cashless-copy > a,
+    .store-feature-copy > a,
+    .view-machine-button
+  ):hover,
+  #site-shell :is(.faq-list summary:hover > span, a:hover > [data-glass="indicator"]) {
+    box-shadow:
+      inset 0 1px 1px var(--glass-edge),
+      inset 0 0 0 1px var(--iv-glass-focus),
+      inset 0 -1px 1px var(--glass-shade),
+      0 5px 13px var(--iv-glass-shadow);
+  }
+}
+
+:is(#site-shell, [data-cookie-consent]) :is(
+  button:not([data-glass="none"]),
+  a[data-glass],
+  a.button,
+  .hero-actions > a.text-link,
+  .cashless-copy > a,
+  .store-feature-copy > a,
+  .view-machine-button,
+  .faq-list summary
+):focus-visible {
+  outline: 2px solid var(--iv-glass-focus);
+  outline-offset: 3px;
+}
+
+:is(#site-shell, [data-cookie-consent]) button:disabled:not([data-glass="none"]) {
+  opacity: 0.56;
+  cursor: not-allowed;
+  box-shadow: inset 0 0 0 1px var(--glass-rim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(#site-shell, [data-cookie-consent]) :is(
+    button:not([data-glass="none"]),
+    a[data-glass],
+    a.button,
+    .hero-actions > a.text-link,
+    .cashless-copy > a,
+    .store-feature-copy > a,
+    .view-machine-button
+  ) {
+    transition: none;
+    translate: none;
+    scale: none;
+  }
+}

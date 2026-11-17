@@ -24,6 +24,7 @@ export default function RequestQuoteLink({
   return (
     <a
       className={`${styles.button} ${styles[variant]} ${className}`.trim()}
+      data-glass="accent"
       href={createWhatsAppQuoteHref({ code, name, context })}
       target="_blank"
       rel="noopener noreferrer"

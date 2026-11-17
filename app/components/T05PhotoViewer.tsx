@@ -146,7 +146,7 @@ export default function T05PhotoViewer({ className, priority = false }: T05Photo
   };
 
   return (
-    <div className={[styles.viewer, className].filter(Boolean).join(" ")} role="group" aria-label="T05 four-angle photo viewer">
+    <div className={[styles.viewer, className].filter(Boolean).join(" ")} role="group" aria-label="T05 four-angle photo viewer" data-glass-theme="dark">
       <div
         id={stageId}
         className={styles.photoStage}
