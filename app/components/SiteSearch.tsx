@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { searchSite } from "../lib/site-search";
 import styles from "./site-search.module.css";
+import { IVENDIconButton } from "./IVENDButton";
 
 export default function SiteSearch({ onOpen }: { onOpen: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -23,14 +24,14 @@ export default function SiteSearch({ onOpen }: { onOpen: () => void }) {
   };
 
   return <>
-    <button ref={buttonRef} className={styles.trigger} data-glass="search" type="button" aria-label="Search IVEND" aria-haspopup="dialog" aria-expanded={open} aria-controls="ivend-site-search" onClick={openSearch}>
+    <IVENDIconButton ref={buttonRef} className={styles.trigger} data-glass="search" type="button" aria-label="Search IVEND" aria-haspopup="dialog" aria-expanded={open} aria-controls="ivend-site-search" onClick={openSearch}>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" /></svg>
-    </button>
+    </IVENDIconButton>
     {/* Native modal dialog handles Escape and backdrop dismissal; it is intentionally interactive. */}
     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
     <dialog ref={dialogRef} id="ivend-site-search" className={styles.panel} aria-labelledby="ivend-search-title" onClick={(event) => { if (event.target === event.currentTarget) closeSearch(); }} onKeyDown={(event) => { if (event.key === "Escape") { event.preventDefault(); closeSearch(); } }} onCancel={(event) => { event.preventDefault(); closeSearch(); }} onClose={() => { setOpen(false); buttonRef.current?.focus({ preventScroll: true }); }}>
       <div className={styles.content}>
-        <div className={styles.topline}><h2 id="ivend-search-title">Search IVEND</h2><button className={styles.close} type="button" aria-label="Close search" onClick={closeSearch}>×</button></div>
+        <div className={styles.topline}><h2 id="ivend-search-title">Search IVEND</h2><IVENDIconButton className={styles.close} type="button" aria-label="Close search" onClick={closeSearch}>×</IVENDIconButton></div>
         <form role="search" onSubmit={(event) => event.preventDefault()}>
           <label className={styles.label} htmlFor="ivend-search-input">Machines, services and pages</label>
           <input ref={inputRef} id="ivend-search-input" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try coffee, T05 or service" autoComplete="off" maxLength={160} />

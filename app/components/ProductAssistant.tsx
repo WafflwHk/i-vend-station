@@ -3,6 +3,7 @@
 import { FormEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AssistantLink, getProductAssistantReply } from "../lib/product-assistant";
+import { IVENDButton, IVENDIconButton, IVENDLinkButton } from "./IVENDButton";
 import styles from "./product-assistant.module.css";
 
 type AssistantMessage = {
@@ -259,10 +260,11 @@ export default function ProductAssistant() {
   return (
     <div className={styles.assistantRoot}>
       {!open ? (
-        <button
+        <IVENDButton
           ref={launcherRef}
           className={styles.launcher}
           data-glass="accent"
+          variant="filled"
           type="button"
           aria-haspopup="dialog"
           aria-expanded="false"
@@ -272,7 +274,7 @@ export default function ProductAssistant() {
         >
           <span className={styles.launcherMic} aria-hidden="true"><i /></span>
           <span><strong>Ask IVS</strong><small>Product guide</small></span>
-        </button>
+        </IVENDButton>
       ) : (
         <section
           className={styles.panel}
@@ -287,14 +289,14 @@ export default function ProductAssistant() {
               <div><strong id="ivend-assistant-title">I Vend AI</strong><small>Catalogue product guide</small></div>
             </div>
             <div className={styles.headerActions}>
-              <button type="button" onClick={startNewConversation}>New</button>
-              <button className={styles.closeButton} type="button" aria-label="Close product assistant" onClick={closeAssistant}><span aria-hidden="true" /></button>
+              <IVENDButton size="compact" type="button" onClick={startNewConversation}>New</IVENDButton>
+              <IVENDIconButton className={styles.closeButton} type="button" aria-label="Close product assistant" onClick={closeAssistant}><span aria-hidden="true" /></IVENDIconButton>
             </div>
           </header>
 
           <div className={styles.quickQuestions} aria-label="Suggested questions">
             {suggestedQuestions.map((question) => (
-              <button key={question} type="button" onClick={() => submitQuestion(question)}>{question}</button>
+              <IVENDButton key={question} size="compact" type="button" onClick={() => submitQuestion(question)}>{question}</IVENDButton>
             ))}
           </div>
 
@@ -305,13 +307,13 @@ export default function ProductAssistant() {
                 <p>{message.text}</p>
                 {message.links?.length ? (
                   <div className={styles.messageLinks}>
-                    {message.links.map((link) => <a key={`${message.id}-${link.href}`} data-glass="neutral" href={link.href}>{link.label}<span aria-hidden="true">&rarr;</span></a>)}
+                    {message.links.map((link) => <IVENDLinkButton key={`${message.id}-${link.href}`} size="compact" data-glass="neutral" href={link.href}>{link.label}<span aria-hidden="true">&rarr;</span></IVENDLinkButton>)}
                   </div>
                 ) : null}
                 {message.role === "assistant" ? (
-                  <button className={styles.readButton} type="button" onClick={() => readReply(`${message.title ? `${message.title}. ` : ""}${message.text}`)} disabled={!speechOutputAvailable}>
+                  <IVENDButton className={styles.readButton} size="compact" type="button" onClick={() => readReply(`${message.title ? `${message.title}. ` : ""}${message.text}`)} disabled={!speechOutputAvailable}>
                     <span aria-hidden="true">◖</span> Read reply aloud
-                  </button>
+                  </IVENDButton>
                 ) : null}
               </article>
             ))}
@@ -331,7 +333,7 @@ export default function ProductAssistant() {
               onKeyDown={handleInputKeyDown}
             />
             <div className={styles.composerButtons}>
-              <button
+              <IVENDIconButton
                 className={`${styles.micButton} ${listening ? styles.listening : ""}`}
                 data-glass={listening ? "recording" : undefined}
                 type="button"
@@ -342,8 +344,8 @@ export default function ProductAssistant() {
                 onClick={toggleListening}
               >
                 <span aria-hidden="true"><i /></span>
-              </button>
-              <button className={styles.sendButton} data-glass="accent" type="submit" disabled={!input.trim()} aria-label="Send question"><span aria-hidden="true">&uarr;</span></button>
+              </IVENDIconButton>
+              <IVENDIconButton className={styles.sendButton} variant="filled" data-glass="accent" type="submit" disabled={!input.trim()} aria-label="Send question"><span aria-hidden="true">&uarr;</span></IVENDIconButton>
             </div>
           </form>
 

@@ -1,4 +1,5 @@
 import { createWhatsAppQuoteHref } from "../lib/whatsapp";
+import { IVENDLinkButton } from "./IVENDButton";
 import styles from "./request-quote-link.module.css";
 
 type Props = {
@@ -22,8 +23,10 @@ export default function RequestQuoteLink({
   const visibleLabel = label ?? (variant === "compact" ? "Request quote" : "Request a Quote");
 
   return (
-    <a
+    <IVENDLinkButton
       className={`${styles.button} ${styles[variant]} ${className}`.trim()}
+      variant="filled"
+      size={variant === "compact" ? "compact" : "regular"}
       data-glass="accent"
       href={createWhatsAppQuoteHref({ code, name, context })}
       target="_blank"
@@ -32,6 +35,6 @@ export default function RequestQuoteLink({
     >
       <span>{visibleLabel}</span>
       <b aria-hidden="true">&#8599;</b>
-    </a>
+    </IVENDLinkButton>
   );
 }

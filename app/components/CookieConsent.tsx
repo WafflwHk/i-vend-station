@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore } from "react";
 import styles from "./cookie-consent.module.css";
+import { IVENDButton } from "./IVENDButton";
 
 const consentStorageKey = "ivend-cookie-preference";
 
@@ -47,8 +48,8 @@ export default function CookieConsent() {
         <p>IVEND uses essential browser storage for appearance and site reliability. We do not currently use advertising or analytics cookies. <a href="/privacy">Privacy Policy</a></p>
       </div>
       <div className={styles.actions}>
-        <button type="button" className={styles.secondary} onClick={() => saveChoice("essential")}>Essential only</button>
-        <button type="button" className={styles.primary} data-glass="accent" onClick={() => saveChoice("all")}>Accept all cookies</button>
+        <IVENDButton type="button" className={styles.secondary} onClick={() => saveChoice("essential")}>Essential only</IVENDButton>
+        <IVENDButton variant="filled" type="button" className={styles.primary} data-glass="accent" onClick={() => saveChoice("all")}>Accept all cookies</IVENDButton>
       </div>
     </aside>
   );

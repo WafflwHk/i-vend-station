@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RequestQuoteLink from "../../components/RequestQuoteLink";
+import { IVENDLinkButton } from "../../components/IVENDButton";
 import T05PhotoViewer from "../../components/T05PhotoViewer";
 import { IVEND_VERSION, IVEND_RELEASE_STATUS } from "../../config/site";
 import { createWhatsAppQuoteHref } from "../../lib/whatsapp";
@@ -62,7 +63,7 @@ export default function T05CashlessPage() {
           <a href="#overview">Overview</a>
           <a href="#features">Features</a>
           <a href="#compatibility">Compatibility</a>
-          <a className={styles.quotePill} data-glass="accent" href="#quote">Request a quote</a>
+          <IVENDLinkButton className={styles.quotePill} size="compact" variant="filled" data-glass="accent" href="#quote">Request a quote</IVENDLinkButton>
         </div>
       </div>
 
@@ -75,9 +76,9 @@ export default function T05CashlessPage() {
             Give customers a faster way to pay at compatible vending machines&mdash;with contactless cards and supported QR or e-wallet methods.
           </p>
           <div className={styles.heroActions}>
-            <a className={styles.primaryButton} data-glass="neutral" href="#quote">
+            <IVENDLinkButton className={styles.primaryButton} data-glass="neutral" href="#quote">
               Check compatibility <span aria-hidden="true">&darr;</span>
-            </a>
+            </IVENDLinkButton>
             <RequestQuoteLink code="T05" name="Cashless Device" context="cashless" variant="blue" />
           </div>
         </div>
@@ -184,9 +185,11 @@ export default function T05CashlessPage() {
         <p className={styles.sectionLabel} data-animate="up">T05 CASHLESS</p>
         <h2 data-animate="up" data-animate-delay="1">Make your next machine<br />easier to pay at.</h2>
         <p data-animate="up" data-animate-delay="2">Send us your vending-machine model and location. We&apos;ll confirm the setup before preparing your quotation.</p>
-        <a href={t05QuoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" data-animate="up" data-animate-delay="3" aria-label="Request a T05 quotation via WhatsApp (opens in a new tab)">
-          Request a T05 quotation <span aria-hidden="true">&#8599;</span>
-        </a>
+        <div className={styles.quoteAction} data-animate="up" data-animate-delay="3">
+          <IVENDLinkButton variant="filled" href={t05QuoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" aria-label="Request a T05 quotation via WhatsApp (opens in a new tab)">
+            Request a T05 quotation <span aria-hidden="true">&#8599;</span>
+          </IVENDLinkButton>
+        </div>
         <small data-animate="up" data-animate-delay="3">Price, availability, configuration, and machine compatibility are confirmed before quotation.</small>
       </section>
 

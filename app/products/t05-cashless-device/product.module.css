@@ -85,7 +85,7 @@
 
 .quotePill,
 .primaryButton,
-.quote > a {
+.quoteAction > a {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -93,7 +93,7 @@
 
 .quotePill::after,
 .primaryButton::after,
-.quote > a::after {
+.quoteAction > a::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -108,7 +108,7 @@
 }
 
 .primaryButton span,
-.quote > a span { display: inline-block; transition: translate 220ms ease, rotate 220ms ease; }
+.quoteAction > a span { display: inline-block; transition: translate 220ms ease, rotate 220ms ease; }
 
 .hero {
   position: relative;
@@ -535,7 +535,7 @@
   line-height: 1.7;
 }
 
-.quote > a {
+.quoteAction > a {
   margin-top: 34px;
   padding: 16px 23px;
   border-radius: 999px;
@@ -547,7 +547,7 @@
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.quote > a span { margin-left: 8px; }
+.quoteAction > a span { margin-left: 8px; }
 .quote > small { margin-top: 17px; color: #545963; font-size: 8px; }
 
 .footer {
@@ -583,12 +583,12 @@
 @media (hover: hover) and (pointer: fine) {
   .quotePill:hover { background: #4386ff; transform: translateY(-1px); }
   .primaryButton:hover { transform: translateY(-2px); box-shadow: 0 14px 35px #0008; }
-  .quote > a:hover { transform: translateY(-2px); box-shadow: 0 24px 52px #dd3b2255; }
+  .quoteAction > a:hover { transform: translateY(-2px); box-shadow: 0 24px 52px #dd3b2255; }
   .quotePill:hover::after,
   .primaryButton:hover::after,
-  .quote > a:hover::after { translate: 680% 0; }
+  .quoteAction > a:hover::after { translate: 680% 0; }
   .primaryButton:hover span,
-  .quote > a:hover span { translate: 4px 0; rotate: 4deg; }
+  .quoteAction > a:hover span { translate: 4px 0; rotate: 4deg; }
   .productLinks > a:not(.quotePill) { position: relative; }
   .productLinks > a:not(.quotePill)::after { content: ""; position: absolute; right: 0; bottom: -5px; left: 0; height: 1px; background: currentColor; scale: 0 1; transform-origin: right; transition: scale 220ms ease; }
   .productLinks > a:not(.quotePill):hover::after { scale: 1 1; transform-origin: left; }
@@ -709,7 +709,7 @@
   .quote { min-height: 570px; padding: 90px 18px calc(90px + env(safe-area-inset-bottom)); }
   .quoteAura { width: 340px; height: 340px; }
   .quote > p:not(.sectionLabel) { font-size: 13px; }
-  .quote > a { width: 100%; min-height: 50px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; }
+  .quoteAction > a { width: 100%; min-height: 50px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; }
   .quote > small { font-size: 10px; line-height: 1.45; }
 
   .footer { padding: 40px 20px calc(40px + env(safe-area-inset-bottom)); }
@@ -746,7 +746,7 @@
 .quote { background: #14243d; padding: var(--iv-section-space) var(--iv-gutter); min-height: 0; }
 .quote > p:not(.sectionLabel) { font-size: 16px; }
 .quote > small { font-size: 11px; color: #b0b8c4; line-height: 1.6; }
-.quote > a { font-size: 13px; }
+.quoteAction > a { font-size: 13px; }
 @media (max-width: 980px) {
   .hero { grid-template-columns: minmax(0, 1fr); padding-top: 48px; gap: 32px; }
   .heroCopy { text-align: left; }
@@ -760,3 +760,8 @@
   .heroActions { gap: 12px; }
   .paymentBand > p { font-size: 36px; line-height: 1.1; letter-spacing: -.04em; }
 }
+
+
+/* Reveal on the wrapper; the link keeps Glisse's independent spring. */
+.quoteAction { margin-top: 34px; }
+.quoteAction > a { margin-top: 0; }

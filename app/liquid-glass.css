@@ -1,159 +1,159 @@
-/* Shared button materials. Components still own their layout and hit areas. */
+/* Glisse tokens follow IVEND's existing resolved theme. */
 :root {
-  --iv-glass-tint: rgba(255, 255, 255, 0.1);
-  --iv-glass-ink: #14223b;
-  --iv-glass-focus: #1b5fc7;
-  --iv-glass-accent-tint: rgba(29, 101, 232, 0.10);
-  --iv-glass-selected-ink: #174f9f;
-  --iv-glass-recording-ink: #821e36;
-  --iv-glass-overlay-tint: rgba(243, 248, 255, 0.1);
+  --lg-foreground: #14223b;
+  --lg-glass: rgb(255 255 255 / .56);
+  --lg-glass-active: rgb(234 240 251 / .8);
+  --lg-edge: rgb(24 48 86 / .14);
+  --lg-drop: rgb(14 32 62 / .08);
+  --lg-ring: #1d65e8;
+  --lg-fill: #1d65e8;
+  --lg-rim-shine: .28;
+  --lg-blur: 8px;
+  --iv-control-fallback: #edf1f7;
+}
+html[data-theme="dark"], [data-glass-theme="dark"], .contact, .cashless-copy, .store-feature-copy {
+  --lg-foreground: #f3f7ff;
+  --lg-glass: rgb(28 41 61 / .56);
+  --lg-glass-active: rgb(43 62 89 / .78);
+  --lg-edge: rgb(221 235 255 / .15);
+  --lg-drop: rgb(0 0 0 / .12);
+  --lg-ring: #93c1ff;
+  --lg-fill: #1d65e8;
+  --lg-rim-shine: .16;
+  --iv-control-fallback: #202d40;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --lg-foreground: #f3f7ff;
+    --lg-glass: rgb(28 41 61 / .56);
+    --lg-glass-active: rgb(43 62 89 / .78);
+    --lg-edge: rgb(221 235 255 / .15);
+    --lg-drop: rgb(0 0 0 / .12);
+    --lg-ring: #93c1ff;
+    --lg-rim-shine: .16;
+    --iv-control-fallback: #202d40;
+  }
 }
 
-html[data-theme="dark"],
-[data-glass-theme="dark"],
-.contact,
-.cashless-copy,
-.store-feature-copy {
-  --iv-glass-tint: rgba(18, 39, 74, 0.1);
-  --iv-glass-ink: #f3f7ff;
-  --iv-glass-focus: #93c1ff;
-  --iv-glass-accent-tint: rgba(18, 39, 74, 0.1);
-  --iv-glass-selected-ink: #b4d2ff;
-  --iv-glass-recording-ink: #ffe2e8;
-  --iv-glass-overlay-tint: rgba(15, 28, 47, 0.1);
-}
-
-:is(#site-shell, [data-cookie-consent]) :is(
-  button:not([data-glass="none"]),
-  a[data-glass],
-  [data-glass="indicator"],
-  a.button,
-  .hero-actions > a.text-link,
-  .cashless-copy > a,
-  .store-feature-copy > a,
-  .collection-hero-foot > a,
-  .view-machine-button,
-  .faq-list summary > span
-) {
-  --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-tint));
-  --glass-ink: var(--iv-glass-ink);
-  color: var(--glass-ink);
-  background: var(--glass-tint);
-  border-color: transparent;
-  box-shadow: none;
-  opacity: 1;
-  -webkit-backdrop-filter: blur(8px) saturate(145%);
-  backdrop-filter: blur(8px) saturate(145%);
-}
-
-/* Accent and selected controls use ink, not a stronger background or outline. */
-:is(#site-shell, [data-cookie-consent]) :is(
-  [data-glass="accent"]:not(:disabled),
-  .hero-actions > .button,
-  .contact-actions > .button,
-  button[aria-pressed="true"]:not(:disabled),
-  button[aria-expanded="true"]:not(:disabled),
-  .faq-list details[open] summary > span
-) {
-  --glass-tint: var(--iv-glass-floating-tint, var(--iv-glass-accent-tint));
-  --glass-ink: var(--iv-glass-selected-ink);
-}
-
-/* Selected text remains identifiable without a decorative rim. */
-#site-shell button:is([aria-pressed="true"], [aria-expanded="true"]):not(:disabled) {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-/* The microphone retains its recording-state colour. */
-#site-shell button[data-glass="recording"][aria-pressed="true"]:not(:disabled) {
-  --glass-tint: rgba(237, 77, 108, 0.1);
-  --glass-ink: var(--iv-glass-recording-ink);
-}
-
-#site-shell :is(.hero-actions > a.text-link, .cashless-copy > a) {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 16px;
+/* Keep component layout classes; retire their competing button skins. */
+:is(#site-shell, [data-cookie-consent]) .ivend-control {
+  --iv-control-height: 46px;
+  --iv-control-padding: 20px;
+  box-sizing: border-box;
+  min-height: var(--iv-control-height);
+  height: auto;
   border: 0;
   border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+  text-align: center;
+  white-space: normal;
+  transform: none;
+  transition: background-color 200ms ease, color 180ms ease;
+  touch-action: manipulation;
 }
-
-#site-shell .store-feature-copy > a > span,
-#site-shell .cashless-copy > a > b,
-#site-shell .contact-actions > .button > b,
-#site-shell [data-glass="accent"] > :is(b, span[aria-hidden="true"]) {
-  color: currentColor;
+:is(#site-shell, [data-cookie-consent]) .ivend-control[data-size="compact"] { --iv-control-height: 44px; --iv-control-padding: 14px; font-size: 12px; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control[data-size="large"] { --iv-control-height: 50px; --iv-control-padding: 24px; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control.lg-button,
+:is(#site-shell, [data-cookie-consent]) .ivend-link-surface.lg-button {
+  height: auto;
+  min-height: var(--iv-control-height);
+  padding: 10px var(--iv-control-padding);
+  border: 0;
+  border-radius: 999px;
+  background-color: var(--lg-glass);
+  background-image: var(--lg-rim, none);
+  background-size: 100% 100%;
+  color: var(--lg-foreground);
+  box-shadow: inset 0 0 0 .5px var(--lg-edge), 0 1px 3px var(--lg-drop);
+  font: inherit;
+  font-weight: 600;
+  transform: none;
+  transition: background-color 200ms ease, color 180ms ease;
+  -webkit-backdrop-filter: blur(var(--lg-blur)) var(--lg-filter, saturate(1.5));
+  backdrop-filter: blur(var(--lg-blur)) var(--lg-filter, saturate(1.5));
 }
+:is(#site-shell, [data-cookie-consent]) .lg-button[data-rim] { box-shadow: 0 1px 3px var(--lg-drop); }
 
-/* Keep dense control groups and decorative indicators inexpensive to draw. */
-#site-shell :is(
-  [data-glass="indicator"],
-  .faq-list summary > span,
-  [role="group"] button[aria-pressed]
-) {
+/* Anchor owns layout/focus/press; Glass alone owns the optical surface. */
+:is(#site-shell, [data-cookie-consent]) a.ivend-control.ivend-link-control {
+  display: inline-flex;
+  align-items: stretch;
+  padding: 0;
+  color: var(--lg-foreground);
+  background: transparent;
+  box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+:is(#site-shell, [data-cookie-consent]) .ivend-link-surface {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: inherit;
+  gap: inherit;
+  min-width: 0;
+}
+:is(#site-shell, [data-cookie-consent]) .ivend-control.ivend-icon-control {
+  flex: 0 0 44px;
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: 20px;
+}
+#site-shell header [aria-label="Website appearance"] .ivend-control { --iv-control-padding: 9px; font-size: 10px; }
+:is(#site-shell, [data-cookie-consent]) .ivend-icon-control > .ivend-link-surface { padding: 0; min-height: 44px; justify-content: center; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control :is(b, svg, span[aria-hidden="true"]) { color: inherit; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control :is(b, span[aria-hidden="true"]) { font-variant-emoji: text; }
+/* The package and CSS modules can arrive in either order after navigation. */
+@media (min-width: 881px) {
+  #site-shell header button[aria-controls="mobile-site-menu"] { display: none; }
+}
+@media (max-width: 880px) {
+  #site-shell header button[aria-controls="mobile-site-menu"] { display: grid; }
+}
+
+/* Primary fill is the brand blue, not the lighter dark-theme text-link accent. */
+:is(#site-shell, [data-cookie-consent]) .lg-button[data-variant="filled"] { background-color: #1d65e8; color: #fff; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control[aria-pressed="true"]:not(:disabled) {
+  color: var(--lg-ring);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+:is(#site-shell, [data-cookie-consent]) .ivend-control[data-glass="recording"][aria-pressed="true"] { color: #d93a59; }
+html[data-theme="dark"] #site-shell .ivend-control[data-glass="recording"][aria-pressed="true"] { color: #ffb8c7; }
 
 @media (hover: hover) and (pointer: fine) {
-  :is(#site-shell, [data-cookie-consent]) :is(
-    button:not([data-glass="none"], :disabled),
-    a[data-glass],
-    a.button,
-    .hero-actions > a.text-link,
-    .cashless-copy > a,
-    .store-feature-copy > a,
-    .collection-hero-foot > a,
-    .view-machine-button
-  ):hover,
-  #site-shell :is(.faq-list summary:hover > span, a:hover > [data-glass="indicator"]) {
-    box-shadow: none;
-    border-color: transparent;
-  }
+  :is(#site-shell, [data-cookie-consent]) .ivend-control.lg-button:hover:not(:disabled),
+  :is(#site-shell, [data-cookie-consent]) a.ivend-control:hover > .ivend-link-surface { background-color: var(--lg-glass-active); }
+  :is(#site-shell, [data-cookie-consent]) .ivend-control.lg-button[data-variant="filled"]:hover:not(:disabled),
+  :is(#site-shell, [data-cookie-consent]) a.ivend-control:hover > [data-variant="filled"] { background-color: #205fce; }
 }
+:is(#site-shell, [data-cookie-consent]) .ivend-control.lg-button:is(:active, [data-pressed]):not(:disabled),
+:is(#site-shell, [data-cookie-consent]) a.ivend-control:is(:active, [data-pressed]) > .ivend-link-surface { background-color: var(--lg-glass-active); }
+:is(#site-shell, [data-cookie-consent]) .ivend-control.lg-button[data-variant="filled"]:is(:active, [data-pressed]):not(:disabled),
+:is(#site-shell, [data-cookie-consent]) a.ivend-control:is(:active, [data-pressed]) > [data-variant="filled"] { background-color: #1854c3; }
 
-:is(#site-shell, [data-cookie-consent]) :is(
-  button:not([data-glass="none"]),
-  a[data-glass],
-  a.button,
-  .hero-actions > a.text-link,
-  .cashless-copy > a,
-  .store-feature-copy > a,
-  .collection-hero-foot > a,
-  .view-machine-button,
-  .faq-list summary
-):focus-visible {
-  outline: 2px solid var(--iv-glass-focus);
-  outline-offset: 3px;
+/* Inline spring values win; never add a second CSS or GSAP press transform. */
+:is(#site-shell, [data-cookie-consent]) .ivend-control:is(:hover, :active) { transform: none; scale: 1; translate: none; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control:focus-visible { outline: 2px solid var(--lg-ring); outline-offset: 4px; }
+:is(#site-shell, [data-cookie-consent]) .ivend-control:disabled { opacity: .5; cursor: not-allowed; text-decoration: none; }
+#site-shell a.ivend-link-control::after { content: none; }
+:is(#site-shell, [data-cookie-consent]) a.ivend-link-control[data-pressed] > .ivend-link-surface::after { opacity: 1; transition-duration: 0s; }
+.ivend-button-progress { width: 12px; height: 12px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: ivend-progress 700ms linear infinite; }
+@keyframes ivend-progress { to { rotate: 1turn; } }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  :is(#site-shell, [data-cookie-consent]) .lg-button:not([data-variant="filled"]) { background-color: var(--iv-control-fallback); }
 }
-
-:is(#site-shell, [data-cookie-consent]) button:disabled:not([data-glass="none"]) {
-  opacity: 1;
-  color: var(--iv-text-secondary);
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  :is(#site-shell, [data-cookie-consent]) :is(
-    button:not([data-glass="none"]),
-    a[data-glass],
-    a.button,
-    .hero-actions > a.text-link,
-    .cashless-copy > a,
-    .store-feature-copy > a,
-    .collection-hero-foot > a,
-    .view-machine-button
-  ) {
-    transition: none;
-    translate: none;
-    scale: none;
-  }
-}
-
-/* Remove legacy decorative sheens without touching icon strokes or backdrops. */
-#site-shell :is(a[data-glass], a.button, .view-machine-button, .collection-hero-foot > a, .store-feature-copy > a)::after {
-  display: none;
+  :is(#site-shell, [data-cookie-consent]) .ivend-control { scale: none !important; translate: none !important; transform: none !important; transition: none !important; }
+  :is(#site-shell, [data-cookie-consent]) .ivend-control::after,
+  :is(#site-shell, [data-cookie-consent]) .ivend-control > .ivend-link-surface { transition: none !important; }
+  .ivend-button-progress { animation: none; }
 }

@@ -1,11 +1,17 @@
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
-import { transpileModule, ModuleKind } from "typescript";
+import { transpileModule, ModuleKind, JsxEmit, ScriptTarget } from "typescript";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 
 test("header account control is an accessible icon link", async () => {
   const html = await (await render("/")).text();
-  assert.match(html, /data-glass="neutral" href="\/account" aria-label="Sign in or open your account" title="Sign in \/ Account"><svg[^>]*aria-hidden="true"/);
+  const accountLink = html.match(/<a\b[^>]*aria-label="Sign in or open your account"[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
+  assert.match(accountLink, /href="\/account"/);
+  assert.match(accountLink, /title="Sign in \/ Account"/);
+  assert.match(accountLink, /ivend-icon-control/);
+  assert.match(accountLink, /<svg[^>]*aria-hidden="true"/);
   assert.doesNotMatch(html, />Sign in \/ Account<\/span>/);
 });
 
@@ -34,18 +40,133 @@ test("machine listings keep view links without quotation buttons", async () => {
   }
 });
 
-test("keeps all button surfaces 90 percent transparent without fading their contents", async () => {
-  const styles = await readFile(new URL("../app/liquid-glass.css", import.meta.url), "utf8");
-  const tints = [...styles.matchAll(/--iv-glass-(?:tint|accent-tint|overlay-tint):\s*rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\)/g)];
-  assert.equal(tints.length, 6);
-  assert.ok(tints.every((match) => Number(match[1]) === 0.1));
-  assert.match(styles, /background:\s*var\(--glass-tint\)/);
-  assert.match(styles, /border-color:\s*transparent/);
-  assert.match(styles, /opacity:\s*1/);
-  assert.match(styles, /\.collection-hero-foot > a/);
-  assert.match(styles, /button:not\(\[data-glass="none"\]\)/);
+test("integrates pinned Glisse with server-loaded styles and IVEND theme tokens", async () => {
+  const [styles, layout, packageSource, installedSource, wrapper, license] = await Promise.all([
+    readFile(new URL("../app/liquid-glass.css", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../package.json", import.meta.url), "utf8"),
+    readFile(new URL("../node_modules/glisse/package.json", import.meta.url), "utf8"),
+    readFile(new URL("../app/components/IVENDButton.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/lib/glisse/LICENSE", import.meta.url), "utf8"),
+  ]);
+  const project = JSON.parse(packageSource);
+  const glisse = JSON.parse(installedSource);
+  assert.equal(project.dependencies.glisse, "0.6.0");
+  assert.equal(glisse.version, "0.6.0");
+  assert.equal(glisse.peerDependencies.react, ">=18");
+  assert.equal(glisse.peerDependencies["react-dom"], ">=18");
+  assert.ok(Number(project.dependencies.react.split(".")[0]) >= 18);
+  assert.match(layout, /import "glisse\/styles\.css"/);
+  assert.match(wrapper, /import \{ Button, Glass, type ButtonProps \} from "glisse"/);
+  assert.match(wrapper, /usePress\(ref\)/);
+  assert.match(license, /MIT License/);
+  assert.match(license, /Copyright \(c\) 2026 Kelvin Zhang/);
+  assert.match(styles, /html\[data-theme="dark"\]/);
+  assert.match(styles, /\[data-glass-theme="dark"\]/);
+  assert.match(styles, /prefers-color-scheme: dark/);
+  assert.match(styles, /--lg-fill:\s*#1d65e8/);
+  assert.match(styles, /\[data-variant="filled"\][^{]*\{[^}]*background-color:\s*#1d65e8;\s*color:\s*#fff/);
+  assert.match(styles, /background-image:\s*var\(--lg-rim, none\)/);
   assert.match(styles, /:focus-visible/);
-  assert.doesNotMatch(styles, /radial-gradient|linear-gradient|80%/);
+  assert.match(styles, /@supports not \(\(backdrop-filter/);
+  assert.match(styles, /prefers-reduced-motion: reduce/);
+  assert.match(styles, /scale:\s*none !important/);
+  assert.match(styles, /min-height:\s*44px/);
+  assert.match(styles, /@media \(min-width: 881px\)[\s\S]*?aria-controls="mobile-site-menu"[^}]*display: none/);
+});
+
+test("shared controls server-render button states and semantic glass navigation links", async () => {
+  const compile = (source) => transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext, jsx: JsxEmit.ReactJSX } }).outputText;
+  const moduleUrl = (code) => `data:text/javascript;base64,${Buffer.from(code).toString("base64")}`;
+  const reactUrl = import.meta.resolve("react");
+  const spring = moduleUrl(compile(await readFile(new URL("../app/lib/glisse/spring.ts", import.meta.url), "utf8")));
+  const press = moduleUrl(compile(await readFile(new URL("../app/lib/glisse/press.ts", import.meta.url), "utf8"))
+    .replace('"react"', JSON.stringify(reactUrl)).replace('"./spring"', JSON.stringify(spring)));
+  const wrapper = compile(await readFile(new URL("../app/components/IVENDButton.tsx", import.meta.url), "utf8"))
+    .replace('"react/jsx-runtime"', JSON.stringify(import.meta.resolve("react/jsx-runtime")))
+    .replace('"react"', JSON.stringify(reactUrl))
+    .replace('"glisse"', JSON.stringify(import.meta.resolve("glisse")))
+    .replace('"../lib/glisse/press"', JSON.stringify(press));
+  const { IVENDButton, IVENDIconButton, IVENDLinkButton } = await import(moduleUrl(wrapper));
+  const disabled = renderToStaticMarkup(createElement(IVENDButton, { type: "submit", disabled: true, onClick() {} }, "Send enquiry"));
+  assert.match(disabled, /^<button\b/);
+  assert.match(disabled, /type="submit"/);
+  assert.match(disabled, /disabled=""/);
+  assert.match(disabled, /lg-glass lg-button/);
+  assert.doesNotMatch(disabled, /onClick=/i);
+  const loading = renderToStaticMarkup(createElement(IVENDButton, { loading: true }, "Preparing"));
+  assert.match(loading, /aria-busy="true"/);
+  assert.match(loading, /disabled=""/);
+  assert.match(loading, /Preparing/);
+  const icon = renderToStaticMarkup(createElement(IVENDIconButton, { "aria-label": "Open search" }, "⌕"));
+  assert.match(icon, /aria-label="Open search"/);
+  assert.match(icon, /ivend-icon-control/);
+  const link = renderToStaticMarkup(createElement(IVENDLinkButton, { href: "https://wa.me/601133180812", variant: "filled", target: "_blank", rel: "noopener noreferrer", "aria-label": "Request a quotation" }, "Request a Quote"));
+  assert.match(link, /^<a\b/);
+  assert.match(link, /href="https:\/\/wa\.me\/601133180812"/);
+  assert.match(link, /target="_blank"/);
+  assert.match(link, /rel="noopener noreferrer"/);
+  assert.match(link, /aria-label="Request a quotation"/);
+  assert.match(link, /<div[^>]*lg-glass[^>]*ivend-link-surface[^>]*data-variant="filled"/);
+  assert.doesNotMatch(link, /<button|role="button"/);
+});
+
+test("Glisse spring settles normally and applies reduced-motion targets without animation frames", async () => {
+  const source = await readFile(new URL("../app/lib/glisse/spring.ts", import.meta.url), "utf8");
+  const code = transpileModule(source, { compilerOptions: { module: ModuleKind.ESNext, target: ScriptTarget.ES2022 } }).outputText;
+  const { createSpring } = await import(`data:text/javascript;base64,${Buffer.from(code).toString("base64")}`);
+  const names = ["document", "matchMedia", "requestAnimationFrame"];
+  const originals = new Map(names.map((name) => [name, Object.getOwnPropertyDescriptor(globalThis, name)]));
+  const frames = new Map();
+  const painted = [];
+  let reducedMotion = true;
+  let time = 0;
+  let nextFrame = 0;
+  let spring;
+  try {
+    Object.defineProperty(globalThis, "document", { configurable: true, value: { hidden: false, timeline: { get currentTime() { return time; } } } });
+    Object.defineProperty(globalThis, "matchMedia", { configurable: true, value: (query) => {
+      assert.equal(query, "(prefers-reduced-motion: reduce)");
+      return { matches: reducedMotion };
+    } });
+    Object.defineProperty(globalThis, "requestAnimationFrame", { configurable: true, value: (callback) => {
+      frames.set(++nextFrame, callback);
+      return nextFrame;
+    } });
+    spring = createSpring(1, 250, 11.8, (value) => painted.push(value));
+    spring.set(1.08);
+    assert.deepEqual(painted, [1.08], "reduced motion paints the target synchronously");
+    assert.equal(frames.size, 0, "reduced motion schedules no animation frame");
+
+    reducedMotion = false;
+    spring.set(1);
+    assert.equal(frames.size, 1);
+    for (let step = 0; frames.size && step < 180; step++) {
+      time += 16;
+      const callbacks = [...frames.values()];
+      frames.clear();
+      for (const callback of callbacks) callback(time);
+    }
+    assert.ok(painted.length > 2, "normal release paints intermediate spring values");
+    assert.ok(painted.every(Number.isFinite));
+    assert.equal(painted.at(-1), 1, "release converges to its exact resting size");
+    assert.equal(frames.size, 0, "settled spring stops scheduling work");
+
+    spring.set(1.1);
+    spring.stop();
+    const paintCount = painted.length;
+    for (const callback of frames.values()) callback(time + 16);
+    frames.clear();
+    assert.equal(painted.length, paintCount, "a stopped spring does not paint again");
+  } finally {
+    spring?.stop();
+    frames.clear();
+    for (const name of names) {
+      const descriptor = originals.get(name);
+      if (descriptor) Object.defineProperty(globalThis, name, descriptor);
+      else delete globalThis[name];
+    }
+  }
 });
 
 test("renders honest sample highlights with native scrolling and server components", async () => {
@@ -154,7 +275,9 @@ test("server-renders the branded I Vend Station homepage", async () => {
   assert.match(html, /premium-hero/);
   assert.match(html, /premium-title-line/);
   const hero = html.match(/<section class="premium-hero"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.match(hero, /href="\/machines"[^>]*>Explore Product Catalog/);
+  const catalogueAction = hero.match(/<a\b[^>]*href="\/machines"[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
+  assert.match(catalogueAction, /Explore Product Catalog/);
+  assert.match(catalogueAction, /data-variant="filled"/);
   assert.doesNotMatch(hero, /<img|machine-cluster|data-vending-track/);
   assert.doesNotMatch(html, /art-brand-label/);
   assert.match(html, /Find your machine\./);
@@ -251,11 +374,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.8\.2(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.9\.0(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.8\.2"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.9\.0"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);
@@ -273,7 +396,9 @@ test("publishes a trilingual, site-specific privacy policy", async () => {
   assert.match(html, /I Vend Station Privacy Policy/);
   assert.match(html, /Notis Privasi I Vend Station/);
   assert.match(html, /I Vend Station 隐私政策/);
-  assert.match(html, /href="#simplified-chinese"[^>]*lang="zh-Hans"[^>]*>简体中文/);
+  const chineseLink = html.match(/<a\b[^>]*href="#simplified-chinese"[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
+  assert.match(chineseLink, /lang="zh-Hans"/);
+  assert.match(chineseLink, /简体中文/);
   assert.match(html, /本网站不会将这些内容发送至外部 AI API/);
   assert.match(html, /I Vend Station does not receive your ChatGPT password/);
   assert.match(html, /appearance preference and your cookie-preference choice use your browser/);

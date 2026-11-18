@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SiteFooter from "../../components/SiteFooter";
+import { IVENDLinkButton } from "../../components/IVENDButton";
 import { getMachine, machines, catalogueMachines } from "../../data/machines";
 import { createWhatsAppQuoteHref } from "../../lib/whatsapp";
 import styles from "./machine-detail.module.css";
@@ -111,7 +112,7 @@ export default async function MachineDetailPage({ params }: Props) {
       <section className={styles.quote} data-animate="scale" data-glass-theme="dark">
         <div data-animate="left"><p className={styles.label}>REQUEST A QUOTATION</p><h2>Ask about {machine.code}.</h2><p>Send this model to our WhatsApp team to confirm the exact unit, configuration, availability, and quotation.</p></div>
         <div className={styles.quoteActions} data-animate="right">
-          <a href={quoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" aria-label={`Request a quotation for ${machine.code} via WhatsApp (opens in a new tab)`}>Request a Quote <span aria-hidden="true">&#8599;</span></a>
+          <IVENDLinkButton variant="filled" href={quoteHref} data-glass="accent" target="_blank" rel="noopener noreferrer" aria-label={`Request a quotation for ${machine.code} via WhatsApp (opens in a new tab)`}>Request a Quote <span aria-hidden="true">&#8599;</span></IVENDLinkButton>
         </div>
       </section>
 

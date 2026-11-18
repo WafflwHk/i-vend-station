@@ -1,5 +1,10 @@
 # IVEND Changelog
 
+## v1.9.0 — 2026-11-18
+
+- Integrated Glisse 0.6.0 glass and IVEND-blue filled controls throughout the site, with shared button, icon and semantic-link components.
+- Preserved theme switching, keyboard focus, reduced motion, disabled states and server-rendered styling.
+
 ## v1.8.2 — 2026-11-18
 
 - Set all button backgrounds to 90% transparency and removed decorative borders, sheens, and shadows while preserving labels, icons, and keyboard focus.

@@ -6,6 +6,7 @@ import styles from "./site-header.module.css";
 import { IVEND_RELEASE_STATUS } from "../config/site";
 import { navigationLinks as links } from "../data/navigation";
 import SiteSearch from "./SiteSearch";
+import { IVENDButton, IVENDIconButton, IVENDLinkButton } from "./IVENDButton";
 
 type Appearance = "system" | "light" | "dark";
 
@@ -36,14 +37,15 @@ function AppearanceControl({ appearance, onChange }: { appearance: Appearance; o
   return (
     <div className={styles.appearanceControl} role="group" aria-label="Website appearance">
       {appearanceOptions.map((option) => (
-        <button
+        <IVENDButton
           key={option.value}
+          size="compact"
           type="button"
           aria-pressed={appearance === option.value}
           onClick={() => onChange(option.value)}
         >
           {option.label}
-        </button>
+        </IVENDButton>
       ))}
     </div>
   );
@@ -155,10 +157,10 @@ export default function SiteHeader() {
             <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
           </div>
           <SiteSearch onOpen={() => setOpen(false)} />
-          <a className={styles.account} data-glass="neutral" href="/account" aria-label="Sign in or open your account" title="Sign in / Account">
+          <IVENDLinkButton iconOnly className={styles.account} data-glass="neutral" href="/account" aria-label="Sign in or open your account" title="Sign in / Account">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.5" /><path d="M5 20v-1a7 7 0 0 1 14 0v1" /></svg>
-          </a>
-          <button
+          </IVENDLinkButton>
+          <IVENDIconButton
             ref={menuButtonRef}
             className={styles.menuButton}
             type="button"
@@ -168,7 +170,7 @@ export default function SiteHeader() {
             onClick={toggleMenu}
           >
             <span /><span />
-          </button>
+          </IVENDIconButton>
         </div>
       </div>
 
@@ -182,7 +184,7 @@ export default function SiteHeader() {
           <span>Appearance</span>
           <AppearanceControl appearance={appearance} onChange={chooseAppearance} />
         </div>
-        <a className={styles.mobileAccount} data-glass="neutral" href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></a>
+        <IVENDLinkButton className={styles.mobileAccount} data-glass="neutral" href="/account" onClick={() => setOpen(false)}>Sign in or open your account <span aria-hidden="true">&rarr;</span></IVENDLinkButton>
       </div>
       {open ? <button className={styles.backdrop} data-glass="none" type="button" aria-label="Close menu" onClick={() => setOpen(false)} /> : null}
     </header>

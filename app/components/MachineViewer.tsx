@@ -4,6 +4,7 @@ import type { CSSProperties, KeyboardEvent, PointerEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Machine } from "../data/machines";
 import styles from "./machine-viewer.module.css";
+import { IVENDButton } from "./IVENDButton";
 
 type Props = {
   machine: Machine;
@@ -164,12 +165,12 @@ export default function MachineViewer({ machine }: Props) {
       <div className={styles.controls} aria-label="Choose a machine view">
         <div className={styles.viewButtons}>
           {views.map((view) => (
-            <button key={view.label} type="button" aria-pressed={activeView === view.label} onClick={() => selectView(view.label, view.angle)}>{view.label}</button>
+            <IVENDButton key={view.label} type="button" aria-pressed={activeView === view.label} onClick={() => selectView(view.label, view.angle)}>{view.label}</IVENDButton>
           ))}
         </div>
-        <button className={styles.spinButton} type="button" aria-pressed={spinning} disabled={reducedMotion} onClick={toggleSpin}>
+        <IVENDButton className={styles.spinButton} type="button" aria-pressed={spinning} disabled={reducedMotion} onClick={toggleSpin}>
           <span aria-hidden="true">&#8635;</span>{spinning ? "Pause spin" : "Spin 360&deg;"}
-        </button>
+        </IVENDButton>
       </div>
 
       <div className={styles.configurator} role="group" aria-label="Illustrative machine configuration preview">

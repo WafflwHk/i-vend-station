@@ -1,5 +1,6 @@
 import { machines } from "../data/machines";
 import RequestQuoteLink from "./RequestQuoteLink";
+import { IVENDLinkButton } from "./IVENDButton";
 import ProductShowcaseMotion from "./ProductShowcaseMotion";
 import styles from "./product-showcase.module.css";
 
@@ -75,7 +76,7 @@ export default function ProductShowcase() {
       <div className={styles.finish}>
         <div><p className={styles.eyebrow}>YOUR NEXT STEP</p><h3>Explore the right setup.</h3><p>Review the full product information, or talk to IVEND about your location and requirements.</p></div>
         <div className={styles.actions}>
-          <a className={styles.detailsLink} data-glass="neutral" href="/machines/hot-cold-coffee-machine">View product details <span aria-hidden="true">↗</span></a>
+          <IVENDLinkButton className={styles.detailsLink} data-glass="neutral" href="/machines/hot-cold-coffee-machine">View product details <span aria-hidden="true">↗</span></IVENDLinkButton>
           <RequestQuoteLink code={machine.code} name={machine.name} />
         </div>
       </div>

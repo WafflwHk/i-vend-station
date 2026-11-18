@@ -1,5 +1,6 @@
 import type { Machine } from "../data/machines";
 import MachineArt from "./MachineArt";
+import { IVENDLinkButton } from "./IVENDButton";
 import styles from "./machine-card.module.css";
 
 type Props = {
@@ -22,7 +23,7 @@ export default function MachineCard({ machine, index }: Props) {
         <h3>{machine.name}</h3>
         <p>{machine.copy}</p>
         <div className="card-bottom card-actions">
-          <a className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></a>
+          <IVENDLinkButton className="view-machine-button" href={`/machines/${machine.slug}`}>View machine <span aria-hidden="true">&rarr;</span></IVENDLinkButton>
           {machine.comingSoon && <span className="coming-soon-action" aria-label={`${machine.code} is coming soon`}>Coming soon</span>}
         </div>
       </div>

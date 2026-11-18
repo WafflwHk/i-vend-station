@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { t05PhotoFrames } from "../data/t05-photos";
 import styles from "./t05-photo-viewer.module.css";
+import { IVENDButton, IVENDIconButton } from "./IVENDButton";
 
 type T05PhotoViewerProps = {
   className?: string;
@@ -181,7 +182,7 @@ export default function T05PhotoViewer({ className, priority = false }: T05Photo
 
       <div className={styles.viewOptions} role="group" aria-label="Choose a T05 photo view">
         {t05PhotoFrames.map((option, index) => (
-          <button
+          <IVENDButton
             key={option.id}
             type="button"
             aria-controls={stageId}
@@ -190,15 +191,15 @@ export default function T05PhotoViewer({ className, priority = false }: T05Photo
           >
             <span>{String(index + 1).padStart(2, "0")}</span>
             {option.label}
-          </button>
+          </IVENDButton>
         ))}
       </div>
 
       <div className={styles.transport}>
-        <button type="button" aria-label="Show previous T05 view" onClick={() => stepFrame(-1)}>
+        <IVENDIconButton type="button" aria-label="Show previous T05 view" onClick={() => stepFrame(-1)}>
           <span aria-hidden="true">&#8592;</span>
-        </button>
-        <button
+        </IVENDIconButton>
+        <IVENDButton
           type="button"
           aria-pressed={isPlaying}
           aria-describedby={reducedMotion ? motionNoteId : undefined}
@@ -207,10 +208,10 @@ export default function T05PhotoViewer({ className, priority = false }: T05Photo
         >
           <span aria-hidden="true">{isPlaying ? "II" : "↻"}</span>
           {isPlaying ? "Pause views" : "Play four views"}
-        </button>
-        <button type="button" aria-label="Show next T05 view" onClick={() => stepFrame(1)}>
+        </IVENDButton>
+        <IVENDIconButton type="button" aria-label="Show next T05 view" onClick={() => stepFrame(1)}>
           <span aria-hidden="true">&#8594;</span>
-        </button>
+        </IVENDIconButton>
       </div>
 
       <div className={styles.viewerMeta}>

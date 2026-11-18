@@ -1,6 +1,7 @@
 import MachineCard from "./components/MachineCard";
 import SiteFooter from "./components/SiteFooter";
 import LatestIvend from "./components/LatestIvend";
+import { IVENDLinkButton } from "./components/IVENDButton";
 import { catalogueMachines } from "./data/machines";
 import { createWhatsAppQuoteHref } from "./lib/whatsapp";
 
@@ -48,7 +49,7 @@ export default function Home() {
           <div className="premium-hero-intro">
             <p>Explore refurbished machines, compatible cashless payments, and support for your next vending project.</p>
             <div className="premium-actions">
-              <a className="button premium-primary" data-glass="accent" href="/machines">Explore Product Catalog <b aria-hidden="true">↗</b></a>
+              <IVENDLinkButton className="button premium-primary" variant="filled" data-glass="accent" href="/machines">Explore Product Catalog <b aria-hidden="true">↗</b></IVENDLinkButton>
               <a className="premium-text-link" href="/#contact">Talk to IVEND <span aria-hidden="true">→</span></a>
             </div>
           </div>
@@ -70,7 +71,7 @@ export default function Home() {
 
       <section className="cashless" id="cashless">
         <div className="cashless-visual" data-animate="up"><img src="/t05-terminal-correct.png" width="1254" height="1254" loading="lazy" decoding="async" alt="Actual grey T05 cashless payment device rotated with the camera side facing down" /><span>TAP &bull; SCAN &bull; PAY</span></div>
-        <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><a href="/products/t05-cashless-device">Explore Cashless Device <b>&#8599;</b></a></div>
+        <div className="cashless-copy" data-animate="right"><div className="section-index light">02 &mdash; CASHLESS DEVICE</div><div className="t05-label">T05</div><h2>Upgrade compatible machines for cashless payments.</h2><p>Offer contactless card and supported QR payments through T05 technology, with centralised transaction records for the operator.</p><ul><li><span>01</span>Contactless card acceptance</li><li><span>02</span>Supported QR payment methods</li><li><span>03</span>Transaction records and reporting</li></ul><small>Compatibility, connectivity, and available payment methods depend on the machine and merchant setup.</small><IVENDLinkButton href="/products/t05-cashless-device">Explore Cashless Device <b>&#8599;</b></IVENDLinkButton></div>
       </section>
 
       <section className="guide" id="guide">
@@ -99,7 +100,7 @@ export default function Home() {
           <p>Send us your product type, location and requirements. Our team will help you check the suitable machine, payment system or technical support needed.</p>
         </div>
         <div className="contact-actions" data-animate="up" data-animate-delay="2">
-          <a className="button white" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="Contact our WhatsApp team (opens in a new tab)">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></a>
+          <IVENDLinkButton className="button white" variant="filled" href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="Contact our WhatsApp team (opens in a new tab)">Contact Our WhatsApp Team <b aria-hidden="true">&#8599;</b></IVENDLinkButton>
         </div>
       </section>
 
