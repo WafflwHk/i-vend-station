@@ -5,6 +5,21 @@ import { transpileModule, ModuleKind, JsxEmit, ScriptTarget } from "typescript";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 
+test("keeps the header bar transparent at every breakpoint without changing its controls", async () => {
+  const css = await readFile(new URL("../app/components/site-header.module.css", import.meta.url), "utf8");
+  const baseBar = css.match(/\.bar\s*\{([^}]+)\}/)?.[1] ?? "";
+  assert.match(baseBar, /border:\s*1px solid transparent/);
+  assert.match(baseBar, /background:\s*transparent/);
+  assert.match(baseBar, /box-shadow:\s*none/);
+  assert.match(baseBar, /-webkit-backdrop-filter:\s*none/);
+  assert.match(baseBar, /backdrop-filter:\s*none/);
+  for (const [, rule] of css.matchAll(/\.bar\s*\{([^}]+)\}/g)) {
+    assert.doesNotMatch(rule, /var\(--iv-header-(?:glass|shadow)\)|blur\(/);
+  }
+  assert.match(css, /\.header\s*\{[^}]*position:\s*fixed/);
+  assert.match(css, /\.mobilePanel\s*\{[^}]*background:\s*var\(--iv-header-glass-strong\)/);
+});
+
 test("header account control is an accessible icon link", async () => {
   const html = await (await render("/")).text();
   const accountLink = html.match(/<a\b[^>]*aria-label="Sign in or open your account"[^>]*>[\s\S]*?<\/a>/)?.[0] ?? "";
@@ -374,11 +389,11 @@ test("renders the central IVEND website version in every footer", async () => {
   assert.equal(t05Response.status, 200);
   for (const response of [homeResponse, t05Response]) {
     const html = await response.text();
-    assert.match(html, /v1\.9\.0(?:<!-- -->|\s)*Beta/);
+    assert.match(html, /v1\.9\.1(?:<!-- -->|\s)*Beta/);
     assert.match(html, /lang="ja">アイ・ヴェンド・ステーション<\/span>/);
     assert.match(html, /title="Website under active development"[^>]*>Beta<\/span>/);
   }
-  assert.match(versionSource, /export const IVEND_VERSION = "v1\.9\.0"/);
+  assert.match(versionSource, /export const IVEND_VERSION = "v1\.9\.1"/);
   assert.match(versionSource, /IVEND_RELEASE_STATUS: "Beta" \| "Stable" = "Beta"/);
   const headerSource = await readFile(new URL("../app/components/SiteHeader.tsx", import.meta.url), "utf8");
   assert.match(headerSource, /import \{ IVEND_RELEASE_STATUS \} from "\.\.\/config\/site"/);

@@ -1,5 +1,9 @@
 # IVEND Changelog
 
+## v1.9.1 — 2026-11-18
+
+- Removed the header's background bar, border, shadow and backdrop blur at desktop widths as well as mobile, preserving navigation and glass controls.
+
 ## v1.9.0 — 2026-11-18
 
 - Integrated Glisse 0.6.0 glass and IVEND-blue filled controls throughout the site, with shared button, icon and semantic-link components.

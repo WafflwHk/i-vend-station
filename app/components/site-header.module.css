@@ -18,12 +18,13 @@
   display: flex;
   align-items: center;
   gap: 28px;
-  border: 1px solid var(--iv-glass-line);
+  border: 1px solid transparent;
   border-radius: 18px;
   color: var(--iv-text);
-  background: var(--iv-header-glass);
-  box-shadow: var(--iv-header-shadow);
-  backdrop-filter: blur(22px) saturate(155%);
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   pointer-events: auto;
 }
 
